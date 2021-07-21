@@ -1,0 +1,50 @@
+{
+	"extends": [
+		"tslint:recommended",
+		"tslint-config-prettier",
+		"tslint-no-unused-expression-chai"
+	],
+	"rules": {
+		"no-console": [
+			"error",
+			{
+				"allow": [
+					"warn"
+				]
+			}
+		],
+		"ban-types": [
+			true,
+			[
+				"Object",
+				"Use {} instead."
+			]
+		],
+		"no-unused-variable": false,
+		"one-variable-per-declaration": "ignore-for-loop",
+		"curly": [
+			true,
+			"ignore-same-line"
+		],
+		"max-classes-per-file": [
+			true,
+			5
+		],
+		"interface-over-type-literal": false,
+		"variable-name": [
+			true,
+			"check-format",
+			"ban-keywords",
+			"allow-pascal-case",
+			"allow-leading-underscore",
+			"require-const-for-all-caps"
+		],
+		"ordered-imports": [
+			false,
+			{
+				"named-imports-order": "any"
+			}
+		],
+		"object-literal-sort-keys": false
+	}
+}
