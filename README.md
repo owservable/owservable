@@ -1,7 +1,7 @@
-![reactive-stack-js](https://avatars0.githubusercontent.com/u/72337471?s=75)
+![owservable](https://avatars0.githubusercontent.com/u/87773159?s=75)
 
-## ReactiveStack backend
-See <a href="https://github.com/reactive-stack-js" target="_blank">reactive-stack-js</a> for more info.
+## Owservable backend
+See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
 
 ## TypeDoc Documentation
 See the <a href="https://reactive-stack-js.github.io/reactive-stack-js-backend/docs/" target="_blank">TypeDoc documentation</a>.
