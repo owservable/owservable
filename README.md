@@ -1,10 +1,22 @@
 ![owservable](https://avatars0.githubusercontent.com/u/87773159?s=75)
 
-## Owservable backend
+# Owservable fastify based backend
 See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
 
 ## TypeDoc Documentation
-See the <a href="https://reactive-stack-js.github.io/reactive-stack-js-backend/docs/" target="_blank">TypeDoc documentation</a>.
+See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
+
+## Uses
+
+- [Fastify](https://www.fastify.io)
+- [Mongoose](https://mongoosejs.com)
+- [RxJS](https://rxjs.dev)
+- [Typescript](https://www.typescriptlang.org/)
+
+#### Unit Testing:
+- [Chai](https://www.chaijs.com/)
+- [Mocha](https://mochajs.org/)
+- [NYC](https://istanbul.js.org/)
 
 # Documentation
 
@@ -16,9 +28,9 @@ It processes client subscription requests, creates appropriate stores and subscr
 It extends RxJS:Subject, so that any websocket instance can subscribe to it, in order to forward updates back to the client.
 
 ### IConnectionManager
-Defines a ConnectionManager interface to be implemented by the application using this library.
+Defines a Connection`Manager interface to be implemented by the application using this library.
 
-This implementation is required for the above OwservableClient. An instance of OwservableClient is calling IConnectionManager methods accordingly.
+This implementation is required for the above ```OwservableClient```. An instance of ```OwservableClient``` is calling ```IConnectionManager``` methods accordingly.
 
 ### DataMiddlewareMap
 This is a map of all defined Data Middleware methods.
