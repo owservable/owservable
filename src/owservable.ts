@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-import ReactiveStackClient from './reactive.stack.client';
+import OwservableClient from './owservable.client';
 
 // _enums
 import EStoreType from './_enums/store.type.enum';
@@ -51,7 +51,7 @@ import CollectionStore from './store/collection.store';
 import storeFactory from './store/factories/store.factory';
 
 export {
-	ReactiveStackClient,
+	OwservableClient,
 	// _enums
 	EStoreType,
 	// _types
@@ -90,5 +90,5 @@ export {
 	storeFactory
 };
 
-const ReactiveStackBackend = {};
-export default ReactiveStackBackend;
+const Owservable = {};
+export default Owservable;

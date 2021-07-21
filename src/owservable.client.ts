@@ -12,7 +12,7 @@ import IConnectionManager from './auth/i.connection.manager';
 import DataMiddlewareMap from './middleware/data.middleware.map';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
 
-export default class ReactiveStackClient extends Subject<any> {
+export default class OwservableClient extends Subject<any> {
 	private _connectionManager: IConnectionManager;
 
 	private _ping = 0;
@@ -29,14 +29,14 @@ export default class ReactiveStackClient extends Subject<any> {
 	}
 
 	public disconnected(): void {
-		// console.log('rsjs -> ReactiveStackClient disconnected');
+		// console.log('rsjs -> OwservableClient disconnected');
 		this.clearSubscriptions();
 		this._connectionManager.disconnected();
 		clearTimeout(this._timeout);
 	}
 
 	public async consume(message: any): Promise<void> {
-		// console.log('rsjs -> ReactiveStackClient::consume received message", message.type);
+		// console.log('rsjs -> OwservableClient::consume received message", message.type);
 
 		switch (message.type) {
 			case 'pong':
@@ -87,7 +87,7 @@ export default class ReactiveStackClient extends Subject<any> {
 	}
 
 	private set location(location: string) {
-		// console.log('rsjs -> ReactiveStackClient location: old:[${this._location}] new:[${location}]`);
+		// console.log('rsjs -> OwservableClient location: old:[${this._location}] new:[${location}]`);
 		if (location === this._location) return;
 		this._location = location;
 
@@ -100,7 +100,7 @@ export default class ReactiveStackClient extends Subject<any> {
 	}
 
 	private removeSubscription(target: string): void {
-		// console.log('rsjs -> ReactiveStackClient removeSubscription: ${target}`);
+		// console.log('rsjs -> OwservableClient removeSubscription: ${target}`);
 		let store = this._stores.get(target);
 		if (store) store.destroy();
 		store = null;
@@ -114,7 +114,7 @@ export default class ReactiveStackClient extends Subject<any> {
 
 	private updateSubscription(subscriptionConfig: StoreSubscriptionUpdateType): void {
 		const {target, scope, observe, config} = subscriptionConfig;
-		// console.log('rsjs -> ReactiveStackClient updateSubscription: ${target}`);
+		// console.log('rsjs -> OwservableClient updateSubscription: ${target}`);
 
 		let store = this._stores.get(target);
 		if (store) {
@@ -142,7 +142,7 @@ export default class ReactiveStackClient extends Subject<any> {
 
 	private clearSubscriptions(): void {
 		const subscriptionsKeys = this._subscriptions.keys();
-		// console.log(' -- ReactiveStackClient clearSubscriptions', subscriptionsKeys);
+		// console.log(' -- OwservableClient clearSubscriptions', subscriptionsKeys);
 		for (const subscriptionKey of subscriptionsKeys) {
 			let subscription = this._subscriptions.get(subscriptionKey);
 			subscription.unsubscribe();
