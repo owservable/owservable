@@ -1,6 +1,6 @@
 ![owservable](https://avatars0.githubusercontent.com/u/87773159?s=75)
 
-# Owservable fastify based backend
+# Owservable fastify backend
 See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
 
 ## TypeDoc Documentation
