@@ -30,6 +30,6 @@ export default class MongoDBConnector {
 
 		this._connection = mongoose.connection;
 		this._connection.on('error', console.error.bind(console, 'connection error:'));
-		this._connection.once('open', () => console.log('rsjs -> MongoDB connected to', mongoDbUri));
+		this._connection.once('open', () => console.log('ows -> MongoDB connected to', mongoDbUri));
 	}
 }

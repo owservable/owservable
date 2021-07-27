@@ -15,7 +15,7 @@ export default class CollectionsModelsMap {
 			try {
 				return mongoose.model(modelName);
 			} catch (error) {
-				console.log('rsjs -> CollectionsModelsMap::getModelByCollection error', collectionName, {err: error});
+				console.log('ows -> CollectionsModelsMap::getModelByCollection error', collectionName, {err: error});
 			}
 		}
 		return null;

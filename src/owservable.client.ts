@@ -29,14 +29,14 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	public disconnected(): void {
-		// console.log('rsjs -> OwservableClient disconnected');
+		// console.log('ows -> OwservableClient disconnected');
 		this.clearSubscriptions();
 		this._connectionManager.disconnected();
 		clearTimeout(this._timeout);
 	}
 
 	public async consume(message: any): Promise<void> {
-		// console.log('rsjs -> OwservableClient::consume received message", message.type);
+		// console.log('ows -> OwservableClient::consume received message", message.type);
 
 		switch (message.type) {
 			case 'pong':
@@ -87,7 +87,7 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private set location(location: string) {
-		// console.log('rsjs -> OwservableClient location: old:[${this._location}] new:[${location}]`);
+		// console.log('ows -> OwservableClient location: old:[${this._location}] new:[${location}]`);
 		if (location === this._location) return;
 		this._location = location;
 
@@ -100,7 +100,7 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private removeSubscription(target: string): void {
-		// console.log('rsjs -> OwservableClient removeSubscription: ${target}`);
+		// console.log('ows -> OwservableClient removeSubscription: ${target}`);
 		let store = this._stores.get(target);
 		if (store) store.destroy();
 		store = null;
@@ -114,7 +114,7 @@ export default class OwservableClient extends Subject<any> {
 
 	private updateSubscription(subscriptionConfig: StoreSubscriptionUpdateType): void {
 		const {target, scope, observe, config} = subscriptionConfig;
-		// console.log('rsjs -> OwservableClient updateSubscription: ${target}`);
+		// console.log('ows -> OwservableClient updateSubscription: ${target}`);
 
 		let store = this._stores.get(target);
 		if (store) {
