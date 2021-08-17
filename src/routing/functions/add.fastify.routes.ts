@@ -20,7 +20,7 @@ const _fixUrl = (url: string, relativeFilePath: string): string => {
 	return url;
 };
 
-const _addRoute = (fastify: FastifyInstance<Server, IncomingMessage, ServerResponse>, route: any, relativeFilePath: string): void => {
+const _addRoute = (fastify: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>, route: any, relativeFilePath: string): void => {
 	if (!_.has(route, 'url')) route.url = '/';
 
 	const {url} = route;

@@ -16,6 +16,8 @@ class ObservableModel extends Subject<any> {
 		this._stream = this._model.watch([], {fullDocument: 'updateLookup'});
 
 		this._stream.on('change', (change) => {
+			console.log('\n-----------------\nchange', pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']));
+			console.log('-----------------\n');
 			this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']));
 		});
 	}
@@ -30,6 +32,7 @@ class ObservableModelsMap {
 	}
 
 	public static get(model: Model<any>): ObservableModel {
+		console.log('\n - observableModel.get', model.collection.collectionName)
 		const instance = ObservableModelsMap.init();
 		const map = instance._map;
 		const collectionName = model.collection.collectionName;
