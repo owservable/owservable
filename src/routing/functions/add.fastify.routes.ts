@@ -5,8 +5,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import * as _ from 'lodash';
-import {IncomingMessage, Server, ServerResponse} from 'http';
-import {FastifyInstance, FastifyLoggerInstance} from 'fastify';
 
 import cleanRelativePath from './clean.relative.path';
 
@@ -20,7 +18,7 @@ const _fixUrl = (url: string, relativeFilePath: string): string => {
 	return url;
 };
 
-const _addRoute = (fastify: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>, route: any, relativeFilePath: string): void => {
+const _addRoute = (fastify: any, route: any, relativeFilePath: string): void => {
 	if (!_.has(route, 'url')) route.url = '/';
 
 	const {url} = route;
@@ -32,7 +30,7 @@ const _addRoute = (fastify: FastifyInstance<Server, IncomingMessage, ServerRespo
 	if (_.isPlainObject(route) && METHODS.includes(route.method)) fastify.route(route);
 };
 
-const addFastifyRoutes = (fastify: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>, folder: string): void => {
+const addFastifyRoutes = (fastify: any, folder: string): void => {
 	if (!routesRootFolder) routesRootFolder = folder;
 
 	const fileNames = fs.readdirSync(folder);
