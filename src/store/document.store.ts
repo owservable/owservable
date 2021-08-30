@@ -44,6 +44,7 @@ export default class DocumentStore extends AStore {
 		let reload = false;
 		if (_.isEmpty(change)) {
 			reload = true;
+
 		} else {
 			switch (type) {
 				case 'delete':
@@ -82,6 +83,8 @@ export default class DocumentStore extends AStore {
 		let data;
 		if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
 		else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
+
+		if (!data) return this.emitOne();
 
 		for (const populate of this._populates) {
 			if (data?.populate) await data.populate(populate).execPopulate();
