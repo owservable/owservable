@@ -68,7 +68,7 @@ export default class CollectionStore extends AStore {
 			if ('delete' === type) return this.emitDelete(key);
 
 			for (const populate of this._populates) {
-				await this._model.populate(document, {path: populate});
+				await this._model.populate(document, populate);
 			}
 			if (_.isEmpty(this._virtuals)) return this.emitMany({data: document});
 
@@ -84,7 +84,7 @@ export default class CollectionStore extends AStore {
 			if (total > 0) data = await this._model.find(this._query, this._fields, this._paging).sort(this._sort);
 
 			for (const populate of this._populates) {
-				await this._model.populate(data, {path: populate});
+				await this._model.populate(data, populate);
 			}
 			if (_.isEmpty(this._virtuals)) return this.emitMany({total, data});
 
