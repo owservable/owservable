@@ -50,9 +50,9 @@ export default abstract class AStore extends Subject<any> {
 		this._subscription = null;
 	}
 
-	protected abstract load(change: any): Promise<void>;
+	public abstract restartSubscription(): void;
 
-	protected abstract restartSubscription(): void;
+	protected abstract load(change: any): Promise<void>;
 
 	protected extractFromConfig(): void {
 		const {query = {}, sort = {}, fields = {}, populates = [], virtuals = []} = this._config;
@@ -64,6 +64,7 @@ export default abstract class AStore extends Subject<any> {
 		if (isArray(fields)) {
 			this._fields = {};
 			each(fields, (field: string) => set(this._fields, field, 1));
+
 		} else {
 			this._fields = fields;
 		}

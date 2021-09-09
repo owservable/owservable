@@ -60,6 +60,10 @@ export default class OwservableClient extends Subject<any> {
 			case 'unsubscribe':
 				this.removeSubscription(message.target);
 				return;
+
+			case 'reload':
+				this.reloadData(message.target);
+				return;
 		}
 	}
 
@@ -112,6 +116,12 @@ export default class OwservableClient extends Subject<any> {
 		this._subscriptions.delete(target);
 	}
 
+	private reloadData(target: string): void {
+		// console.log('ows -> OwservableClient reloadData: ${target}`);
+		let store = this._stores.get(target);
+		store.restartSubscription();
+	}
+
 	private updateSubscription(subscriptionConfig: StoreSubscriptionUpdateType): void {
 		const {target, scope, observe, config} = subscriptionConfig;
 		// console.log('ows -> OwservableClient updateSubscription: ${target}`);
@@ -119,6 +129,7 @@ export default class OwservableClient extends Subject<any> {
 		let store = this._stores.get(target);
 		if (store) {
 			store.config = config;
+
 		} else {
 			store = storeFactory(scope, observe, target);
 

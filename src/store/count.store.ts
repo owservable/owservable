@@ -15,7 +15,7 @@ export default class CountStore extends AStore {
 		Object.setPrototypeOf(this, CountStore.prototype);
 	}
 
-	protected restartSubscription(): void {
+	public restartSubscription(): void {
 		this.subscription = observableModel(this.model).subscribe({
 			next: (change: any): Promise<void> => this.load(change)
 		});

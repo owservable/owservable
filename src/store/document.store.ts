@@ -26,7 +26,7 @@ export default class DocumentStore extends AStore {
 		this._paging = skip ? {} : {skip, limit: 1};
 	}
 
-	protected restartSubscription(): void {
+	public restartSubscription(): void {
 		this.subscription = observableModel(this.model)
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
