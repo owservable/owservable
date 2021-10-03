@@ -21,7 +21,7 @@ export default class MongoDBConnector {
 		mongoose
 			.connect(mongoDbUri, {
 				poolSize: 10,
-				useCreateIndex: true,
+				// useCreateIndex: true,	// does not work in MongoDB 5
 				useNewUrlParser: true,
 				useUnifiedTopology: true
 			})
