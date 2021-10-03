@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.3.21",
+	"version": "0.3.22",
 	"description": "owservable fastify backend",
 	"engines": {
 		"node": ">=14"
