@@ -6,13 +6,6 @@ import {Subject} from 'rxjs';
 import * as mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
 
-// TODO: Available from MongoDB 4.0
-// observableDatabase()
-// 	.pipe(filter((change) => _.get(change, 'ns.coll') === model.collection.collectionName)
-// 		.subscribe({
-// 			next: (change: any): void => console.log(change)
-// 		});
-
 class ObservableDatabase extends Subject<any> {
 	private _stream: ChangeStream;
 	private static _instance: ObservableDatabase;
