@@ -16,9 +16,10 @@ export default class CountStore extends AStore {
 	}
 
 	public restartSubscription(): void {
-		this.subscription = observableModel(this.model).subscribe({
-			next: (change: any): Promise<void> => this.load(change)
-		});
+		this.subscription = observableModel(this.model)
+			.subscribe({
+				next: (change: any): Promise<void> => this.load(change)
+			});
 	}
 
 	protected async load(change: any): Promise<void> {

@@ -102,6 +102,20 @@ export default abstract class AStore extends Subject<any> {
 		});
 	}
 
+	protected emitError(error: any): void {
+		this.next({
+			type: 'error',
+			error,
+			target: this._target,
+			query: this._query,
+			sort: this._sort,
+			fields: this._fields,
+			paging: this._paging,
+			populates: this._populates,
+			virtuals: this._virtuals
+		});
+	}
+
 	protected shouldConsiderFields(): boolean {
 		return !isEmpty(this._fields) && !includes(values(this._fields), 0);
 	}

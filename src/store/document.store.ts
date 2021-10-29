@@ -81,6 +81,8 @@ export default class DocumentStore extends AStore {
 		// console.log('ows -> DB Reload Document for query:', this._query);
 
 		let data;
+
+		// TODO: wrap in try/catch with emitError
 		if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
 		else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
 

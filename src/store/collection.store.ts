@@ -17,9 +17,10 @@ export default class CollectionStore extends AStore {
 	}
 
 	public restartSubscription(): void {
-		this.subscription = observableModel(this.model).subscribe({
-			next: (change: any): Promise<void> => this.load(change)
-		});
+		this.subscription = observableModel(this.model)
+			.subscribe({
+				next: (change: any): Promise<void> => this.load(change)
+			});
 	}
 
 	protected async load(change: any): Promise<void> {
@@ -81,22 +82,29 @@ export default class CollectionStore extends AStore {
 		} else {
 			let data = [];
 			const total = await this._model.countDocuments(this._query);
-			if (total > 0) data = await this._model.find(this._query, this._fields, this._paging).sort(this._sort);
+			if (total > 0) {
 
-			for (const populate of this._populates) {
-				await this._model.populate(data, populate);
-			}
-			if (_.isEmpty(this._virtuals)) return this.emitMany({total, data});
+				// TODO: wrap in try/catch with emitError
+				data = await this._model.find(this._query, this._fields, this._paging).sort(this._sort);
 
-			const replacements: any[] = [];
-			for (const item of data) {
-				const replacement: any = _.cloneDeep(_.omit(item.toJSON(), this._virtuals));
-				for (const virtual of this._virtuals) {
-					replacement[virtual] = await Promise.resolve(item[virtual]);
+				for (const populate of this._populates) {
+					await this._model.populate(data, populate);
 				}
-				replacements.push(replacement);
+
+				if (!_.isEmpty(this._virtuals)) {
+					const replacements: any[] = [];
+					for (const item of data) {
+						const replacement: any = _.cloneDeep(_.omit(item.toJSON(), this._virtuals));
+						for (const virtual of this._virtuals) {
+							replacement[virtual] = await Promise.resolve(item[virtual]);
+						}
+						replacements.push(replacement);
+					}
+					data = replacements;
+				}
 			}
-			return this.emitMany({total, data: replacements});
+
+			return this.emitMany({total, data});
 		}
 	}
 
