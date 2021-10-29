@@ -4,8 +4,8 @@
 import {pick} from 'lodash';
 import {Subject, Subscription} from 'rxjs';
 import {Model} from 'mongoose';
-import {filter} from "rxjs/operators";
-import observableDatabase from "./observable.database";
+import {filter} from 'rxjs/operators';
+import observableDatabase from './observable.database';
 
 class ObservableModel extends Subject<any> {
 	private readonly _collection: string;
@@ -23,7 +23,9 @@ class ObservableModel extends Subject<any> {
 	}
 
 	private _pipeFilter(change: any): boolean {
-		const {ns: {coll}} = change;
+		const {
+			ns: {coll}
+		} = change;
 		return this._collection === coll;
 	}
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-import StoreScopeType from "../_types/store.scope.type";
+import StoreScopeType from '../_types/store.scope.type';
 
 const criteria = (scope: StoreScopeType, collection: string): string => `${scope}-${collection}`;
 
