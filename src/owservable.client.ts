@@ -118,7 +118,7 @@ export default class OwservableClient extends Subject<any> {
 
 	private reloadData(target: string): void {
 		// console.log('ows -> OwservableClient reloadData: ${target}`);
-		let store = this._stores.get(target);
+		const store = this._stores.get(target);
 		store.restartSubscription();
 	}
 
