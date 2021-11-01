@@ -80,28 +80,28 @@ export default class DocumentStore extends AStore {
 
 		// console.log('ows -> DB Reload Document for query:', this._query);
 
-		let data;
-
 		try {
+			let data;
 			if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
 			else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
+
+			if (!data) return this.emitOne();
+
+			for (const populate of this._populates) {
+				if (data?.populate) await data.populate(populate).execPopulate();
+			}
+
+			if (_.isEmpty(this._virtuals)) return this.emitOne(data.toJSON());
+
+			const jsonData: any = _.cloneDeep(_.omit(data.toJSON(), this._virtuals));
+			for (const virtual of this._virtuals) {
+				jsonData[virtual] = await Promise.resolve(data[virtual]);
+			}
+			this.emitOne(jsonData);
+
 		} catch (error) {
 			this.emitError(error);
 		}
-
-		if (!data) return this.emitOne();
-
-		for (const populate of this._populates) {
-			if (data?.populate) await data.populate(populate).execPopulate();
-		}
-
-		if (_.isEmpty(this._virtuals)) return this.emitOne(data.toJSON());
-
-		const jsonData: any = _.cloneDeep(_.omit(data.toJSON(), this._virtuals));
-		for (const virtual of this._virtuals) {
-			jsonData[virtual] = await Promise.resolve(data[virtual]);
-		}
-		this.emitOne(jsonData);
 	}
 
 	private _pipeFilter(change: any): boolean {

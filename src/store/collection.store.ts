@@ -64,50 +64,52 @@ export default class CollectionStore extends AStore {
 
 		// console.log('ows -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
 
-		// TODO: cleanup this mess:
-		if (document && this._incremental) {
-			if ('delete' === type) return this.emitDelete(key);
+		try {
 
-			for (const populate of this._populates) {
-				await this._model.populate(document, populate);
-			}
-			if (_.isEmpty(this._virtuals)) return this.emitMany({data: document});
-
-			const replacement: any = _.cloneDeep(_.omit(document.toJSON(), this._virtuals));
-			for (const virtual of this._virtuals) {
-				replacement[virtual] = await Promise.resolve(document[virtual]);
-			}
-			return this.emitMany({data: replacement});
-
-		} else {
-			let data = [];
-			const total = await this._model.countDocuments(this._query);
-			if (total > 0) {
-
-				try {
-					data = await this._model.find(this._query, this._fields, this._paging).sort(this._sort);
-				} catch (error) {
-					this.emitError(error);
-				}
+			// TODO: cleanup this mess:
+			if (document && this._incremental) {
+				if ('delete' === type) return this.emitDelete(key);
 
 				for (const populate of this._populates) {
-					await this._model.populate(data, populate);
+					await this._model.populate(document, populate);
+				}
+				if (_.isEmpty(this._virtuals)) return this.emitMany({data: document});
+
+				const replacement: any = _.cloneDeep(_.omit(document.toJSON(), this._virtuals));
+				for (const virtual of this._virtuals) {
+					replacement[virtual] = await Promise.resolve(document[virtual]);
+				}
+				return this.emitMany({data: replacement});
+
+			} else {
+				let data = [];
+				const total = await this._model.countDocuments(this._query);
+				if (total > 0) {
+
+					data = await this._model.find(this._query, this._fields, this._paging).sort(this._sort);
+
+					for (const populate of this._populates) {
+						await this._model.populate(data, populate);
+					}
+
+					if (!_.isEmpty(this._virtuals)) {
+						const replacements: any[] = [];
+						for (const item of data) {
+							const replacement: any = _.cloneDeep(_.omit(item.toJSON(), this._virtuals));
+							for (const virtual of this._virtuals) {
+								replacement[virtual] = await Promise.resolve(item[virtual]);
+							}
+							replacements.push(replacement);
+						}
+						data = replacements;
+					}
 				}
 
-				if (!_.isEmpty(this._virtuals)) {
-					const replacements: any[] = [];
-					for (const item of data) {
-						const replacement: any = _.cloneDeep(_.omit(item.toJSON(), this._virtuals));
-						for (const virtual of this._virtuals) {
-							replacement[virtual] = await Promise.resolve(item[virtual]);
-						}
-						replacements.push(replacement);
-					}
-					data = replacements;
-				}
+				return this.emitMany({total, data});
 			}
 
-			return this.emitMany({total, data});
+		} catch (error) {
+			this.emitError(error);
 		}
 	}
 
