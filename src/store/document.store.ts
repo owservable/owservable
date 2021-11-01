@@ -82,9 +82,12 @@ export default class DocumentStore extends AStore {
 
 		let data;
 
-		// TODO: wrap in try/catch with emitError
-		if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
-		else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
+		try {
+			if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
+			else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
+		} catch (error) {
+			this.emitError(error);
+		}
 
 		if (!data) return this.emitOne();
 
