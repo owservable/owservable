@@ -46,8 +46,8 @@ export default abstract class AStore extends Subject<any> {
 	}
 
 	public destroy(): void {
-		if (this._subscription) this._subscription.unsubscribe();
-		this._subscription = null;
+		this._subscription?.unsubscribe();
+		delete this._subscription;
 	}
 
 	public abstract restartSubscription(): void;

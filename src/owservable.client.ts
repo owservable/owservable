@@ -105,14 +105,10 @@ export default class OwservableClient extends Subject<any> {
 
 	private removeSubscription(target: string): void {
 		// console.log('ows -> OwservableClient removeSubscription: ${target}`);
-		let store = this._stores.get(target);
-		if (store) store.destroy();
-		store = null;
+		this._stores.get(target)?.destroy();
 		this._stores.delete(target);
 
-		let subscription = this._subscriptions.get(target);
-		if (subscription) subscription.unsubscribe();
-		subscription = null;
+		this._subscriptions.get(target)?.unsubscribe();
 		this._subscriptions.delete(target);
 	}
 
@@ -155,18 +151,14 @@ export default class OwservableClient extends Subject<any> {
 		const subscriptionsKeys = this._subscriptions.keys();
 		// console.log(' -- OwservableClient clearSubscriptions', subscriptionsKeys);
 		for (const subscriptionKey of subscriptionsKeys) {
-			let subscription = this._subscriptions.get(subscriptionKey);
-			subscription.unsubscribe();
-			subscription = null;
+			this._subscriptions.get(subscriptionKey)?.unsubscribe();
 		}
 		this._subscriptions.clear();
 		this._subscriptions = null;
 
 		const storesKeys = this._stores.keys();
 		for (const storeKey of storesKeys) {
-			let store = this._stores.get(storeKey);
-			store.destroy();
-			store = null;
+			this._stores.get(storeKey)?.destroy();
 		}
 		this._stores.clear();
 		this._stores = null;
