@@ -27,6 +27,8 @@
 		"test": "nyc mocha -r ts-node/register test/**/*.spec.ts",
 		"coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
 		"sonar": "sonarjs -e .sonarlint/**,node_modules/**,coverage/**,.nyc_output/**",
+		"test_qube": "nyc --reporter=lcov mocha -R @danmasta/mocha-sonar -r ts-node/register test/**/*.spec.ts",
+		"qube": "yarn test_qube & docker run --rm -e SONAR_HOST_URL=\"https://sonarqube.systools.nvidia.com\" -e SONAR_LOGIN=\"3db2cc475490ea6f28ac7aac5030f3b12530dcf8\" -v \"C:/git/github/owservable/owservable:/usr/src\" sonarsource/sonar-scanner-cli",
 		"up": "yarn upgrade-interactive",
 		"upgrade": "yarn upgrade --latest",
 		"latest": "yarn upgrade-interactive --latest"
@@ -45,6 +47,7 @@
 		"sift": "^13.3.5"
 	},
 	"devDependencies": {
+		"@danmasta/mocha-sonar": "^1.0.1",
 		"@types/chai": "^4.2.21",
 		"@types/mocha": "^8.2.3",
 		"chai": "^4.2.0",
