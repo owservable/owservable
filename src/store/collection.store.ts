@@ -7,20 +7,12 @@ import {Model} from 'mongoose';
 
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
-import observableModel from '../mongodb/functions/observable.model';
 
 export default class CollectionStore extends AStore {
 	constructor(model: Model<any>, target: string) {
 		super(model, target);
 		this._type = EStoreType.COLLECTION;
 		Object.setPrototypeOf(this, CollectionStore.prototype);
-	}
-
-	public restartSubscription(): void {
-		this.subscription = observableModel(this.model)
-			.subscribe({
-				next: (change: any): Promise<void> => this.load(change)
-			});
 	}
 
 	protected async load(change: any): Promise<void> {

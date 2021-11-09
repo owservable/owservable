@@ -7,6 +7,7 @@ import * as jsondiffpatch from 'jsondiffpatch';
 import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
 import EStoreType from '../_enums/store.type.enum';
+import observableModel from "../mongodb/functions/observable.model";
 
 // tslint:disable-next-line:variable-name
 const _baseMessage = (target: string, incremental = false): any => ({
@@ -50,7 +51,12 @@ export default abstract class AStore extends Subject<any> {
 		delete this._subscription;
 	}
 
-	public abstract restartSubscription(): void;
+	public restartSubscription(): void {
+		this.subscription = observableModel(this.model)
+			.subscribe({
+				next: (change: any): Promise<void> => this.load(change)
+			});
+	}
 
 	protected abstract load(change: any): Promise<void>;
 
