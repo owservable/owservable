@@ -4,7 +4,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import {filter} from 'lodash';
+import {filter, isFunction} from 'lodash';
 import * as cron from 'node-cron';
 
 import CronJobType from '../_types/cronjob.type';
@@ -16,8 +16,9 @@ const initiateCronjobs = (folder: string): void => {
 		const absoluteFilePath = path.join(folder, file);
 		const cronjob: CronJobType = require(absoluteFilePath).default;
 		const {schedule, job, options, init} = cronjob;
-		cron.schedule(schedule, job, options);
-		init?.();
+
+		if (isFunction(init)) init().then(() => cron.schedule(schedule, job, options));
+		else cron.schedule(schedule, job, options);
 	});
 
 	const folders = filter(fileNames, (name: string) => fs.lstatSync(path.join(folder, name)).isDirectory());
