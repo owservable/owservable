@@ -6,5 +6,6 @@
 	"useTabs": true,
 	"bracketSpacing": false,
 	"vueIndentScriptAndStyle": true,
-	"jsxBracketSameLine": true
+	"jsxBracketSameLine": true,
+	"proseWrap": "never"
 }
