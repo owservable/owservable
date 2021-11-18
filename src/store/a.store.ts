@@ -51,7 +51,7 @@ export default abstract class AStore extends Subject<any> {
 	}
 
 	public restartSubscription(): void {
-		this.subscription = observableModel(this.model)
+		this.subscription = observableModel(this.model) //
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
 			});
@@ -69,7 +69,6 @@ export default abstract class AStore extends Subject<any> {
 		if (isArray(fields)) {
 			this._fields = {};
 			each(fields, (field: string) => set(this._fields, field, 1));
-
 		} else {
 			this._fields = fields;
 		}

@@ -26,7 +26,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	public restartSubscription(): void {
-		this.subscription = observableModel(this.model)
+		this.subscription = observableModel(this.model) //
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
