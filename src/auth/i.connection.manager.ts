@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import ConnectionManagerRefreshType from '../_types/connection.manager.refresh.type';

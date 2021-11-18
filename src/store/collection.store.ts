@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import sift from 'sift';
@@ -57,7 +56,6 @@ export default class CollectionStore extends AStore {
 		// console.log('ows -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
 
 		try {
-
 			// TODO: cleanup this mess:
 			if (document && this._incremental) {
 				if ('delete' === type) return this.emitDelete(key);
@@ -77,7 +75,6 @@ export default class CollectionStore extends AStore {
 				let data = [];
 				const total = await this._model.countDocuments(this._query);
 				if (total > 0) {
-
 					data = await this._model.find(this._query, this._fields, this._paging).sort(this._sort);
 
 					for (const populate of this._populates) {

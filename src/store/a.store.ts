@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import {Model} from 'mongoose';
@@ -7,7 +6,7 @@ import * as jsondiffpatch from 'jsondiffpatch';
 import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
 import EStoreType from '../_enums/store.type.enum';
-import observableModel from "../mongodb/functions/observable.model";
+import observableModel from '../mongodb/functions/observable.model';
 
 // tslint:disable-next-line:variable-name
 const _baseMessage = (target: string, incremental = false): any => ({

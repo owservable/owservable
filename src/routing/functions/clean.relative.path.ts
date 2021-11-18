@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import {toLower, replace, join, split} from 'lodash';

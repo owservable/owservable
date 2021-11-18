@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import {pick} from 'lodash';

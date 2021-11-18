@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import StoreScopeType from '../_types/store.scope.type';

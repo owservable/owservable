@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import {each, includes, map, split} from 'lodash';

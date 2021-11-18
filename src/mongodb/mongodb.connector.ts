@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 'use strict';
 
 import * as mongoose from 'mongoose';
