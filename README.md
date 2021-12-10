@@ -48,14 +48,6 @@ This is a map of all defined Data Middleware methods.
 A Data Middleware is tied to a store scope ```'count' | 'one' | 'many'``` and collection name and is used to modify an observed payload if necessary. For example, if based on users
 access permissions a portion of the payload needs to be removed or replaced, etc.
 
-### initiateWorkers
-
-Method that initiates all workers. Takes folder path as attribute.
-
-### initiateCronjobs
-
-Method that initiates all cronjobs. Takes folder path as attribute.
-
 ## MongoDB
 
 ### MongoDBConnector
@@ -130,8 +122,6 @@ Store factory method, creates an appropriate AStore instance based on passed sub
 
 These types are self explanatory.
 
-- CronJobType
-- WorkerType
 - StoreScopeType
 - StoreSubscriptionConfigType
 - StoreSubscriptionUpdateType

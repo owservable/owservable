@@ -7,18 +7,12 @@ import EStoreType from './_enums/store.type.enum';
 
 // _types
 import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
-import CronJobType from './_types/cronjob.type';
 import StoreScopeType from './_types/store.scope.type';
 import StoreSubscriptionConfigType from './_types/store.subscription.config.type';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
-import WorkerType from './_types/worker.type';
 
 // auth
 import IConnectionManager from './auth/i.connection.manager';
-
-// functions
-import initiateWorkers from './functions/initiate.workers';
-import initiateCronjobs from './functions/initiate.cronjobs';
 
 // middleware
 import DataMiddlewareMap from './middleware/data.middleware.map';
@@ -55,16 +49,11 @@ export {
 	EStoreType,
 	// _types
 	ConnectionManagerRefreshType,
-	CronJobType,
 	StoreScopeType,
 	StoreSubscriptionConfigType,
 	StoreSubscriptionUpdateType,
-	WorkerType,
 	// auth
 	IConnectionManager,
-	// functions
-	initiateWorkers,
-	initiateCronjobs,
 	// middleware
 	DataMiddlewareMap,
 	// mongodb
