@@ -5,7 +5,7 @@ import * as path from 'path';
 
 import {each, filter, isFunction} from 'lodash';
 
-import ObserverType from '../_types/observer.type';
+import WatcherType from '../_types/watcher.type';
 import getSubfolderPathsByFolderName from './get.subfolder.paths.by.folder.name';
 
 const _initiateObservers = (folder: string): void => {
@@ -13,11 +13,11 @@ const _initiateObservers = (folder: string): void => {
 	const files = filter(subfolderNames, (name) => !fs.lstatSync(path.join(folder, name)).isDirectory());
 	each(files, (file: string) => {
 		const absoluteFilePath = path.join(folder, file);
-		const observer: ObserverType = require(absoluteFilePath).default;
+		const watcher: WatcherType = require(absoluteFilePath).default;
 
-		const {init, observe} = observer;
-		if (isFunction(init)) init().then(() => observe?.());
-		else observe?.();
+		const {init, watch} = watcher;
+		if (isFunction(init)) init().then(() => watch?.());
+		else watch?.();
 	});
 
 	const folders = filter(subfolderNames, (name: string) => fs.lstatSync(path.join(folder, name)).isDirectory());

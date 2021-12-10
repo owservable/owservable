@@ -8,10 +8,10 @@ import EStoreType from './_enums/store.type.enum';
 // _types
 import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
 import CronJobType from './_types/cronjob.type';
-import ObserverType from './_types/observer.type';
 import StoreScopeType from './_types/store.scope.type';
 import StoreSubscriptionConfigType from './_types/store.subscription.config.type';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
+import WatcherType from './_types/watcher.type';
 import WorkerType from './_types/worker.type';
 
 // auth
@@ -59,10 +59,10 @@ export {
 	// _types
 	ConnectionManagerRefreshType,
 	CronJobType,
-	ObserverType,
 	StoreScopeType,
 	StoreSubscriptionConfigType,
 	StoreSubscriptionUpdateType,
+	WatcherType,
 	WorkerType,
 	// auth
 	IConnectionManager,
