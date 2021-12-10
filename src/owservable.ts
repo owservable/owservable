@@ -20,7 +20,7 @@ import IConnectionManager from './auth/i.connection.manager';
 // functions
 import initiateWorkers from './functions/initiate.workers';
 import initiateCronjobs from './functions/initiate.cronjobs';
-import initiateObservers from './functions/initiate.observers';
+import initiateWatchers from './functions/initiate.watchers';
 import getSubfolderPathsByFolderName from './functions/get.subfolder.paths.by.folder.name';
 
 // middleware
@@ -68,9 +68,9 @@ export {
 	IConnectionManager,
 	// functions
 	getSubfolderPathsByFolderName,
-	initiateWorkers,
-	initiateObservers,
 	initiateCronjobs,
+	initiateWatchers,
+	initiateWorkers,
 	// middleware
 	DataMiddlewareMap,
 	// mongodb

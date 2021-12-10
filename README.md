@@ -48,11 +48,11 @@ This is a map of all defined Data Middleware methods.
 A Data Middleware is tied to a store scope ```'count' | 'one' | 'many'``` and collection name and is used to modify an observed payload if necessary. For example, if based on users
 access permissions a portion of the payload needs to be removed or replaced, etc.
 
-### initiateObservers
+### initiateWatchers
 
-Method that initiates all observers. Takes the project root folder path and a global folder name for the observers.
+Method that initiates all watchers. Takes the project root folder path and a global folder name for the watchers.
 
-Observers can either perform simple tasks or add jobs to a queue, to be processed by the workers.
+Watchers can either perform simple tasks or add jobs to a queue, to be processed by the workers.
 
 ### initiateCronjobs
 
@@ -142,8 +142,8 @@ Store factory method, creates an appropriate AStore instance based on passed sub
 These types are self explanatory.
 
 - CronJobType
+- WatcherType
 - WorkerType
-- ObserverType
 - StoreScopeType
 - StoreSubscriptionConfigType
 - StoreSubscriptionUpdateType
