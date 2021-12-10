@@ -48,6 +48,24 @@ This is a map of all defined Data Middleware methods.
 A Data Middleware is tied to a store scope ```'count' | 'one' | 'many'``` and collection name and is used to modify an observed payload if necessary. For example, if based on users
 access permissions a portion of the payload needs to be removed or replaced, etc.
 
+### initiateObservers
+
+Method that initiates all observers. Takes the project root folder path and a global folder name for the observers.
+
+Observers can either perform simple tasks or add jobs to a queue, to be processed by the workers.
+
+### initiateCronjobs
+
+Method that initiates all cronjobs. Takes the project root folder path and a global folder name for the cronjobs.
+
+Cronjobs can either perform simple tasks or add jobs to a queue, to be processed by the workers.
+
+### initiateWorkers
+
+Method that initiates all workers. Takes the project root folder path and a global folder name for the workers.
+
+Workers can either perform simple tasks or take jobs from a queue.
+
 ## MongoDB
 
 ### MongoDBConnector
@@ -56,7 +74,8 @@ A MongoDB database connector class, used to initialize the database collection w
 
 ### processModels
 
-This method parses all models and adds them to the ```CollectionsModelsMap``` if they pass validation. The method takes the folder path for the models and an optional folder name(
+This method parses all models and adds them to the ```CollectionsModelsMap``` if they pass validation. The method takes the project root folder path and a global folder name for
+the models and an optional folder name(
 s) to exclude, for example ```mixins``` and similar.
 
 ### CollectionsModelsMap
@@ -86,7 +105,7 @@ This is a map of all available routes. It is populated automatically during the 
 
 ### addFastifyRoutes
 
-This method adds all routes to fastify automatically. It requires as parameters a fastify instance and routes folder path.
+This method adds all routes to fastify automatically. It requires as parameters a fastify instance, the project root folder path and a global folder name for the routes.
 
 ### cleanRelativePath
 
@@ -122,6 +141,9 @@ Store factory method, creates an appropriate AStore instance based on passed sub
 
 These types are self explanatory.
 
+- CronJobType
+- WorkerType
+- ObserverType
 - StoreScopeType
 - StoreSubscriptionConfigType
 - StoreSubscriptionUpdateType

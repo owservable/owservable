@@ -7,12 +7,21 @@ import EStoreType from './_enums/store.type.enum';
 
 // _types
 import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
+import CronJobType from './_types/cronjob.type';
+import ObserverType from './_types/observer.type';
 import StoreScopeType from './_types/store.scope.type';
 import StoreSubscriptionConfigType from './_types/store.subscription.config.type';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
+import WorkerType from './_types/worker.type';
 
 // auth
 import IConnectionManager from './auth/i.connection.manager';
+
+// functions
+import initiateWorkers from './functions/initiate.workers';
+import initiateCronjobs from './functions/initiate.cronjobs';
+import initiateObservers from './functions/initiate.observers';
+import getSubfolderPathsByFolderName from './functions/get.subfolder.paths.by.folder.name';
 
 // middleware
 import DataMiddlewareMap from './middleware/data.middleware.map';
@@ -22,7 +31,7 @@ import MongoDBConnector from './mongodb/mongodb.connector';
 import CollectionsModelsMap from './mongodb/collections.models.map';
 
 // mongodb functions
-import processModels from './mongodb/functions/process.models';
+import _processModels from './mongodb/functions/process.models';
 import observableModel from './mongodb/functions/observable.model';
 import observableDatabase from './mongodb/functions/observable.database';
 
@@ -49,18 +58,26 @@ export {
 	EStoreType,
 	// _types
 	ConnectionManagerRefreshType,
+	CronJobType,
+	ObserverType,
 	StoreScopeType,
 	StoreSubscriptionConfigType,
 	StoreSubscriptionUpdateType,
+	WorkerType,
 	// auth
 	IConnectionManager,
+	// functions
+	getSubfolderPathsByFolderName,
+	initiateWorkers,
+	initiateObservers,
+	initiateCronjobs,
 	// middleware
 	DataMiddlewareMap,
 	// mongodb
 	MongoDBConnector,
 	CollectionsModelsMap,
 	// mongodb functions
-	processModels,
+	_processModels,
 	observableModel,
 	observableDatabase,
 	// routing

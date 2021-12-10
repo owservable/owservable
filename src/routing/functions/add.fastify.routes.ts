@@ -6,6 +6,8 @@ import * as path from 'path';
 import * as _ from 'lodash';
 
 import cleanRelativePath from './clean.relative.path';
+import getSubfolderPathsByFolderName from '../../functions/get.subfolder.paths.by.folder.name';
+import {each} from 'lodash';
 
 let routesRootFolder: string;
 const METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'];
@@ -29,12 +31,12 @@ const _addRoute = (fastify: any, route: any, relativeFilePath: string): void => 
 	if (_.isPlainObject(route) && METHODS.includes(route.method)) fastify.route(route);
 };
 
-const addFastifyRoutes = (fastify: any, folder: string): void => {
+const _addFastifyRoutes = (fastify: any, folder: string): void => {
 	if (!routesRootFolder) routesRootFolder = folder;
 
 	const fileNames = fs.readdirSync(folder);
 	const files = _.filter(fileNames, (name) => !fs.lstatSync(path.join(folder, name)).isDirectory());
-	files.forEach((file: string) => {
+	_.each(files, (file: string) => {
 		const ext = path.extname(file);
 		if (ext !== '.ts' && ext !== '.js') return;
 		const absoluteFilePath = path.join(folder, file);
@@ -46,6 +48,11 @@ const addFastifyRoutes = (fastify: any, folder: string): void => {
 	});
 
 	const folders = _.filter(fileNames, (name: string) => fs.lstatSync(path.join(folder, name)).isDirectory());
-	folders.forEach((sub: string) => addFastifyRoutes(fastify, path.join(folder, sub)));
+	_.each(folders, (sub: string) => _addFastifyRoutes(fastify, path.join(folder, sub)));
+};
+
+const addFastifyRoutes = (fastify: any, root: string, name: string = 'routes'): void => {
+	const folders: string[] = getSubfolderPathsByFolderName(root, name);
+	each(folders, (folder: string) => _addFastifyRoutes(fastify, folder));
 };
 export default addFastifyRoutes;
