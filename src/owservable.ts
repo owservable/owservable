@@ -31,7 +31,7 @@ import MongoDBConnector from './mongodb/mongodb.connector';
 import CollectionsModelsMap from './mongodb/collections.models.map';
 
 // mongodb functions
-import _processModels from './mongodb/functions/process.models';
+import processModels from './mongodb/functions/process.models';
 import observableModel from './mongodb/functions/observable.model';
 import observableDatabase from './mongodb/functions/observable.database';
 
@@ -77,7 +77,7 @@ export {
 	MongoDBConnector,
 	CollectionsModelsMap,
 	// mongodb functions
-	_processModels,
+	processModels,
 	observableModel,
 	observableDatabase,
 	// routing
