@@ -35,14 +35,6 @@ import processModels from './mongodb/functions/process.models';
 import observableModel from './mongodb/functions/observable.model';
 import observableDatabase from './mongodb/functions/observable.database';
 
-// routing
-import RoutesMap from './routing/routes.map';
-
-// routing functions
-import addFastifyRoutes from './routing/functions/add.fastify.routes';
-import cleanRelativePath from './routing/functions/clean.relative.path';
-import processFastifyBlipp from './routing/functions/process.fastify.blipp';
-
 // store
 import AStore from './store/a.store';
 import CountStore from './store/count.store';
@@ -80,12 +72,6 @@ export {
 	processModels,
 	observableModel,
 	observableDatabase,
-	// routing
-	RoutesMap,
-	// routing functions
-	addFastifyRoutes,
-	cleanRelativePath,
-	processFastifyBlipp,
 	// store
 	AStore,
 	CountStore,

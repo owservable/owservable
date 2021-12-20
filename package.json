@@ -1,7 +1,7 @@
 {
 	"name": "owservable",
-	"version": "0.7.0",
-	"description": "owservable fastify backend",
+	"version": "0.7.1",
+	"description": "owservable backend",
 	"engines": {
 		"node": ">=14"
 	},
@@ -38,7 +38,6 @@
 		"@types/mongoose": "^5.7.36",
 		"@types/node": "^14.11.2",
 		"@types/node-cron": "^2.0.4",
-		"fastify": "^3.19.1",
 		"jsondiffpatch": "^0.4.1",
 		"lodash": "^4.17.20",
 		"mongoose": "^5.13.3",
