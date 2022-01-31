@@ -7,6 +7,7 @@ import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
+import convertToLeaves from './functions/convert.to.leaves';
 
 // tslint:disable-next-line:variable-name
 const _baseMessage = (target: string, incremental = false): any => ({
@@ -61,8 +62,12 @@ export default abstract class AStore extends Subject<any> {
 
 	protected extractFromConfig(): void {
 		const {query = {}, sort = {}, fields = {}, populates = [], virtuals = []} = this._config;
-		this._query = query;
-		this._sort = sort;
+		this._query = convertToLeaves(query);
+		this._sort = convertToLeaves(sort);
+
+		console.log('extractFromConfig query', query, this._query);
+		console.log('extractFromConfig sort', sort, this._sort);
+
 		this._populates = populates;
 		this._virtuals = virtuals;
 
