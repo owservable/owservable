@@ -78,7 +78,6 @@ export default class DocumentStore extends AStore {
 		if (!reload) return;
 
 		// console.log('ows -> DB Reload Document for query:', this._query);
-
 		try {
 			let data;
 			if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();

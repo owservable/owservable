@@ -11,7 +11,7 @@ describe('getSubfolderPathsByFolderName tests', () => {
 	});
 	it('expect src\\functions', () => {
 		const folders: string[] = getSubfolderPathsByFolderName('src', 'functions');
-		expect(folders.length).to.be.equal(3);
-		expect(folders).to.be.deep.equal(['src\\functions', 'src\\mongodb\\functions', 'src\\store\\functions']);
+		expect(folders.length).to.be.equal(2);
+		expect(folders).to.be.deep.equal(['src\\functions', 'src\\mongodb\\functions']);
 	});
 });

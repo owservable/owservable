@@ -64,11 +64,6 @@ export default abstract class AStore extends Subject<any> {
 		this._query = query;
 		this._sort = sort;
 
-		// this._query = convertToLeaves(query);
-		// this._sort = convertToLeaves(sort);
-		// console.log('extractFromConfig query', query, this._query);
-		// console.log('extractFromConfig sort', sort, this._sort);
-
 		this._populates = populates;
 		this._virtuals = virtuals;
 

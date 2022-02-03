@@ -54,9 +54,7 @@ export default class CollectionStore extends AStore {
 		if (!reload) return;
 
 		// console.log('ows -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
-
 		try {
-			// TODO: cleanup this mess:
 			if (document && this._incremental) {
 				if ('delete' === type) return this.emitDelete(key);
 
@@ -96,7 +94,6 @@ export default class CollectionStore extends AStore {
 
 				return this.emitMany({total, data});
 			}
-
 		} catch (error) {
 			this.emitError(error);
 		}
