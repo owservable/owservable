@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.7.4",
+	"version": "0.7.5",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=14"
@@ -30,38 +30,37 @@
 		"test_qube": "nyc --reporter=lcov mocha -R @danmasta/mocha-sonar -r ts-node/register test/**/*.spec.ts",
 		"qube": "yarn test_qube & docker run --rm -e SONAR_HOST_URL=\"https://sonarqube.systools.nvidia.com\" -e SONAR_LOGIN=\"3db2cc475490ea6f28ac7aac5030f3b12530dcf8\" -v \"C:/git/github/owservable/owservable:/usr/src\" sonarsource/sonar-scanner-cli",
 		"up": "yarn upgrade-interactive",
-		"upgrade": "yarn upgrade --latest",
 		"latest": "yarn upgrade-interactive --latest"
 	},
 	"dependencies": {
-		"@types/lodash": "^4.14.171",
+		"@types/lodash": "^4.14.178",
 		"@types/mongoose": "^5.7.36",
-		"@types/node": "^14.11.2",
-		"@types/node-cron": "^2.0.4",
+		"@types/node": "^17.0.16",
+		"@types/node-cron": "^3.0.1",
 		"jsondiffpatch": "^0.4.1",
 		"lodash": "^4.17.20",
 		"mongoose": "^5.13.3",
-		"node-cron": "^2.0.3",
-		"rxjs": "^6.6.3",
-		"sift": "^13.3.5"
+		"node-cron": "^3.0.0",
+		"rxjs": "^7.5.3",
+		"sift": "^15.1.3"
 	},
 	"devDependencies": {
 		"@danmasta/mocha-sonar": "^1.0.1",
-		"@types/chai": "^4.2.21",
-		"@types/mocha": "^8.2.3",
-		"chai": "^4.2.0",
+		"@types/chai": "^4.3.0",
+		"@types/mocha": "^9.1.0",
+		"chai": "^4.3.6",
 		"coveralls": "^3.0.9",
-		"mocha": "^8.3.0",
+		"mocha": "^9.2.0",
 		"nyc": "^15.1.0",
-		"prettier": "^2.2.1",
+		"prettier": "^2.5.1",
 		"sonarjs": "^1.0.0",
-		"source-map-support": "^0.5.16",
-		"ts-node": "^9.0.0",
+		"source-map-support": "^0.5.21",
+		"ts-node": "^10.5.0",
 		"tslint": "^6.1.3",
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-etc": "^1.13.7",
 		"tslint-no-unused-expression-chai": "^0.1.4",
-		"typedoc": "^0.21.4",
-		"typescript": "^4.3.2"
+		"typedoc": "^0.22.11",
+		"typescript": "^4.5.5"
 	}
 }
