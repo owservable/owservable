@@ -11,6 +11,7 @@ import CronJobType from './_types/cronjob.type';
 import StoreScopeType from './_types/store.scope.type';
 import StoreSubscriptionConfigType from './_types/store.subscription.config.type';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
+import SubscriptionMethodsType from './_types/subscription.methods.type';
 import WatcherType from './_types/watcher.type';
 import WorkerType from './_types/worker.type';
 
@@ -54,6 +55,7 @@ export {
 	StoreScopeType,
 	StoreSubscriptionConfigType,
 	StoreSubscriptionUpdateType,
+	SubscriptionMethodsType,
 	WatcherType,
 	WorkerType,
 	// auth
