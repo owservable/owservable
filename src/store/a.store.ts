@@ -57,6 +57,8 @@ export default abstract class AStore extends Subject<any> {
 			});
 	}
 
+	protected abstract shouldReload(change: any): boolean;
+
 	protected abstract load(change: any): Promise<void>;
 
 	protected extractFromConfig(): void {

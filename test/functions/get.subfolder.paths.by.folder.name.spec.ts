@@ -6,7 +6,7 @@ import getSubfolderPathsByFolderName from '../../src/functions/get.subfolder.pat
 describe('getSubfolderPathsByFolderName tests', () => {
 	it('expect test\\functions', () => {
 		const folders: string[] = getSubfolderPathsByFolderName('test', 'functions');
-		expect(folders.length).to.be.equal(1);
+		expect(folders.length).to.be.equal(2);
 		expect(folders[0]).to.be.equal('test\\functions');
 	});
 	it('expect src\\functions', () => {

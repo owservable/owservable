@@ -33,49 +33,50 @@ export default class DocumentStore extends AStore {
 			});
 	}
 
-	protected async load(change: any): Promise<void> {
-		if (_.isEmpty(this._config)) return this.emitOne();
+	protected shouldReload(change: any): boolean {
+		if (_.isEmpty(change)) return true;
 
 		const id = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey, updateDescription: description, fullDocument: document} = change;
 		const key = _.get(documentKey, '_id', '').toString();
 
-		let reload = false;
-		if (_.isEmpty(change)) {
-			reload = true;
+		switch (type) {
+			case 'delete':
+				return true;
 
-		} else {
-			switch (type) {
-				case 'delete':
-					if (id && id === key) return this.emitDelete(key);
-					reload = true;
-					break;
+			case 'insert':
+				if (id) return false;
+				if (!_.isEmpty(this._query)) {
+					const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
+					return test(document);
+				}
+				return true;
 
-				case 'insert':
-					if (id) return;
-					reload = true;
-					if (!_.isEmpty(this._query)) {
-						const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
-						reload = test(document);
-					}
-					break;
+			case 'replace':
+			case 'update':
+				if (id && id === key) return true;
+				if (!this.shouldConsiderFields()) return true;
 
-				case 'replace':
-				case 'update':
-					if (id && id === key) reload = true;
-					else if (!this.shouldConsiderFields()) reload = true;
-					else {
-						if (!description) reload = true;
-						else {
-							const {updatedFields, removedFields} = description;
-							const us = _.concat(removedFields, _.keys(updatedFields));
-							reload = !_.isEmpty(_.intersection(_.keys(this._fields), us));
-						}
-					}
-					break;
-			}
+				if (!description) return true;
+				else {
+					const {updatedFields, removedFields} = description;
+					const us = _.concat(removedFields, _.keys(updatedFields));
+					return !_.isEmpty(_.intersection(_.keys(this._fields), us));
+				}
 		}
-		if (!reload) return;
+
+		return false;
+	}
+
+	protected async load(change: any): Promise<void> {
+		if (_.isEmpty(this._config)) return this.emitOne();
+		if (!this.shouldReload(change)) return;
+
+		const id = _getIdFromQuery(this._query);
+		const {operationType: type, documentKey} = change;
+		const key = _.get(documentKey, '_id', '').toString();
+
+		if (type === 'delete' && id === key) return this.emitDelete(key);
 
 		// console.log('ows -> DB Reload Document for query:', this._query);
 		try {
@@ -96,7 +97,6 @@ export default class DocumentStore extends AStore {
 				jsonData[virtual] = await Promise.resolve(data[virtual]);
 			}
 			this.emitOne(jsonData);
-
 		} catch (error) {
 			this.emitError(error);
 		}

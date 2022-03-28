@@ -13,6 +13,10 @@ export default class CountStore extends AStore {
 		Object.setPrototypeOf(this, CountStore.prototype);
 	}
 
+	protected shouldReload(change: any): boolean {
+		return false;
+	}
+
 	protected async load(change: any): Promise<void> {
 		if (isEmpty(this._config)) return this.emitOne();
 		const count = await this._model.countDocuments(this._query);

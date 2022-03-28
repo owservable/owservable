@@ -10,14 +10,8 @@ export default class CollectionsModelsMap {
 
 	public static getModelByCollection(collectionName: string): Model<any> | null {
 		const modelName = CollectionsModelsMap._models.get(collectionName);
-		if (modelName) {
-			try {
-				return mongoose.model(modelName);
-			} catch (error) {
-				console.log('ows -> CollectionsModelsMap::getModelByCollection error', collectionName, {err: error});
-			}
-		}
-		return null;
+		if (!modelName) return null;
+		return mongoose.model(modelName);
 	}
 
 	public static keys() {
@@ -26,10 +20,6 @@ export default class CollectionsModelsMap {
 
 	public static values() {
 		return Array.from(CollectionsModelsMap._models.values());
-	}
-
-	public static print() {
-		console.log(CollectionsModelsMap._models);
 	}
 
 	private static readonly _models: Map<string, string> = new Map<string, string>();

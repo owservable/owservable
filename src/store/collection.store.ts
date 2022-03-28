@@ -14,47 +14,45 @@ export default class CollectionStore extends AStore {
 		Object.setPrototypeOf(this, CollectionStore.prototype);
 	}
 
+	protected shouldReload(change: any): boolean {
+		if (_.isEmpty(change)) return true;
+
+		const {operationType: type, updateDescription: description, fullDocument: document} = change;
+
+		const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
+		switch (type) {
+			case 'delete':
+				return true;
+
+			case 'insert':
+				if (!_.isEmpty(this._query)) return test(document);
+				break;
+
+			case 'replace':
+			case 'update':
+				if (!description) return true;
+
+				let us = [];
+				const {updatedFields, removedFields} = description;
+				us = _.concat(removedFields, _.keys(updatedFields));
+
+				const qs = this.shouldConsiderFields() ? _.keys(this._fields) : [];
+				return !_.isEmpty(_.intersection(qs, us)) || test(document);
+		}
+
+		return false;
+	}
+
 	protected async load(change: any): Promise<void> {
 		// console.log('ows -> CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
 		if (_.isEmpty(this._config)) return this.emitMany();
-
-		const {operationType: type, documentKey, updateDescription: description, fullDocument: document} = change;
-		const key = _.get(documentKey, '_id', '').toString();
-
-		let reload = false;
-		if (_.isEmpty(change)) {
-			reload = true;
-
-		} else {
-			const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
-			switch (type) {
-				case 'delete':
-					reload = true;
-					break;
-
-				case 'insert':
-					reload = true;
-					if (!_.isEmpty(this._query)) reload = test(document);
-					break;
-
-				case 'replace':
-				case 'update':
-					if (!description) reload = true;
-					else {
-						let us = [];
-						const {updatedFields, removedFields} = description;
-						us = _.concat(removedFields, _.keys(updatedFields));
-
-						const qs = this.shouldConsiderFields() ? _.keys(this._fields) : [];
-						reload = !_.isEmpty(_.intersection(qs, us)) || test(document);
-					}
-					break;
-			}
-		}
-		if (!reload) return;
+		if (!this.shouldReload(change)) return;
 
 		// console.log('ows -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
 		try {
+			const {operationType: type, documentKey, fullDocument: document} = change;
+			const key = _.get(documentKey, '_id', '').toString();
+
 			if (document && this._incremental) {
 				if ('delete' === type) return this.emitDelete(key);
 
@@ -68,7 +66,6 @@ export default class CollectionStore extends AStore {
 					replacement[virtual] = await Promise.resolve(document[virtual]);
 				}
 				return this.emitMany({data: replacement});
-
 			} else {
 				let data = [];
 				const total = await this._model.countDocuments(this._query);
