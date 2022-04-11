@@ -3,7 +3,7 @@
 	"version": "0.8.0",
 	"description": "owservable backend",
 	"engines": {
-		"node": ">=14"
+		"node": ">=16"
 	},
 	"main": "./lib/owservable.js",
 	"types": "./lib/owservable.d.ts",
