@@ -34,7 +34,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	protected shouldReload(change: any): boolean {
-		if (_.isEmpty(change)) return false;
+		if (_.isEmpty(change)) return true;
 
 		const id = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey, updateDescription: description, fullDocument: document} = change;

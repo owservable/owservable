@@ -15,7 +15,7 @@ export default class CollectionStore extends AStore {
 	}
 
 	protected shouldReload(change: any): boolean {
-		if (_.isEmpty(change)) return false;
+		if (_.isEmpty(change)) return true;
 
 		const {operationType: type, updateDescription: description, fullDocument: document} = change;
 
