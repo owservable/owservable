@@ -151,4 +151,4 @@ These types are self explanatory.
 
 ## UML
 
-![owservable](https://github.com/owservable/owservable/blob/main/uml.png)
+![owservable](https://raw.githubusercontent.com/owservable/owservable/main/uml.png)
