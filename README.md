@@ -148,3 +148,7 @@ These types are self explanatory.
 - StoreSubscriptionConfigType
 - StoreSubscriptionUpdateType
 - ConnectionManagerRefreshType
+
+## UML
+
+![owservable](https://github.com/owservable/owservable/blob/main/uml.png)
