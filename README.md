@@ -8,6 +8,10 @@ See <a href="https://owservable.github.io/" target="_blank">owservable.github.io
 
 See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
 
+### Test Coverage
+
+See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
+
 ## Uses
 
 - [Fastify](https://www.fastify.io)
