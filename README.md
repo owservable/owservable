@@ -4,14 +4,6 @@
 
 See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
 
-## TypeDoc Documentation
-
-See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
-
-### Test Coverage
-
-See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
-
 ## Uses
 
 - [Fastify](https://www.fastify.io)
@@ -19,13 +11,17 @@ See the <a href="https://owservable.github.io/owservable/coverage/" target="_bla
 - [RxJS](https://rxjs.dev)
 - [Typescript](https://www.typescriptlang.org/)
 
-#### Unit Testing:
+## Testing:
 
 - [Chai](https://www.chaijs.com/)
 - [Mocha](https://mochajs.org/)
 - [NYC](https://istanbul.js.org/)
 
+See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
+
 # Documentation
+
+See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
 
 ## MongoDB Replica Set
 
@@ -156,3 +152,5 @@ These types are self explanatory.
 ## UML
 
 ![owservable](https://raw.githubusercontent.com/owservable/owservable/main/uml.png)
+
+# Contributors
