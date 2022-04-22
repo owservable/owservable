@@ -1,5 +1,7 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "contributorsPerLine": 5,
   "contributorsSortAlphabetically": false,
@@ -12,6 +14,27 @@
       "link": "[<%= symbol %>](<%= url %> \"<%= description %>\"),"
     }
   },
-  "skipCi": "true",
-  "contributors": []
+  "skipCi": true,
+  "contributors": [
+    {
+      "login": "cope",
+      "name": "Predrag Stojadinović",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112515?v=4",
+      "profile": "http://stojadinovic.net",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "infra",
+        "maintenance",
+        "projectManagement",
+        "tool",
+        "test"
+      ]
+    }
+  ],
+  "projectName": "owservable",
+  "projectOwner": "owservable",
+  "repoType": "github",
+  "repoHost": "https://github.com"
 }
