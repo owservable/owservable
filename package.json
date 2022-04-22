@@ -23,7 +23,7 @@
 		"lint": "tslint -p tsconfig.json",
 		"clean": "tslint --config tslint-imports.json --fix --project .",
 		"format": "prettier --write \"src/**/*.ts\"",
-		"docs": "typedoc --readme none --out docs src",
+		"docs": "typedoc --readme none --out docs ./src/owservable.ts",
 		"test": "nyc --all --reporter=lcov --reporter=html mocha -r ts-node/register test/**/*.spec.ts --code-coverage",
 		"coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
 		"sonar": "sonarjs -e .sonarlint/**,node_modules/**,coverage/**,.nyc_output/**",

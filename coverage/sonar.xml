@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testExecutions version="1">
     <file path="test\_enums\store.type.enum.spec.ts">
-        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="0"/>
+        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="1"/>
     </file>
     <file path="test\functions\get.subfolder.paths.by.folder.name.spec.ts">
         <testCase name="getSubfolderPathsByFolderName tests expect test\functions" duration="2"/>
-        <testCase name="getSubfolderPathsByFolderName tests expect src\functions" duration="3"/>
+        <testCase name="getSubfolderPathsByFolderName tests expect src\functions" duration="4"/>
     </file>
     <file path="test\functions\initiate.cronjobs.spec.ts">
         <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="0"/>
@@ -17,15 +17,15 @@
         <testCase name="initiate.workers.ts tests initiateWorkers exists" duration="0"/>
     </file>
     <file path="test\middleware\data.middleware.map.spec.ts">
-        <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="1"/>
+        <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="0"/>
         <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="1"/>
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="1"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
         <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
     </file>
     <file path="test\mongodb\functions\observable.database.spec.ts">
-        <testCase name="owservable.database.ts tests observableDatabase exists" duration="0"/>
+        <testCase name="owservable.database.ts tests observableDatabase exists" duration="1"/>
     </file>
     <file path="test\mongodb\functions\observable.model.spec.ts">
         <testCase name="owservable.model.ts tests observableModel exists" duration="0"/>
