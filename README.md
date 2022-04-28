@@ -6,11 +6,9 @@
 
 See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
 
-# Udemy course
-
 Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blank">Reactive Stack Udemy course</a>.
 
-# TODOs
+## TODOs
 
 - Web Server abstraction
 - Database abstraction
