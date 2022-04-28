@@ -22,7 +22,7 @@ Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blan
 - [RxJS](https://rxjs.dev)
 - [Typescript](https://www.typescriptlang.org/)
 
-## Testing:
+### Testing:
 
 - [Chai](https://www.chaijs.com/)
 - [Mocha](https://mochajs.org/)
