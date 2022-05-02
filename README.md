@@ -173,7 +173,13 @@ These types are self explanatory.
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://stojadinovic.net"><img src="https://avatars.githubusercontent.com/u/112515?v=4" width="100px;" alt=""/><br /><sub><b>Predrag Stojadinović</b></sub></a></td>
+  </tr>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
