@@ -15,24 +15,7 @@
     }
   },
   "skipCi": true,
-  "contributors": [
-    {
-      "login": "cope",
-      "name": "Predrag Stojadinović",
-      "avatar_url": "https://avatars.githubusercontent.com/u/112515?v=4",
-      "profile": "http://stojadinovic.net",
-      "contributions": [
-        "code",
-        "doc",
-        "ideas",
-        "infra",
-        "maintenance",
-        "projectManagement",
-        "tool",
-        "test"
-      ]
-    }
-  ],
+  "contributors": [],
   "projectName": "owservable",
   "projectOwner": "owservable",
   "repoType": "github",
