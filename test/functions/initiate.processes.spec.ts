@@ -1,2 +1,8 @@
-import {describe, it} from 'vitest';
-describe('initiate.processes.ts tests', () => it.todo('should be implemented'));
+import {expect} from 'chai';
+import initiateProcesses from '../../src/functions/initiate.processes';
+
+describe('initiateProcesses.workers.ts tests', () => {
+	it('initiateProcesses exists', () => {
+		expect(initiateProcesses).to.be.a('function');
+	});
+});

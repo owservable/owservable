@@ -4,7 +4,6 @@
 	"testFolderName": "test",
 	"testFileExtensionPrefix": "spec",
 	"considerVueFiles": true,
-	"useVitest": true,
 	"ignoreSrcFiles": [
 		"src/auth/i.connection.manager.ts",
 		"src/_types/connection.manager.refresh.type.ts",
