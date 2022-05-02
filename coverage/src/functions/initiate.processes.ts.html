@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/mongodb/mongodb.connector.ts</title>
+    <title>Code coverage report for src/functions/initiate.processes.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/mongodb</a> mongodb.connector.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/functions</a> initiate.processes.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/12</span>
+                <span class='fraction'>7/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">41.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/10</span>
+                <span class='fraction'>7/17</span>
             </div>
         
             
@@ -84,81 +84,60 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
-import * as mongoose from 'mongoose';
-import {Connection} from 'mongoose';
+import * as fs from 'fs';
+import * as path from 'path';
 &nbsp;
-export default class MongoDBConnector {
-	public <span class="fstat-no" title="function not covered" >static </span>init(mongoDbUri: string): Connection {
-<span class="cstat-no" title="statement not covered" >		if (!MongoDBConnector._instance) <span class="cstat-no" title="statement not covered" >MongoDBConnector._instance = new MongoDBConnector(mongoDbUri);</span></span>
-<span class="cstat-no" title="statement not covered" >		return MongoDBConnector._instance._connection;</span>
-	}
+import {each, filter} from 'lodash';
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >static </span>get connection(): Connection {
-<span class="cstat-no" title="statement not covered" >		return MongoDBConnector._instance._connection;</span>
-	}
+import getSubfolderPathsByFolderName from './get.subfolder.paths.by.folder.name';
 &nbsp;
-	private static _instance: MongoDBConnector;
-	private readonly _connection: Connection;
+const _initiate = <span class="fstat-no" title="function not covered" >(f</span>older: string, execute: Function): void =&gt; {
+	const subfolderNames = <span class="cstat-no" title="statement not covered" >fs.readdirSync(folder);</span>
+	const files = <span class="cstat-no" title="statement not covered" >filter(subfolderNames, <span class="fstat-no" title="function not covered" >(n</span>ame) =&gt; <span class="cstat-no" title="statement not covered" >!fs.lstatSync(path.join(folder, name)).isDirectory())</span>;</span>
+<span class="cstat-no" title="statement not covered" >	each(files, <span class="fstat-no" title="function not covered" >(f</span>ile: string) =&gt; {</span>
+		const absoluteFilePath = <span class="cstat-no" title="statement not covered" >path.join(folder, file);</span>
+		const obj: any = <span class="cstat-no" title="statement not covered" >require(absoluteFilePath).default;</span>
+<span class="cstat-no" title="statement not covered" >		execute(obj);</span>
+	});
 &nbsp;
-<span class="fstat-no" title="function not covered" >	private constructor(m</span>ongoDbUri: string) {
-<span class="cstat-no" title="statement not covered" >		mongoose</span>
-			.connect(mongoDbUri, {
-				poolSize: 10,
-				// useCreateIndex: true,	// does not work in MongoDB 5
-				useNewUrlParser: true,
-				useUnifiedTopology: true
-			})
-			.then(<span class="fstat-no" title="function not covered" >() =</span>&gt; (<span class="cstat-no" title="statement not covered" >{})</span>)
-			.catch(console.error);
+	const folders = <span class="cstat-no" title="statement not covered" >filter(subfolderNames, <span class="fstat-no" title="function not covered" >(n</span>ame: string) =&gt; <span class="cstat-no" title="statement not covered" >fs.lstatSync(path.join(folder, name)).isDirectory())</span>;</span>
+<span class="cstat-no" title="statement not covered" >	each(folders, <span class="fstat-no" title="function not covered" >(s</span>ub: string) =&gt; <span class="cstat-no" title="statement not covered" >_initiate(path.join(folder, sub), execute))</span>;</span>
+};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		this._connection = mongoose.connection;</span>
-<span class="cstat-no" title="statement not covered" >		this._connection.on('error', console.error.bind(console, 'connection error:'));</span>
-<span class="cstat-no" title="statement not covered" >		this._connection.once('open', <span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >console.log('ows -&gt; MongoDB connected to', mongoDbUri))</span>;</span>
-	}
-}
+const initiateProcesses = <span class="fstat-no" title="function not covered" >(r</span>oot: string, name: string, execute: Function): void =&gt; {
+	const folders: string[] = <span class="cstat-no" title="statement not covered" >getSubfolderPathsByFolderName(root, name);</span>
+<span class="cstat-no" title="statement not covered" >	each(folders, <span class="fstat-no" title="function not covered" >(f</span>older: string) =&gt; <span class="cstat-no" title="statement not covered" >_initiate(folder, execute))</span>;</span>
+};
+export default initiateProcesses;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

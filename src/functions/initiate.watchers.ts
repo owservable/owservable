@@ -1,31 +1,17 @@
 'use strict';
 
-import * as fs from 'fs';
-import * as path from 'path';
-
-import {each, filter, isFunction} from 'lodash';
+import {isFunction} from 'lodash';
 
 import WatcherType from '../_types/watcher.type';
-import getSubfolderPathsByFolderName from './get.subfolder.paths.by.folder.name';
+import initiateProcesses from './initiate.processes';
 
-const _initiateWatchers = (folder: string): void => {
-	const subfolderNames = fs.readdirSync(folder);
-	const files = filter(subfolderNames, (name) => !fs.lstatSync(path.join(folder, name)).isDirectory());
-	each(files, (file: string) => {
-		const absoluteFilePath = path.join(folder, file);
-		const watcher: WatcherType = require(absoluteFilePath).default;
-
-		const {init, watch} = watcher;
-		if (isFunction(init)) init().then(() => watch?.());
-		else watch?.();
-	});
-
-	const folders = filter(subfolderNames, (name: string) => fs.lstatSync(path.join(folder, name)).isDirectory());
-	each(folders, (sub: string) => _initiateWatchers(path.join(folder, sub)));
+const _execute = (obj: WatcherType) => {
+	const {init, watch} = obj;
+	if (isFunction(init)) init().then(() => watch?.());
+	else watch?.();
 };
 
 const initiateWatchers = (root: string, name: string = 'watchers'): void => {
-	const folders: string[] = getSubfolderPathsByFolderName(root, name);
-	each(folders, _initiateWatchers);
+	initiateProcesses(root, name, _execute);
 };
 export default initiateWatchers;
