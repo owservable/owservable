@@ -45,7 +45,7 @@ This implementation is required for the above ```OwservableClient```. An instanc
 
 This is a map of all defined Data Middleware methods.
 
-A Data Middleware is tied to a store scope ```'count' | 'one' | 'many'``` and collection name and is used to modify an observed payload if necessary. For example, if based on users
+A Data Middleware is tied to a collection name and is used to modify an observed payload if necessary. For example, if based on users
 access permissions a portion of the payload needs to be removed or replaced, etc.
 
 ### initiateWatchers
@@ -158,3 +158,11 @@ These types are self explanatory.
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->

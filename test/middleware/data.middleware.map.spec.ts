@@ -8,16 +8,16 @@ describe('data.middleware.map.ts tests', () => {
 	it('DataMiddlewareMap functionality', () => {
 		let keys = DataMiddlewareMap.keys();
 		expect(keys).to.be.empty;
-		expect(DataMiddlewareMap.hasMiddleware('count', 'users')).to.be.equal(false);
-		expect(DataMiddlewareMap.getMiddleware('count', 'users')).to.be.undefined;
+		expect(DataMiddlewareMap.hasMiddleware('users')).to.be.equal(false);
+		expect(DataMiddlewareMap.getMiddleware('users')).to.be.undefined;
 
 		const processor = () => console.log('processor');
 
-		DataMiddlewareMap.addMiddleware('count', 'users', processor);
+		DataMiddlewareMap.addMiddleware('users', processor);
 		keys = DataMiddlewareMap.keys();
 		expect(keys).to.have.length(1);
-		expect(DataMiddlewareMap.hasMiddleware('count', 'users')).to.be.equal(true);
-		expect(DataMiddlewareMap.getMiddleware('count', 'users')).to.not.be.undefined;
-		expect(DataMiddlewareMap.getMiddleware('count', 'users')).to.be.equal(processor);
+		expect(DataMiddlewareMap.hasMiddleware('users')).to.be.equal(true);
+		expect(DataMiddlewareMap.getMiddleware('users')).to.not.be.undefined;
+		expect(DataMiddlewareMap.getMiddleware('users')).to.be.equal(processor);
 	});
 });

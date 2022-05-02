@@ -2,9 +2,9 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as cron from 'node-cron';
 
 import {each, filter, isFunction} from 'lodash';
-import * as cron from 'node-cron';
 
 import CronJobType from '../_types/cronjob.type';
 import getSubfolderPathsByFolderName from './get.subfolder.paths.by.folder.name';

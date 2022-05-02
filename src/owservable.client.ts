@@ -1,7 +1,6 @@
 'use strict';
 
 import Timeout = NodeJS.Timeout;
-
 import {get} from 'lodash';
 import {Subject, Subscription} from 'rxjs';
 
@@ -124,15 +123,14 @@ export default class OwservableClient extends Subject<any> {
 		let store = this._stores.get(target);
 		if (store) {
 			store.config = config;
-
 		} else {
 			store = storeFactory(scope, observe, target);
 
 			this._stores.set(target, store);
 			const subscription = store.subscribe({
 				next: async (m: any): Promise<void> => {
-					if (DataMiddlewareMap.hasMiddleware(scope, observe)) {
-						const process = DataMiddlewareMap.getMiddleware(scope, observe);
+					if (DataMiddlewareMap.hasMiddleware(observe)) {
+						const process = DataMiddlewareMap.getMiddleware(observe);
 						m = await process(m, this._connectionManager.user);
 					}
 					this.next(m);
