@@ -175,7 +175,21 @@ These types are self explanatory.
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://stojadinovic.net"><img src="https://avatars.githubusercontent.com/u/112515?v=4" width="100px;" alt=""/><br /><sub><b>Predrag Stojadinović</b></sub></a></td>
+    <td align="center">
+        <a href="http://stojadinovic.net">
+            <img src="https://avatars.githubusercontent.com/u/112515?v=4" width="100px;" alt=""/>
+            <br />
+            <sub><b>Predrag Stojadinović</b></sub>
+            <br />
+        </a>
+        <br />
+        <a href="https://github.com/owservable/owservable/commits?author=cope" title="Code">💻</a>
+        <a href="https://github.com/owservable/owservable/commits?author=cope" title="Documentation">📖</a>
+        <a href="https://github.com/owservable/owservable/commits?author=cope" title="Ideas & Planning">🤔</a>
+        <a href="https://github.com/owservable/owservable/commits?author=cope" title="Maintenance">🚧</a>
+        <a href="https://github.com/owservable/owservable/commits?author=cope" title="Project Management">📆</a>
+        <a href="https://github.com/owservable/owservable/commits?author=cope" title="Tests">⚠️</a>
+    </td>
   </tr>
 </table>
 
