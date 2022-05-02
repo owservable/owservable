@@ -1,17 +1,28 @@
 ![owservable](https://avatars0.githubusercontent.com/u/87773159?s=75)
 
-# Owservable fastify backend
+# Owservable backend
+
+[Reactive Stack JS](https://github.com/reactive-stack-js) replacement.
 
 See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
 
+Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blank">Reactive Stack Udemy course</a>.
+
+## TODOs
+
+- Web Server abstraction
+- Database abstraction
+- Client-side datastore abstraction
+- Larga Data handling
+- Server-Side Events
+
 ## Uses
 
-- [Fastify](https://www.fastify.io)
 - [Mongoose](https://mongoosejs.com)
 - [RxJS](https://rxjs.dev)
 - [Typescript](https://www.typescriptlang.org/)
 
-## Testing:
+### Testing:
 
 - [Chai](https://www.chaijs.com/)
 - [Mocha](https://mochajs.org/)
