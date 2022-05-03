@@ -30,13 +30,13 @@ Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blan
 
 See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
 
-# Documentation
-
-See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
-
 ## MongoDB Replica Set
 
 Make sure your MongoDB database is running as a Replica Set: http://stojadinovic.net/2020/07/05/mongodb-change-streams-on-localhost-with-nodejs/
+
+## Documentation
+
+See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
 
 ### OwservableClient
 
@@ -164,11 +164,11 @@ These types are self explanatory.
 
 ![owservable](https://raw.githubusercontent.com/owservable/owservable/main/uml.png)
 
-# :page_facing_up: License
+## :page_facing_up: License
 
 Licensed under [The Unlicense](./LICENSE)
 
-# :sparkles: Contributors
+## :sparkles: Contributors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
