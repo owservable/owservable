@@ -199,4 +199,4 @@ Contributions of any kind welcome!
 
 ## UML
 
-![owservable](https://raw.githubusercontent.com/owservable/owservable/main/uml.png)
+Checkout the UML diagram [uml](./uml.png).
