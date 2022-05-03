@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.8.3",
+	"version": "0.8.4",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -33,6 +33,7 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
+		"@owservable/list-subfolders-by-name": "^0.0.1",
 		"@types/lodash": "^4.14.182",
 		"@types/mongoose": "^5.7.36",
 		"@types/node": "^17.0.31",

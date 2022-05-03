@@ -3,10 +3,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import {each, endsWith, find, isString, filter} from 'lodash';
+import {each, endsWith, filter, find, isString} from 'lodash';
+import listSubfoldersByName from '@owservable/list-subfolders-by-name';
 
 import CollectionsModelsMap from '../collections.models.map';
-import listSubfoldersByName from '../../functions/list.subfolders.by.name';
 
 const _processFile = (folder: string, file: string): void => {
 	const fullPath = path.join(folder, file);

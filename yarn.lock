@@ -289,6 +289,15 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
+"@owservable/list-subfolders-by-name@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@owservable/list-subfolders-by-name/-/list-subfolders-by-name-0.0.1.tgz#d0e0b27a08b7eaef8a51d2ea0c8852c902226de4"
+  integrity sha512-6y6sKMM8FIl41Y2LXHtn/HYrcWEJtYxSQTUR7dnjmfrAvTDXPCkKoLAB+eM8/03H1QVVRJ84TGDO55RvAQAL2Q==
+  dependencies:
+    "@types/lodash" "^4.14.182"
+    "@types/node" "^17.0.31"
+    lodash "^4.17.20"
+
 "@phenomnomnominal/tsquery@^4.0.0":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@phenomnomnominal/tsquery/-/tsquery-4.1.1.tgz#42971b83590e9d853d024ddb04a18085a36518df"
