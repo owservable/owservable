@@ -160,19 +160,11 @@ These types are self explanatory.
 - StoreSubscriptionUpdateType
 - ConnectionManagerRefreshType
 
-## UML
-
-![owservable](https://raw.githubusercontent.com/owservable/owservable/main/uml.png)
-
 ## :page_facing_up: License
 
-Licensed under [The Unlicense](./LICENSE)
+Licensed under [The Unlicense](./LICENSE).
 
 ## :sparkles: Contributors
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -204,3 +196,7 @@ Licensed under [The Unlicense](./LICENSE)
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
 
 Contributions of any kind welcome!
+
+## UML
+
+![owservable](https://raw.githubusercontent.com/owservable/owservable/main/uml.png)
