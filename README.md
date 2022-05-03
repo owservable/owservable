@@ -197,6 +197,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 Contributions of any kind welcome!
 
-## UML
+## :chart_with_upwards_trend: UML
 
 Checkout the [UML diagram](https://raw.githubusercontent.com/owservable/owservable/main/uml.png).
