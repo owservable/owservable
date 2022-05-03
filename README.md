@@ -8,7 +8,7 @@ See <a href="https://owservable.github.io/" target="_blank">owservable.github.io
 
 Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blank">Reactive Stack Udemy course</a>.
 
-## TODOs
+## :clipboard: TODOs
 
 - Web Server abstraction
 - Database abstraction
@@ -16,13 +16,13 @@ Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blan
 - Larga Data handling
 - Server-Side Events
 
-## Uses
+## :scroll: Uses
 
 - [Mongoose](https://mongoosejs.com)
 - [RxJS](https://rxjs.dev)
 - [Typescript](https://www.typescriptlang.org/)
 
-### Testing:
+### :traffic_light: Testing:
 
 - [Chai](https://www.chaijs.com/)
 - [Mocha](https://mochajs.org/)
@@ -30,11 +30,11 @@ Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blan
 
 See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
 
-## MongoDB Replica Set
+## :floppy_disk: MongoDB Replica Set
 
 Make sure your MongoDB database is running as a Replica Set: http://stojadinovic.net/2020/07/05/mongodb-change-streams-on-localhost-with-nodejs/
 
-## Documentation
+## :books: Documentation
 
 See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
 
@@ -160,7 +160,7 @@ These types are self explanatory.
 - StoreSubscriptionUpdateType
 - ConnectionManagerRefreshType
 
-## :page_facing_up: License
+## :scroll: License
 
 Licensed under [The Unlicense](./LICENSE).
 
