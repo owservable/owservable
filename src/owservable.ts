@@ -22,7 +22,7 @@ import IConnectionManager from './auth/i.connection.manager';
 import initiateWorkers from './functions/initiate.workers';
 import initiateCronjobs from './functions/initiate.cronjobs';
 import initiateWatchers from './functions/initiate.watchers';
-import getSubfolderPathsByFolderName from './functions/get.subfolder.paths.by.folder.name';
+import listSubfoldersByName from './functions/list.subfolders.by.name';
 
 // middleware
 import DataMiddlewareMap from './middleware/data.middleware.map';
@@ -61,7 +61,7 @@ export {
 	// auth
 	IConnectionManager,
 	// functions
-	getSubfolderPathsByFolderName,
+	listSubfoldersByName,
 	initiateCronjobs,
 	initiateWatchers,
 	initiateWorkers,

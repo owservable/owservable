@@ -5,7 +5,7 @@ import * as path from 'path';
 
 import {each, filter} from 'lodash';
 
-import getSubfolderPathsByFolderName from './get.subfolder.paths.by.folder.name';
+import listSubfoldersByName from './list.subfolders.by.name';
 
 const _initiate = (folder: string, execute: Function): void => {
 	const subfolderNames = fs.readdirSync(folder);
@@ -21,7 +21,7 @@ const _initiate = (folder: string, execute: Function): void => {
 };
 
 const initiateProcesses = (root: string, name: string, execute: Function): void => {
-	const folders: string[] = getSubfolderPathsByFolderName(root, name);
+	const folders: string[] = listSubfoldersByName(root, name);
 	each(folders, (folder: string) => _initiate(folder, execute));
 };
 export default initiateProcesses;

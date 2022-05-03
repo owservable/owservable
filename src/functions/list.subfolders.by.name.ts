@@ -5,7 +5,7 @@ import * as path from 'path';
 
 import {concat, each, filter} from 'lodash';
 
-const getSubfolderPathsByFolderName = (root: string, name: string): string[] => {
+const listSubfoldersByName = (root: string, name: string): string[] => {
 	let folders: string[] = [];
 
 	const subfolderNames = fs.readdirSync(root);
@@ -14,9 +14,9 @@ const getSubfolderPathsByFolderName = (root: string, name: string): string[] => 
 	each(subfolders, (subfolder) => {
 		const fullPath = path.join(root, subfolder);
 		if (name === subfolder) folders.push(fullPath);
-		else folders = concat(folders, getSubfolderPathsByFolderName(fullPath, name));
+		else folders = concat(folders, listSubfoldersByName(fullPath, name));
 	});
 
 	return folders;
 };
-export default getSubfolderPathsByFolderName;
+export default listSubfoldersByName;

@@ -6,7 +6,7 @@ import * as path from 'path';
 import {each, endsWith, find, isString, filter} from 'lodash';
 
 import CollectionsModelsMap from '../collections.models.map';
-import getSubfolderPathsByFolderName from '../../functions/get.subfolder.paths.by.folder.name';
+import listSubfoldersByName from '../../functions/list.subfolders.by.name';
 
 const _processFile = (folder: string, file: string): void => {
 	const fullPath = path.join(folder, file);
@@ -38,7 +38,7 @@ const _processModels = (folder: string, exclude?: string | string[]): void => {
 };
 
 const processModels = (root: string, name: string = 'models', exclude?: string | string[]): void => {
-	const folders: string[] = getSubfolderPathsByFolderName(root, name);
+	const folders: string[] = listSubfoldersByName(root, name);
 	each(folders, (folder: string) => _processModels(folder, exclude));
 };
 export default processModels;
