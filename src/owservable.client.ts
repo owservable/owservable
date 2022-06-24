@@ -93,8 +93,6 @@ export default class OwservableClient extends Subject<any> {
 		if (location === this._location) return;
 		this._location = location;
 
-		this.clearSubscriptions();
-
 		this._stores = new Map<string, AStore>();
 		this._subscriptions = new Map<string, Subscription>();
 
