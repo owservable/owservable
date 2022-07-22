@@ -1,7 +1,10 @@
 'use strict';
 
 import {Model} from 'mongoose';
-import {Subject, Subscription} from 'rxjs';
+
+import {throttle} from 'rxjs/operators';
+import {interval, Subject, Subscription} from 'rxjs';
+
 import * as jsondiffpatch from 'jsondiffpatch';
 import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
@@ -30,6 +33,8 @@ export default abstract class AStore extends Subject<any> {
 	protected _populates: any[];
 	protected _virtuals: any[];
 
+	protected _delay: number;
+
 	protected _subscription: Subscription;
 
 	protected constructor(model: Model<any>, target: string) {
@@ -43,6 +48,7 @@ export default abstract class AStore extends Subject<any> {
 		this._paging = {};
 		this._populates = [];
 		this._virtuals = [];
+		this._delay = 50;
 	}
 
 	public destroy(): void {
@@ -52,6 +58,7 @@ export default abstract class AStore extends Subject<any> {
 
 	public restartSubscription(): void {
 		this.subscription = observableModel(this.model) //
+			.pipe(throttle(() => interval(this._delay)))
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
 			});
@@ -62,12 +69,14 @@ export default abstract class AStore extends Subject<any> {
 	protected abstract load(change: any): Promise<void>;
 
 	protected extractFromConfig(): void {
-		const {query = {}, sort = {}, fields = {}, populates = [], virtuals = []} = this._config;
+		const {query = {}, sort = {}, fields = {}, populates = [], virtuals = [], delay = 50} = this._config;
 		this._query = query;
 		this._sort = sort;
 
 		this._populates = populates;
 		this._virtuals = virtuals;
+
+		this._delay = delay;
 
 		if (isArray(fields)) {
 			this._fields = {};

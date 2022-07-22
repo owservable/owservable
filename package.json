@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.8.9",
+	"version": "0.8.10",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"

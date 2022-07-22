@@ -2,7 +2,9 @@
 
 import sift from 'sift';
 import * as _ from 'lodash';
-import {filter} from 'rxjs/operators';
+
+import {interval} from 'rxjs';
+import {filter, throttle} from 'rxjs/operators';
 
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
@@ -27,6 +29,7 @@ export default class DocumentStore extends AStore {
 
 	public restartSubscription(): void {
 		this.subscription = observableModel(this.model) //
+			.pipe(throttle(() => interval(this._delay)))
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
