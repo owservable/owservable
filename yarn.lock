@@ -302,13 +302,13 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@owservable/list-subfolders-by-name@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@owservable/list-subfolders-by-name/-/list-subfolders-by-name-0.0.1.tgz#d0e0b27a08b7eaef8a51d2ea0c8852c902226de4"
-  integrity sha512-6y6sKMM8FIl41Y2LXHtn/HYrcWEJtYxSQTUR7dnjmfrAvTDXPCkKoLAB+eM8/03H1QVVRJ84TGDO55RvAQAL2Q==
+"@owservable/list-subfolders-by-name@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@owservable/list-subfolders-by-name/-/list-subfolders-by-name-0.0.2.tgz#e99529c9fa52f0e6bf168c2866f94c5c30d7421a"
+  integrity sha512-nTGvwccPZFn8IhXcb9b408m09xnD5Wk6pNZQmw1UkA+phNrSSS34wsamQavtF822zkohYYyhDAC5VkyFmx1i4w==
   dependencies:
     "@types/lodash" "^4.14.182"
-    "@types/node" "^17.0.31"
+    "@types/node" "^18.0.6"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -391,11 +391,6 @@
   version "17.0.16"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.16.tgz#e3733f46797b9df9e853ca9f719c8a6f7b84cd26"
   integrity sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==
-
-"@types/node@^17.0.31":
-  version "17.0.31"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.31.tgz#a5bb84ecfa27eec5e1c802c6bbf8139bdb163a5d"
-  integrity sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==
 
 "@types/node@^18.0.6":
   version "18.0.6"
