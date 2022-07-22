@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.8.8",
+	"version": "0.8.9",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -42,7 +42,7 @@
 		"lodash": "^4.17.20",
 		"mongoose": "^5.13.3",
 		"node-cron": "^3.0.0",
-		"rxjs": "^7.5.5",
+		"rxjs": "^7.5.6",
 		"sift": "^16.0.0"
 	},
 	"devDependencies": {
