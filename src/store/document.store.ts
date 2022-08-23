@@ -48,12 +48,7 @@ export default class DocumentStore extends AStore {
 				return true;
 
 			case 'insert':
-				if (id) return false;
-				if (!_.isEmpty(this._query)) {
-					const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
-					return test(document);
-				}
-				return true;
+				return !id;
 
 			case 'replace':
 			case 'update':

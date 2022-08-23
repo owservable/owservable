@@ -22,11 +22,8 @@ export default class CollectionStore extends AStore {
 		const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
 		switch (type) {
 			case 'delete':
-				return true;
-
 			case 'insert':
-				if (!_.isEmpty(this._query)) return test(document);
-				break;
+				return true;
 
 			case 'replace':
 			case 'update':
