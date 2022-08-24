@@ -7,22 +7,31 @@ export default class MongoDBConnector {
 	public static async init(mongoDbUri: string): Promise<Connection> {
 		if (!this._connection) {
 			return new Promise(async (resolve, reject) => {
-				console.log('ows -> MongoDB connecting to', mongoDbUri);
+				console.log('');
 				mongoose
 					.connect(mongoDbUri, {
 						poolSize: 10,
 						// useCreateIndex: true,	// does not work in MongoDB 5
 						useNewUrlParser: true,
-						useUnifiedTopology: true
+						useUnifiedTopology: true,
+
+						keepAlive: true,
+						keepAliveInitialDelay: 100000
 					})
 					.then(() => {
 						this._connection = mongoose.connection;
-						this._connection.on('error', console.error.bind(console, 'ows -> MongoDB connection error:'));
-						this._connection.once('open', () => console.log('ows -> MongoDB connected to', mongoDbUri));
-
 						resolve(this._connection);
 					})
 					.catch(reject);
+
+				mongoose.connection.on('connecting', () => console.log('ows -> MongoDB connecting to', mongoDbUri, '...'));
+				mongoose.connection.on('connected', () => console.log('ows -> MongoDB connected to', mongoDbUri));
+				mongoose.connection.on('open', () => console.log('ows -> MongoDB opened connection to', mongoDbUri));
+
+				mongoose.connection.on('error', console.error.bind(console, 'ows -> MongoDB connection error:'));
+				mongoose.connection.on('disconnecting', () => console.error('ows -> MongoDB disconnecting from', mongoDbUri, '...'));
+				mongoose.connection.on('disconnected', () => console.error('ows -> MongoDB disconnected from', mongoDbUri));
+				mongoose.connection.on('close', () => console.error('ows -> MongoDB closed connection to', mongoDbUri));
 			});
 
 			//
