@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">21.05% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/12</span>
+                <span class='fraction'>4/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.36% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/11</span>
+                <span class='fraction'>4/16</span>
             </div>
         
             
@@ -82,8 +82,20 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -100,15 +112,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
-&nbsp;
 import {isEmpty} from 'lodash';
 import {Model} from 'mongoose';
 &nbsp;
@@ -123,11 +148,25 @@ export default class CountStore extends AStore {
 	}
 &nbsp;
 	protected <span class="fstat-no" title="function not covered" >shouldReload(</span>change: any): boolean {
-<span class="cstat-no" title="statement not covered" >		return false;</span>
+<span class="cstat-no" title="statement not covered" >		if (this.isInitialSubscription(change)) <span class="cstat-no" title="statement not covered" >return true;</span></span>
+&nbsp;
+		const {operationType: type} = <span class="cstat-no" title="statement not covered" >change;</span>
+<span class="cstat-no" title="statement not covered" >		switch (type) {</span>
+			case 'delete':
+			case 'insert':
+<span class="cstat-no" title="statement not covered" >				return true;</span>
+&nbsp;
+			case 'replace':
+			case 'update':
+			default:
+<span class="cstat-no" title="statement not covered" >				return false;</span>
+		}
 	}
 &nbsp;
 	protected async <span class="fstat-no" title="function not covered" >load(</span>change: any): Promise&lt;void&gt; {
 <span class="cstat-no" title="statement not covered" >		if (isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitOne();</span></span>
+<span class="cstat-no" title="statement not covered" >		if (!this.shouldReload(change)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
 		const count = <span class="cstat-no" title="statement not covered" >await this._model.countDocuments(this._query);</span>
 <span class="cstat-no" title="statement not covered" >		this.emitOne(count);</span>
 	}
@@ -139,7 +178,7 @@ export default class CountStore extends AStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Aug 24 2022 13:48:53 GMT+0200 (Mitteleuropäische Sommerzeit)
+                at Tue Sep 06 2022 10:57:37 GMT+0200 (Mitteleuropäische Sommerzeit)
             </div>
         </div>
         <script src="../../prettify.js"></script>

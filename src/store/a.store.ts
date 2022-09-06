@@ -6,6 +6,7 @@ import {throttle} from 'rxjs/operators';
 import {interval, Subject, Subscription} from 'rxjs';
 
 import * as jsondiffpatch from 'jsondiffpatch';
+import * as _ from 'lodash';
 import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
 import EStoreType from '../_enums/store.type.enum';
@@ -62,6 +63,10 @@ export default abstract class AStore extends Subject<any> {
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
 			});
+	}
+
+	protected isInitialSubscription(change: any): boolean {
+		return _.isEmpty(change);
 	}
 
 	protected abstract shouldReload(change: any): boolean;

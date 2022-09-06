@@ -1,6 +1,4 @@
 'use strict';
-
-import * as _ from 'lodash';
 import {isEmpty} from 'lodash';
 import {Model} from 'mongoose';
 
@@ -15,7 +13,7 @@ export default class CountStore extends AStore {
 	}
 
 	protected shouldReload(change: any): boolean {
-		if (_.isEmpty(change)) return false;
+		if (this.isInitialSubscription(change)) return true;
 
 		const {operationType: type} = change;
 		switch (type) {
