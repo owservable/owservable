@@ -2,8 +2,8 @@
 
 import {Model} from 'mongoose';
 
-import {throttle} from 'rxjs/operators';
-import {interval, Subject, Subscription} from 'rxjs';
+import {asyncScheduler, Subject, Subscription} from 'rxjs';
+import {throttleTime} from 'rxjs/operators';
 
 import * as jsondiffpatch from 'jsondiffpatch';
 import * as _ from 'lodash';
@@ -59,7 +59,7 @@ export default abstract class AStore extends Subject<any> {
 
 	public restartSubscription(): void {
 		this.subscription = observableModel(this.model) //
-			.pipe(throttle(() => interval(this._delay)))
+			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
 			});

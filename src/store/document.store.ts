@@ -3,8 +3,8 @@
 import sift from 'sift';
 import * as _ from 'lodash';
 
-import {interval} from 'rxjs';
-import {filter, throttle} from 'rxjs/operators';
+import {asyncScheduler} from 'rxjs';
+import {filter, throttleTime} from 'rxjs/operators';
 
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
@@ -29,7 +29,7 @@ export default class DocumentStore extends AStore {
 
 	public restartSubscription(): void {
 		this.subscription = observableModel(this.model) //
-			.pipe(throttle(() => interval(this._delay)))
+			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
