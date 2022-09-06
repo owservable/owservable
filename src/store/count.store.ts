@@ -1,5 +1,6 @@
 'use strict';
 
+import * as _ from 'lodash';
 import {isEmpty} from 'lodash';
 import {Model} from 'mongoose';
 
@@ -14,11 +15,25 @@ export default class CountStore extends AStore {
 	}
 
 	protected shouldReload(change: any): boolean {
-		return false;
+		if (_.isEmpty(change)) return false;
+
+		const {operationType: type} = change;
+		switch (type) {
+			case 'delete':
+			case 'insert':
+				return true;
+
+			case 'replace':
+			case 'update':
+			default:
+				return false;
+		}
 	}
 
 	protected async load(change: any): Promise<void> {
 		if (isEmpty(this._config)) return this.emitOne();
+		if (!this.shouldReload(change)) return;
+
 		const count = await this._model.countDocuments(this._query);
 		this.emitOne(count);
 	}

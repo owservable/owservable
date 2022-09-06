@@ -15,7 +15,7 @@ export default class CollectionStore extends AStore {
 	}
 
 	protected shouldReload(change: any): boolean {
-		if (_.isEmpty(change)) return true;
+		if (_.isEmpty(change)) return false;
 
 		const {operationType: type, updateDescription: description, fullDocument: document} = change;
 
@@ -29,12 +29,12 @@ export default class CollectionStore extends AStore {
 			case 'update':
 				if (!description) return true;
 
-				let us = [];
-				const {updatedFields, removedFields} = description;
-				us = _.concat(removedFields, _.keys(updatedFields));
+				if (!this.shouldConsiderFields()) return test(document);
 
-				const qs = this.shouldConsiderFields() ? _.keys(this._fields) : [];
-				return !_.isEmpty(_.intersection(qs, us)) || test(document);
+				const {updatedFields, removedFields} = description;
+				const us = _.concat(removedFields, _.keys(updatedFields));
+				const qs = _.keys(this._fields);
+				return !_.isEmpty(_.intersection(qs, us));
 		}
 
 		return false;

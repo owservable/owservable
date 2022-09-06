@@ -37,7 +37,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	protected shouldReload(change: any): boolean {
-		if (_.isEmpty(change)) return true;
+		if (_.isEmpty(change)) return false;
 
 		const id = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey, updateDescription: description, fullDocument: document} = change;
@@ -53,14 +53,14 @@ export default class DocumentStore extends AStore {
 			case 'replace':
 			case 'update':
 				if (id && id === key) return true;
+				if (!description) return true;
+
 				if (!this.shouldConsiderFields()) return true;
 
-				if (!description) return true;
-				else {
-					const {updatedFields, removedFields} = description;
-					const us = _.concat(removedFields, _.keys(updatedFields));
-					return !_.isEmpty(_.intersection(_.keys(this._fields), us));
-				}
+				const {updatedFields, removedFields} = description;
+				const us = _.concat(removedFields, _.keys(updatedFields));
+				const qs = _.keys(this._fields);
+				return !_.isEmpty(_.intersection(qs, us));
 		}
 
 		return false;
