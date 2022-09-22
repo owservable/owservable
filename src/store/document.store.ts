@@ -40,7 +40,7 @@ export default class DocumentStore extends AStore {
 		if (this.isInitialSubscription(change)) return true;
 
 		const id = _getIdFromQuery(this._query);
-		const {operationType: type, documentKey, updateDescription: description, fullDocument: document} = change;
+		const {operationType: type, documentKey, updateDescription: description} = change;
 		const key = _.get(documentKey, '_id', '').toString();
 
 		switch (type) {
@@ -119,7 +119,11 @@ export default class DocumentStore extends AStore {
 	}
 
 	private async _loadSortedFirstDocument(): Promise<any> {
-		return _.first(await this._model.find(this._query, this._fields, this._paging).sort(this._sort));
+		const docs = await this._model //
+			.find(this._query, this._fields, this._paging)
+			.collation({locale: 'en'})
+			.sort(this._sort);
+		return _.first(docs);
 	}
 
 	private async _loadDocument(): Promise<any> {
