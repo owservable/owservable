@@ -1,3 +1,5 @@
+'use strict';
+
 import {expect} from 'chai';
 import initiateCronjobs from '../../src/functions/initiate.cronjobs';
 

@@ -1,3 +1,5 @@
+'use strict';
+
 import {expect} from 'chai';
 import initiateProcesses from '../../src/functions/initiate.processes';
 

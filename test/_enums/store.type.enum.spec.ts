@@ -1,3 +1,5 @@
+'use strict';
+
 import {expect} from 'chai';
 import EStoreType from '../../src/_enums/store.type.enum';
 

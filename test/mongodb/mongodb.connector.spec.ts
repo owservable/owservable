@@ -1,3 +1,5 @@
+'use strict';
+
 import {expect} from 'chai';
 import MongoDBConnector from '../../src/mongodb/mongodb.connector';
 

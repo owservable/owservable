@@ -13,5 +13,5 @@ export default interface IConnectionManager {
 
 	disconnected(): void;
 
-	checkSession(): ConnectionManagerRefreshType;
+	checkSession(): Promise<ConnectionManagerRefreshType> | ConnectionManagerRefreshType;
 }

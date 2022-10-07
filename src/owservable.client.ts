@@ -76,8 +76,8 @@ export default class OwservableClient extends Subject<any> {
 		this._connectionManager.ping(this._ping);
 	}
 
-	private _checkSession(): void {
-		const check = this._connectionManager.checkSession();
+	private async _checkSession(): Promise<void> {
+		const check = await this._connectionManager.checkSession();
 		if (check) this.next(check);
 
 		const refreshIn = get(check, 'refresh_in', 299000); // 299000 = 4min 59sec

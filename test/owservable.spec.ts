@@ -1,3 +1,5 @@
+'use strict';
+
 import {expect} from 'chai';
 import Owservable from '../src/owservable';
 

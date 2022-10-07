@@ -1,3 +1,5 @@
+'use strict';
+
 import {expect} from 'chai';
 import DataMiddlewareMap from '../../src/middleware/data.middleware.map';
 
