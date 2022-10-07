@@ -80,12 +80,11 @@ export default class OwservableClient extends Subject<any> {
 		const check = await this._connectionManager.checkSession();
 		if (check) this.next(check);
 
-		const refreshIn = get(check, 'refresh_in', 299000); // 299000 = 4min 59sec
+		let refreshIn = get(check, 'refresh_in', 300000); // 300000 = 5min
+		refreshIn = Math.round((refreshIn * 95) / 100);
 
 		clearTimeout(this._timeout);
-		this._timeout = setTimeout(() => {
-			this._checkSession();
-		}, refreshIn);
+		this._timeout = setTimeout(() => this._checkSession(), refreshIn);
 	}
 
 	private set location(location: string) {
