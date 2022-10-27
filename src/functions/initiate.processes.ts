@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import {each, filter} from 'lodash';
-import listSubfoldersByName from '@owservable/list-subfolders-by-name';
+import {listSubfoldersByName} from '@owservable/list-subfolders-by-name';
 
 const _initiate = (folder: string, execute: Function): void => {
 	const subfolderNames = fs.readdirSync(folder);
