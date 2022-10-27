@@ -302,10 +302,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@owservable/list-subfolders-by-name@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@owservable/list-subfolders-by-name/-/list-subfolders-by-name-0.0.6.tgz#46fcbb2efe684d8a9caf5f9b6afee2ba6e1198fd"
-  integrity sha512-RoUd//JlCP5Rh5zRDarrwklg87JaIY0HaLRtEF4JO8Ohbt8/jiwNK733lLDY8ltjfKoHBENWzcfJfEi8SENXVA==
+"@owservable/list-subfolders-by-name@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@owservable/list-subfolders-by-name/-/list-subfolders-by-name-0.0.7.tgz#4072ab4190726a8e4f7719fa50f5563a24fef47e"
+  integrity sha512-alubAvjlIi2KmqctkdftpHCqiGGhOPwxd2R0WgrCRhdrp01/kuZnMCwbhi2m78y8daEnx/fZsm3VyJqB6xjc4A==
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/node" "^18.0.6"
