@@ -105,6 +105,8 @@ export default class OwservableClient extends Subject<any> {
 
 		this._subscriptions.get(target)?.unsubscribe();
 		this._subscriptions.delete(target);
+
+		this.sendDebugTargets('removeSubscription');
 	}
 
 	private reloadData(target: string): void {
@@ -139,6 +141,20 @@ export default class OwservableClient extends Subject<any> {
 
 			store.config = config;
 		}
+
+		this.sendDebugTargets('updateSubscription');
+	}
+
+	private sendDebugTargets(event: string) {
+		const targets = Array.from(this._stores.keys());
+		this.next({
+			type: 'debug', //
+			id: new Date().getTime(),
+			payload: {
+				event,
+				availableTargets: targets
+			}
+		});
 	}
 
 	private clearSubscriptions(): void {
@@ -156,5 +172,7 @@ export default class OwservableClient extends Subject<any> {
 		}
 		this._stores.clear();
 		this._stores = null;
+
+		this.sendDebugTargets('clearSubscriptions');
 	}
 }
