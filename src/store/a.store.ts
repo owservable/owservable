@@ -55,10 +55,19 @@ export default abstract class AStore extends Subject<any> {
 	public destroy(): void {
 		this._subscription?.unsubscribe();
 		delete this._subscription;
+		delete this._model;
+		delete this._target;
+		delete this._query;
+		delete this._sort;
+		delete this._fields;
+		delete this._paging;
+		delete this._populates;
+		delete this._virtuals;
+		delete this._delay;
 	}
 
 	public restartSubscription(): void {
-		this.subscription = observableModel(this.model) //
+		this.subscription = observableModel(this._model) //
 			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.subscribe({
 				next: (change: any): Promise<void> => this.load(change)
@@ -95,10 +104,6 @@ export default abstract class AStore extends Subject<any> {
 		this.destroy();
 		this._subscription = subscription;
 		this.load({}).then(() => null);
-	}
-
-	protected get model(): Model<any> {
-		return this._model;
 	}
 
 	protected emitOne(update: any = {}): void {

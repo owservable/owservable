@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.7% </span>
+                <span class="strong">11.27% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/63</span>
+                <span class='fraction'>8/71</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.04% </span>
+                <span class="strong">12.31% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/57</span>
+                <span class='fraction'>8/65</span>
             </div>
         
             
@@ -218,7 +218,12 @@
 <a name='L159'></a><a href='#L159'>159</a>
 <a name='L160'></a><a href='#L160'>160</a>
 <a name='L161'></a><a href='#L161'>161</a>
-<a name='L162'></a><a href='#L162'>162</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,6 +280,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,10 +328,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,10 +446,19 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 	public <span class="fstat-no" title="function not covered" >destroy(</span>): void {
 <span class="cstat-no" title="statement not covered" >		this._subscription?.unsubscribe();</span>
 <span class="cstat-no" title="statement not covered" >		delete this._subscription;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._model;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._target;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._query;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._sort;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._fields;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._paging;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._populates;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._virtuals;</span>
+<span class="cstat-no" title="statement not covered" >		delete this._delay;</span>
 	}
 &nbsp;
 	public <span class="fstat-no" title="function not covered" >restartSubscription(</span>): void {
-<span class="cstat-no" title="statement not covered" >		this.subscription = observableModel(this.model) //</span>
+<span class="cstat-no" title="statement not covered" >		this.subscription = observableModel(this._model) //</span>
 			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.subscribe({
 				next: <span class="fstat-no" title="function not covered" >(c</span>hange: any): Promise&lt;void&gt; =&gt; <span class="cstat-no" title="statement not covered" >this.load(change)</span>
@@ -476,10 +495,6 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 <span class="cstat-no" title="statement not covered" >		this.destroy();</span>
 <span class="cstat-no" title="statement not covered" >		this._subscription = subscription;</span>
 <span class="cstat-no" title="statement not covered" >		this.load({}).then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >null)</span>;</span>
-	}
-&nbsp;
-<span class="fstat-no" title="function not covered" >	protected get m</span>odel(): Model&lt;any&gt; {
-<span class="cstat-no" title="statement not covered" >		return this._model;</span>
 	}
 &nbsp;
 	protected <span class="fstat-no" title="function not covered" >emitOne(</span>update: any = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span>: void {
@@ -547,7 +562,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 27 2022 14:07:44 GMT+0200 (Mitteleuropäische Sommerzeit)
+                at Wed Nov 09 2022 10:54:53 GMT+0100 (Mitteleuropäische Normalzeit)
             </div>
         </div>
         <script src="../../prettify.js"></script>

@@ -1,7 +1,7 @@
 'use strict';
 
 import Timeout = NodeJS.Timeout;
-import {get} from 'lodash';
+import {get, includes, join} from 'lodash';
 import {Subject, Subscription} from 'rxjs';
 
 import AStore from './store/a.store';
@@ -100,13 +100,14 @@ export default class OwservableClient extends Subject<any> {
 
 	private removeSubscription(target: string): void {
 		// console.log('ows -> OwservableClient removeSubscription: ${target}`);
-		this._stores.get(target)?.destroy();
-		this._stores.delete(target);
 
 		this._subscriptions.get(target)?.unsubscribe();
 		this._subscriptions.delete(target);
 
-		this.sendDebugTargets('removeSubscription');
+		this._stores.get(target)?.destroy();
+		this._stores.delete(target);
+
+		this.sendDebugTargets('removeSubscription', target);
 	}
 
 	private reloadData(target: string): void {
@@ -132,7 +133,7 @@ export default class OwservableClient extends Subject<any> {
 						const process = DataMiddlewareMap.getMiddleware(observe);
 						m = await process(m, this._connectionManager.user);
 					}
-					this.next(m);
+					if (this.isValidTarget(target)) this.next(m);
 				},
 				error: (e: any): void => this.error(e),
 				complete: (): void => this.complete()
@@ -142,17 +143,23 @@ export default class OwservableClient extends Subject<any> {
 			store.config = config;
 		}
 
-		this.sendDebugTargets('updateSubscription');
+		this.sendDebugTargets('updateSubscription', target);
 	}
 
-	private sendDebugTargets(event: string) {
+	private isValidTarget(target: string): boolean {
+		const targets = Array.from(this._stores.keys());
+		return includes(targets, target);
+	}
+
+	private sendDebugTargets(event: string, target: string) {
 		const targets = Array.from(this._stores.keys());
 		this.next({
 			type: 'debug', //
 			id: new Date().getTime(),
 			payload: {
 				event,
-				availableTargets: targets
+				target,
+				availableTargets: join(targets, ', ')
 			}
 		});
 	}
@@ -173,6 +180,6 @@ export default class OwservableClient extends Subject<any> {
 		this._stores.clear();
 		this._stores = null;
 
-		this.sendDebugTargets('clearSubscriptions');
+		this.sendDebugTargets('clearSubscriptions', '*');
 	}
 }

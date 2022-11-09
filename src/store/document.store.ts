@@ -28,7 +28,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	public restartSubscription(): void {
-		this.subscription = observableModel(this.model) //
+		this.subscription = observableModel(this._model) //
 			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
