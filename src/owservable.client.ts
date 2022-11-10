@@ -153,6 +153,7 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private sendDebugTargets(event: string, target: string) {
+		if (!this._stores) return false;
 		const targets = Array.from(this._stores.keys());
 		this.next({
 			type: 'debug', //
@@ -166,19 +167,24 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private clearSubscriptions(): void {
-		const subscriptionsKeys = this._subscriptions.keys();
-		// console.log(' -- OwservableClient clearSubscriptions', subscriptionsKeys);
-		for (const subscriptionKey of subscriptionsKeys) {
-			this._subscriptions.get(subscriptionKey)?.unsubscribe();
+		if (this._subscriptions) {
+			const subscriptionsKeys = this._subscriptions.keys();
+			console.log(' -- OwservableClient clearSubscriptions subscriptionsKeys:', subscriptionsKeys);
+			for (const subscriptionKey of subscriptionsKeys) {
+				this._subscriptions.get(subscriptionKey)?.unsubscribe();
+			}
+			this._subscriptions.clear();
 		}
-		this._subscriptions.clear();
 		this._subscriptions = null;
 
-		const storesKeys = this._stores.keys();
-		for (const storeKey of storesKeys) {
-			this._stores.get(storeKey)?.destroy();
+		if (this._stores) {
+			const storesKeys = this._stores.keys();
+			console.log(' -- OwservableClient clearSubscriptions storesKeys:', storesKeys);
+			for (const storeKey of storesKeys) {
+				this._stores.get(storeKey)?.destroy();
+			}
+			this._stores.clear();
 		}
-		this._stores.clear();
 		this._stores = null;
 
 		this.sendDebugTargets('clearSubscriptions', '*');
