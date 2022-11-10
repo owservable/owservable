@@ -147,6 +147,7 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private isValidTarget(target: string): boolean {
+		if (!this._stores) return false;
 		const targets = Array.from(this._stores.keys());
 		return includes(targets, target);
 	}
