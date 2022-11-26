@@ -23,6 +23,18 @@ import initiateWorkers from './functions/initiate.workers';
 import initiateCronjobs from './functions/initiate.cronjobs';
 import initiateWatchers from './functions/initiate.watchers';
 
+// functions action
+import addActionCronjobs from './functions/action/add.action.cronjobs';
+import addActionWatchers from './functions/action/add.action.watchers';
+import addActionWorkers from './functions/action/add.action.workers';
+
+// functions execute
+import executeCronjob from './functions/execute/execute.cronjob';
+import executeWatcher from './functions/execute/execute.watcher';
+import executeWorker from './functions/execute/execute.worker';
+import executeProcessesInFolder from './functions/execute/execute.processes.in.folder';
+import executeOnFilesRecursively from './functions/execute/execute.on.files.recursively';
+
 // middleware
 import DataMiddlewareMap from './middleware/data.middleware.map';
 
@@ -46,8 +58,10 @@ import storeFactory from './store/factories/store.factory';
 
 export {
 	OwservableClient,
+
 	// _enums
 	EStoreType,
+
 	// _types
 	ConnectionManagerRefreshType,
 	CronJobType,
@@ -57,26 +71,45 @@ export {
 	SubscriptionMethodsType,
 	WatcherType,
 	WorkerType,
+
 	// auth
 	IConnectionManager,
+
 	// functions
 	initiateCronjobs,
 	initiateWatchers,
 	initiateWorkers,
+
+	// functions action
+	addActionCronjobs,
+	addActionWatchers,
+	addActionWorkers,
+
+	// functions execute
+	executeCronjob,
+	executeWatcher,
+	executeWorker,
+	executeProcessesInFolder,
+	executeOnFilesRecursively,
+
 	// middleware
 	DataMiddlewareMap,
+
 	// mongodb
 	MongoDBConnector,
 	CollectionsModelsMap,
+
 	// mongodb functions
 	processModels,
 	observableModel,
 	observableDatabase,
+
 	// store
 	AStore,
 	CountStore,
 	DocumentStore,
 	CollectionStore,
+
 	// store factories
 	storeFactory
 };

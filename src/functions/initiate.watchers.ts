@@ -1,17 +1,9 @@
 'use strict';
 
-import {isFunction} from 'lodash';
+import executeWatcher from './execute/execute.watcher';
+import executeProcessesInFolder from './execute/execute.processes.in.folder';
 
-import WatcherType from '../_types/watcher.type';
-import initiateProcesses from './initiate.processes';
-
-const _execute = (obj: WatcherType) => {
-	const {init, watch} = obj;
-	if (isFunction(init)) init().then(() => watch?.());
-	else watch?.();
-};
-
-const initiateWatchers = (root: string, name: string = 'watchers'): void => {
-	initiateProcesses(root, name, _execute);
+const initiateWatchers = (root: string, folder: string = 'watchers'): void => {
+	executeProcessesInFolder(root, folder, executeWatcher);
 };
 export default initiateWatchers;
