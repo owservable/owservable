@@ -12,6 +12,7 @@ export default function addActionCronjobs(root: string, folderName: string) {
 	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
+		console.log('   - [@owservable] Initializing cronjob action', actionPath);
 		// tslint:disable-next-line:callable-types
 		const ActionClass: {new (): ActionAsCronjobInterface} = require(actionPath).default;
 		const action: ActionAsCronjobInterface = new ActionClass();

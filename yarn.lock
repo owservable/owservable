@@ -1036,10 +1036,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@owservable/actions@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.0.3.tgz#340c2825627f84ef273ca3dfb1e3ad04913bba0f"
-  integrity sha512-q2X9ZL23XFk7HrCrKHCnlT32ndcd0+DtSSHjW97l4EeBe2eHDZis/iZN4u+gpRt9UacokuhSvowM953Vye0TDw==
+"@owservable/actions@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.0.4.tgz#78db26cf0b5522d6283c3af48202449c23a55158"
+  integrity sha512-Nx7GCmZ5SKKMVG+IX62f/iswzrYqdtYuYDlNqLIg8fHmNr98LmOK1HBdc1z3BdiBJxs8D7nedTtTF6Gp0DaJzw==
   dependencies:
     "@owservable/folders" "^0.0.4"
     "@types/lodash" "^4.14.182"

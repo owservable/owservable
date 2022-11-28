@@ -12,6 +12,7 @@ export default function addActionWorkers(root: string, folderName: string) {
 	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
+		console.log('   - [@owservable] Initializing worker action', actionPath);
 		// tslint:disable-next-line:callable-types
 		const ActionClass: {new (): ActionAsWorkerInterface} = require(actionPath).default;
 		const action: ActionAsWorkerInterface = new ActionClass();

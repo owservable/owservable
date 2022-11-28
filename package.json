@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.8.31",
+	"version": "0.8.32",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -30,10 +30,11 @@
 		"test_qube": "nyc --reporter=lcov mocha -R @danmasta/mocha-sonar -r ts-node/register test/**/*.spec.ts",
 		"up": "yarn upgrade-interactive",
 		"latest": "yarn upgrade-interactive --latest",
+		"l": "yarn latest",
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^0.0.3",
+		"@owservable/actions": "^0.0.4",
 		"@owservable/folders": "^0.0.4",
 		"@types/lodash": "^4.14.186",
 		"@types/mongoose": "^5.7.36",
