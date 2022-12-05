@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.8.32",
+	"version": "0.8.33",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -30,27 +30,27 @@
 		"test_qube": "nyc --reporter=lcov mocha -R @danmasta/mocha-sonar -r ts-node/register test/**/*.spec.ts",
 		"up": "yarn upgrade-interactive",
 		"latest": "yarn upgrade-interactive --latest",
-		"l": "yarn latest",
+		"l": "yarn & yarn latest",
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^0.0.4",
-		"@owservable/folders": "^0.0.4",
-		"@types/lodash": "^4.14.186",
+		"@owservable/actions": "^0.0.5",
+		"@owservable/folders": "^0.0.5",
+		"@types/lodash": "^4.14.191",
 		"@types/mongoose": "^5.7.36",
-		"@types/node": "^18.11.7",
+		"@types/node": "^18.11.10",
 		"@types/node-cron": "^3.0.4",
 		"jsondiffpatch": "^0.4.1",
 		"lodash": "^4.17.20",
 		"mongoose": "^5.13.3",
 		"node-cron": "^3.0.2",
-		"rxjs": "^7.5.7",
+		"rxjs": "^7.6.0",
 		"sift": "^16.0.0"
 	},
 	"devDependencies": {
 		"@danmasta/mocha-sonar": "^1.0.1",
 		"@types/chai": "^4.3.3",
-		"@types/mocha": "^10.0.0",
+		"@types/mocha": "^10.0.1",
 		"@types/rewire": "^2.5.28",
 		"chai": "^4.3.6",
 		"chai-rx": "^0.0.4",
