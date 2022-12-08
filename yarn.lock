@@ -1036,24 +1036,24 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@owservable/actions@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.0.5.tgz#a739a47778f058e88f136b467c88e0f9df369953"
-  integrity sha512-wXbenFkdZXy1Z6Pjm+IE5NZS/4IV5ko4PT8tNMr4ceVD+j8UU8ioFfFAVkZ3SJBmlwDXr+LePFFs9OH3bcsKwQ==
+"@owservable/actions@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.0.6.tgz#a8510705016e842f445f1081c367bd3bdcb77b4e"
+  integrity sha512-SPyvwv1OPeL/q6hKsdvRVyMhHzBoK40GxQgACsQU/6RIO/jJZ9kpAZnzNGsZZhkb+QFdpMbkyUbEb35Dp1rH4g==
   dependencies:
-    "@owservable/folders" "^0.0.5"
+    "@owservable/folders" "^0.0.6"
     "@types/lodash" "^4.14.191"
-    "@types/node" "^18.11.10"
+    "@types/node" "^18.11.11"
     commander "^9.4.1"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.0.5.tgz#54cff978959c1cd39efd2636ce18c3bee09c9d90"
-  integrity sha512-af1GJBd5/i7TMFCdI4AizCtV7OtrWIuuTty6cg3EB1Acj5pN6nG0/MTi/ARXjilARgQ9QTiuKsISkYU87Jr8EQ==
+"@owservable/folders@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.0.6.tgz#322ccc4d8be39456a27311e92f9f7cc05c9defb3"
+  integrity sha512-L2Dh+LZ1F+N64ZyP5Za406nlyi2SD8uuXutGET5Uc3TH7k0xjvOqHYIR/W4PrsRW6qjcOFE4Bb2khJRZqFgWtA==
   dependencies:
     "@types/lodash" "^4.14.191"
-    "@types/node" "^18.11.10"
+    "@types/node" "^18.11.11"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -1137,10 +1137,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
   integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
 
-"@types/node@^18.11.10":
-  version "18.11.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.10.tgz#4c64759f3c2343b7e6c4b9caf761c7a3a05cee34"
-  integrity sha512-juG3RWMBOqcOuXC643OAdSA525V44cVgGV6dUDuiFtss+8Fk5x1hI93Rsld43VeJVIeqlP9I7Fn9/qaVqoEAuQ==
+"@types/node@^18.11.11":
+  version "18.11.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.11.tgz#1d455ac0211549a8409d3cdb371cd55cc971e8dc"
+  integrity sha512-KJ021B1nlQUBLopzZmPBVuGU9un7WJd/W4ya7Ih02B4Uwky5Nja0yGYav2EfYIk0RR2Q9oVhf60S2XR1BCWJ2g==
 
 "@types/rewire@^2.5.28":
   version "2.5.28"
@@ -3292,9 +3292,9 @@ prelude-ls@^1.2.1:
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
 prettier@^2.7.1:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.0.tgz#c7df58393c9ba77d6fba3921ae01faf994fb9dc9"
-  integrity sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.1.tgz#4e1fd11c34e2421bc1da9aea9bd8127cd0a35efc"
+  integrity sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -4015,9 +4015,9 @@ typedoc@^0.23.18:
     shiki "^0.11.1"
 
 typescript@^4.8.4:
-  version "4.9.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
-  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
+  integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
 unzip-stream@^0.2.1:
   version "0.2.3"
