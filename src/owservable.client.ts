@@ -33,6 +33,14 @@ export default class OwservableClient extends Subject<any> {
 		clearTimeout(this._timeout);
 	}
 
+	private set location(location: string) {
+		// console.log('ows -> OwservableClient location: old:[${this._location}] new:[${location}]`);
+		if (location === this._location) return;
+		this._location = location;
+
+		this._connectionManager.location(location);
+	}
+
 	public async consume(message: any): Promise<void> {
 		// console.log('ows -> OwservableClient::consume received message", message.type);
 
@@ -85,17 +93,6 @@ export default class OwservableClient extends Subject<any> {
 
 		clearTimeout(this._timeout);
 		this._timeout = setTimeout(() => this._checkSession(), refreshIn);
-	}
-
-	private set location(location: string) {
-		// console.log('ows -> OwservableClient location: old:[${this._location}] new:[${location}]`);
-		if (location === this._location) return;
-		this._location = location;
-
-		this._stores = new Map<string, AStore>();
-		this._subscriptions = new Map<string, Subscription>();
-
-		this._connectionManager.location(location);
 	}
 
 	private removeSubscription(target: string): void {
