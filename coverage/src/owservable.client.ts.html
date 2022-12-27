@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.2% </span>
+                <span class="strong">5.31% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/96</span>
+                <span class='fraction'>5/94</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.61% </span>
+                <span class="strong">5.74% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/89</span>
+                <span class='fraction'>5/87</span>
             </div>
         
             
@@ -252,10 +252,7 @@
 <a name='L187'></a><a href='#L187'>187</a>
 <a name='L188'></a><a href='#L188'>188</a>
 <a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -292,6 +289,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -341,17 +346,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -482,6 +476,14 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 <span class="cstat-no" title="statement not covered" >		clearTimeout(this._timeout);</span>
 	}
 &nbsp;
+<span class="fstat-no" title="function not covered" >	private set l</span>ocation(location: string) {
+		// console.log('ows -&gt; OwservableClient location: old:[${this._location}] new:[${location}]`);
+<span class="cstat-no" title="statement not covered" >		if (location === this._location) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		this._location = location;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		this._connectionManager.location(location);</span>
+	}
+&nbsp;
 	public async <span class="fstat-no" title="function not covered" >consume(</span>message: any): Promise&lt;void&gt; {
 		// console.log('ows -&gt; OwservableClient::consume received message", message.type);
 &nbsp;
@@ -534,17 +536,6 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		clearTimeout(this._timeout);</span>
 <span class="cstat-no" title="statement not covered" >		this._timeout = setTimeout(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >this._checkSession(),</span> refreshIn);</span>
-	}
-&nbsp;
-<span class="fstat-no" title="function not covered" >	private set l</span>ocation(location: string) {
-		// console.log('ows -&gt; OwservableClient location: old:[${this._location}] new:[${location}]`);
-<span class="cstat-no" title="statement not covered" >		if (location === this._location) <span class="cstat-no" title="statement not covered" >return;</span></span>
-<span class="cstat-no" title="statement not covered" >		this._location = location;</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >		this._stores = new Map&lt;string, AStore&gt;();</span>
-<span class="cstat-no" title="statement not covered" >		this._subscriptions = new Map&lt;string, Subscription&gt;();</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >		this._connectionManager.location(location);</span>
 	}
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >removeSubscription(</span>target: string): void {
@@ -646,7 +637,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-08T14:43:13.459Z
+                at 2022-12-27T19:23:37.111Z
             </div>
         <script src="../prettify.js"></script>
         <script>
