@@ -10,6 +10,7 @@ import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
 
+// TODO: extract to a pure function file
 // tslint:disable-next-line:variable-name
 const _getIdFromQuery = (query: any): string => (_.isString(query) ? query : _.get(query, '_id', '').toString());
 
@@ -100,6 +101,7 @@ export default class DocumentStore extends AStore {
 		}
 	}
 
+	// TODO: extract to a pure function file
 	private _pipeFilter(change: any): boolean {
 		if (!_.isEmpty(this._sort)) return true;
 

@@ -37,10 +37,12 @@ class ObservableModel extends Subject<any> {
 			});
 	}
 
+	// TODO: extract to a pure function file
 	private _pipeFilter(change: any): boolean {
 		const {
 			ns: {coll}
 		} = change;
+
 		return this._collection === coll;
 	}
 }

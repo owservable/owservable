@@ -1,17 +1,24 @@
 'use strict';
 
+import {randomUUID} from 'node:crypto';
+
 import {Model} from 'mongoose';
 
 import {asyncScheduler, Subject, Subscription} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 
 import * as jsondiffpatch from 'jsondiffpatch';
-import * as _ from 'lodash';
 import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
+import StoreSubscriptionConfigType from '../_types/store.subscription.config.type';
 
+const diffPatcher = jsondiffpatch.create({
+	propertyFilter: (name: string) => name !== 'subscriptionId'
+});
+
+// TODO: extract to a pure function file
 // tslint:disable-next-line:variable-name
 const _baseMessage = (target: string, incremental = false): any => ({
 	type: incremental ? 'increment' : 'update',
@@ -24,8 +31,10 @@ export default abstract class AStore extends Subject<any> {
 	protected _target: string;
 	protected _type: EStoreType;
 
-	protected _config: any;
+	protected _config: StoreSubscriptionConfigType;
 	protected _incremental: boolean = false;
+
+	protected _subscriptionId: string;
 
 	protected _query: any;
 	protected _sort: any;
@@ -66,7 +75,7 @@ export default abstract class AStore extends Subject<any> {
 	}
 
 	protected isInitialSubscription(change: any): boolean {
-		return _.isEmpty(change);
+		return isEmpty(change);
 	}
 
 	protected abstract shouldReload(change: any): boolean;
@@ -74,7 +83,10 @@ export default abstract class AStore extends Subject<any> {
 	protected abstract load(change: any): Promise<void>;
 
 	protected extractFromConfig(): void {
-		const {query = {}, sort = {}, fields = {}, populates = [], virtuals = [], delay = 50} = this._config;
+		const {subscriptionId = randomUUID(), query = {}, sort = {}, fields = {}, populates = [], virtuals = [], delay = 50} = this._config;
+
+		this._subscriptionId = subscriptionId;
+
 		this._query = query;
 		this._sort = sort;
 
@@ -112,11 +124,15 @@ export default abstract class AStore extends Subject<any> {
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, data);
 		if (!this._incremental) set(message.payload, '_' + this._target + 'Count', total);
-		this.next(message);
+		this.next({
+			subscriptionId: this._subscriptionId,
+			...message
+		});
 	}
 
 	protected emitDelete(deleted: any): void {
 		this.next({
+			subscriptionId: this._subscriptionId,
 			type: 'delete',
 			target: this._target,
 			payload: deleted
@@ -125,6 +141,7 @@ export default abstract class AStore extends Subject<any> {
 
 	protected emitError(error: any): void {
 		this.next({
+			subscriptionId: this._subscriptionId,
 			type: 'error',
 			error,
 			target: this._target,
@@ -141,10 +158,12 @@ export default abstract class AStore extends Subject<any> {
 		return !isEmpty(this._fields) && !includes(values(this._fields), 0);
 	}
 
-	public set config(config: any) {
+	public set config(config: StoreSubscriptionConfigType) {
 		if (!this._isValidConfig(config)) return;
 
 		this._config = cloneDeep(config);
+		config.subscriptionId = config.subscriptionId || randomUUID();
+
 		this.extractFromConfig();
 		this.restartSubscription();
 	}
@@ -153,9 +172,11 @@ export default abstract class AStore extends Subject<any> {
 		return this._target;
 	}
 
-	private _isValidConfig(config: any): boolean {
+	// TODO: extract to a pure function file
+	private _isValidConfig(config: StoreSubscriptionConfigType): boolean {
 		if (!config) return false;
-		const diff = jsondiffpatch.diff(this._config, config);
+
+		const diff = diffPatcher.diff(this._config, config);
 		return !isEmpty(diff);
 	}
 }

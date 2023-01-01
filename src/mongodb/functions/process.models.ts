@@ -8,6 +8,7 @@ import {listSubfoldersByName} from '@owservable/folders';
 
 import CollectionsModelsMap from '../collections.models.map';
 
+// TODO: extract to a pure function file
 const _processFile = (folder: string, file: string): void => {
 	const fullPath = path.join(folder, file);
 	const model = require(fullPath).default;
@@ -15,6 +16,7 @@ const _processFile = (folder: string, file: string): void => {
 	CollectionsModelsMap.addCollectionToModelMapping(model);
 };
 
+// TODO: extract to a pure function file
 const _isExcluded = (folder: string, exclude: string | string[]): boolean => {
 	if (!exclude) return false;
 	return isString(exclude) //
@@ -22,6 +24,7 @@ const _isExcluded = (folder: string, exclude: string | string[]): boolean => {
 		: !!find(exclude, (e: string) => endsWith(folder, e));
 };
 
+// TODO: extract to a pure function file
 const _processModels = (folder: string, exclude?: string | string[]): void => {
 	if (_isExcluded(folder, exclude)) return;
 
