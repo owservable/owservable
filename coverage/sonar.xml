@@ -68,7 +68,7 @@
     </file>
     <file path="test\mongodb\functions\process.models.spec.ts">
         <testCase name="process.models.ts tests processModels exists" duration="0"/>
-        <testCase name="process.models.ts tests _processFile" duration="0"/>
+        <testCase name="process.models.ts tests _processFile" duration="1"/>
         <testCase name="process.models.ts tests _isExcluded" duration="0"/>
     </file>
     <file path="test\mongodb\mongodb.connector.spec.ts">
