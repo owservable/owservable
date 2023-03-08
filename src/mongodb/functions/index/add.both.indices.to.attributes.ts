@@ -2,11 +2,10 @@
 
 import {Schema} from 'mongoose';
 
-import addUpIndicesToAttributes from './add.up.indices.to.attributes';
-import addDownIndicesToAttributes from './add.down.indices.to.attributes';
+import addUpAndDownIndicesToAttributes from './add.up.and.down.indices.to.attributes';
 
-const addBothIndicesToAttributes = (schema: Schema, attributes: string[]): void => {
-	addUpIndicesToAttributes(schema, attributes);
-	addDownIndicesToAttributes(schema, attributes);
-};
+/**
+ * @deprecated Please use {@link addUpAndDownIndicesToAttributes}, instead.
+ */
+const addBothIndicesToAttributes = (schema: Schema, attributes: string[]): void => addUpAndDownIndicesToAttributes(schema, attributes);
 export default addBothIndicesToAttributes;

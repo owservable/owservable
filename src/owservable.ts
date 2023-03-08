@@ -43,13 +43,14 @@ import MongoDBConnector from './mongodb/mongodb.connector';
 import CollectionsModelsMap from './mongodb/collections.models.map';
 
 // mongodb functions
-import addBothIndicesToAttributes from './mongodb/functions/index/add.both.indices.to.attributes';
-import addDownIndicesToAttributes from './mongodb/functions/index/add.down.indices.to.attributes';
-import addIndexToAttributes from './mongodb/functions/index/add.index.to.attributes';
-import addUpIndicesToAttributes from './mongodb/functions/index/add.up.indices.to.attributes';
 import processModels from './mongodb/functions/process.models';
 import observableModel from './mongodb/functions/observable.model';
 import observableDatabase from './mongodb/functions/observable.database';
+import addIndexToAttributes from './mongodb/functions/index/add.index.to.attributes';
+import addUpIndicesToAttributes from './mongodb/functions/index/add.up.indices.to.attributes';
+import addDownIndicesToAttributes from './mongodb/functions/index/add.down.indices.to.attributes';
+import addBothIndicesToAttributes from './mongodb/functions/index/add.both.indices.to.attributes';
+import addUpAndDownIndicesToAttributes from './mongodb/functions/index/add.up.and.down.indices.to.attributes';
 
 // store
 import AStore from './store/a.store';
@@ -104,13 +105,14 @@ export {
 	CollectionsModelsMap,
 
 	// mongodb functions
-	addBothIndicesToAttributes,
-	addDownIndicesToAttributes,
-	addIndexToAttributes,
-	addUpIndicesToAttributes,
 	processModels,
 	observableModel,
 	observableDatabase,
+	addIndexToAttributes,
+	addUpIndicesToAttributes,
+	addDownIndicesToAttributes,
+	addBothIndicesToAttributes,
+	addUpAndDownIndicesToAttributes,
 
 	// store
 	AStore,
