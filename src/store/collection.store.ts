@@ -70,7 +70,8 @@ export default class CollectionStore extends AStore {
 					data = await this._model //
 						.find(this._query, this._fields, this._paging)
 						.collation({locale: 'en'})
-						.sort(this._sort);
+						.sort(this._sort) // @ts-ignore
+						.setOptions({allowDiskUse: true});
 
 					for (const populate of this._populates) {
 						await this._model.populate(data, populate);

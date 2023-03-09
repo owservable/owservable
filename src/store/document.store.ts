@@ -124,7 +124,8 @@ export default class DocumentStore extends AStore {
 		const docs = await this._model //
 			.find(this._query, this._fields, this._paging)
 			.collation({locale: 'en'})
-			.sort(this._sort);
+			.sort(this._sort) // @ts-ignore
+			.setOptions({allowDiskUse: true});
 		return _.first(docs);
 	}
 
