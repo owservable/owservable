@@ -123,7 +123,7 @@ export default class DocumentStore extends AStore {
 	private async _loadSortedFirstDocument(): Promise<any> {
 		const docs = await this._model //
 			.find(this._query, this._fields, this._paging)
-			.collation({locale: 'en'})
+			// .collation({locale: 'en'})
 			.sort(this._sort) // @ts-ignore
 			.setOptions({allowDiskUse: true});
 		return _.first(docs);
