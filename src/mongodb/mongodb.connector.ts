@@ -10,13 +10,8 @@ export default class MongoDBConnector {
 				console.log('');
 				mongoose
 					.connect(mongoDbUri, {
-						poolSize: 10,
-						// useCreateIndex: true,	// does not work in MongoDB 5
-						useNewUrlParser: true,
-						useUnifiedTopology: true,
-
-						keepAlive: true,
-						keepAliveInitialDelay: 100000
+						minPoolSize: 20,
+						maxPoolSize: 100
 					})
 					.then(() => {
 						this._connection = mongoose.connection;

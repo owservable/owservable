@@ -44,13 +44,13 @@
         </testCase>
     </file>
     <file path="test\functions\initiate.cronjobs.spec.ts">
-        <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="0"/>
+        <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="1"/>
     </file>
     <file path="test\functions\initiate.watchers.spec.ts">
         <testCase name="initiate.watchers.ts tests initiateWatchers exists" duration="0"/>
     </file>
     <file path="test\functions\initiate.workers.spec.ts">
-        <testCase name="initiate.workers.ts tests initiateWorkers exists" duration="1"/>
+        <testCase name="initiate.workers.ts tests initiateWorkers exists" duration="0"/>
     </file>
     <file path="test\middleware\data.middleware.map.spec.ts">
         <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="0"/>
@@ -68,7 +68,7 @@
     </file>
     <file path="test\mongodb\functions\process.models.spec.ts">
         <testCase name="process.models.ts tests processModels exists" duration="0"/>
-        <testCase name="process.models.ts tests _processFile" duration="0"/>
+        <testCase name="process.models.ts tests _processFile" duration="1"/>
         <testCase name="process.models.ts tests _isExcluded" duration="1"/>
     </file>
     <file path="test\mongodb\mongodb.connector.spec.ts">
@@ -78,7 +78,7 @@
         <testCase name="owservable.client.ts tests OwservableClient exists" duration="0"/>
     </file>
     <file path="test\owservable.spec.ts">
-        <testCase name="owservable.ts tests Owservable exists" duration="1"/>
+        <testCase name="owservable.ts tests Owservable exists" duration="0"/>
     </file>
     <file path="test\store\a.store.spec.ts">
         <testCase name="a.store.ts tests should be implemented" duration="0">
