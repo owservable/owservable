@@ -470,14 +470,14 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 	}
 &nbsp;
 	public <span class="fstat-no" title="function not covered" >disconnected(</span>): void {
-		// console.log('ows -&gt; OwservableClient disconnected');
+		// console.log('[@owservable] -&gt; OwservableClient disconnected');
 <span class="cstat-no" title="statement not covered" >		this.clearSubscriptions();</span>
 <span class="cstat-no" title="statement not covered" >		this._connectionManager.disconnected();</span>
 <span class="cstat-no" title="statement not covered" >		clearTimeout(this._timeout);</span>
 	}
 &nbsp;
 <span class="fstat-no" title="function not covered" >	private set l</span>ocation(location: string) {
-		// console.log('ows -&gt; OwservableClient location: old:[${this._location}] new:[${location}]`);
+		// console.log('[@owservable] -&gt; OwservableClient location: old:[${this._location}] new:[${location}]`);
 <span class="cstat-no" title="statement not covered" >		if (location === this._location) <span class="cstat-no" title="statement not covered" >return;</span></span>
 <span class="cstat-no" title="statement not covered" >		this._location = location;</span>
 &nbsp;
@@ -485,7 +485,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 	}
 &nbsp;
 	public async <span class="fstat-no" title="function not covered" >consume(</span>message: any): Promise&lt;void&gt; {
-		// console.log('ows -&gt; OwservableClient::consume received message", message.type);
+		// console.log('[@owservable] -&gt; OwservableClient::consume received message", message.type);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		switch (message.type) {</span>
 			case 'pong':
@@ -539,7 +539,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 	}
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >removeSubscription(</span>target: string): void {
-		// console.log('ows -&gt; OwservableClient removeSubscription: ${target}`);
+		// console.log('[@owservable] -&gt; OwservableClient removeSubscription: ${target}`);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		this._subscriptions.get(target)?.unsubscribe();</span>
 <span class="cstat-no" title="statement not covered" >		this._subscriptions.delete(target);</span>
@@ -551,14 +551,14 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 	}
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >reloadData(</span>target: string): void {
-		// console.log('ows -&gt; OwservableClient reloadData: ${target}`);
+		// console.log('[@owservable] -&gt; OwservableClient reloadData: ${target}`);
 		const store = <span class="cstat-no" title="statement not covered" >this._stores.get(target);</span>
 <span class="cstat-no" title="statement not covered" >		store.restartSubscription();</span>
 	}
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >updateSubscription(</span>subscriptionConfig: StoreSubscriptionUpdateType): void {
 		const {target, scope, observe, config} = <span class="cstat-no" title="statement not covered" >subscriptionConfig;</span>
-		// console.log('ows -&gt; OwservableClient updateSubscription: ${target}`);
+		// console.log('[@owservable] -&gt; OwservableClient updateSubscription: ${target}`);
 &nbsp;
 		let store = <span class="cstat-no" title="statement not covered" >this._stores.get(target);</span>
 <span class="cstat-no" title="statement not covered" >		if (store) {</span>
@@ -609,7 +609,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 	private <span class="fstat-no" title="function not covered" >clearSubscriptions(</span>): void {
 <span class="cstat-no" title="statement not covered" >		if (this._subscriptions) {</span>
 			const subscriptionsKeys = <span class="cstat-no" title="statement not covered" >this._subscriptions.keys();</span>
-<span class="cstat-no" title="statement not covered" >			console.log(' -- OwservableClient clearSubscriptions subscriptionsKeys:', subscriptionsKeys);</span>
+<span class="cstat-no" title="statement not covered" >			console.log('[@owservable] -&gt; OwservableClient clearSubscriptions subscriptionsKeys:', subscriptionsKeys);</span>
 <span class="cstat-no" title="statement not covered" >			for (const subscriptionKey of subscriptionsKeys) {</span>
 <span class="cstat-no" title="statement not covered" >				this._subscriptions.get(subscriptionKey)?.unsubscribe();</span>
 			}
@@ -619,7 +619,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		if (this._stores) {</span>
 			const storesKeys = <span class="cstat-no" title="statement not covered" >this._stores.keys();</span>
-<span class="cstat-no" title="statement not covered" >			console.log(' -- OwservableClient clearSubscriptions storesKeys:', storesKeys);</span>
+<span class="cstat-no" title="statement not covered" >			console.log('[@owservable] -&gt; OwservableClient clearSubscriptions storesKeys:', storesKeys);</span>
 <span class="cstat-no" title="statement not covered" >			for (const storeKey of storesKeys) {</span>
 <span class="cstat-no" title="statement not covered" >				this._stores.get(storeKey)?.destroy();</span>
 			}
@@ -637,7 +637,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-05T08:46:23.363Z
+                at 2023-06-06T08:57:32.136Z
             </div>
         <script src="../prettify.js"></script>
         <script>

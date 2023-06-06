@@ -41,11 +41,11 @@ export default class CollectionStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
-		// console.log('ows -> CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
+		// console.log('[@owservable] -> CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
 		if (_.isEmpty(this._config)) return this.emitMany();
 		if (!this.shouldReload(change)) return;
 
-		// console.log('ows -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
+		// console.log('[@owservable] -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
 		try {
 			const {operationType: type, documentKey, fullDocument: document} = change;
 			const key = _.get(documentKey, '_id', '').toString();
@@ -93,7 +93,7 @@ export default class CollectionStore extends AStore {
 				return this.emitMany({total, data});
 			}
 		} catch (error) {
-			console.log('ows -> CollectionStore::load Error:', {change, error});
+			console.log('[@owservable] -> CollectionStore::load Error:', {change, error});
 			this.emitError(error);
 		}
 	}

@@ -306,21 +306,21 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@owservable/actions@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.1.tgz#5713875c37235e49d555f9f3b0b4f915abfbf4d3"
-  integrity sha512-Pzhjk456vzRmWuY2ppvLDiH33opnGbn5lM1PoUG/jlH5qCWCo0gQsepzepksuSdhFjcM77kSNf2EAEwbc/xVLg==
+"@owservable/actions@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.2.tgz#fdab3ddf04883708ba1493e5361f5126a593706b"
+  integrity sha512-HMiIUMDNlWIF0zgbIlMq3uzvmk8ptgVzeGF57webgbV0IQ9+LfWpCFjay7Mq5zZYc4XDMifbLQz/Erx8NOlj3Q==
   dependencies:
-    "@owservable/folders" "^0.1.1"
+    "@owservable/folders" "^0.1.2"
     "@types/lodash" "^4.14.195"
     "@types/node" "^20.2.5"
     commander "^10.0.1"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.1.tgz#bc7b4451f9d7059aa1a180f40b93884f8c2e1153"
-  integrity sha512-zg0w5ZwtOkCxE3b/clCQIgRGRT8ErLQFBX2lQ7BxR93brs9RXr/A0Z8mnDYFfAqDAc7MocIGn+sj4kkU8krvTw==
+"@owservable/folders@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.2.tgz#d2bfac954ea5ce1cef19ae4147a3691c24bca95d"
+  integrity sha512-7EAfqRhCKSoYJQRK+FAdUuqJCJPEDq5N9ewU3x5dIxq8OxG1cYJNHaOwHCSWoN7KB1r9A+tM9qQ9aVr4+FUbIg==
   dependencies:
     "@types/lodash" "^4.14.195"
     "@types/node" "^20.2.5"

@@ -27,14 +27,14 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	public disconnected(): void {
-		// console.log('ows -> OwservableClient disconnected');
+		// console.log('[@owservable] -> OwservableClient disconnected');
 		this.clearSubscriptions();
 		this._connectionManager.disconnected();
 		clearTimeout(this._timeout);
 	}
 
 	private set location(location: string) {
-		// console.log('ows -> OwservableClient location: old:[${this._location}] new:[${location}]`);
+		// console.log('[@owservable] -> OwservableClient location: old:[${this._location}] new:[${location}]`);
 		if (location === this._location) return;
 		this._location = location;
 
@@ -42,7 +42,7 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	public async consume(message: any): Promise<void> {
-		// console.log('ows -> OwservableClient::consume received message", message.type);
+		// console.log('[@owservable] -> OwservableClient::consume received message", message.type);
 
 		switch (message.type) {
 			case 'pong':
@@ -96,7 +96,7 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private removeSubscription(target: string): void {
-		// console.log('ows -> OwservableClient removeSubscription: ${target}`);
+		// console.log('[@owservable] -> OwservableClient removeSubscription: ${target}`);
 
 		this._subscriptions.get(target)?.unsubscribe();
 		this._subscriptions.delete(target);
@@ -108,14 +108,14 @@ export default class OwservableClient extends Subject<any> {
 	}
 
 	private reloadData(target: string): void {
-		// console.log('ows -> OwservableClient reloadData: ${target}`);
+		// console.log('[@owservable] -> OwservableClient reloadData: ${target}`);
 		const store = this._stores.get(target);
 		store.restartSubscription();
 	}
 
 	private updateSubscription(subscriptionConfig: StoreSubscriptionUpdateType): void {
 		const {target, scope, observe, config} = subscriptionConfig;
-		// console.log('ows -> OwservableClient updateSubscription: ${target}`);
+		// console.log('[@owservable] -> OwservableClient updateSubscription: ${target}`);
 
 		let store = this._stores.get(target);
 		if (store) {
@@ -166,7 +166,7 @@ export default class OwservableClient extends Subject<any> {
 	private clearSubscriptions(): void {
 		if (this._subscriptions) {
 			const subscriptionsKeys = this._subscriptions.keys();
-			console.log(' -- OwservableClient clearSubscriptions subscriptionsKeys:', subscriptionsKeys);
+			console.log('[@owservable] -> OwservableClient clearSubscriptions subscriptionsKeys:', subscriptionsKeys);
 			for (const subscriptionKey of subscriptionsKeys) {
 				this._subscriptions.get(subscriptionKey)?.unsubscribe();
 			}
@@ -176,7 +176,7 @@ export default class OwservableClient extends Subject<any> {
 
 		if (this._stores) {
 			const storesKeys = this._stores.keys();
-			console.log(' -- OwservableClient clearSubscriptions storesKeys:', storesKeys);
+			console.log('[@owservable] -> OwservableClient clearSubscriptions storesKeys:', storesKeys);
 			for (const storeKey of storesKeys) {
 				this._stores.get(storeKey)?.destroy();
 			}

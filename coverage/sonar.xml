@@ -58,7 +58,7 @@
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
         <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="1"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
     </file>
     <file path="test\mongodb\functions\observable.database.spec.ts">
         <testCase name="owservable.database.ts tests observableDatabase exists" duration="0"/>
@@ -67,7 +67,7 @@
         <testCase name="owservable.model.ts tests observableModel exists" duration="0"/>
     </file>
     <file path="test\mongodb\functions\process.models.spec.ts">
-        <testCase name="process.models.ts tests processModels exists" duration="0"/>
+        <testCase name="process.models.ts tests processModels exists" duration="1"/>
         <testCase name="process.models.ts tests _processFile" duration="1"/>
         <testCase name="process.models.ts tests _isExcluded" duration="1"/>
     </file>
@@ -75,10 +75,10 @@
         <testCase name="mongodb.connector.ts tests MongoDBConnector exists" duration="0"/>
     </file>
     <file path="test\owservable.client.spec.ts">
-        <testCase name="owservable.client.ts tests OwservableClient exists" duration="1"/>
+        <testCase name="owservable.client.ts tests OwservableClient exists" duration="0"/>
     </file>
     <file path="test\owservable.spec.ts">
-        <testCase name="owservable.ts tests Owservable exists" duration="0"/>
+        <testCase name="owservable.ts tests Owservable exists" duration="1"/>
     </file>
     <file path="test\store\a.store.spec.ts">
         <testCase name="a.store.ts tests should be implemented" duration="0">

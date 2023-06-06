@@ -77,7 +77,7 @@ export default class DocumentStore extends AStore {
 
 		if (type === 'delete' && id === key) return this.emitDelete(key);
 
-		// console.log('ows -> DB Reload Document for query:', this._query);
+		// console.log('[@owservable] -> DB Reload Document for query:', this._query);
 		try {
 			let data;
 			if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
@@ -97,7 +97,7 @@ export default class DocumentStore extends AStore {
 			}
 			this.emitOne(jsonData);
 		} catch (error) {
-			console.log('ows -> DocumentStore::load Error:', {change, error});
+			console.log('[@owservable] -> DocumentStore::load Error:', {change, error});
 			this.emitError(error);
 		}
 	}

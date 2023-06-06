@@ -19,9 +19,9 @@ export default class MongoDBConnector {
 					})
 					.catch(reject);
 
-				mongoose.connection.on('connecting', () => console.log('ows -> MongoDB connecting to', mongoDbUri, '...'));
-				mongoose.connection.on('connected', () => console.log('ows -> MongoDB connected to', mongoDbUri));
-				mongoose.connection.on('open', () => console.log('ows -> MongoDB opened connection to', mongoDbUri));
+				mongoose.connection.on('connecting', () => console.log('[@owservable] -> MongoDB connecting to', mongoDbUri, '...'));
+				mongoose.connection.on('connected', () => console.log('[@owservable] -> MongoDB connected to', mongoDbUri));
+				mongoose.connection.on('open', () => console.log('[@owservable] -> MongoDB opened connection to', mongoDbUri));
 
 				mongoose.connection.on('error', console.error.bind(console, 'ows -> MongoDB connection error:'));
 				mongoose.connection.on('disconnecting', () => console.error('ows -> MongoDB disconnecting from', mongoDbUri, '...'));
