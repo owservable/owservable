@@ -86,7 +86,7 @@ export default class DocumentStore extends AStore {
 			if (!data) return this.emitOne();
 
 			for (const populate of this._populates) {
-				if (data?.populate) await data.populate(populate).execPopulate();
+				if (data?.populate) await data.populate(populate);
 			}
 
 			if (_.isEmpty(this._virtuals)) return this.emitOne(data.toJSON());
@@ -97,6 +97,7 @@ export default class DocumentStore extends AStore {
 			}
 			this.emitOne(jsonData);
 		} catch (error) {
+			console.log('ows -> DocumentStore::load Error:', {change, error});
 			this.emitError(error);
 		}
 	}

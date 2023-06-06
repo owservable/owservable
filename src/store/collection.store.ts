@@ -93,6 +93,7 @@ export default class CollectionStore extends AStore {
 				return this.emitMany({total, data});
 			}
 		} catch (error) {
+			console.log('ows -> CollectionStore::load Error:', {change, error});
 			this.emitError(error);
 		}
 	}

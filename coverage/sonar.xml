@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testExecutions version="1">
     <file path="test\_enums\store.type.enum.spec.ts">
-        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="1"/>
+        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="0"/>
     </file>
     <file path="test\functions\action\add.action.cronjobs.spec.ts">
         <testCase name="add.action.cronjobs tests should be implemented" duration="0">
@@ -44,7 +44,7 @@
         </testCase>
     </file>
     <file path="test\functions\initiate.cronjobs.spec.ts">
-        <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="1"/>
+        <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="0"/>
     </file>
     <file path="test\functions\initiate.watchers.spec.ts">
         <testCase name="initiate.watchers.ts tests initiateWatchers exists" duration="0"/>
@@ -58,7 +58,7 @@
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
         <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="1"/>
     </file>
     <file path="test\mongodb\functions\observable.database.spec.ts">
         <testCase name="owservable.database.ts tests observableDatabase exists" duration="0"/>
@@ -75,7 +75,7 @@
         <testCase name="mongodb.connector.ts tests MongoDBConnector exists" duration="0"/>
     </file>
     <file path="test\owservable.client.spec.ts">
-        <testCase name="owservable.client.ts tests OwservableClient exists" duration="0"/>
+        <testCase name="owservable.client.ts tests OwservableClient exists" duration="1"/>
     </file>
     <file path="test\owservable.spec.ts">
         <testCase name="owservable.ts tests Owservable exists" duration="0"/>
