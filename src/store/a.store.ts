@@ -2,15 +2,13 @@
 
 import sift from 'sift';
 import {randomUUID} from 'node:crypto';
+import * as jsondiffpatch from 'jsondiffpatch';
+import {cloneDeep, each, includes, isArray, isEmpty, omit, set, values} from 'lodash';
 
 import {Model} from 'mongoose';
 
-import {asyncScheduler, Subject, Subscription} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
-
-import * as jsondiffpatch from 'jsondiffpatch';
-import * as _ from 'lodash';
-import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
+import {asyncScheduler, Subject, Subscription} from 'rxjs';
 
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
@@ -107,7 +105,7 @@ export default abstract class AStore extends Subject<any> {
 
 	protected testDocument(document: any): boolean {
 		try {
-			const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
+			const test = sift(omit(this._query, ['createdAt', 'updatedAt']));
 			return test(document);
 		} catch (error) {
 			console.error('[@owservable] -> AStore::testDocument Error:', {query: this._query, document, error});
