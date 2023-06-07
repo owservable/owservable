@@ -29,7 +29,6 @@ See the <a href="https://owservable.github.io/owservable/coverage/" target="_bla
 - [Mongoose](https://mongoosejs.com)
 - [RxJS](https://rxjs.dev)
 - [Typescript](https://www.typescriptlang.org/)
-
 - [Chai](https://www.chaijs.com/)
 - [Mocha](https://mochajs.org/)
 - [NYC](https://istanbul.js.org/)
