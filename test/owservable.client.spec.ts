@@ -7,4 +7,6 @@ describe('owservable.client.ts tests', () => {
 	it('OwservableClient exists', () => {
 		expect(OwservableClient).to.be.an('function');
 	});
+
+	it('should be implemented');
 });

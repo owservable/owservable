@@ -7,4 +7,6 @@ describe('initiate.cronjobs.ts tests', () => {
 	it('initiateCronjobs exists', () => {
 		expect(initiateCronjobs).to.be.a('function');
 	});
+
+	it('should be implemented');
 });

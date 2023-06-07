@@ -19,4 +19,6 @@ describe('owservable.model.ts tests', () => {
 		expect(ObservableModelsMap.get).to.be.an('function');
 		expect(ObservableModelsMap.init).to.be.an('function');
 	});
+
+	it('should be implemented');
 });

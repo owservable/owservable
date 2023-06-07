@@ -7,4 +7,6 @@ describe('initiate.workers.ts tests', () => {
 	it('initiateWorkers exists', () => {
 		expect(initiateWorkers).to.be.a('function');
 	});
+
+	it('should be implemented');
 });

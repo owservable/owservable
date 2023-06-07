@@ -16,4 +16,6 @@ describe('owservable.database.ts tests', () => {
 		expect(ObservableDatabase).to.be.an('function');
 		expect(ObservableDatabase.init).to.be.an('function');
 	});
+
+	it('should be implemented');
 });

@@ -8,4 +8,6 @@ describe('mongodb.connector.ts tests', () => {
 		expect(MongoDBConnector).to.be.an('function');
 		expect(MongoDBConnector.init).to.be.an('function');
 	});
+
+	it('should be implemented');
 });
