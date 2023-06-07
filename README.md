@@ -8,6 +8,14 @@ See <a href="https://owservable.github.io/" target="_blank">owservable.github.io
 
 Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blank">Reactive Stack Udemy course</a>.
 
+## :books: Documentation
+
+See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
+
+### :traffic_light: Testing:
+
+See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
+
 ## :clipboard: TODOs
 
 - Web Server abstraction
@@ -22,21 +30,13 @@ Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blan
 - [RxJS](https://rxjs.dev)
 - [Typescript](https://www.typescriptlang.org/)
 
-### :traffic_light: Testing:
-
 - [Chai](https://www.chaijs.com/)
 - [Mocha](https://mochajs.org/)
 - [NYC](https://istanbul.js.org/)
 
-See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
-
 ## :floppy_disk: MongoDB Replica Set
 
 Make sure your MongoDB database is running as a Replica Set: http://stojadinovic.net/2020/07/05/mongodb-change-streams-on-localhost-with-nodejs/
-
-## :books: Documentation
-
-See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
 
 ### OwservableClient
 
