@@ -1,6 +1,5 @@
 'use strict';
 
-import sift from 'sift';
 import * as _ from 'lodash';
 import {Model} from 'mongoose';
 
@@ -19,7 +18,6 @@ export default class CollectionStore extends AStore {
 
 		const {operationType: type, updateDescription: description, fullDocument: document} = change;
 
-		const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
 		switch (type) {
 			case 'delete':
 			case 'insert':
@@ -29,7 +27,7 @@ export default class CollectionStore extends AStore {
 			case 'update':
 				if (!description) return true;
 
-				if (!this.shouldConsiderFields()) return test(document);
+				if (!this.shouldConsiderFields()) return this.testDocument(document);
 
 				const {updatedFields, removedFields} = description;
 				const us = _.concat(removedFields, _.keys(updatedFields));
@@ -93,7 +91,7 @@ export default class CollectionStore extends AStore {
 				return this.emitMany({total, data});
 			}
 		} catch (error) {
-			console.log('[@owservable] -> CollectionStore::load Error:', {change, error});
+			console.error('[@owservable] -> CollectionStore::load Error:', {change, error});
 			this.emitError(error);
 		}
 	}

@@ -1,6 +1,5 @@
 'use strict';
 
-import sift from 'sift';
 import * as _ from 'lodash';
 
 import {asyncScheduler} from 'rxjs';
@@ -97,7 +96,7 @@ export default class DocumentStore extends AStore {
 			}
 			this.emitOne(jsonData);
 		} catch (error) {
-			console.log('[@owservable] -> DocumentStore::load Error:', {change, error});
+			console.error('[@owservable] -> DocumentStore::load Error:', {change, error});
 			this.emitError(error);
 		}
 	}
@@ -113,8 +112,7 @@ export default class DocumentStore extends AStore {
 		const key = _.get(documentKey, '_id', '').toString();
 		if (key === _getIdFromQuery(this._query)) return true;
 
-		const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
-		return test(document);
+		return this.testDocument(document);
 	}
 
 	private async _loadDocumentById(id: string): Promise<any> {

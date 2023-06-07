@@ -1,5 +1,6 @@
 'use strict';
 
+import sift from 'sift';
 import {randomUUID} from 'node:crypto';
 
 import {Model} from 'mongoose';
@@ -8,6 +9,7 @@ import {asyncScheduler, Subject, Subscription} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 
 import * as jsondiffpatch from 'jsondiffpatch';
+import * as _ from 'lodash';
 import {cloneDeep, each, includes, isArray, isEmpty, set, values} from 'lodash';
 
 import EStoreType from '../_enums/store.type.enum';
@@ -100,6 +102,16 @@ export default abstract class AStore extends Subject<any> {
 			each(fields, (field: string) => set(this._fields, field, 1));
 		} else {
 			this._fields = fields;
+		}
+	}
+
+	protected testDocument(document: any): boolean {
+		try {
+			const test = sift(_.omit(this._query, ['createdAt', 'updatedAt']));
+			return test(document);
+		} catch (error) {
+			console.error('[@owservable] -> AStore::testDocument Error:', {query: this._query, document, error});
+			return false;
 		}
 	}
 
