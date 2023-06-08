@@ -109,7 +109,7 @@ export default abstract class AStore extends Subject<any> {
 			return test(document);
 		} catch (error) {
 			console.error('[@owservable] -> AStore::testDocument Error:', {query: this._query, document, error});
-			return false;
+			return true;
 		}
 	}
 
