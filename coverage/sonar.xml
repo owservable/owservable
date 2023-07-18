@@ -115,7 +115,7 @@
         </testCase>
     </file>
     <file path="test\mongodb\mongodb.connector.spec.ts">
-        <testCase name="mongodb.connector.ts tests MongoDBConnector exists" duration="1"/>
+        <testCase name="mongodb.connector.ts tests MongoDBConnector exists" duration="0"/>
         <testCase name="mongodb.connector.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
@@ -127,7 +127,7 @@
         </testCase>
     </file>
     <file path="test\owservable.spec.ts">
-        <testCase name="owservable.ts tests Owservable exists" duration="1"/>
+        <testCase name="owservable.ts tests Owservable exists" duration="0"/>
         <testCase name="owservable.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>

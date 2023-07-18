@@ -47,7 +47,7 @@ export default abstract class AStore extends Subject<any> {
 
 	protected _subscription: Subscription;
 
-	protected _subscriptionDiffs: Map<string, any>;
+	protected _subscriptionDiffs: Map<string, boolean>;
 
 	protected constructor(model: Model<any>, target: string) {
 		super();
@@ -62,7 +62,7 @@ export default abstract class AStore extends Subject<any> {
 		this._virtuals = [];
 		this._delay = 50;
 
-		this._subscriptionDiffs = new Map<string, any>();
+		this._subscriptionDiffs = new Map<string, boolean>();
 	}
 
 	public destroy(): void {
@@ -150,7 +150,7 @@ export default abstract class AStore extends Subject<any> {
 	protected emitTotal(subscriptionId: string, total: any): void {
 		this.next({
 			subscriptionId,
-			type: 'totalCount',
+			type: 'total',
 			target: this._target,
 			total
 		});
@@ -191,7 +191,7 @@ export default abstract class AStore extends Subject<any> {
 
 		if (this._type === EStoreType.COLLECTION) {
 			const queryDiff = jsondiffpatch.diff(get(this._config, 'query', {}), get(config, 'query', {}));
-			this._addSubscriptionDiff(this._subscriptionId, queryDiff);
+			this._addSubscriptionDiff(config.subscriptionId, isEmpty(queryDiff));
 		}
 
 		this._config = cloneDeep(config);
@@ -212,7 +212,7 @@ export default abstract class AStore extends Subject<any> {
 		return !isEmpty(diff);
 	}
 
-	private _addSubscriptionDiff(subId: string, diff: any) {
+	private _addSubscriptionDiff(subId: string, diff: boolean) {
 		this._subscriptionDiffs.set(subId, diff);
 	}
 
@@ -220,8 +220,7 @@ export default abstract class AStore extends Subject<any> {
 		this._subscriptionDiffs.delete(subId);
 	}
 
-	protected isQueryChange(subId: string) {
-		const diff = this._subscriptionDiffs.get(subId);
-		return !isEmpty(diff);
+	protected isQueryChange(subId: string): boolean {
+		return !!this._subscriptionDiffs.get(subId);
 	}
 }
