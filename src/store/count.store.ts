@@ -29,10 +29,10 @@ export default class CountStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
-		if (isEmpty(this._config)) return this.emitOne();
+		if (isEmpty(this._config)) return this.emitOne(this._subscriptionId);
 		if (!this.shouldReload(change)) return;
 
 		const count = await this._model.countDocuments(this._query);
-		this.emitOne(count);
+		this.emitOne(this._subscriptionId, count);
 	}
 }

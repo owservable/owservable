@@ -47,6 +47,8 @@ export default abstract class AStore extends Subject<any> {
 
 	protected _subscription: Subscription;
 
+	protected _subscriptionDiffs: Map<string, any>;
+
 	protected constructor(model: Model<any>, target: string) {
 		super();
 
@@ -59,6 +61,8 @@ export default abstract class AStore extends Subject<any> {
 		this._populates = [];
 		this._virtuals = [];
 		this._delay = 50;
+
+		this._subscriptionDiffs = new Map<string, any>();
 	}
 
 	public destroy(): void {
@@ -123,35 +127,47 @@ export default abstract class AStore extends Subject<any> {
 		return this._model;
 	}
 
-	protected emitOne(update: any = {}): void {
+	protected emitOne(subscriptionId: string, update: any = {}): void {
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, update);
-		this.next(message);
-	}
-
-	protected emitMany(update: any = {total: 0, data: []}): void {
-		const {total, data} = update;
-		const message = _baseMessage(this._target, this._incremental);
-		set(message.payload, this._target, data);
-		if (!this._incremental) set(message.payload, '_' + this._target + 'Count', total);
 		this.next({
-			subscriptionId: this._subscriptionId,
+			subscriptionId,
 			...message
 		});
 	}
 
-	protected emitDelete(deleted: any): void {
+	protected emitMany(subscriptionId: string, update: any = {total: 0, data: []}): void {
+		const {total, data} = update;
+		const message = _baseMessage(this._target, this._incremental);
+		set(message.payload, this._target, data);
+		if (!this._incremental && total >= 0) set(message.payload, '_' + this._target + 'Count', total);
 		this.next({
-			subscriptionId: this._subscriptionId,
+			subscriptionId,
+			...message
+		});
+	}
+
+	protected emitTotal(subscriptionId: string, total: any): void {
+		this.next({
+			subscriptionId,
+			type: 'totalCount',
+			target: this._target,
+			total
+		});
+	}
+
+	protected emitDelete(subscriptionId: string, deleted: any): void {
+		this.next({
+			subscriptionId,
 			type: 'delete',
 			target: this._target,
 			payload: deleted
 		});
 	}
 
-	protected emitError(error: any): void {
+	protected emitError(subscriptionId: string, error: any): void {
 		this.next({
-			subscriptionId: this._subscriptionId,
+			subscriptionId,
 			type: 'error',
 			error,
 			target: this._target,
@@ -171,8 +187,14 @@ export default abstract class AStore extends Subject<any> {
 	public set config(config: StoreSubscriptionConfigType) {
 		if (!this._isValidConfig(config)) return;
 
-		this._config = cloneDeep(config);
 		config.subscriptionId = config.subscriptionId || randomUUID();
+
+		if (this._type === EStoreType.COLLECTION) {
+			const queryDiff = jsondiffpatch.diff(this._config.query, config.query);
+			this._addSubscriptionDiff(this._subscriptionId, queryDiff);
+		}
+
+		this._config = cloneDeep(config);
 
 		this.extractFromConfig();
 		this.restartSubscription();
@@ -187,6 +209,19 @@ export default abstract class AStore extends Subject<any> {
 		if (!config) return false;
 
 		const diff = diffPatcher.diff(this._config, config);
+		return !isEmpty(diff);
+	}
+
+	private _addSubscriptionDiff(subId: string, diff: any) {
+		this._subscriptionDiffs.set(subId, diff);
+	}
+
+	protected removeSubscriptionDiff(subId: string) {
+		this._subscriptionDiffs.delete(subId);
+	}
+
+	protected isQueryChange(subId: string) {
+		const diff = this._subscriptionDiffs.get(subId);
 		return !isEmpty(diff);
 	}
 }

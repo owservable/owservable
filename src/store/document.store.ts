@@ -67,14 +67,14 @@ export default class DocumentStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
-		if (_.isEmpty(this._config)) return this.emitOne();
+		if (_.isEmpty(this._config)) return this.emitOne(this._subscriptionId);
 		if (!this.shouldReload(change)) return;
 
 		const id = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey} = change;
 		const key = _.get(documentKey, '_id', '').toString();
 
-		if (type === 'delete' && id === key) return this.emitDelete(key);
+		if (type === 'delete' && id === key) return this.emitDelete(this._subscriptionId, key);
 
 		// console.log('[@owservable] -> DB Reload Document for query:', this._query);
 		try {
@@ -82,22 +82,22 @@ export default class DocumentStore extends AStore {
 			if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
 			else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
 
-			if (!data) return this.emitOne();
+			if (!data) return this.emitOne(this._subscriptionId);
 
 			for (const populate of this._populates) {
 				if (data?.populate) await data.populate(populate);
 			}
 
-			if (_.isEmpty(this._virtuals)) return this.emitOne(data.toJSON());
+			if (_.isEmpty(this._virtuals)) return this.emitOne(this._subscriptionId, data.toJSON());
 
 			const jsonData: any = _.cloneDeep(_.omit(data.toJSON(), this._virtuals));
 			for (const virtual of this._virtuals) {
 				jsonData[virtual] = await Promise.resolve(data[virtual]);
 			}
-			this.emitOne(jsonData);
+			this.emitOne(this._subscriptionId, jsonData);
 		} catch (error) {
 			console.error('[@owservable] -> DocumentStore::load Error:', {change, error});
-			this.emitError(error);
+			this.emitError(this._subscriptionId, error);
 		}
 	}
 
