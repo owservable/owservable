@@ -147,15 +147,6 @@ export default abstract class AStore extends Subject<any> {
 		});
 	}
 
-	protected emitTotal(subscriptionId: string, total: any): void {
-		this.next({
-			subscriptionId,
-			type: 'total',
-			target: this._target,
-			total
-		});
-	}
-
 	protected emitDelete(subscriptionId: string, deleted: any): void {
 		this.next({
 			subscriptionId,
@@ -191,7 +182,7 @@ export default abstract class AStore extends Subject<any> {
 
 		if (this._type === EStoreType.COLLECTION) {
 			const queryDiff = jsondiffpatch.diff(get(this._config, 'query', {}), get(config, 'query', {}));
-			this._addSubscriptionDiff(config.subscriptionId, isEmpty(queryDiff));
+			this._addSubscriptionDiff(config.subscriptionId, !isEmpty(queryDiff));
 		}
 
 		this._config = cloneDeep(config);
