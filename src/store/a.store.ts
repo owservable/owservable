@@ -3,7 +3,7 @@
 import sift from 'sift';
 import {randomUUID} from 'node:crypto';
 import * as jsondiffpatch from 'jsondiffpatch';
-import {cloneDeep, each, includes, isArray, isEmpty, omit, set, values} from 'lodash';
+import {cloneDeep, each, get, includes, isArray, isEmpty, omit, set, values} from 'lodash';
 
 import {Model} from 'mongoose';
 
@@ -190,7 +190,7 @@ export default abstract class AStore extends Subject<any> {
 		config.subscriptionId = config.subscriptionId || randomUUID();
 
 		if (this._type === EStoreType.COLLECTION) {
-			const queryDiff = jsondiffpatch.diff(this._config.query, config.query);
+			const queryDiff = jsondiffpatch.diff(get(this._config, 'query', {}), get(config, 'query', {}));
 			this._addSubscriptionDiff(this._subscriptionId, queryDiff);
 		}
 
