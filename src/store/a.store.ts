@@ -147,6 +147,15 @@ export default abstract class AStore extends Subject<any> {
 		});
 	}
 
+	protected emitTotal(subscriptionId: string, total: any): void {
+		this.next({
+			subscriptionId,
+			type: 'total',
+			target: this._target,
+			total
+		});
+	}
+
 	protected emitDelete(subscriptionId: string, deleted: any): void {
 		this.next({
 			subscriptionId,
