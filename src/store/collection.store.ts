@@ -92,7 +92,7 @@ export default class CollectionStore extends AStore {
 					data = replacements;
 				}
 
-				if (this.isQueryChange(currentLoadSubscriptionId) || this.isInitialSubscription(change)) {
+				if (this.isQueryChange(currentLoadSubscriptionId)) {
 					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
 
 					this._totalCount = await this._model.countDocuments(this._query);

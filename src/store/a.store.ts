@@ -62,6 +62,11 @@ export default abstract class AStore extends Subject<any> {
 		this._virtuals = [];
 		this._delay = 50;
 
+		this._config = {
+			query: {___initial___: true},
+			strict: false,
+			incremental: false
+		};
 		this._subscriptionDiffs = new Map<string, boolean>();
 	}
 
@@ -143,7 +148,7 @@ export default abstract class AStore extends Subject<any> {
 		set(message.payload, this._target, data);
 
 		if (!this._incremental && total >= 0) set(message.payload, '_' + this._target + 'Count', total);
-		if (recounting) set(message.payload, '_' + this._target + 'Count', -1);
+		if (recounting) set(message.payload, '_' + this._target + 'Recounting', true);
 
 		this.next({
 			subscriptionId,
