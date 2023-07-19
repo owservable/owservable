@@ -92,11 +92,15 @@ export default class CollectionStore extends AStore {
 					data = replacements;
 				}
 
-				this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data});
-
 				if (this.isQueryChange(currentLoadSubscriptionId)) {
+					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
+
 					this._totalCount = await this._model.countDocuments(this._query);
 					this.emitTotal(currentLoadSubscriptionId, this._totalCount);
+
+					//
+				} else {
+					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data});
 				}
 
 				this.removeSubscriptionDiff(currentLoadSubscriptionId);

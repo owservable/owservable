@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.9.5",
+	"version": "0.9.6",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -42,7 +42,7 @@
 		"deprecated-decorator": "^0.1.6",
 		"jsondiffpatch": "^0.4.1",
 		"lodash": "^4.17.20",
-		"mongoose": "^7.3.4",
+		"mongoose": "^7.4.0",
 		"node-cron": "^3.0.2",
 		"rxjs": "^7.8.1",
 		"sift": "^17.0.1"

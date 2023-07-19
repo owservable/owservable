@@ -136,11 +136,15 @@ export default abstract class AStore extends Subject<any> {
 		});
 	}
 
-	protected emitMany(subscriptionId: string, update: any = {total: 0, data: []}): void {
-		const {total, data} = update;
+	protected emitMany(subscriptionId: string, update: any = {total: 0, data: [], recounting: false}): void {
+		const {total, data, recounting} = update;
+
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, data);
+
 		if (!this._incremental && total >= 0) set(message.payload, '_' + this._target + 'Count', total);
+		if (recounting) set(message.payload, '_' + this._target + 'Count', -1);
+
 		this.next({
 			subscriptionId,
 			...message
