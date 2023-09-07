@@ -42,6 +42,13 @@ export default class CollectionStore extends AStore {
 		return false;
 	}
 
+	protected async sendCount(subscriptionId: string): Promise<void> {
+		this._totalCount = await this._model.countDocuments(this._query);
+		this.emitTotal(subscriptionId, this._totalCount);
+	}
+
+	protected delaySendCount: _.DebouncedFunc<any> = _.throttle(this.sendCount, 5000);
+
 	protected async load(change: any): Promise<void> {
 		const currentLoadSubscriptionId = this._subscriptionId + '';
 
@@ -95,12 +102,13 @@ export default class CollectionStore extends AStore {
 				if (this.isQueryChange(currentLoadSubscriptionId)) {
 					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
 
-					this._totalCount = await this._model.countDocuments(this._query);
-					this.emitTotal(currentLoadSubscriptionId, this._totalCount);
+					await this.sendCount(currentLoadSubscriptionId);
 
 					//
 				} else {
 					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data});
+
+					this.delaySendCount(currentLoadSubscriptionId);
 				}
 
 				this.removeSubscriptionDiff(currentLoadSubscriptionId);

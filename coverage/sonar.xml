@@ -63,7 +63,7 @@
     </file>
     <file path="test\middleware\data.middleware.map.spec.ts">
         <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="0"/>
-        <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="1"/>
+        <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="0"/>
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
         <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
