@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "0.9.82",
+	"version": "0.9.9",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -34,25 +34,25 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^0.1.7",
-		"@owservable/folders": "^0.1.7",
-		"@types/lodash": "^4.14.199",
-		"@types/node": "^20.6.5",
-		"@types/node-cron": "^3.0.9",
+		"@owservable/actions": "^0.1.8",
+		"@owservable/folders": "^0.1.8",
+		"@types/lodash": "^4.14.201",
+		"@types/node": "^20.9.0",
+		"@types/node-cron": "^3.0.11",
 		"deprecated-decorator": "^0.1.6",
 		"jsondiffpatch": "^0.5.0",
 		"lodash": "^4.17.20",
 		"mongoose": "^7.5.2",
-		"node-cron": "^3.0.2",
+		"node-cron": "^3.0.3",
 		"rxjs": "^7.8.1",
 		"sift": "^17.0.1"
 	},
 	"devDependencies": {
 		"@danmasta/mocha-sonar": "^1.0.1",
-		"@types/chai": "^4.3.6",
-		"@types/mocha": "^10.0.1",
-		"@types/rewire": "^2.5.28",
-		"chai": "^4.3.8",
+		"@types/chai": "^4.3.10",
+		"@types/mocha": "^10.0.4",
+		"@types/rewire": "^2.5.30",
+		"chai": "^4.3.10",
 		"chai-rx": "^0.0.4",
 		"coveralls": "^3.0.9",
 		"mocha": "^10.2.0",
@@ -68,7 +68,7 @@
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-etc": "^1.13.7",
 		"tslint-no-unused-expression-chai": "^0.1.4",
-		"typedoc": "^0.25.1",
+		"typedoc": "^0.25.3",
 		"typescript": "^5.2.2"
 	}
 }
