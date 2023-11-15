@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testExecutions version="1">
     <file path="test\_enums\store.type.enum.spec.ts">
-        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="0"/>
+        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="1"/>
     </file>
     <file path="test\functions\action\add.action.cronjobs.spec.ts">
         <testCase name="add.action.cronjobs tests should be implemented" duration="0">
@@ -63,7 +63,7 @@
     </file>
     <file path="test\middleware\data.middleware.map.spec.ts">
         <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="0"/>
-        <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="0"/>
+        <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="1"/>
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
         <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
@@ -108,8 +108,8 @@
     </file>
     <file path="test\mongodb\functions\process.models.spec.ts">
         <testCase name="process.models.ts tests processModels exists" duration="0"/>
-        <testCase name="process.models.ts tests _processFile" duration="0"/>
-        <testCase name="process.models.ts tests _isExcluded" duration="0"/>
+        <testCase name="process.models.ts tests _processFile" duration="1"/>
+        <testCase name="process.models.ts tests _isExcluded" duration="1"/>
         <testCase name="process.models.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
