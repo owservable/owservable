@@ -6,7 +6,7 @@ import * as mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
 
 class ObservableDatabase extends Subject<any> {
-	private _stream: ChangeStream;
+	protected _stream: ChangeStream;
 	private static _instance: ObservableDatabase;
 
 	public static init(): ObservableDatabase {
@@ -16,10 +16,22 @@ class ObservableDatabase extends Subject<any> {
 
 	constructor() {
 		super();
-		const db = mongoose.connection.db;
+
+		const db: mongoose.mongo.Db = mongoose.connection.db;
+
 		this._stream = db.watch([], {fullDocument: 'updateLookup'});
-		this._stream.on('change', (change) => {
+		this._stream.on('change', (change: any): void => {
 			this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']));
+		});
+
+		mongoose.connection.on('connected', (): void => {
+			console.log('[@owservable] -> MongoDB connected event in ObservableDatabase');
+
+			delete this._stream;
+			this._stream = null;
+
+			delete ObservableDatabase._instance;
+			ObservableDatabase._instance = null;
 		});
 	}
 }

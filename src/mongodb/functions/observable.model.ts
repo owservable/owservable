@@ -9,20 +9,6 @@ import {filter} from 'rxjs/operators';
 import observableDatabase from './observable.database';
 
 class ObservableModel extends Subject<any> {
-	// NOTE: Use before MongoDB 4.0
-	// private _model: Model<any>;
-	// private _stream: ChangeStream;
-	//
-	// constructor(model: Model<any>) {
-	// 	super();
-	// 	this._model = model;
-	// 	this._stream = this._model.watch([], {fullDocument: 'updateLookup'});
-	//
-	// 	this._stream.on('change', (change) => {
-	// 		this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']));
-	// 	});
-	// }
-
 	private readonly _collection: string;
 	protected _subscription: Subscription;
 
@@ -63,10 +49,10 @@ class ObservableModelsMap {
 	public static get(model: Model<any>): ObservableModel {
 		const instance: ObservableModelsMap = ObservableModelsMap.init();
 		const map: Map<string, ObservableModel> = instance._map;
+
 		const collectionName: string = model.collection.collectionName;
-		// NOTE: Use before MongoDB 4.0
-		// if (!map.get(collectionName)) map.set(collectionName, new ObservableModel(model));
 		if (!map.get(collectionName)) map.set(collectionName, new ObservableModel(collectionName));
+
 		return map.get(collectionName);
 	}
 
