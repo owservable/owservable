@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">21.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/24</span>
+                <span class='fraction'>6/28</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">24% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/21</span>
+                <span class='fraction'>6/25</span>
             </div>
         
             
@@ -139,7 +139,12 @@
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,16 +180,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,17 +260,22 @@ class ObservableModel extends Subject&lt;any&gt; {
 <span class="cstat-no" title="statement not covered" >		this._subscription = observableDatabase()</span>
 			.pipe(filter(<span class="fstat-no" title="function not covered" >(c</span>hange) =&gt; <span class="cstat-no" title="statement not covered" >this._pipeFilter(change))</span>)
 			.subscribe({
-				next: <span class="fstat-no" title="function not covered" >(c</span>hange: any): void =&gt; <span class="cstat-no" title="statement not covered" >this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']))</span>
+				next: <span class="fstat-no" title="function not covered" >(c</span>hange: any): void =&gt; <span class="cstat-no" title="statement not covered" >this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument'])),</span>
+				error: <span class="fstat-no" title="function not covered" >(e</span>: any): void =&gt; <span class="cstat-no" title="statement not covered" >this.error(e),</span>
+				complete: <span class="fstat-no" title="function not covered" >(): void =</span>&gt; <span class="cstat-no" title="statement not covered" >this.complete()</span>
 			});
 	}
 &nbsp;
-	// TODO: extract to a pure function file
 	private <span class="fstat-no" title="function not covered" >_pipeFilter(</span>change: any): boolean {
-		const {
-			ns: {coll}
-		} = <span class="cstat-no" title="statement not covered" >change;</span>
+<span class="cstat-no" title="statement not covered" >		try {</span>
+			const {
+				ns: {coll}
+			} = <span class="cstat-no" title="statement not covered" >change;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		return this._collection === coll;</span>
+<span class="cstat-no" title="statement not covered" >			return this._collection === coll;</span>
+		} catch (error) {
+<span class="cstat-no" title="statement not covered" >			return false;</span>
+		}
 	}
 }
 &nbsp;
@@ -273,9 +288,9 @@ class ObservableModelsMap {
 	}
 &nbsp;
 	public <span class="fstat-no" title="function not covered" >static </span>get(model: Model&lt;any&gt;): ObservableModel {
-		const instance = <span class="cstat-no" title="statement not covered" >ObservableModelsMap.init();</span>
-		const map = <span class="cstat-no" title="statement not covered" >instance._map;</span>
-		const collectionName = <span class="cstat-no" title="statement not covered" >model.collection.collectionName;</span>
+		const instance: ObservableModelsMap = <span class="cstat-no" title="statement not covered" >ObservableModelsMap.init();</span>
+		const map: Map&lt;string, ObservableModel&gt; = <span class="cstat-no" title="statement not covered" >instance._map;</span>
+		const collectionName: string = <span class="cstat-no" title="statement not covered" >model.collection.collectionName;</span>
 		// NOTE: Use before MongoDB 4.0
 		// if (!map.get(collectionName)) map.set(collectionName, new ObservableModel(model));
 <span class="cstat-no" title="statement not covered" >		if (!map.get(collectionName)) <span class="cstat-no" title="statement not covered" >map.set(collectionName, new ObservableModel(collectionName));</span></span>
@@ -298,7 +313,7 @@ export default observableModel;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-01T10:06:41.647Z
+                at 2023-12-04T14:41:43.416Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

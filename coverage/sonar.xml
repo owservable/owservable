@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testExecutions version="1">
     <file path="test\_enums\store.type.enum.spec.ts">
-        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="1"/>
+        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="0"/>
     </file>
     <file path="test\functions\action\add.action.cronjobs.spec.ts">
         <testCase name="add.action.cronjobs tests should be implemented" duration="0">
@@ -50,7 +50,7 @@
         </testCase>
     </file>
     <file path="test\functions\initiate.watchers.spec.ts">
-        <testCase name="initiate.watchers.ts tests initiateWatchers exists" duration="1"/>
+        <testCase name="initiate.watchers.ts tests initiateWatchers exists" duration="0"/>
         <testCase name="initiate.watchers.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
@@ -66,7 +66,7 @@
         <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="1"/>
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="1"/>
         <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
     </file>
     <file path="test\mongodb\functions\index\add.both.indices.to.attributes.spec.ts">
@@ -101,14 +101,14 @@
         </testCase>
     </file>
     <file path="test\mongodb\functions\observable.model.spec.ts">
-        <testCase name="owservable.model.ts tests observableModel exists" duration="1"/>
+        <testCase name="owservable.model.ts tests observableModel exists" duration="0"/>
         <testCase name="owservable.model.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
     </file>
     <file path="test\mongodb\functions\process.models.spec.ts">
-        <testCase name="process.models.ts tests processModels exists" duration="0"/>
-        <testCase name="process.models.ts tests _processFile" duration="0"/>
+        <testCase name="process.models.ts tests processModels exists" duration="1"/>
+        <testCase name="process.models.ts tests _processFile" duration="1"/>
         <testCase name="process.models.ts tests _isExcluded" duration="0"/>
         <testCase name="process.models.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
@@ -121,7 +121,7 @@
         </testCase>
     </file>
     <file path="test\owservable.client.spec.ts">
-        <testCase name="owservable.client.ts tests OwservableClient exists" duration="1"/>
+        <testCase name="owservable.client.ts tests OwservableClient exists" duration="0"/>
         <testCase name="owservable.client.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>

@@ -33,17 +33,22 @@ class ObservableModel extends Subject<any> {
 		this._subscription = observableDatabase()
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
-				next: (change: any): void => this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']))
+				next: (change: any): void => this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument'])),
+				error: (e: any): void => this.error(e),
+				complete: (): void => this.complete()
 			});
 	}
 
-	// TODO: extract to a pure function file
 	private _pipeFilter(change: any): boolean {
-		const {
-			ns: {coll}
-		} = change;
+		try {
+			const {
+				ns: {coll}
+			} = change;
 
-		return this._collection === coll;
+			return this._collection === coll;
+		} catch (error) {
+			return false;
+		}
 	}
 }
 
@@ -56,9 +61,9 @@ class ObservableModelsMap {
 	}
 
 	public static get(model: Model<any>): ObservableModel {
-		const instance = ObservableModelsMap.init();
-		const map = instance._map;
-		const collectionName = model.collection.collectionName;
+		const instance: ObservableModelsMap = ObservableModelsMap.init();
+		const map: Map<string, ObservableModel> = instance._map;
+		const collectionName: string = model.collection.collectionName;
 		// NOTE: Use before MongoDB 4.0
 		// if (!map.get(collectionName)) map.set(collectionName, new ObservableModel(model));
 		if (!map.get(collectionName)) map.set(collectionName, new ObservableModel(collectionName));

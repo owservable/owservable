@@ -444,24 +444,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^0.1.83":
-  version "0.1.83"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.83.tgz#edcf2ad5278086aab70d2de8c6856b0d2811c257"
-  integrity sha512-XaHn4CzXayrQh4aORn7S92psHmxdcV3HFE0fS3K+A8suEy1x2+uwzlaKC0dUfZSRKzTjuxqPN0EWww1S/p9uyg==
+"@owservable/actions@^0.1.84":
+  version "0.1.84"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.84.tgz#cfb89eb0180f977d7ce78a2a1f6d5164bd3e35c4"
+  integrity sha512-uYTK+KuUEoempiXOCPJt3QZjngDsJJdYCm2lEMZhaZgZQZaRO8I5cfCq2+0KU6PGC2TTGXulCTMUKnwEWY6N8A==
   dependencies:
-    "@owservable/folders" "^0.1.83"
+    "@owservable/folders" "^0.1.84"
     "@types/lodash" "^4.14.202"
-    "@types/node" "^20.10.1"
+    "@types/node" "^20.10.3"
     commander "^11.1.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.1.83":
-  version "0.1.83"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.83.tgz#f79ae95d8691368f94f6d2c9fc89ba76a3919bf5"
-  integrity sha512-BfYKm9o8C7oYUvSi1KfOHBqagMFhK/M8yUZ8gzQ6On4I3R6nodfmknW6SIpNLbUtnqxMKlDQwW9eCWkCGjsEJw==
+"@owservable/folders@^0.1.84":
+  version "0.1.84"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.84.tgz#73ba52f515a3ad9a43917cf5580431e78e1f4877"
+  integrity sha512-XUSH0IFbgLGn2SDsKmkJgtilMYKgKo8fsqEQWT3+mIee833tTQ3wu8wX7JkNtsD/myvA9T3fI1nSOXxdmmbMWQ==
   dependencies:
     "@types/lodash" "^4.14.202"
-    "@types/node" "^20.10.1"
+    "@types/node" "^20.10.3"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -526,10 +526,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
   integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
 
-"@types/node@^20.10.1":
-  version "20.10.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.1.tgz#d2c96f356c3125fedc983d74c424910c3767141c"
-  integrity sha512-T2qwhjWwGH81vUEx4EXmBKsTJRXFXNZTL4v0gi01+zyBmCwzE6TyHszqX01m+QHTEq+EZNo13NeJIdEqf+Myrg==
+"@types/node@^20.10.3":
+  version "20.10.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.3.tgz#4900adcc7fc189d5af5bb41da8f543cea6962030"
+  integrity sha512-XJavIpZqiXID5Yxnxv3RUDKTN5b81ddNC3ecsA0SoFXz/QU8OGBwZGMomiq0zw+uuqbL/krztv/DINAQ/EV4gg==
   dependencies:
     undici-types "~5.26.4"
 
