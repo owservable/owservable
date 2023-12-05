@@ -14,14 +14,6 @@ class ObservableDatabase extends Subject<any> {
 		return ObservableDatabase._instance;
 	}
 
-	public reset() {
-		delete this._stream;
-		this._stream = null;
-
-		delete ObservableDatabase._instance;
-		ObservableDatabase._instance = null;
-	}
-
 	constructor() {
 		super();
 
@@ -33,12 +25,6 @@ class ObservableDatabase extends Subject<any> {
 		});
 	}
 }
-
-mongoose.connection.on('connected', (): void => {
-	console.log('[@owservable] -> MongoDB connected event in ObservableDatabase');
-	ObservableDatabase.init().reset();
-	ObservableDatabase.init();
-});
 
 const observableDatabase = (): Subject<any> => ObservableDatabase.init();
 export default observableDatabase;
