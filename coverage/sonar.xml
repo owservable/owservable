@@ -50,7 +50,7 @@
         </testCase>
     </file>
     <file path="test\functions\initiate.watchers.spec.ts">
-        <testCase name="initiate.watchers.ts tests initiateWatchers exists" duration="1"/>
+        <testCase name="initiate.watchers.ts tests initiateWatchers exists" duration="0"/>
         <testCase name="initiate.watchers.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
@@ -67,7 +67,7 @@
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
         <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="1"/>
     </file>
     <file path="test\mongodb\functions\index\add.both.indices.to.attributes.spec.ts">
         <testCase name="add.both.indices.to.attributes tests should be implemented" duration="0">
@@ -101,7 +101,7 @@
         </testCase>
     </file>
     <file path="test\mongodb\functions\observable.model.spec.ts">
-        <testCase name="owservable.model.ts tests observableModel exists" duration="1"/>
+        <testCase name="owservable.model.ts tests observableModel exists" duration="0"/>
         <testCase name="owservable.model.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
@@ -115,7 +115,7 @@
         </testCase>
     </file>
     <file path="test\mongodb\mongodb.connector.spec.ts">
-        <testCase name="mongodb.connector.ts tests MongoDBConnector exists" duration="0"/>
+        <testCase name="mongodb.connector.ts tests MongoDBConnector exists" duration="1"/>
         <testCase name="mongodb.connector.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>

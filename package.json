@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -35,21 +35,21 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^0.1.85",
-		"@owservable/folders": "^0.1.85",
+		"@owservable/actions": "^0.1.87",
+		"@owservable/folders": "^0.1.87",
 		"@types/lodash": "^4.14.202",
-		"@types/node": "^20.10.7",
+		"@types/node": "^20.11.10",
 		"@types/node-cron": "^3.0.11",
 		"deprecated-decorator": "^0.1.6",
 		"jsondiffpatch": "^0.5.0",
 		"lodash": "^4.17.20",
-		"mongoose": "^8.0.3",
+		"mongoose": "^8.1.1",
 		"node-cron": "^3.0.3",
 		"rxjs": "^7.8.1",
 		"sift": "^17.0.1"
 	},
 	"devDependencies": {
-		"@danmasta/mocha-sonar": "^1.0.1",
+		"@danmasta/mocha-sonar": "^1.1.0",
 		"@types/chai": "^4.3.11",
 		"@types/mocha": "^10.0.6",
 		"@types/rewire": "^2.5.30",
@@ -58,7 +58,7 @@
 		"coveralls": "^3.0.9",
 		"mocha": "^10.2.0",
 		"nyc": "^15.1.0",
-		"prettier": "^3.1.1",
+		"prettier": "^3.2.4",
 		"rewire": "^7.0.0",
 		"skeletest": "^0.5.0",
 		"sonarjs": "^1.0.0",
