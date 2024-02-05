@@ -444,24 +444,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^0.1.87":
-  version "0.1.87"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.87.tgz#4d9fb58284656a4dee2bf8377171c197e26c3de6"
-  integrity sha512-c5C4KA2aSCjKmTqbAYblznFXlH5gxBm7KkP1Ni+53PhgbF0Chwg+N60+3pyHsm1ngkIdWIuNITfnGFORwDM41A==
+"@owservable/actions@^0.1.88":
+  version "0.1.88"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.88.tgz#51aefabbb1835a3d91fd0f5afde196b0f60dbeec"
+  integrity sha512-MW4xdwho19C62YH2M9pPy5/N7fv8tq8pJCxE3yPLbPy4iAvVRwrIrttbTgBGrpT/A6b4WsYekprRYDy37U4wkA==
   dependencies:
-    "@owservable/folders" "^0.1.87"
+    "@owservable/folders" "^0.1.88"
     "@types/lodash" "^4.14.202"
-    "@types/node" "^20.11.10"
-    commander "^11.1.0"
+    "@types/node" "^20.11.16"
+    commander "^12.0.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.1.87":
-  version "0.1.87"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.87.tgz#c75f3592c1d0855b9820d434673e50e19b3afcb6"
-  integrity sha512-iLsnUcG3AZPWOnJEtWIobyCU3L2woYSAzEMs496ajLOAdPaXZA8pQsZWsbCAx7e4ZxYqVBkVmSj78dzgrmfRYQ==
+"@owservable/folders@^0.1.88":
+  version "0.1.88"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.88.tgz#8dafcb55fabb7b039244b1e02a7a886d2c2fb7b4"
+  integrity sha512-dbpLFzheCQM/xA+7utZNRhgynCpctn8v7XrmzP0PrtdZ2xvoEs3TZgNcKVWhQL0KQqD/lz/hqv/Zb4LJms6l+g==
   dependencies:
     "@types/lodash" "^4.14.202"
-    "@types/node" "^20.11.10"
+    "@types/node" "^20.11.16"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -521,10 +521,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^20.11.10":
-  version "20.11.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.10.tgz#6c3de8974d65c362f82ee29db6b5adf4205462f9"
-  integrity sha512-rZEfe/hJSGYmdfX9tvcPMYeYPW2sNl50nsw4jZmRcaG0HIAb0WYEpsB05GOb53vjqpyE9GUhlDQ4jLSoB5q9kg==
+"@types/node@^20.11.16":
+  version "20.11.16"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.16.tgz#4411f79411514eb8e2926f036c86c9f0e4ec6708"
+  integrity sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==
   dependencies:
     undici-types "~5.26.4"
 
@@ -861,10 +861,10 @@ chai-rx@^0.0.4:
   resolved "https://registry.yarnpkg.com/chai-rx/-/chai-rx-0.0.4.tgz#4aa5f9ad13bd5007bd9e0d459bc873770e68733e"
   integrity sha512-X92dWnjq9W7F5lokVBC/p15MG4vieyWkOAvgjtgehYtJeTfBg/RbEiptNdQPR9r6O7ZabV5zGtcui81pK1nkjQ==
 
-chai@^4.3.10:
-  version "4.3.10"
-  resolved "https://registry.yarnpkg.com/chai/-/chai-4.3.10.tgz#d784cec635e3b7e2ffb66446a63b4e33bd390384"
-  integrity sha512-0UXG04VuVbruMUYbJ6JctvH0YnC/4q3/AkT18q4NaITo91CUm0liMS9VqzT9vZhVQ/1eqPanMWjBM+Juhfb/9g==
+chai@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/chai/-/chai-4.4.0.tgz#f9ac79f26726a867ac9d90a9b382120479d5f55b"
+  integrity sha512-x9cHNq1uvkCdU+5xTkNh5WtgD4e4yDFCsp9jVc7N7qVeKeftv3gO/ZrviX5d+3ZfxdYnZXZYujjRInu1RogU6A==
   dependencies:
     assertion-error "^1.1.0"
     check-error "^1.0.3"
@@ -1038,10 +1038,10 @@ commander@^11.0.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-11.0.0.tgz#43e19c25dbedc8256203538e8d7e9346877a6f67"
   integrity sha512-9HMlXtt/BNoYr8ooyjjNRdIilOTkVJXB+GhxMTtOKwk0R4j4lS4NpjuqmRxroBfnfTSHQIHQB7wryHhXarNjmQ==
 
-commander@^11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-11.1.0.tgz#62fdce76006a68e5c1ab3314dc92e800eb83d906"
-  integrity sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==
+commander@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-12.0.0.tgz#b929db6df8546080adfd004ab215ed48cf6f2592"
+  integrity sha512-MwVNWlYjDTtOjX5PiD7o5pK0UrFU/OYgcJfjjK4RaHZETNtjJqrZa9Y9ds88+A+f+d5lv+561eZ+yCKoS3gbAA==
 
 commander@^2.12.1:
   version "2.20.3"
@@ -2523,10 +2523,10 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@^3.2.4:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.2.4.tgz#4723cadeac2ce7c9227de758e5ff9b14e075f283"
-  integrity sha512-FWu1oLHKCrtpO1ypU6J0SbK2d9Ckwysq6bHj/uaCP26DxrPpppCLQRGVuqAxSTvhF00AcvDRyYrLNW7ocBhFFQ==
+prettier@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.2.5.tgz#e52bc3090586e824964a8813b09aba6233b28368"
+  integrity sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
