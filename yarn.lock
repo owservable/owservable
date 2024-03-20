@@ -444,24 +444,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^0.1.90":
-  version "0.1.90"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.90.tgz#1150ac931f60153ff860be768c076fe93cb640e1"
-  integrity sha512-LU0rtBiSv+k1l8O96GpULJ4T/im3geqVxzNXOFEcZQi7OCRI5i1KOPwJwz8XxgbR08bqHHLJr5btVedUzBIbyg==
+"@owservable/actions@^0.1.91":
+  version "0.1.91"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.91.tgz#10ff2040e6421204b2c143aaf45252818cac3aeb"
+  integrity sha512-noPcKt6mZfyi288eDj30wpJ5NXo3RKgk4odxvQqdw+GCEg9Vvy9LU31SzVKEWsciCuPVPtaQBzVOAWJvuGUEfA==
   dependencies:
-    "@owservable/folders" "^0.1.90"
-    "@types/lodash" "^4.14.202"
-    "@types/node" "^20.11.20"
+    "@owservable/folders" "^0.1.91"
+    "@types/lodash" "^4.17.0"
+    "@types/node" "^20.11.30"
     commander "^12.0.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.1.90":
-  version "0.1.90"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.90.tgz#c89e856dd3d38321fb926ada314e73d9c81fd45e"
-  integrity sha512-hZD/J0Z0p3MQVJJPr7ThCOHWObnbC8VhsRMEwkyTwZpVlVV7lTfGKNcscRRmQJb6aU4n0jcPe77iqTo7EWg6Dg==
+"@owservable/folders@^0.1.91":
+  version "0.1.91"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.91.tgz#bf81fd5a0f6050fbf4f142ad2ac523c0f1b6eea9"
+  integrity sha512-uGc6esLODdyBUYtygmDGu78a060YxQsfZQLtHylOEQg0qllnQhEnlvCT7BSKHVFDk2666oCfgckJ3bTFFgIntg==
   dependencies:
-    "@types/lodash" "^4.14.202"
-    "@types/node" "^20.11.20"
+    "@types/lodash" "^4.17.0"
+    "@types/node" "^20.11.30"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -491,10 +491,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.3.tgz#472eaab5f15c1ffdd7f8628bd4c4f753995ec79e"
   integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
 
-"@types/chai@^4.3.12":
-  version "4.3.12"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.12.tgz#b192fe1c553b54f45d20543adc2ab88455a07d5e"
-  integrity sha512-zNKDHG/1yxm8Il6uCCVsm+dRdEsJlFoDu73X17y09bId6UwoYww+vFBsAcRzl8knM1sab3Dp1VRikFQwDOtDDw==
+"@types/chai@^4.3.13":
+  version "4.3.13"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.13.tgz#1b152232b93959829842177cbdfc756ed27e9fd9"
+  integrity sha512-+LxQEbg4BDUf88utmhpUpTyYn1zHao443aGnXIAQak9ZMt9Rtsic0Oig0OS1xyIqdDXc5uMekoC6NaiUlkT/qA==
 
 "@types/cli-color@^2.0.6":
   version "2.0.6"
@@ -506,10 +506,10 @@
   resolved "https://registry.yarnpkg.com/@types/cli-table/-/cli-table-0.3.4.tgz#ecc3efce1b4d13503de59d2ddb49b8f9fd7203e7"
   integrity sha512-GsALrTL69mlwbAw/MHF1IPTadSLZQnsxe7a80G8l4inN/iEXCOcVeT/S7aRc6hbhqzL9qZ314kHPDQnQ3ev+HA==
 
-"@types/lodash@^4.14.202":
-  version "4.14.202"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.202.tgz#f09dbd2fb082d507178b2f2a5c7e74bd72ff98f8"
-  integrity sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==
+"@types/lodash@^4.17.0":
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.0.tgz#d774355e41f372d5350a4d0714abb48194a489c3"
+  integrity sha512-t7dhREVv6dbNj0q17X12j7yDG4bD/DHYX7o5/DbDxobP0HnGPgpRz2Ej77aL7TZT3DSw13fqUTj8J4mMnqa7WA==
 
 "@types/mocha@^10.0.6":
   version "10.0.6"
@@ -521,10 +521,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^20.11.20":
-  version "20.11.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.20.tgz#f0a2aee575215149a62784210ad88b3a34843659"
-  integrity sha512-7/rR21OS+fq8IyHTgtLkDK949uzsa6n8BkziAKtPVpugIkO6D+/ooXMvzXxDnZrmtXVfjb1bKQafYpb8s89LOg==
+"@types/node@^20.11.30":
+  version "20.11.30"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.30.tgz#9c33467fc23167a347e73834f788f4b9f399d66f"
+  integrity sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==
   dependencies:
     undici-types "~5.26.4"
 
@@ -2267,10 +2267,10 @@ mongodb@6.3.0:
     bson "^6.2.0"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.2.0.tgz#dac98f1a5bfefad8656a0bb085789a2dc079631c"
-  integrity sha512-la93n6zCYRbPS+c5N9oTDAktvREy5OT9OCljp1Tah0y3+p8UPMTAoabWaLZMdzYruOtF9/9GRf6MasaZjiZP1A==
+mongoose@^8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.2.2.tgz#8079857d906aab5b94a5f7ae7600b7401efdbfdc"
+  integrity sha512-6sMxe1d3k/dBjiOX4ExNTNOP0g1x0iq8eXyg+ttgIXM3HLnQ0IUyXRwVVAPFFY6O4/8uYN5dB0Ec72FrexbPpw==
   dependencies:
     bson "^6.2.0"
     kareem "2.5.1"
@@ -3249,20 +3249,20 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typedoc@^0.25.9:
-  version "0.25.9"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.25.9.tgz#0fb6608feec994eedc1e3276154fa8a486218ed2"
-  integrity sha512-jVoGmfNw848iW0L313+jqHbsknepwDV6F9nzk1H30oWhKXkw65uaENgR6QtTw9a5KqRWEb6nwNd54KxffBJyWw==
+typedoc@^0.25.12:
+  version "0.25.12"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.25.12.tgz#f73f0a8d3731d418cc604d4230f95a857799e27a"
+  integrity sha512-F+qhkK2VoTweDXd1c42GS/By2DvI2uDF4/EpG424dTexSHdtCH52C6IcAvMA6jR3DzAWZjHpUOW+E02kyPNUNw==
   dependencies:
     lunr "^2.3.9"
     marked "^4.3.0"
     minimatch "^9.0.3"
     shiki "^0.14.7"
 
-typescript@^5.3.3:
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.3.tgz#b3ce6ba258e72e6305ba66f5c9b452aaee3ffe37"
-  integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
+typescript@^5.4.2:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.4.2.tgz#0ae9cebcfae970718474fe0da2c090cad6577372"
+  integrity sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==
 
 undici-types@~5.26.4:
   version "5.26.5"
