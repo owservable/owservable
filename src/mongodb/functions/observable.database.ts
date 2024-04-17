@@ -2,7 +2,7 @@
 
 import {pick} from 'lodash';
 import {Subject} from 'rxjs';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
 
 class ObservableDatabase extends Subject<any> {

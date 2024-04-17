@@ -1,6 +1,6 @@
 'use strict';
 
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import {Model} from 'mongoose';
 
 export default class CollectionsModelsMap {
