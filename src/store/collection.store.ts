@@ -47,7 +47,7 @@ export default class CollectionStore extends AStore {
 		this.emitTotal(subscriptionId, this._totalCount);
 	}
 
-	protected delaySendCount: _.DebouncedFunc<any> = _.throttle(this.sendCount, 5000);
+	protected delaySendCount: _.DebouncedFuncLeading<any> = _.throttle(this.sendCount, 5000);
 
 	protected async load(change: any): Promise<void> {
 		const currentLoadSubscriptionId = this._subscriptionId + '';
