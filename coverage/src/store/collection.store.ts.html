@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -355,7 +355,7 @@ export default class CollectionStore extends AStore {
 	}
 &nbsp;
 	protected <span class="fstat-no" title="function not covered" >shouldReload(</span>change: any): boolean {
-<span class="cstat-no" title="statement not covered" >		if (this.isInitialSubscription(change)) <span class="cstat-no" title="statement not covered" >return true;</span></span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (this.isInitialSubscription(change)) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
 		const {operationType: type, updateDescription: description, fullDocument: document} = <span class="cstat-no" title="statement not covered" >change;</span>
 &nbsp;
@@ -366,9 +366,9 @@ export default class CollectionStore extends AStore {
 &nbsp;
 			case 'replace':
 			case 'update':
-<span class="cstat-no" title="statement not covered" >				if (!description) <span class="cstat-no" title="statement not covered" >return true;</span></span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!description) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >				if (!this.shouldConsiderFields()) <span class="cstat-no" title="statement not covered" >return this.testDocument(document);</span></span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.shouldConsiderFields()) <span class="cstat-no" title="statement not covered" >return this.testDocument(document);</span></span>
 &nbsp;
 				const {updatedFields, removedFields} = <span class="cstat-no" title="statement not covered" >description;</span>
 				const us = <span class="cstat-no" title="statement not covered" >_.concat(removedFields, _.keys(updatedFields));</span>
@@ -390,8 +390,8 @@ export default class CollectionStore extends AStore {
 		const currentLoadSubscriptionId = <span class="cstat-no" title="statement not covered" >this._subscriptionId + '';</span>
 &nbsp;
 		// console.log('[@owservable] -&gt; CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
-<span class="cstat-no" title="statement not covered" >		if (_.isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitMany(currentLoadSubscriptionId);</span></span>
-<span class="cstat-no" title="statement not covered" >		if (!this.shouldReload(change)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitMany(currentLoadSubscriptionId);</span></span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.shouldReload(change)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
 		// console.log('[@owservable] -&gt; DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
 <span class="cstat-no" title="statement not covered" >		try {</span>
@@ -399,12 +399,12 @@ export default class CollectionStore extends AStore {
 			const key = <span class="cstat-no" title="statement not covered" >_.get(documentKey, '_id', '').toString();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >			if (document &amp;&amp; this._incremental) {</span>
-<span class="cstat-no" title="statement not covered" >				if ('delete' === type) <span class="cstat-no" title="statement not covered" >return this.emitDelete(currentLoadSubscriptionId, key);</span></span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if ('delete' === type) <span class="cstat-no" title="statement not covered" >return this.emitDelete(currentLoadSubscriptionId, key);</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >				for (const populate of this._populates) {</span>
 <span class="cstat-no" title="statement not covered" >					await this._model.populate(document, populate);</span>
 				}
-<span class="cstat-no" title="statement not covered" >				if (_.isEmpty(this._virtuals)) <span class="cstat-no" title="statement not covered" >return this.emitMany(currentLoadSubscriptionId, {data: document});</span></span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._virtuals)) <span class="cstat-no" title="statement not covered" >return this.emitMany(currentLoadSubscriptionId, {data: document});</span></span>
 &nbsp;
 				const replacement: any = <span class="cstat-no" title="statement not covered" >_.cloneDeep(_.omit(document.toJSON(), this._virtuals));</span>
 <span class="cstat-no" title="statement not covered" >				for (const virtual of this._virtuals) {</span>
@@ -418,13 +418,13 @@ export default class CollectionStore extends AStore {
 					.sort(this._sort) // @ts-ignore
 					.setOptions({allowDiskUse: true});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >				if (!_.isEmpty(this._populates)) {</span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!_.isEmpty(this._populates)) {</span>
 <span class="cstat-no" title="statement not covered" >					for (const populate of this._populates) {</span>
 <span class="cstat-no" title="statement not covered" >						await this._model.populate(data, populate);</span>
 					}
 				}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >				if (!_.isEmpty(this._virtuals)) {</span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!_.isEmpty(this._virtuals)) {</span>
 					const replacements: any[] = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >					for (const item of data) {</span>
 						const replacement: any = <span class="cstat-no" title="statement not covered" >_.cloneDeep(_.omit(item.toJSON(), this._virtuals));</span>
@@ -463,7 +463,7 @@ export default class CollectionStore extends AStore {
 <span class="cstat-no" title="statement not covered" >		this._incremental = incremental;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		this._paging = {};</span>
-<span class="cstat-no" title="statement not covered" >		if (pageSize) {</span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (pageSize) {</span>
 <span class="cstat-no" title="statement not covered" >			this._paging = {</span>
 				skip: (page - 1) * pageSize,
 				limit: pageSize
@@ -478,7 +478,7 @@ export default class CollectionStore extends AStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-05-31T10:34:43.259Z
+                at 2024-06-14T09:08:42.950Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
