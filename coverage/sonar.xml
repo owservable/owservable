@@ -44,7 +44,7 @@
         </testCase>
     </file>
     <file path="test\functions\initiate.cronjobs.spec.ts">
-        <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="0"/>
+        <testCase name="initiate.cronjobs.ts tests initiateCronjobs exists" duration="1"/>
         <testCase name="initiate.cronjobs.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
@@ -62,12 +62,12 @@
         </testCase>
     </file>
     <file path="test\middleware\data.middleware.map.spec.ts">
-        <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="0"/>
+        <testCase name="data.middleware.map.ts tests DataMiddlewareMap exists" duration="1"/>
         <testCase name="data.middleware.map.ts tests DataMiddlewareMap functionality" duration="1"/>
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="1"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="1"/>
     </file>
     <file path="test\mongodb\functions\index\add.both.indices.to.attributes.spec.ts">
         <testCase name="add.both.indices.to.attributes tests should be implemented" duration="0">
