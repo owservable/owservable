@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.71% </span>
+                <span class="strong">5.63% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/70</span>
+                <span class='fraction'>4/71</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>0/23</span>
             </div>
         
             
@@ -198,8 +198,7 @@
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a>
-<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,20 +221,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -358,6 +356,11 @@ export default class CollectionStore extends AStore {
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (this.isInitialSubscription(change)) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
 		const {operationType: type, updateDescription: description, fullDocument: document} = <span class="cstat-no" title="statement not covered" >change;</span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!description) <span class="cstat-no" title="statement not covered" >return true;</span></span>
+&nbsp;
+		const {updatedFields, removedFields} = <span class="cstat-no" title="statement not covered" >description;</span>
+		const us: string[] = <span class="cstat-no" title="statement not covered" >_.concat(removedFields, _.keys(updatedFields));</span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!_.isEmpty(_.intersection(_.keys(this._query), us))) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		switch (type) {</span>
 			case 'delete':
@@ -366,14 +369,8 @@ export default class CollectionStore extends AStore {
 &nbsp;
 			case 'replace':
 			case 'update':
-<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!description) <span class="cstat-no" title="statement not covered" >return true;</span></span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.shouldConsiderFields()) <span class="cstat-no" title="statement not covered" >return this.testDocument(document);</span></span>
-&nbsp;
-				const {updatedFields, removedFields} = <span class="cstat-no" title="statement not covered" >description;</span>
-				const us = <span class="cstat-no" title="statement not covered" >_.concat(removedFields, _.keys(updatedFields));</span>
-				const qs = <span class="cstat-no" title="statement not covered" >_.keys(this._fields);</span>
-<span class="cstat-no" title="statement not covered" >				return !_.isEmpty(_.intersection(qs, us));</span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (this.shouldConsiderFields()) <span class="cstat-no" title="statement not covered" >return !_.isEmpty(_.intersection(_.keys(this._fields), us));</span></span>
+<span class="cstat-no" title="statement not covered" >				return this.testDocument(document);</span>
 		}
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		return false;</span>
@@ -478,7 +475,7 @@ export default class CollectionStore extends AStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-22T07:51:39.914Z
+                at 2024-07-30T13:23:13.027Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

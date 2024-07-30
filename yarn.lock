@@ -381,21 +381,21 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^0.1.96":
-  version "0.1.96"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.96.tgz#d966cf7d3df40a76f94dd859d3c7433c882c3d15"
-  integrity sha512-4zARNVOKkp4jDKl9m7cLhmHrqPhZ3ZV3wFzD2mnTQE0x0uXL66phFjvxGathOMCRKiDa9Zob8dH1NCad2MjBPQ==
+"@owservable/actions@^0.1.97":
+  version "0.1.97"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.1.97.tgz#0d0ef0d01d1d4a71081d7c3b861d51d51a8ccd02"
+  integrity sha512-DJb2WWaEZQKoEpUNgH5dQrEgZRn1z8jA2PPneT09t3rKXdx5JcyDAqbvmlR8yIyfE7EH649XzEQs2dTSCZK+IA==
   dependencies:
-    "@owservable/folders" "^0.1.96"
+    "@owservable/folders" "^0.1.97"
     "@types/lodash" "^4.17.7"
     "@types/node" "^20.14.11"
     commander "^12.1.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.1.96":
-  version "0.1.96"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.96.tgz#8b32cb9f69d756fd7a5096d902c3b149467436ff"
-  integrity sha512-SitiEEG1Hjw0UAaNs3qDdRgJhL/n8t0rk+HAPEGdNH8pZ/LV+ObAfOl7cdc5PsAUnSAYyi2q5I+fuvB6HoQlag==
+"@owservable/folders@^0.1.97":
+  version "0.1.97"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.1.97.tgz#e871e45f293481017bb58c82c8ddf469e0b087cf"
+  integrity sha512-Drm1QAgS2HqDwla8HeieMKZbH8abJDRcN+bdg9FiQxu6GLmUO5IX2BgPowcpxgBxk5lAAsDqktXEyjvCVBX8aQ==
   dependencies:
     "@types/lodash" "^4.17.7"
     "@types/node" "^20.14.11"
@@ -3300,10 +3300,10 @@ typedoc@^0.26.5:
     shiki "^1.9.1"
     yaml "^2.4.5"
 
-typescript@^5.5.3:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.3.tgz#e1b0a3c394190838a0b168e771b0ad56a0af0faa"
-  integrity sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==
+typescript@^5.5.4:
+  version "5.5.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.4.tgz#d9852d6c82bad2d2eda4fd74a5762a8f5909e9ba"
+  integrity sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==
 
 uc.micro@^2.0.0, uc.micro@^2.1.0:
   version "2.1.0"

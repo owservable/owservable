@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "1.0.90",
+	"version": "1.0.91",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=16"
@@ -36,8 +36,8 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^0.1.96",
-		"@owservable/folders": "^0.1.96",
+		"@owservable/actions": "^0.1.97",
+		"@owservable/folders": "^0.1.97",
 		"@types/lodash": "^4.17.7",
 		"@types/node": "^20.14.11",
 		"@types/node-cron": "^3.0.11",
@@ -71,6 +71,6 @@
 		"tslint-etc": "^1.13.7",
 		"tslint-no-unused-expression-chai": "^0.1.4",
 		"typedoc": "^0.26.5",
-		"typescript": "^5.5.3"
+		"typescript": "^5.5.4"
 	}
 }

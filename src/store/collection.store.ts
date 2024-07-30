@@ -21,6 +21,11 @@ export default class CollectionStore extends AStore {
 		if (this.isInitialSubscription(change)) return true;
 
 		const {operationType: type, updateDescription: description, fullDocument: document} = change;
+		if (!description) return true;
+
+		const {updatedFields, removedFields} = description;
+		const us: string[] = _.concat(removedFields, _.keys(updatedFields));
+		if (!_.isEmpty(_.intersection(_.keys(this._query), us))) return true;
 
 		switch (type) {
 			case 'delete':
@@ -29,14 +34,8 @@ export default class CollectionStore extends AStore {
 
 			case 'replace':
 			case 'update':
-				if (!description) return true;
-
-				if (!this.shouldConsiderFields()) return this.testDocument(document);
-
-				const {updatedFields, removedFields} = description;
-				const us = _.concat(removedFields, _.keys(updatedFields));
-				const qs = _.keys(this._fields);
-				return !_.isEmpty(_.intersection(qs, us));
+				if (this.shouldConsiderFields()) return !_.isEmpty(_.intersection(_.keys(this._fields), us));
+				return this.testDocument(document);
 		}
 
 		return false;
