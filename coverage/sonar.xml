@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testExecutions version="1">
     <file path="test\_enums\store.type.enum.spec.ts">
-        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="0"/>
+        <testCase name="store.type.enum.ts tests test EStoreType fields" duration="1"/>
     </file>
     <file path="test\functions\action\add.action.cronjobs.spec.ts">
         <testCase name="add.action.cronjobs tests should be implemented" duration="0">
