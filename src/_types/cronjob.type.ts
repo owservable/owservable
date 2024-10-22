@@ -2,8 +2,8 @@
 
 type CronJobType = {
 	schedule: string;
-	job: () => void;
-	options?: any;
 	init?: () => Promise<void>;
+	job: () => Promise<void>;
+	options?: any;
 };
 export default CronJobType;

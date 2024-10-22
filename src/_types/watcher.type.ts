@@ -2,7 +2,7 @@
 
 type WatcherType = {
 	init?: () => Promise<void>;
-	watch: () => void;
+	watch: () => Promise<void>;
 	waitForInit?: boolean;
 };
 export default WatcherType;

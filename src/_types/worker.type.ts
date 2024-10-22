@@ -2,6 +2,6 @@
 
 type WorkerType = {
 	init?: () => Promise<void>;
-	work: () => void;
+	work: () => Promise<void>;
 };
 export default WorkerType;
