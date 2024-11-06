@@ -123,10 +123,9 @@ export default class OwservableClient extends Subject<any> {
 			this._stores.set(target, store);
 			const subscription: Subscription = store.subscribe({
 				next: async (m: any): Promise<void> => {
-					if (DataMiddlewareMap.hasMiddleware(observe)) {
-						const process = DataMiddlewareMap.getMiddleware(observe);
-						m = await process(m, this._connectionManager.user);
-					}
+					const process = DataMiddlewareMap.getMiddleware(observe);
+					if (process) m = await process(m, this._connectionManager.user);
+
 					if (this.isValidTarget(target)) this.next(m);
 				},
 				error: (e: any): void => this.error(e),

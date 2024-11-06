@@ -42,7 +42,8 @@ export default class CollectionStore extends AStore {
 		return false;
 	}
 
-	protected async sendCount(startTime: number, subscriptionId: string): Promise<void> {
+	protected async sendCount(subscriptionId: string): Promise<void> {
+		const startTime: number = getHrtimeAsNumber();
 		this._totalCount = await this._model.countDocuments(this._query);
 		this.emitTotal(startTime, subscriptionId, this._totalCount);
 	}
@@ -104,7 +105,7 @@ export default class CollectionStore extends AStore {
 				if (this.isQueryChange(currentLoadSubscriptionId)) {
 					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
 
-					await this.sendCount(startTime, currentLoadSubscriptionId);
+					await this.sendCount(currentLoadSubscriptionId);
 
 					//
 				} else {
