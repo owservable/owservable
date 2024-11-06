@@ -247,16 +247,21 @@ export default abstract class AStore extends Subject<any> {
 	}
 
 	private _responseStatistics(): any {
-		return omitBy(
-			{
-				query: this._query,
-				sort: this._sort,
-				fields: this._fields,
-				paging: this._paging,
-				populates: this._populates,
-				virtuals: this._virtuals
-			},
-			isNil
-		);
+		try {
+			return omitBy(
+				{
+					query: JSON.stringify(this._query),
+					sort: JSON.stringify(this._sort),
+					fields: JSON.stringify(this._fields),
+					paging: JSON.stringify(this._paging),
+					populates: JSON.stringify(this._populates),
+					virtuals: JSON.stringify(this._virtuals)
+				},
+				isNil
+			);
+		} catch (error) {
+			console.error('[@owservable] -> AStore::responseStatistics Error:', {error});
+			return {};
+		}
 	}
 }
