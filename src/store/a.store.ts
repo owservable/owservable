@@ -136,20 +136,6 @@ export default abstract class AStore extends Subject<any> {
 		return this._model;
 	}
 
-	protected get responseStatistics(): any {
-		return omitBy(
-			{
-				query: this._query,
-				sort: this._sort,
-				fields: this._fields,
-				paging: this._paging,
-				populates: this._populates,
-				virtuals: this._virtuals
-			},
-			isNil
-		);
-	}
-
 	protected emitOne(startTime: number, subscriptionId: string, update: any = {}): void {
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, update);
@@ -157,7 +143,7 @@ export default abstract class AStore extends Subject<any> {
 			subscriptionId,
 			...message,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 
@@ -174,7 +160,7 @@ export default abstract class AStore extends Subject<any> {
 			subscriptionId,
 			...message,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 
@@ -185,7 +171,7 @@ export default abstract class AStore extends Subject<any> {
 			target: this._target,
 			total,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 
@@ -196,7 +182,7 @@ export default abstract class AStore extends Subject<any> {
 			target: this._target,
 			payload: deleted,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 
@@ -213,7 +199,7 @@ export default abstract class AStore extends Subject<any> {
 			populates: this._populates,
 			virtuals: this._virtuals,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 
@@ -241,6 +227,14 @@ export default abstract class AStore extends Subject<any> {
 		return this._target;
 	}
 
+	protected removeSubscriptionDiff(subId: string) {
+		this._subscriptionDiffs.delete(subId);
+	}
+
+	protected isQueryChange(subId: string): boolean {
+		return !!this._subscriptionDiffs.get(subId);
+	}
+
 	private _isValidConfig(config: StoreSubscriptionConfigType): boolean {
 		if (!config) return false;
 
@@ -252,11 +246,17 @@ export default abstract class AStore extends Subject<any> {
 		this._subscriptionDiffs.set(subId, diff);
 	}
 
-	protected removeSubscriptionDiff(subId: string) {
-		this._subscriptionDiffs.delete(subId);
-	}
-
-	protected isQueryChange(subId: string): boolean {
-		return !!this._subscriptionDiffs.get(subId);
+	private _responseStatistics(): any {
+		return omitBy(
+			{
+				query: this._query,
+				sort: this._sort,
+				fields: this._fields,
+				paging: this._paging,
+				populates: this._populates,
+				virtuals: this._virtuals
+			},
+			isNil
+		);
 	}
 }

@@ -465,20 +465,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -571,6 +557,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -584,7 +578,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
@@ -725,20 +725,6 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 <span class="cstat-no" title="statement not covered" >		return this._model;</span>
 	}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	protected get r</span>esponseStatistics(): any {
-<span class="cstat-no" title="statement not covered" >		return omitBy(</span>
-			{
-				query: this._query,
-				sort: this._sort,
-				fields: this._fields,
-				paging: this._paging,
-				populates: this._populates,
-				virtuals: this._virtuals
-			},
-			isNil
-		);
-	}
-&nbsp;
 	protected <span class="fstat-no" title="function not covered" >emitOne(</span>startTime: number, subscriptionId: string, update: any = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span>: void {
 		const message = <span class="cstat-no" title="statement not covered" >_baseMessage(this._target, this._incremental);</span>
 <span class="cstat-no" title="statement not covered" >		set(message.payload, this._target, update);</span>
@@ -746,7 +732,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 			subscriptionId,
 			...message,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 &nbsp;
@@ -763,7 +749,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 			subscriptionId,
 			...message,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 &nbsp;
@@ -774,7 +760,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 			target: this._target,
 			total,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 &nbsp;
@@ -785,7 +771,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 			target: this._target,
 			payload: deleted,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 &nbsp;
@@ -802,7 +788,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 			populates: this._populates,
 			virtuals: this._virtuals,
 			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
-			...this.responseStatistics()
+			...this._responseStatistics()
 		});
 	}
 &nbsp;
@@ -830,6 +816,14 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 <span class="cstat-no" title="statement not covered" >		return this._target;</span>
 	}
 &nbsp;
+	protected <span class="fstat-no" title="function not covered" >removeSubscriptionDiff(</span>subId: string) {
+<span class="cstat-no" title="statement not covered" >		this._subscriptionDiffs.delete(subId);</span>
+	}
+&nbsp;
+	protected <span class="fstat-no" title="function not covered" >isQueryChange(</span>subId: string): boolean {
+<span class="cstat-no" title="statement not covered" >		return !!this._subscriptionDiffs.get(subId);</span>
+	}
+&nbsp;
 	private <span class="fstat-no" title="function not covered" >_isValidConfig(</span>config: StoreSubscriptionConfigType): boolean {
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!config) <span class="cstat-no" title="statement not covered" >return false;</span></span>
 &nbsp;
@@ -841,12 +835,18 @@ export default abstract class AStore extends Subject&lt;any&gt; {
 <span class="cstat-no" title="statement not covered" >		this._subscriptionDiffs.set(subId, diff);</span>
 	}
 &nbsp;
-	protected <span class="fstat-no" title="function not covered" >removeSubscriptionDiff(</span>subId: string) {
-<span class="cstat-no" title="statement not covered" >		this._subscriptionDiffs.delete(subId);</span>
-	}
-&nbsp;
-	protected <span class="fstat-no" title="function not covered" >isQueryChange(</span>subId: string): boolean {
-<span class="cstat-no" title="statement not covered" >		return !!this._subscriptionDiffs.get(subId);</span>
+	private <span class="fstat-no" title="function not covered" >_responseStatistics(</span>): any {
+<span class="cstat-no" title="statement not covered" >		return omitBy(</span>
+			{
+				query: this._query,
+				sort: this._sort,
+				fields: this._fields,
+				paging: this._paging,
+				populates: this._populates,
+				virtuals: this._virtuals
+			},
+			isNil
+		);
 	}
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -856,7 +856,7 @@ export default abstract class AStore extends Subject&lt;any&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-06T11:51:07.131Z
+                at 2024-11-06T11:59:06.287Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
