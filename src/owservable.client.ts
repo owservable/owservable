@@ -9,11 +9,12 @@ import storeFactory from './store/factories/store.factory';
 import IConnectionManager from './auth/i.connection.manager';
 import DataMiddlewareMap from './middleware/data.middleware.map';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
+import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
 
 export default class OwservableClient extends Subject<any> {
 	private _connectionManager: IConnectionManager;
 
-	private _ping = 0;
+	private _ping: number = 0;
 	private _location: string;
 	private _stores: Map<string, AStore>;
 	private _subscriptions: Map<string, Subscription>;
@@ -46,49 +47,45 @@ export default class OwservableClient extends Subject<any> {
 
 		switch (message.type) {
 			case 'pong':
-				this._processPong(message);
-				return;
+				return this._processPong(message);
 
 			case 'authenticate':
 				this._connectionManager.connected(message.jwt);
-				this._checkSession();
-				return;
+				return this._checkSession();
 
-			case 'location':
+			case 'location': {
 				const {path} = message;
 				this.location = path;
 				return;
+			}
 
 			case 'subscribe':
-				this.updateSubscription(message);
-				return;
+				return this.updateSubscription(message);
 
 			case 'unsubscribe':
-				this.removeSubscription(message.target);
-				return;
+				return this.removeSubscription(message.target);
 
 			case 'reload':
-				this.reloadData(message.target);
-				return;
+				return this.reloadData(message.target);
 		}
 	}
 
-	public ping() {
+	public ping(): void {
 		this.next({type: 'ping', id: new Date().getTime()});
 		setTimeout(() => this.ping(), 60000);
 	}
 
 	private _processPong(message: any): void {
-		const response = new Date().getTime();
+		const response: number = new Date().getTime();
 		this._ping = response - message.id;
 		this._connectionManager.ping(this._ping);
 	}
 
 	private async _checkSession(): Promise<void> {
-		const check = await this._connectionManager.checkSession();
+		const check: ConnectionManagerRefreshType = await this._connectionManager.checkSession();
 		if (check) this.next(check);
 
-		let refreshIn = get(check, 'refresh_in', 300000); // 300000 = 5min
+		let refreshIn: number = get(check, 'refresh_in', 300000); // 300000 = 5min
 		refreshIn = Math.round((refreshIn * 95) / 100);
 
 		clearTimeout(this._timeout);
@@ -109,7 +106,7 @@ export default class OwservableClient extends Subject<any> {
 
 	private reloadData(target: string): void {
 		// console.log('[@owservable] -> OwservableClient reloadData: ${target}`);
-		const store = this._stores.get(target);
+		const store: AStore = this._stores.get(target);
 		store.restartSubscription();
 	}
 
@@ -117,14 +114,14 @@ export default class OwservableClient extends Subject<any> {
 		const {target, scope, observe, config} = subscriptionConfig;
 		// console.log('[@owservable] -> OwservableClient updateSubscription: ${target}`);
 
-		let store = this._stores.get(target);
+		let store: AStore = this._stores.get(target);
 		if (store) {
 			store.config = config;
 		} else {
 			store = storeFactory(scope, observe, target);
 
 			this._stores.set(target, store);
-			const subscription = store.subscribe({
+			const subscription: Subscription = store.subscribe({
 				next: async (m: any): Promise<void> => {
 					if (DataMiddlewareMap.hasMiddleware(observe)) {
 						const process = DataMiddlewareMap.getMiddleware(observe);
@@ -145,13 +142,13 @@ export default class OwservableClient extends Subject<any> {
 
 	private isValidTarget(target: string): boolean {
 		if (!this._stores) return false;
-		const targets = Array.from(this._stores.keys());
+		const targets: string[] = Array.from(this._stores.keys());
 		return includes(targets, target);
 	}
 
 	private sendDebugTargets(event: string, target: string) {
 		if (!this._stores) return false;
-		const targets = Array.from(this._stores.keys());
+		const targets: string[] = Array.from(this._stores.keys());
 		this.next({
 			type: 'debug', //
 			id: new Date().getTime(),

@@ -8,8 +8,8 @@ import {filter, throttleTime} from 'rxjs/operators';
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
+import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
-// TODO: extract to a pure function file
 // tslint:disable-next-line:variable-name
 const _getIdFromQuery = (query: any): string => (_.isString(query) ? query : _.get(query, '_id', '').toString());
 
@@ -41,7 +41,7 @@ export default class DocumentStore extends AStore {
 	protected shouldReload(change: any): boolean {
 		if (this.isInitialSubscription(change)) return true;
 
-		const id = _getIdFromQuery(this._query);
+		const id: string = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey, updateDescription: description} = change;
 		const key = _.get(documentKey, '_id', '').toString();
 
@@ -53,30 +53,33 @@ export default class DocumentStore extends AStore {
 				return !id;
 
 			case 'replace':
-			case 'update':
+			case 'update': {
 				if (id && id === key) return true;
 				if (!description) return true;
 
 				if (!this.shouldConsiderFields()) return true;
 
 				const {updatedFields, removedFields} = description;
-				const us = _.concat(removedFields, _.keys(updatedFields));
-				const qs = _.keys(this._fields);
+				const us: any[] = _.concat(removedFields, _.keys(updatedFields));
+				const qs: string[] = _.keys(this._fields);
 				return !_.isEmpty(_.intersection(qs, us));
+			}
 		}
 
 		return false;
 	}
 
 	protected async load(change: any): Promise<void> {
-		if (_.isEmpty(this._config)) return this.emitOne(this._subscriptionId);
+		const startTime: number = getHrtimeAsNumber();
+
+		if (_.isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
 
-		const id = _getIdFromQuery(this._query);
+		const id: string = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey} = change;
 		const key = _.get(documentKey, '_id', '').toString();
 
-		if (type === 'delete' && id === key) return this.emitDelete(this._subscriptionId, key);
+		if (type === 'delete' && id === key) return this.emitDelete(startTime, this._subscriptionId, key);
 
 		// console.log('[@owservable] -> DB Reload Document for query:', this._query);
 		try {
@@ -84,26 +87,25 @@ export default class DocumentStore extends AStore {
 			if (!_.isEmpty(this._sort)) data = await this._loadSortedFirstDocument();
 			else data = id ? await this._loadDocumentById(id) : await this._loadDocument();
 
-			if (!data) return this.emitOne(this._subscriptionId);
+			if (!data) return this.emitOne(startTime, this._subscriptionId);
 
 			for (const populate of this._populates) {
 				if (data?.populate) await data.populate(populate);
 			}
 
-			if (_.isEmpty(this._virtuals)) return this.emitOne(this._subscriptionId, data.toJSON());
+			if (_.isEmpty(this._virtuals)) return this.emitOne(startTime, this._subscriptionId, data.toJSON());
 
 			const jsonData: any = _.cloneDeep(_.omit(data.toJSON(), this._virtuals));
 			for (const virtual of this._virtuals) {
 				jsonData[virtual] = await Promise.resolve(data[virtual]);
 			}
-			this.emitOne(this._subscriptionId, jsonData);
+			this.emitOne(startTime, this._subscriptionId, jsonData);
 		} catch (error) {
 			console.error('[@owservable] -> DocumentStore::load Error:', {change, error});
-			this.emitError(this._subscriptionId, error);
+			this.emitError(startTime, this._subscriptionId, error);
 		}
 	}
 
-	// TODO: extract to a pure function file
 	private _pipeFilter(change: any): boolean {
 		if (!_.isEmpty(this._sort)) return true;
 
@@ -122,7 +124,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	private async _loadSortedFirstDocument(): Promise<any> {
-		const docs = await this._model //
+		const docs: any = await this._model //
 			.find(this._query, this._fields, this._paging)
 			// .collation({locale: 'en'})
 			.sort(this._sort) // @ts-ignore

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.31% </span>
+                <span class="strong">5.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/94</span>
+                <span class='fraction'>5/89</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.74% </span>
+                <span class="strong">6.09% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/87</span>
+                <span class='fraction'>5/82</span>
             </div>
         
             
@@ -249,10 +249,7 @@
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L187'></a><a href='#L187'>187</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -262,6 +259,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -301,17 +299,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -320,9 +307,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -452,11 +446,12 @@ import storeFactory from './store/factories/store.factory';
 import IConnectionManager from './auth/i.connection.manager';
 import DataMiddlewareMap from './middleware/data.middleware.map';
 import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
+import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
 &nbsp;
 export default class OwservableClient extends Subject&lt;any&gt; {
 	private _connectionManager: IConnectionManager;
 &nbsp;
-	private <span class="cstat-no" title="statement not covered" >_ping = 0;</span>
+	private <span class="cstat-no" title="statement not covered" >_ping: number = 0;</span>
 	private _location: string;
 	private _stores: Map&lt;string, AStore&gt;;
 	private _subscriptions: Map&lt;string, Subscription&gt;;
@@ -489,49 +484,45 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		switch (message.type) {</span>
 			case 'pong':
-<span class="cstat-no" title="statement not covered" >				this._processPong(message);</span>
-<span class="cstat-no" title="statement not covered" >				return;</span>
+<span class="cstat-no" title="statement not covered" >				return this._processPong(message);</span>
 &nbsp;
 			case 'authenticate':
 <span class="cstat-no" title="statement not covered" >				this._connectionManager.connected(message.jwt);</span>
-<span class="cstat-no" title="statement not covered" >				this._checkSession();</span>
-<span class="cstat-no" title="statement not covered" >				return;</span>
+<span class="cstat-no" title="statement not covered" >				return this._checkSession();</span>
 &nbsp;
-			case 'location':
+			case 'location': {
 				const {path} = <span class="cstat-no" title="statement not covered" >message;</span>
 <span class="cstat-no" title="statement not covered" >				this.location = path;</span>
 <span class="cstat-no" title="statement not covered" >				return;</span>
+			}
 &nbsp;
 			case 'subscribe':
-<span class="cstat-no" title="statement not covered" >				this.updateSubscription(message);</span>
-<span class="cstat-no" title="statement not covered" >				return;</span>
+<span class="cstat-no" title="statement not covered" >				return this.updateSubscription(message);</span>
 &nbsp;
 			case 'unsubscribe':
-<span class="cstat-no" title="statement not covered" >				this.removeSubscription(message.target);</span>
-<span class="cstat-no" title="statement not covered" >				return;</span>
+<span class="cstat-no" title="statement not covered" >				return this.removeSubscription(message.target);</span>
 &nbsp;
 			case 'reload':
-<span class="cstat-no" title="statement not covered" >				this.reloadData(message.target);</span>
-<span class="cstat-no" title="statement not covered" >				return;</span>
+<span class="cstat-no" title="statement not covered" >				return this.reloadData(message.target);</span>
 		}
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >ping(</span>) {
+	public <span class="fstat-no" title="function not covered" >ping(</span>): void {
 <span class="cstat-no" title="statement not covered" >		this.next({type: 'ping', id: new Date().getTime()});</span>
 <span class="cstat-no" title="statement not covered" >		setTimeout(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >this.ping(),</span> 60000);</span>
 	}
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >_processPong(</span>message: any): void {
-		const response = <span class="cstat-no" title="statement not covered" >new Date().getTime();</span>
+		const response: number = <span class="cstat-no" title="statement not covered" >new Date().getTime();</span>
 <span class="cstat-no" title="statement not covered" >		this._ping = response - message.id;</span>
 <span class="cstat-no" title="statement not covered" >		this._connectionManager.ping(this._ping);</span>
 	}
 &nbsp;
 	private async <span class="fstat-no" title="function not covered" >_checkSession(</span>): Promise&lt;void&gt; {
-		const check = <span class="cstat-no" title="statement not covered" >await this._connectionManager.checkSession();</span>
+		const check: ConnectionManagerRefreshType = <span class="cstat-no" title="statement not covered" >await this._connectionManager.checkSession();</span>
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (check) <span class="cstat-no" title="statement not covered" >this.next(check);</span></span>
 &nbsp;
-		let refreshIn = <span class="cstat-no" title="statement not covered" >get(check, 'refresh_in', 300000);</span> // 300000 = 5min
+		let refreshIn: number = <span class="cstat-no" title="statement not covered" >get(check, 'refresh_in', 300000);</span> // 300000 = 5min
 <span class="cstat-no" title="statement not covered" >		refreshIn = Math.round((refreshIn * 95) / 100);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		clearTimeout(this._timeout);</span>
@@ -552,7 +543,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >reloadData(</span>target: string): void {
 		// console.log('[@owservable] -&gt; OwservableClient reloadData: ${target}`);
-		const store = <span class="cstat-no" title="statement not covered" >this._stores.get(target);</span>
+		const store: AStore = <span class="cstat-no" title="statement not covered" >this._stores.get(target);</span>
 <span class="cstat-no" title="statement not covered" >		store.restartSubscription();</span>
 	}
 &nbsp;
@@ -560,14 +551,14 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 		const {target, scope, observe, config} = <span class="cstat-no" title="statement not covered" >subscriptionConfig;</span>
 		// console.log('[@owservable] -&gt; OwservableClient updateSubscription: ${target}`);
 &nbsp;
-		let store = <span class="cstat-no" title="statement not covered" >this._stores.get(target);</span>
+		let store: AStore = <span class="cstat-no" title="statement not covered" >this._stores.get(target);</span>
 <span class="cstat-no" title="statement not covered" >		if (store) {</span>
 <span class="cstat-no" title="statement not covered" >			store.config = config;</span>
 		} else {
 <span class="cstat-no" title="statement not covered" >			store = storeFactory(scope, observe, target);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >			this._stores.set(target, store);</span>
-			const subscription = <span class="cstat-no" title="statement not covered" >store.subscribe({</span>
+			const subscription: Subscription = <span class="cstat-no" title="statement not covered" >store.subscribe({</span>
 				next: <span class="fstat-no" title="function not covered" >async (m</span>: any): Promise&lt;void&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
 <span class="cstat-no" title="statement not covered" >					<span class="missing-if-branch" title="if path not taken" >I</span>if (DataMiddlewareMap.hasMiddleware(observe)) {</span>
 						const process = <span class="cstat-no" title="statement not covered" >DataMiddlewareMap.getMiddleware(observe);</span>
@@ -588,13 +579,13 @@ export default class OwservableClient extends Subject&lt;any&gt; {
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >isValidTarget(</span>target: string): boolean {
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!this._stores) <span class="cstat-no" title="statement not covered" >return false;</span></span>
-		const targets = <span class="cstat-no" title="statement not covered" >Array.from(this._stores.keys());</span>
+		const targets: string[] = <span class="cstat-no" title="statement not covered" >Array.from(this._stores.keys());</span>
 <span class="cstat-no" title="statement not covered" >		return includes(targets, target);</span>
 	}
 &nbsp;
 	private <span class="fstat-no" title="function not covered" >sendDebugTargets(</span>event: string, target: string) {
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!this._stores) <span class="cstat-no" title="statement not covered" >return false;</span></span>
-		const targets = <span class="cstat-no" title="statement not covered" >Array.from(this._stores.keys());</span>
+		const targets: string[] = <span class="cstat-no" title="statement not covered" >Array.from(this._stores.keys());</span>
 <span class="cstat-no" title="statement not covered" >		this.next({</span>
 			type: 'debug', //
 			id: new Date().getTime(),
@@ -637,7 +628,7 @@ export default class OwservableClient extends Subject&lt;any&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-23T10:40:16.267Z
+                at 2024-11-06T11:17:13.166Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -2,7 +2,7 @@
 
 import {expect} from 'chai';
 
-describe('add.both.indices.to.attributes tests', () => {
+describe('get.milliseconds.from tests', () => {
 	expect(true).to.be.true;
 	it('should be implemented');
 });

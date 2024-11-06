@@ -12,13 +12,15 @@ import {asyncScheduler, Subject, Subscription} from 'rxjs';
 
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
+import getMillisecondsFrom from '../functions/performance/get.milliseconds.from';
 import StoreSubscriptionConfigType from '../_types/store.subscription.config.type';
 
-const diffPatcher = jsondiffpatch.create({
-	propertyFilter: (name: string) => name !== 'subscriptionId'
+const DEFAULT_DELAY: number = 100;
+
+const diffPatcher: jsondiffpatch.DiffPatcher = jsondiffpatch.create({
+	propertyFilter: (name: string): boolean => name !== 'subscriptionId'
 });
 
-// TODO: extract to a pure function file
 // tslint:disable-next-line:variable-name
 const _baseMessage = (target: string, incremental = false): any => ({
 	type: incremental ? 'increment' : 'update',
@@ -60,7 +62,7 @@ export default abstract class AStore extends Subject<any> {
 		this._paging = {};
 		this._populates = [];
 		this._virtuals = [];
-		this._delay = 50;
+		this._delay = DEFAULT_DELAY;
 
 		this._config = {
 			query: {___initial___: true},
@@ -94,7 +96,7 @@ export default abstract class AStore extends Subject<any> {
 	protected abstract load(change: any): Promise<void>;
 
 	protected extractFromConfig(): void {
-		const {subscriptionId = randomUUID(), query = {}, sort = {}, fields = {}, populates = [], virtuals = [], delay = 50} = this._config;
+		const {subscriptionId = randomUUID(), query = {}, sort = {}, fields = {}, populates = [], virtuals = [], delay = DEFAULT_DELAY} = this._config;
 
 		this._subscriptionId = subscriptionId;
 
@@ -134,16 +136,17 @@ export default abstract class AStore extends Subject<any> {
 		return this._model;
 	}
 
-	protected emitOne(subscriptionId: string, update: any = {}): void {
+	protected emitOne(startTime: number, subscriptionId: string, update: any = {}): void {
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, update);
 		this.next({
 			subscriptionId,
-			...message
+			...message,
+			execution_time: getMillisecondsFrom(startTime).toFixed(2)
 		});
 	}
 
-	protected emitMany(subscriptionId: string, update: any = {total: 0, data: [], recounting: false}): void {
+	protected emitMany(startTime: number, subscriptionId: string, update: any = {total: 0, data: [], recounting: false}): void {
 		const {total, data, recounting} = update;
 
 		const message = _baseMessage(this._target, this._incremental);
@@ -154,29 +157,32 @@ export default abstract class AStore extends Subject<any> {
 
 		this.next({
 			subscriptionId,
-			...message
+			...message,
+			execution_time: getMillisecondsFrom(startTime).toFixed(2)
 		});
 	}
 
-	protected emitTotal(subscriptionId: string, total: any): void {
+	protected emitTotal(startTime: number, subscriptionId: string, total: any): void {
 		this.next({
 			subscriptionId,
 			type: 'total',
 			target: this._target,
-			total
+			total,
+			execution_time: getMillisecondsFrom(startTime).toFixed(2)
 		});
 	}
 
-	protected emitDelete(subscriptionId: string, deleted: any): void {
+	protected emitDelete(startTime: number, subscriptionId: string, deleted: any): void {
 		this.next({
 			subscriptionId,
 			type: 'delete',
 			target: this._target,
-			payload: deleted
+			payload: deleted,
+			execution_time: getMillisecondsFrom(startTime).toFixed(2)
 		});
 	}
 
-	protected emitError(subscriptionId: string, error: any): void {
+	protected emitError(startTime: number, subscriptionId: string, error: any): void {
 		this.next({
 			subscriptionId,
 			type: 'error',
@@ -187,7 +193,8 @@ export default abstract class AStore extends Subject<any> {
 			fields: this._fields,
 			paging: this._paging,
 			populates: this._populates,
-			virtuals: this._virtuals
+			virtuals: this._virtuals,
+			execution_time: getMillisecondsFrom(startTime).toFixed(2)
 		});
 	}
 
@@ -215,7 +222,6 @@ export default abstract class AStore extends Subject<any> {
 		return this._target;
 	}
 
-	// TODO: extract to a pure function file
 	private _isValidConfig(config: StoreSubscriptionConfigType): boolean {
 		if (!config) return false;
 

@@ -5,6 +5,7 @@ import {Model} from 'mongoose';
 
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
+import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
 export default class CollectionStore extends AStore {
 	private _totalCount: number;
@@ -41,18 +42,20 @@ export default class CollectionStore extends AStore {
 		return false;
 	}
 
-	protected async sendCount(subscriptionId: string): Promise<void> {
+	protected async sendCount(startTime: number, subscriptionId: string): Promise<void> {
 		this._totalCount = await this._model.countDocuments(this._query);
-		this.emitTotal(subscriptionId, this._totalCount);
+		this.emitTotal(startTime, subscriptionId, this._totalCount);
 	}
 
 	protected delaySendCount: _.DebouncedFuncLeading<any> = _.throttle(this.sendCount, 5000);
 
 	protected async load(change: any): Promise<void> {
+		const startTime: number = getHrtimeAsNumber();
+
 		const currentLoadSubscriptionId = this._subscriptionId + '';
 
 		// console.log('[@owservable] -> CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
-		if (_.isEmpty(this._config)) return this.emitMany(currentLoadSubscriptionId);
+		if (_.isEmpty(this._config)) return this.emitMany(startTime, currentLoadSubscriptionId);
 		if (!this.shouldReload(change)) return;
 
 		// console.log('[@owservable] -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
@@ -61,18 +64,18 @@ export default class CollectionStore extends AStore {
 			const key = _.get(documentKey, '_id', '').toString();
 
 			if (document && this._incremental) {
-				if ('delete' === type) return this.emitDelete(currentLoadSubscriptionId, key);
+				if ('delete' === type) return this.emitDelete(startTime, currentLoadSubscriptionId, key);
 
 				for (const populate of this._populates) {
 					await this._model.populate(document, populate);
 				}
-				if (_.isEmpty(this._virtuals)) return this.emitMany(currentLoadSubscriptionId, {data: document});
+				if (_.isEmpty(this._virtuals)) return this.emitMany(startTime, currentLoadSubscriptionId, {data: document});
 
 				const replacement: any = _.cloneDeep(_.omit(document.toJSON(), this._virtuals));
 				for (const virtual of this._virtuals) {
 					replacement[virtual] = await Promise.resolve(document[virtual]);
 				}
-				return this.emitMany(currentLoadSubscriptionId, {data: replacement});
+				return this.emitMany(startTime, currentLoadSubscriptionId, {data: replacement});
 			} else {
 				let data: any[] = await this._model //
 					.find(this._query, this._fields, this._paging)
@@ -99,13 +102,13 @@ export default class CollectionStore extends AStore {
 				}
 
 				if (this.isQueryChange(currentLoadSubscriptionId)) {
-					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
+					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
 
-					await this.sendCount(currentLoadSubscriptionId);
+					await this.sendCount(startTime, currentLoadSubscriptionId);
 
 					//
 				} else {
-					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data});
+					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data});
 
 					this.delaySendCount(currentLoadSubscriptionId);
 				}
@@ -114,7 +117,7 @@ export default class CollectionStore extends AStore {
 			}
 		} catch (error) {
 			console.error('[@owservable] -> CollectionStore::load Error:', {change, error});
-			this.emitError(currentLoadSubscriptionId, error);
+			this.emitError(startTime, currentLoadSubscriptionId, error);
 		}
 	}
 

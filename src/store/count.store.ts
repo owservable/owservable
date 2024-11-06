@@ -4,6 +4,7 @@ import {Model} from 'mongoose';
 
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
+import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
 export default class CountStore extends AStore {
 	constructor(model: Model<any>, target: string) {
@@ -29,10 +30,12 @@ export default class CountStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
-		if (isEmpty(this._config)) return this.emitOne(this._subscriptionId);
+		const startTime: number = getHrtimeAsNumber();
+
+		if (isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
 
 		const count = await this._model.countDocuments(this._query);
-		this.emitOne(this._subscriptionId, count);
+		this.emitOne(startTime, this._subscriptionId, count);
 	}
 }

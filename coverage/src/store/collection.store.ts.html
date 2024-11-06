@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.63% </span>
+                <span class="strong">6.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/71</span>
+                <span class='fraction'>5/73</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.34% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/63</span>
+                <span class='fraction'>5/65</span>
             </div>
         
             
@@ -198,13 +198,17 @@
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,6 +252,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -340,6 +346,7 @@ import {Model} from 'mongoose';
 &nbsp;
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
+import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 &nbsp;
 export default class CollectionStore extends AStore {
 	private _totalCount: number;
@@ -376,18 +383,20 @@ export default class CollectionStore extends AStore {
 <span class="cstat-no" title="statement not covered" >		return false;</span>
 	}
 &nbsp;
-	protected async <span class="fstat-no" title="function not covered" >sendCount(</span>subscriptionId: string): Promise&lt;void&gt; {
+	protected async <span class="fstat-no" title="function not covered" >sendCount(</span>startTime: number, subscriptionId: string): Promise&lt;void&gt; {
 <span class="cstat-no" title="statement not covered" >		this._totalCount = await this._model.countDocuments(this._query);</span>
-<span class="cstat-no" title="statement not covered" >		this.emitTotal(subscriptionId, this._totalCount);</span>
+<span class="cstat-no" title="statement not covered" >		this.emitTotal(startTime, subscriptionId, this._totalCount);</span>
 	}
 &nbsp;
 	protected <span class="cstat-no" title="statement not covered" >delaySendCount: _.DebouncedFuncLeading&lt;any&gt; = _.throttle(this.sendCount, 5000);</span>
 &nbsp;
 	protected async <span class="fstat-no" title="function not covered" >load(</span>change: any): Promise&lt;void&gt; {
+		const startTime: number = <span class="cstat-no" title="statement not covered" >getHrtimeAsNumber();</span>
+&nbsp;
 		const currentLoadSubscriptionId = <span class="cstat-no" title="statement not covered" >this._subscriptionId + '';</span>
 &nbsp;
 		// console.log('[@owservable] -&gt; CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
-<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitMany(currentLoadSubscriptionId);</span></span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitMany(startTime, currentLoadSubscriptionId);</span></span>
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.shouldReload(change)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
 		// console.log('[@owservable] -&gt; DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
@@ -396,18 +405,18 @@ export default class CollectionStore extends AStore {
 			const key = <span class="cstat-no" title="statement not covered" >_.get(documentKey, '_id', '').toString();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >			if (document &amp;&amp; this._incremental) {</span>
-<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if ('delete' === type) <span class="cstat-no" title="statement not covered" >return this.emitDelete(currentLoadSubscriptionId, key);</span></span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if ('delete' === type) <span class="cstat-no" title="statement not covered" >return this.emitDelete(startTime, currentLoadSubscriptionId, key);</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >				for (const populate of this._populates) {</span>
 <span class="cstat-no" title="statement not covered" >					await this._model.populate(document, populate);</span>
 				}
-<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._virtuals)) <span class="cstat-no" title="statement not covered" >return this.emitMany(currentLoadSubscriptionId, {data: document});</span></span>
+<span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._virtuals)) <span class="cstat-no" title="statement not covered" >return this.emitMany(startTime, currentLoadSubscriptionId, {data: document});</span></span>
 &nbsp;
 				const replacement: any = <span class="cstat-no" title="statement not covered" >_.cloneDeep(_.omit(document.toJSON(), this._virtuals));</span>
 <span class="cstat-no" title="statement not covered" >				for (const virtual of this._virtuals) {</span>
 <span class="cstat-no" title="statement not covered" >					replacement[virtual] = await Promise.resolve(document[virtual]);</span>
 				}
-<span class="cstat-no" title="statement not covered" >				return this.emitMany(currentLoadSubscriptionId, {data: replacement});</span>
+<span class="cstat-no" title="statement not covered" >				return this.emitMany(startTime, currentLoadSubscriptionId, {data: replacement});</span>
 			} else {
 				let data: any[] = <span class="cstat-no" title="statement not covered" >await this._model //</span>
 					.find(this._query, this._fields, this._paging)
@@ -434,13 +443,13 @@ export default class CollectionStore extends AStore {
 				}
 &nbsp;
 <span class="cstat-no" title="statement not covered" >				if (this.isQueryChange(currentLoadSubscriptionId)) {</span>
-<span class="cstat-no" title="statement not covered" >					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});</span>
+<span class="cstat-no" title="statement not covered" >					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >					await this.sendCount(currentLoadSubscriptionId);</span>
+<span class="cstat-no" title="statement not covered" >					await this.sendCount(startTime, currentLoadSubscriptionId);</span>
 &nbsp;
 					//
 				} else {
-<span class="cstat-no" title="statement not covered" >					this.emitMany(currentLoadSubscriptionId, {total: this._totalCount, data});</span>
+<span class="cstat-no" title="statement not covered" >					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data});</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >					this.delaySendCount(currentLoadSubscriptionId);</span>
 				}
@@ -449,7 +458,7 @@ export default class CollectionStore extends AStore {
 			}
 		} catch (error) {
 <span class="cstat-no" title="statement not covered" >			console.error('[@owservable] -&gt; CollectionStore::load Error:', {change, error});</span>
-<span class="cstat-no" title="statement not covered" >			this.emitError(currentLoadSubscriptionId, error);</span>
+<span class="cstat-no" title="statement not covered" >			this.emitError(startTime, currentLoadSubscriptionId, error);</span>
 		}
 	}
 &nbsp;
@@ -475,7 +484,7 @@ export default class CollectionStore extends AStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-23T10:40:16.267Z
+                at 2024-11-06T11:17:13.166Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

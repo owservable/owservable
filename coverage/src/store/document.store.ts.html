@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.12% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/79</span>
+                <span class='fraction'>9/81</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">13.63% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/64</span>
+                <span class='fraction'>9/66</span>
             </div>
         
             
@@ -199,7 +199,9 @@
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
 <a name='L136'></a><a href='#L136'>136</a>
-<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,7 +211,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -266,18 +268,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -286,6 +279,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -301,7 +306,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -345,8 +349,8 @@ import {filter, throttleTime} from 'rxjs/operators';
 import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
+import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 &nbsp;
-// TODO: extract to a pure function file
 // tslint:disable-next-line:variable-name
 const _getIdFromQuery = <span class="fstat-no" title="function not covered" >(q</span>uery: any): string =&gt; (<span class="cstat-no" title="statement not covered" >_.isString(query) ? query : _.get(query, '_id', '').toString())</span>;
 &nbsp;
@@ -378,7 +382,7 @@ export default class DocumentStore extends AStore {
 	protected <span class="fstat-no" title="function not covered" >shouldReload(</span>change: any): boolean {
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (this.isInitialSubscription(change)) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
-		const id = <span class="cstat-no" title="statement not covered" >_getIdFromQuery(this._query);</span>
+		const id: string = <span class="cstat-no" title="statement not covered" >_getIdFromQuery(this._query);</span>
 		const {operationType: type, documentKey, updateDescription: description} = <span class="cstat-no" title="statement not covered" >change;</span>
 		const key = <span class="cstat-no" title="statement not covered" >_.get(documentKey, '_id', '').toString();</span>
 &nbsp;
@@ -390,30 +394,33 @@ export default class DocumentStore extends AStore {
 <span class="cstat-no" title="statement not covered" >				return !id;</span>
 &nbsp;
 			case 'replace':
-			case 'update':
+			case 'update': {
 <span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (id &amp;&amp; id === key) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 <span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!description) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.shouldConsiderFields()) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
 				const {updatedFields, removedFields} = <span class="cstat-no" title="statement not covered" >description;</span>
-				const us = <span class="cstat-no" title="statement not covered" >_.concat(removedFields, _.keys(updatedFields));</span>
-				const qs = <span class="cstat-no" title="statement not covered" >_.keys(this._fields);</span>
+				const us: any[] = <span class="cstat-no" title="statement not covered" >_.concat(removedFields, _.keys(updatedFields));</span>
+				const qs: string[] = <span class="cstat-no" title="statement not covered" >_.keys(this._fields);</span>
 <span class="cstat-no" title="statement not covered" >				return !_.isEmpty(_.intersection(qs, us));</span>
+			}
 		}
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		return false;</span>
 	}
 &nbsp;
 	protected async <span class="fstat-no" title="function not covered" >load(</span>change: any): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitOne(this._subscriptionId);</span></span>
+		const startTime: number = <span class="cstat-no" title="statement not covered" >getHrtimeAsNumber();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._config)) <span class="cstat-no" title="statement not covered" >return this.emitOne(startTime, this._subscriptionId);</span></span>
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.shouldReload(change)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
-		const id = <span class="cstat-no" title="statement not covered" >_getIdFromQuery(this._query);</span>
+		const id: string = <span class="cstat-no" title="statement not covered" >_getIdFromQuery(this._query);</span>
 		const {operationType: type, documentKey} = <span class="cstat-no" title="statement not covered" >change;</span>
 		const key = <span class="cstat-no" title="statement not covered" >_.get(documentKey, '_id', '').toString();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (type === 'delete' &amp;&amp; id === key) <span class="cstat-no" title="statement not covered" >return this.emitDelete(this._subscriptionId, key);</span></span>
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (type === 'delete' &amp;&amp; id === key) <span class="cstat-no" title="statement not covered" >return this.emitDelete(startTime, this._subscriptionId, key);</span></span>
 &nbsp;
 		// console.log('[@owservable] -&gt; DB Reload Document for query:', this._query);
 <span class="cstat-no" title="statement not covered" >		try {</span>
@@ -421,26 +428,25 @@ export default class DocumentStore extends AStore {
 <span class="cstat-no" title="statement not covered" >			if (!_.isEmpty(this._sort)) <span class="cstat-no" title="statement not covered" >data = await this._loadSortedFirstDocument();</span></span>
 			else <span class="cstat-no" title="statement not covered" >data = id ? await this._loadDocumentById(id) : await this._loadDocument();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >			<span class="missing-if-branch" title="if path not taken" >I</span>if (!data) <span class="cstat-no" title="statement not covered" >return this.emitOne(this._subscriptionId);</span></span>
+<span class="cstat-no" title="statement not covered" >			<span class="missing-if-branch" title="if path not taken" >I</span>if (!data) <span class="cstat-no" title="statement not covered" >return this.emitOne(startTime, this._subscriptionId);</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >			for (const populate of this._populates) {</span>
 <span class="cstat-no" title="statement not covered" >				<span class="missing-if-branch" title="if path not taken" >I</span>if (data?.populate) <span class="cstat-no" title="statement not covered" >await data.populate(populate);</span></span>
 			}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >			<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._virtuals)) <span class="cstat-no" title="statement not covered" >return this.emitOne(this._subscriptionId, data.toJSON());</span></span>
+<span class="cstat-no" title="statement not covered" >			<span class="missing-if-branch" title="if path not taken" >I</span>if (_.isEmpty(this._virtuals)) <span class="cstat-no" title="statement not covered" >return this.emitOne(startTime, this._subscriptionId, data.toJSON());</span></span>
 &nbsp;
 			const jsonData: any = <span class="cstat-no" title="statement not covered" >_.cloneDeep(_.omit(data.toJSON(), this._virtuals));</span>
 <span class="cstat-no" title="statement not covered" >			for (const virtual of this._virtuals) {</span>
 <span class="cstat-no" title="statement not covered" >				jsonData[virtual] = await Promise.resolve(data[virtual]);</span>
 			}
-<span class="cstat-no" title="statement not covered" >			this.emitOne(this._subscriptionId, jsonData);</span>
+<span class="cstat-no" title="statement not covered" >			this.emitOne(startTime, this._subscriptionId, jsonData);</span>
 		} catch (error) {
 <span class="cstat-no" title="statement not covered" >			console.error('[@owservable] -&gt; DocumentStore::load Error:', {change, error});</span>
-<span class="cstat-no" title="statement not covered" >			this.emitError(this._subscriptionId, error);</span>
+<span class="cstat-no" title="statement not covered" >			this.emitError(startTime, this._subscriptionId, error);</span>
 		}
 	}
 &nbsp;
-	// TODO: extract to a pure function file
 	private <span class="fstat-no" title="function not covered" >_pipeFilter(</span>change: any): boolean {
 <span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (!_.isEmpty(this._sort)) <span class="cstat-no" title="statement not covered" >return true;</span></span>
 &nbsp;
@@ -459,7 +465,7 @@ export default class DocumentStore extends AStore {
 	}
 &nbsp;
 	private async <span class="fstat-no" title="function not covered" >_loadSortedFirstDocument(</span>): Promise&lt;any&gt; {
-		const docs = <span class="cstat-no" title="statement not covered" >await this._model //</span>
+		const docs: any = <span class="cstat-no" title="statement not covered" >await this._model //</span>
 			.find(this._query, this._fields, this._paging)
 			// .collation({locale: 'en'})
 			.sort(this._sort) // @ts-ignore
@@ -478,7 +484,7 @@ export default class DocumentStore extends AStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-23T10:40:16.267Z
+                at 2024-11-06T11:17:13.166Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -49,7 +49,6 @@ import observableDatabase from './mongodb/functions/observable.database';
 import addIndexToAttributes from './mongodb/functions/index/add.index.to.attributes';
 import addUpIndicesToAttributes from './mongodb/functions/index/add.up.indices.to.attributes';
 import addDownIndicesToAttributes from './mongodb/functions/index/add.down.indices.to.attributes';
-import addBothIndicesToAttributes from './mongodb/functions/index/add.both.indices.to.attributes';
 import addUpAndDownIndicesToAttributes from './mongodb/functions/index/add.up.and.down.indices.to.attributes';
 
 // store
@@ -111,7 +110,6 @@ export {
 	addIndexToAttributes,
 	addUpIndicesToAttributes,
 	addDownIndicesToAttributes,
-	addBothIndicesToAttributes,
 	addUpAndDownIndicesToAttributes,
 
 	// store
