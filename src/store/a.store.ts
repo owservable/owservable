@@ -3,7 +3,7 @@
 import sift from 'sift';
 import {randomUUID} from 'node:crypto';
 import * as jsondiffpatch from 'jsondiffpatch';
-import {cloneDeep, each, get, includes, isArray, isEmpty, omit, set, values} from 'lodash';
+import {cloneDeep, each, get, includes, isArray, isEmpty, isNil, omit, omitBy, set, values} from 'lodash';
 
 import {Model} from 'mongoose';
 
@@ -136,13 +136,28 @@ export default abstract class AStore extends Subject<any> {
 		return this._model;
 	}
 
+	protected get responseStatistics(): any {
+		return omitBy(
+			{
+				query: this._query,
+				sort: this._sort,
+				fields: this._fields,
+				paging: this._paging,
+				populates: this._populates,
+				virtuals: this._virtuals
+			},
+			isNil
+		);
+	}
+
 	protected emitOne(startTime: number, subscriptionId: string, update: any = {}): void {
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, update);
 		this.next({
 			subscriptionId,
 			...message,
-			execution_time: getMillisecondsFrom(startTime).toFixed(2)
+			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
+			...this.responseStatistics()
 		});
 	}
 
@@ -158,7 +173,8 @@ export default abstract class AStore extends Subject<any> {
 		this.next({
 			subscriptionId,
 			...message,
-			execution_time: getMillisecondsFrom(startTime).toFixed(2)
+			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
+			...this.responseStatistics()
 		});
 	}
 
@@ -168,7 +184,8 @@ export default abstract class AStore extends Subject<any> {
 			type: 'total',
 			target: this._target,
 			total,
-			execution_time: getMillisecondsFrom(startTime).toFixed(2)
+			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
+			...this.responseStatistics()
 		});
 	}
 
@@ -178,7 +195,8 @@ export default abstract class AStore extends Subject<any> {
 			type: 'delete',
 			target: this._target,
 			payload: deleted,
-			execution_time: getMillisecondsFrom(startTime).toFixed(2)
+			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
+			...this.responseStatistics()
 		});
 	}
 
@@ -194,7 +212,8 @@ export default abstract class AStore extends Subject<any> {
 			paging: this._paging,
 			populates: this._populates,
 			virtuals: this._virtuals,
-			execution_time: getMillisecondsFrom(startTime).toFixed(2)
+			execution_time: getMillisecondsFrom(startTime).toFixed(2) + 'ms',
+			...this.responseStatistics()
 		});
 	}
 
