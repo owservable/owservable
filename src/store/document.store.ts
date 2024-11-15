@@ -10,6 +10,8 @@ import EStoreType from '../_enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
+require('json-circular-stringify');
+
 // tslint:disable-next-line:variable-name
 const _getIdFromQuery = (query: any): string => (_.isString(query) ? query : _.get(query, '_id', '').toString());
 
@@ -70,6 +72,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
+		console.log('[@owservable] -> DocumentStore::load', JSON.stringify(change));
 		const startTime: number = getHrtimeAsNumber();
 
 		if (_.isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
@@ -120,6 +123,7 @@ export default class DocumentStore extends AStore {
 	}
 
 	private async _loadDocumentById(id: string): Promise<any> {
+		console.log('[@owservable] -> CountStore::DocumentStore', id, this._model.collection.collectionName);
 		return this._model.findById(id, this._fields);
 	}
 
@@ -133,6 +137,11 @@ export default class DocumentStore extends AStore {
 	}
 
 	private async _loadDocument(): Promise<any> {
+		console.log('[@owservable] -> CountStore::findOne', {
+			model: this._model.collection.collectionName,
+			fields: JSON.stringify(this._fields),
+			query: JSON.stringify(this._query)
+		});
 		return this._model.findOne(this._query, this._fields);
 	}
 }

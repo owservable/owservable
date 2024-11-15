@@ -15,6 +15,8 @@ import observableModel from '../mongodb/functions/observable.model';
 import getMillisecondsFrom from '../functions/performance/get.milliseconds.from';
 import StoreSubscriptionConfigType from '../_types/store.subscription.config.type';
 
+require('json-circular-stringify');
+
 const DEFAULT_DELAY: number = 100;
 
 const diffPatcher: jsondiffpatch.DiffPatcher = jsondiffpatch.create({
@@ -107,6 +109,7 @@ export default abstract class AStore extends Subject<any> {
 		this._virtuals = virtuals;
 
 		this._delay = delay;
+		console.log('[@owservable] -> extractFromConfig::delay', this._delay);
 
 		if (isArray(fields)) {
 			this._fields = {};

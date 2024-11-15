@@ -7,6 +7,8 @@ import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
+require('json-circular-stringify');
+
 export default class CollectionStore extends AStore {
 	private _totalCount: number;
 
@@ -44,6 +46,11 @@ export default class CollectionStore extends AStore {
 
 	protected async sendCount(subscriptionId: string): Promise<void> {
 		const startTime: number = getHrtimeAsNumber();
+		console.log('[@owservable] -> CollectionStore::sendCount', {
+			model: this._model.collection.collectionName,
+			subscriptionId,
+			query: JSON.stringify(this._query)
+		});
 		this._totalCount = await this._model.countDocuments(this._query);
 		this.emitTotal(startTime, subscriptionId, this._totalCount);
 	}
@@ -51,6 +58,7 @@ export default class CollectionStore extends AStore {
 	protected delaySendCount: _.DebouncedFuncLeading<any> = _.throttle(this.sendCount, 5000);
 
 	protected async load(change: any): Promise<void> {
+		console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
 		const startTime: number = getHrtimeAsNumber();
 
 		const currentLoadSubscriptionId = this._subscriptionId + '';

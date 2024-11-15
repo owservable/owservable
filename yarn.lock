@@ -2098,6 +2098,13 @@ jsesc@^2.5.1:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
 
+json-circular-stringify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/json-circular-stringify/-/json-circular-stringify-1.0.1.tgz#90c6394c038c656e24940089e908bc1dcbca2688"
+  integrity sha512-JX0zH0kyi6N419lEcf9CH2/TeQjWUe+d/4aIIlBzp1tOBEpU2i8jIqu0YyO9JIiEJl07+6mK7W6vpvDmUcFueg==
+  dependencies:
+    json-stringify-safe "^5.0.1"
+
 json-schema-traverse@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
@@ -2113,7 +2120,7 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
-json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==
@@ -2491,10 +2498,10 @@ mongodb@~6.10.0:
     bson "^6.7.0"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.8.0:
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.8.0.tgz#4475fdac6ce525ef4bdce406abd91c914e666f29"
-  integrity sha512-KluvgwnQB1GPOYZZXUHJRjS1TW6xxwTlf/YgjWExuuNanIe3W7VcR7dDXQVCIRk8L7NYge8EnoTcu2grWtN+XQ==
+mongoose@^8.8.1:
+  version "8.8.1"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.8.1.tgz#1caab80aa2e91d6121b13ca020890d18327c45f3"
+  integrity sha512-l7DgeY1szT98+EKU8GYnga5WnyatAu+kOQ2VlVX1Mxif6A0Umt0YkSiksCiyGxzx8SPhGe9a53ND1GD4yVDrPA==
   dependencies:
     bson "^6.7.0"
     kareem "2.6.3"

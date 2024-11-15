@@ -6,6 +6,8 @@ import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
+require('json-circular-stringify');
+
 export default class CountStore extends AStore {
 	constructor(model: Model<any>, target: string) {
 		super(model, target);
@@ -30,11 +32,17 @@ export default class CountStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
+		console.log('[@owservable] -> CountStore::load', JSON.stringify(change));
 		const startTime: number = getHrtimeAsNumber();
 
 		if (isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
 
+		console.log('[@owservable] -> CountStore::sendCount', {
+			model: this._model.collection.collectionName,
+			change: JSON.stringify(change),
+			query: JSON.stringify(this._query)
+		});
 		const count = await this._model.countDocuments(this._query);
 		this.emitOne(startTime, this._subscriptionId, count);
 	}
