@@ -58,16 +58,14 @@ export default class CollectionStore extends AStore {
 	protected delaySendCount: _.DebouncedFuncLeading<any> = _.throttle(this.sendCount, 5000);
 
 	protected async load(change: any): Promise<void> {
-		console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
 		const startTime: number = getHrtimeAsNumber();
 
 		const currentLoadSubscriptionId = this._subscriptionId + '';
 
-		// console.log('[@owservable] -> CollectionStore load', change, this._target, this._query, this._sort, this._fields, this._paging);
 		if (_.isEmpty(this._config)) return this.emitMany(startTime, currentLoadSubscriptionId);
 		if (!this.shouldReload(change)) return;
+		console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
 
-		// console.log('[@owservable] -> DB Reload Collection for query:', {query: this._query, sort: this._sort, paging: this._paging, fields: this._fields});
 		try {
 			const {operationType: type, documentKey, fullDocument: document} = change;
 			const key = _.get(documentKey, '_id', '').toString();

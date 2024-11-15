@@ -72,11 +72,11 @@ export default class DocumentStore extends AStore {
 	}
 
 	protected async load(change: any): Promise<void> {
-		console.log('[@owservable] -> DocumentStore::load', JSON.stringify(change));
 		const startTime: number = getHrtimeAsNumber();
 
 		if (_.isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
+		console.log('[@owservable] -> DocumentStore::load', JSON.stringify(change));
 
 		const id: string = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey} = change;
