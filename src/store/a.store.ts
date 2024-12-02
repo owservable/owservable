@@ -132,7 +132,7 @@ export default abstract class AStore extends Subject<any> {
 	protected set subscription(subscription: Subscription) {
 		this.destroy();
 		this._subscription = subscription;
-		this.load({}).then(() => null);
+		this.load({}).then((): null => null);
 	}
 
 	protected get model(): Model<any> {
