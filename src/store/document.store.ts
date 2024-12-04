@@ -34,7 +34,7 @@ export default class DocumentStore extends AStore {
 			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
-				next: (change: any): Promise<void> => this.load(change),
+				next: async (change: any): Promise<void> => this.load(change),
 				error: (e: any): void => this.error(e),
 				complete: (): void => this.complete()
 			});

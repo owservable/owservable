@@ -12,7 +12,7 @@ import StoreSubscriptionUpdateType from './_types/store.subscription.update.type
 import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
 
 export default class OwservableClient extends Subject<any> {
-	private _connectionManager: IConnectionManager;
+	private readonly _connectionManager: IConnectionManager;
 
 	private _ping: number = 0;
 	private _location: string;

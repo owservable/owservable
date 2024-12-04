@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
 
 class ObservableDatabase extends Subject<any> {
-	private _stream: ChangeStream;
+	private readonly _stream: ChangeStream;
 	private static _instance: ObservableDatabase;
 
 	public static init(): ObservableDatabase {

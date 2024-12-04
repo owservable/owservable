@@ -1,7 +1,6 @@
 'use strict';
 
-import mongoose from 'mongoose';
-import {Model} from 'mongoose';
+import mongoose, {Model} from 'mongoose';
 
 export default class CollectionsModelsMap {
 	public static addCollectionToModelMapping(model: Model<any>): void {

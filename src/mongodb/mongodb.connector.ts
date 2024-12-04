@@ -1,7 +1,6 @@
 'use strict';
 
-import mongoose from 'mongoose';
-import {Connection} from 'mongoose';
+import mongoose, {Connection} from 'mongoose';
 
 export default class MongoDBConnector {
 	public static async init(mongoDbUri: string): Promise<Connection> {
