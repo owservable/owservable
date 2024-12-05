@@ -110,13 +110,11 @@ export default class CollectionStore extends AStore {
 
 				if (this.isQueryChange(currentLoadSubscriptionId)) {
 					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
-
 					await this.sendCount(currentLoadSubscriptionId);
 
 					//
 				} else {
 					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data});
-
 					this.delaySendCount(currentLoadSubscriptionId);
 				}
 
