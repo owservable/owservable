@@ -23,14 +23,14 @@ export default class CollectionStore extends AStore {
 	protected shouldReload(change: any): boolean {
 		if (this.isInitialSubscription(change)) return true;
 
-		const {operationType: type, updateDescription: description, fullDocument: document} = change;
-		if (!description) return true;
+		const {operationType, updateDescription, fullDocument} = change;
+		if (!updateDescription) return true;
 
-		const {updatedFields, removedFields} = description;
+		const {updatedFields, removedFields} = updateDescription;
 		const us: string[] = _.concat(removedFields, _.keys(updatedFields));
 		if (!_.isEmpty(_.intersection(_.keys(this._query), us))) return true;
 
-		switch (type) {
+		switch (operationType) {
 			case 'delete':
 			case 'insert':
 				return true;
@@ -38,7 +38,7 @@ export default class CollectionStore extends AStore {
 			case 'replace':
 			case 'update':
 				if (this.shouldConsiderFields()) return !_.isEmpty(_.intersection(_.keys(this._fields), us));
-				return this.testDocument(document);
+				return this.testDocument(fullDocument);
 		}
 
 		return false;
@@ -57,68 +57,76 @@ export default class CollectionStore extends AStore {
 
 	protected delaySendCount: _.DebouncedFuncLeading<any> = _.throttle(this.sendCount, 5000);
 
+	protected async loadIncremental(startTime: number, currentLoadSubscriptionId: string, change: any): Promise<void> {
+		const {operationType, documentKey, fullDocument} = change;
+
+		const key = _.get(documentKey, '_id', '').toString();
+		if ('delete' === operationType) return this.emitDelete(startTime, currentLoadSubscriptionId, key);
+
+		for (const populate of this._populates) {
+			await this._model.populate(fullDocument, populate);
+		}
+
+		let document: any = fullDocument;
+		if (!_.isEmpty(this._virtuals)) {
+			document = _.cloneDeep(_.omit(fullDocument.toJSON(), this._virtuals));
+			for (const virtual of this._virtuals) {
+				document[virtual] = await Promise.resolve(fullDocument[virtual]);
+			}
+		}
+		return this.emitMany(startTime, currentLoadSubscriptionId, {data: document});
+	}
+
+	protected async loadAll(startTime: number, currentLoadSubscriptionId: string): Promise<void> {
+		let documents: any[] = await this._model //
+			.find(this._query, this._fields, this._paging)
+			.sort(this._sort) // @ts-ignore
+			.setOptions({allowDiskUse: true});
+
+		for (const populate of this._populates) {
+			await this._model.populate(documents, populate);
+		}
+
+		if (!_.isEmpty(this._virtuals)) {
+			const replacements: any[] = [];
+			for (const document of documents) {
+				const replacement: any = _.cloneDeep(_.omit(document.toJSON(), this._virtuals));
+				for (const virtual of this._virtuals) {
+					replacement[virtual] = await Promise.resolve(document[virtual]);
+				}
+				replacements.push(replacement);
+			}
+			documents = replacements;
+		}
+
+		if (this.isQueryChange(currentLoadSubscriptionId)) {
+			this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data: documents, recounting: true});
+			await this.sendCount(currentLoadSubscriptionId);
+
+			//
+		} else {
+			this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data: documents});
+			this.delaySendCount(currentLoadSubscriptionId);
+		}
+
+		this.removeSubscriptionDiff(currentLoadSubscriptionId);
+	}
+
 	protected async load(change: any): Promise<void> {
 		const startTime: number = getHrtimeAsNumber();
 
-		const currentLoadSubscriptionId = this._subscriptionId + '';
+		const currentLoadSubscriptionId: string = this._subscriptionId + '';
 
 		if (_.isEmpty(this._config)) return this.emitMany(startTime, currentLoadSubscriptionId);
 		if (!this.shouldReload(change)) return;
 		console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
 
 		try {
-			const {operationType: type, documentKey, fullDocument: document} = change;
-			const key = _.get(documentKey, '_id', '').toString();
-
-			if (document && this._incremental) {
-				if ('delete' === type) return this.emitDelete(startTime, currentLoadSubscriptionId, key);
-
-				for (const populate of this._populates) {
-					await this._model.populate(document, populate);
-				}
-				if (_.isEmpty(this._virtuals)) return this.emitMany(startTime, currentLoadSubscriptionId, {data: document});
-
-				const replacement: any = _.cloneDeep(_.omit(document.toJSON(), this._virtuals));
-				for (const virtual of this._virtuals) {
-					replacement[virtual] = await Promise.resolve(document[virtual]);
-				}
-				return this.emitMany(startTime, currentLoadSubscriptionId, {data: replacement});
+			const {fullDocument} = change;
+			if (fullDocument && this._incremental) {
+				await this.loadIncremental(startTime, currentLoadSubscriptionId, change);
 			} else {
-				let data: any[] = await this._model //
-					.find(this._query, this._fields, this._paging)
-					// .collation({locale: 'en'})
-					.sort(this._sort) // @ts-ignore
-					.setOptions({allowDiskUse: true});
-
-				if (!_.isEmpty(this._populates)) {
-					for (const populate of this._populates) {
-						await this._model.populate(data, populate);
-					}
-				}
-
-				if (!_.isEmpty(this._virtuals)) {
-					const replacements: any[] = [];
-					for (const item of data) {
-						const replacement: any = _.cloneDeep(_.omit(item.toJSON(), this._virtuals));
-						for (const virtual of this._virtuals) {
-							replacement[virtual] = await Promise.resolve(item[virtual]);
-						}
-						replacements.push(replacement);
-					}
-					data = replacements;
-				}
-
-				if (this.isQueryChange(currentLoadSubscriptionId)) {
-					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data, recounting: true});
-					await this.sendCount(currentLoadSubscriptionId);
-
-					//
-				} else {
-					this.emitMany(startTime, currentLoadSubscriptionId, {total: this._totalCount, data});
-					this.delaySendCount(currentLoadSubscriptionId);
-				}
-
-				this.removeSubscriptionDiff(currentLoadSubscriptionId);
+				await this.loadAll(startTime, currentLoadSubscriptionId);
 			}
 		} catch (error) {
 			console.error('[@owservable] -> CollectionStore::load Error:', {change, error});
