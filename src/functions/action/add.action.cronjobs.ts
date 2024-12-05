@@ -14,7 +14,7 @@ export default function addActionCronjobs(root: string, folderName: string) {
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing cronjob action', actionPath);
 		// tslint:disable-next-line:callable-types
-		const ActionClass: {new (): ActionAsCronjobInterface} = require(actionPath).default;
+		const ActionClass: new () => ActionAsCronjobInterface = require(actionPath).default;
 		const action: ActionAsCronjobInterface = new ActionClass();
 
 		if (isFunction(action.schedule) && isFunction(action.asCronjob)) {

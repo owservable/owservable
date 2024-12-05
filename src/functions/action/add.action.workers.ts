@@ -14,7 +14,7 @@ export default function addActionWorkers(root: string, folderName: string) {
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing worker action', actionPath);
 		// tslint:disable-next-line:callable-types
-		const ActionClass: {new (): ActionAsWorkerInterface} = require(actionPath).default;
+		const ActionClass: new () => ActionAsWorkerInterface = require(actionPath).default;
 		const action: ActionAsWorkerInterface = new ActionClass();
 
 		if (isFunction(action.asWorker)) {

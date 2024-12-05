@@ -83,7 +83,11 @@ export default abstract class AStore extends Subject<any> {
 		this.subscription = observableModel(this.model) //
 			.pipe(throttleTime(this._delay, asyncScheduler, {leading: true, trailing: true}))
 			.subscribe({
-				next: async (change: any): Promise<void> => this.load(change),
+				next: (change: any): void => {
+					this.load(change) //
+						.then((): null => null)
+						.catch((e: any): void => this.error(e));
+				},
 				error: (e: any): void => this.error(e),
 				complete: (): void => this.complete()
 			});

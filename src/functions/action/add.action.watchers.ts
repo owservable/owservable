@@ -14,7 +14,7 @@ export default function addActionWatchers(root: string, folderName: string) {
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing watcher action', actionPath);
 		// tslint:disable-next-line:callable-types
-		const ActionClass: {new (): ActionAsWatcherInterface} = require(actionPath).default;
+		const ActionClass: new () => ActionAsWatcherInterface = require(actionPath).default;
 		const action: ActionAsWatcherInterface = new ActionClass();
 
 		if (isFunction(action.asWatcher)) {
