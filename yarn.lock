@@ -402,10 +402,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.2.4.tgz#83834cea43a84d3ca01813a2210b2c8d1816af25"
-  integrity sha512-yIWmKbmhyaKE63ZJimXto9dmMqdHd9f9PUz3r6AgeBvAudsmeiecMYABAbui9pDNc9ga3jrRsDkno5cqOGLorQ==
+"@owservable/actions@^0.2.41":
+  version "0.2.41"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.2.41.tgz#f773b451c68cead95c2007b35821a6c8cdbfe2d3"
+  integrity sha512-HEtjRM7gW2ODaIjXLVW9X+lm/bHq2M87BXTFBE5f82eXY7yEjVjt0X1q+gj751WerjY8YpjpLyIK7/3DB+Jf7Q==
   dependencies:
     "@owservable/folders" "^0.2.4"
     "@types/lodash" "^4.17.14"
