@@ -402,24 +402,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^0.2.41":
-  version "0.2.41"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.2.41.tgz#f773b451c68cead95c2007b35821a6c8cdbfe2d3"
-  integrity sha512-HEtjRM7gW2ODaIjXLVW9X+lm/bHq2M87BXTFBE5f82eXY7yEjVjt0X1q+gj751WerjY8YpjpLyIK7/3DB+Jf7Q==
+"@owservable/actions@^0.2.42":
+  version "0.2.42"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-0.2.42.tgz#1adfe0479a3b187a06c554dc32ba8ea723dec8cf"
+  integrity sha512-fQUVz5Wbn0vx5Hud8lnM7jWrk0B5srsLdKGmt/iRqiCOk4u6yYfr7IoJ1Ho+U86+eU4hjQGF2y4e+WpI4LcuqQ==
   dependencies:
-    "@owservable/folders" "^0.2.4"
+    "@owservable/folders" "^0.2.42"
     "@types/lodash" "^4.17.14"
-    "@types/node" "^22.10.5"
-    commander "^12.1.0"
+    "@types/node" "^22.10.7"
+    commander "^13.1.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.2.4.tgz#a878101f5f1faa401750c30cf3a6886924a6031b"
-  integrity sha512-X5g/shC8JLxCy5kzvo26V6hk27gzSPSvUDbYLbqXnHxtsB0O+bjswLM6dOjHEChAaP8bQoASG5AS9sQJqsbSKQ==
+"@owservable/folders@^0.2.42":
+  version "0.2.42"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-0.2.42.tgz#59bdce30eef88632616b6d6f684cc86f04904f0e"
+  integrity sha512-XT9NHNq7lY9AK14Z+jkiOsMc4AhGDNz7ZTGSlNv8OwEOVkdKiGIw4KplK1v8ThLT/4cFI/7vHaLuxbnRDH9kuQ==
   dependencies:
     "@types/lodash" "^4.17.14"
-    "@types/node" "^22.10.5"
+    "@types/node" "^22.10.7"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -512,10 +512,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^22.10.5":
-  version "22.10.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.10.5.tgz#95af89a3fb74a2bb41ef9927f206e6472026e48b"
-  integrity sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==
+"@types/node@^22.10.7":
+  version "22.10.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.10.7.tgz#14a1ca33fd0ebdd9d63593ed8d3fbc882a6d28d7"
+  integrity sha512-V09KvXxFiutGp6B7XkpaDXlNadZxrzajcY50EuoLIpQ6WWYCSvf19lVIazzfIzQvhUN2HjX12spLojTnhuKlGg==
   dependencies:
     undici-types "~6.20.0"
 
@@ -1074,6 +1074,11 @@ commander@^12.1.0:
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
   integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
+
+commander@^13.1.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-13.1.0.tgz#776167db68c78f38dcce1f9b8d7b8b9a488abf46"
+  integrity sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==
 
 commander@^2.12.1:
   version "2.20.3"
@@ -2418,10 +2423,10 @@ mongodb@~6.12.0:
     bson "^6.10.1"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.9.3:
-  version "8.9.3"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.9.3.tgz#770a990f6992884a8a858c90f1be6862054e6fbc"
-  integrity sha512-G50GNPdMqhoiRAJ/24GYAzg13yxXDD3FOOFeYiFwtHmHpAJem3hxbYIxAhLJGWbYEiUZL0qFMu2LXYkgGAmo+Q==
+mongoose@^8.9.5:
+  version "8.9.5"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.9.5.tgz#90a2d70b48a66022a61d7a170ab4fad106b83cba"
+  integrity sha512-SPhOrgBm0nKV3b+IIHGqpUTOmgVL5Z3OO9AwkFEmvOZznXTvplbomstCnPOGAyungtRXE5pJTgKpKcZTdjeESg==
   dependencies:
     bson "^6.10.1"
     kareem "2.6.3"
@@ -3468,10 +3473,10 @@ typedoc@^0.27.6:
     minimatch "^9.0.5"
     yaml "^2.6.1"
 
-typescript@^5.7.2:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.7.2.tgz#3169cf8c4c8a828cde53ba9ecb3d2b1d5dd67be6"
-  integrity sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==
+typescript@^5.7.3:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.7.3.tgz#919b44a7dbb8583a9b856d162be24a54bf80073e"
+  integrity sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==
 
 uc.micro@^2.0.0, uc.micro@^2.1.0:
   version "2.1.0"
