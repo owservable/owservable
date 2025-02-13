@@ -402,24 +402,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.3.0.tgz#324b0a303c43e3f59eafb3e0eca006127d51bac8"
-  integrity sha512-AhEkPZsP6+yjMiar/uucvBmjFm7D2nGGxcz1Plx2c/poMe3kmdM+fg4DUSPi72MaAuryOE1YYkorj3YQTKK6Nw==
+"@owservable/actions@^1.3.6":
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.3.6.tgz#fad03a8aa9f783b91bcead15202d3bc02eea04c4"
+  integrity sha512-WKGVt8Z9SNvFB8zBUZmqjvnU5knen5As26P+VZ80FYX97vSqQIM0wuhMKjOO/e1KhXh+s4CKCoDRNUNtbuTf9g==
   dependencies:
-    "@owservable/folders" "^1.3.0"
+    "@owservable/folders" "^1.3.6"
     "@types/lodash" "^4.17.15"
-    "@types/node" "^22.13.0"
+    "@types/node" "^22.13.2"
     commander "^13.1.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.3.0.tgz#ac00f2765fbfb339b3537c841c47037cb80b2022"
-  integrity sha512-/tf9LkTYfGEwELnd/wnPfmIoeynaKK7R6QiBlo63OvyRFH3G3FORAeOs9RFKog2lTSks1e5TFRSObnBCZE+YKw==
+"@owservable/folders@^1.3.6":
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.3.6.tgz#c331bf7ef67c7c7d886a682513ef7da634fbca1a"
+  integrity sha512-gnq7A8hRXksHO92NkXFYS5XaRKNpF4F2/jaODB6a/IGhps6eYtKGReyoo3Oyt+bqlGe+ek4g6MTxQtwCjEfr9g==
   dependencies:
     "@types/lodash" "^4.17.15"
-    "@types/node" "^22.13.0"
+    "@types/node" "^22.13.2"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -512,17 +512,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^22.13.0":
-  version "22.13.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.0.tgz#d376dd9a0ee2f9382d86c2d5d7beb4d198b4ea8c"
-  integrity sha512-ClIbNe36lawluuvq3+YYhnIN2CELi+6q8NpnM7PYp4hBn/TatfboPgVSm2rwKRfnV2M+Ty9GWDFI64KEe+kysA==
-  dependencies:
-    undici-types "~6.20.0"
-
-"@types/node@^22.13.1":
-  version "22.13.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.1.tgz#a2a3fefbdeb7ba6b89f40371842162fac0934f33"
-  integrity sha512-jK8uzQlrvXqEU91UxiK5J7pKHyzgnI1Qnl0QDHIgVGuolJhRb9EEl28Cj9b3rGR8B2lhFCtvIm5os8lFnO/1Ew==
+"@types/node@^22.13.2":
+  version "22.13.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.2.tgz#6f401c5ccadac75354f5652128e9fcc3b0cf23b7"
+  integrity sha512-Z+r8y3XL9ZpI2EY52YYygAFmo2/oWfNSj4BCpAXE2McAexDk8VcnBMGC9Djn9gTKt4d2T/hhXqmPzo4hfIXtTg==
   dependencies:
     undici-types "~6.20.0"
 
@@ -2743,10 +2736,10 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@^3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.4.2.tgz#a5ce1fb522a588bf2b78ca44c6e6fe5aa5a2b13f"
-  integrity sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==
+prettier@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.5.1.tgz#22fac9d0b18c0b92055ac8fb619ac1c7bef02fb7"
+  integrity sha512-hPpFQvHwL3Qv5AdRvBFMhnKo4tYxp0ReXiPn2bxkiohEX6mBeBwEpBSQTkD458RaaDKQMYSp4hX4UtfUTA5wDw==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -3469,10 +3462,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typedoc@^0.27.6:
-  version "0.27.6"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.27.6.tgz#7e8d067bd5386b7908afcb12c9054a83e8bb326b"
-  integrity sha512-oBFRoh2Px6jFx366db0lLlihcalq/JzyCVp7Vaq1yphL/tbgx2e+bkpkCgJPunaPvPwoTOXSwasfklWHm7GfAw==
+typedoc@^0.27.7:
+  version "0.27.7"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.27.7.tgz#09047ffb5c845f45765de26c68b77260867fe967"
+  integrity sha512-K/JaUPX18+61W3VXek1cWC5gwmuLvYTOXJzBvD9W7jFvbPnefRnCHQCEPw7MSNrP/Hj7JJrhZtDDLKdcYm6ucg==
   dependencies:
     "@gerrit0/mini-shiki" "^1.24.0"
     lunr "^2.3.9"

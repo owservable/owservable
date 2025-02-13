@@ -113,7 +113,6 @@ export default abstract class AStore extends Subject<any> {
 		this._virtuals = virtuals;
 
 		this._delay = delay;
-		console.log('[@owservable] -> extractFromConfig::delay', this._delay);
 
 		if (isArray(fields)) {
 			this._fields = {};

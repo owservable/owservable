@@ -80,7 +80,7 @@ export default class DocumentStore extends AStore {
 
 		if (_.isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
-		console.log('[@owservable] -> DocumentStore::load', JSON.stringify(change));
+		// console.log('[@owservable] -> DocumentStore::load', JSON.stringify(change));
 
 		const id: string = _getIdFromQuery(this._query);
 		const {operationType: type, documentKey} = change;
@@ -127,7 +127,6 @@ export default class DocumentStore extends AStore {
 	}
 
 	private async _loadDocumentById(id: string): Promise<any> {
-		console.log('[@owservable] -> CountStore::DocumentStore', id, this._model.collection.collectionName);
 		return this._model.findById(id, this._fields);
 	}
 
@@ -141,11 +140,6 @@ export default class DocumentStore extends AStore {
 	}
 
 	private async _loadDocument(): Promise<any> {
-		console.log('[@owservable] -> CountStore::findOne', {
-			model: this._model.collection.collectionName,
-			fields: JSON.stringify(this._fields),
-			query: JSON.stringify(this._query)
-		});
 		return this._model.findOne(this._query, this._fields);
 	}
 }

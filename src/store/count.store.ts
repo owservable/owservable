@@ -36,13 +36,8 @@ export default class CountStore extends AStore {
 
 		if (isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
-		console.log('[@owservable] -> CountStore::load', JSON.stringify(change));
+		// console.log('[@owservable] -> CountStore::load', JSON.stringify(change));
 
-		console.log('[@owservable] -> CountStore::sendCount', {
-			model: this._model.collection.collectionName,
-			change: JSON.stringify(change),
-			query: JSON.stringify(this._query)
-		});
 		const count = await this._model.countDocuments(this._query);
 		this.emitOne(startTime, this._subscriptionId, count);
 	}

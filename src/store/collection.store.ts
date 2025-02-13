@@ -46,11 +46,6 @@ export default class CollectionStore extends AStore {
 
 	protected async sendCount(subscriptionId: string): Promise<void> {
 		const startTime: number = getHrtimeAsNumber();
-		console.log('[@owservable] -> CollectionStore::sendCount', {
-			model: this._model.collection.collectionName,
-			subscriptionId,
-			query: JSON.stringify(this._query)
-		});
 		this._totalCount = await this._model.countDocuments(this._query);
 		this.emitTotal(startTime, subscriptionId, this._totalCount);
 	}
@@ -119,7 +114,7 @@ export default class CollectionStore extends AStore {
 
 		if (_.isEmpty(this._config)) return this.emitMany(startTime, currentLoadSubscriptionId);
 		if (!this.shouldReload(change)) return;
-		console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
+		// console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
 
 		try {
 			const {fullDocument} = change;
