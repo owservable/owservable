@@ -404,24 +404,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^1.3.93":
-  version "1.3.93"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.3.93.tgz#f9b52c1014d1d0de5fb4540e1c604d801528083c"
-  integrity sha512-z5eSmwmXwwLaYO5GRG5c6zV1Ww95snJClwClwMdLFFoR+SMuaaCjZ+ytEYT5y0HnAMrxUkv5WBMzIdXQHplGdg==
+"@owservable/actions@^1.3.94":
+  version "1.3.94"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.3.94.tgz#2f82e8150c4ae32351e9753691a9f8869ab87216"
+  integrity sha512-GwOGjhj2GOutdzJ1KUOpJdHW12M8DGD7otL36qzwjE+G48AAXckJJ7H/fWtk+YGzndXrb222KGV543IKuWjWKA==
   dependencies:
-    "@owservable/folders" "^1.3.93"
+    "@owservable/folders" "^1.3.94"
     "@types/lodash" "^4.17.16"
-    "@types/node" "^22.14.0"
+    "@types/node" "^22.14.1"
     commander "^13.1.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^1.3.93":
-  version "1.3.93"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.3.93.tgz#da5a19ab92c19e4e8395af2abbd3e154c6612be9"
-  integrity sha512-SvYSeYD2fSBLHKqowVBSwUlidnewbbo+sKhE+OfzCjXh+ZSei5Gx6kcv93H6B/rLVJTGYBGgZnguJv1JwCsy4A==
+"@owservable/folders@^1.3.94":
+  version "1.3.94"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.3.94.tgz#d5982756612ebfcdcbea005fd53d58d2d796c913"
+  integrity sha512-TzXUHLkYJRD+xSDga0cUMNBmb9cqwtSK2xY3SDEemgPlNOOQ8IktTBr/wHvquPIeI2H41AL9XxGzq4+Ci0nVtA==
   dependencies:
     "@types/lodash" "^4.17.16"
-    "@types/node" "^22.14.0"
+    "@types/node" "^22.14.1"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -528,10 +528,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^22.14.0":
-  version "22.14.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.0.tgz#d3bfa3936fef0dbacd79ea3eb17d521c628bb47e"
-  integrity sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==
+"@types/node@^22.14.1":
+  version "22.14.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.1.tgz#53b54585cec81c21eee3697521e31312d6ca1e6f"
+  integrity sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==
   dependencies:
     undici-types "~6.21.0"
 
@@ -1080,16 +1080,6 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   dependencies:
     delayed-stream "~1.0.0"
-
-commander@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-12.0.0.tgz#b929db6df8546080adfd004ab215ed48cf6f2592"
-  integrity sha512-MwVNWlYjDTtOjX5PiD7o5pK0UrFU/OYgcJfjjK4RaHZETNtjJqrZa9Y9ds88+A+f+d5lv+561eZ+yCKoS3gbAA==
-
-commander@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
-  integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
 commander@^13.1.0:
   version "13.1.0"
@@ -3037,16 +3027,16 @@ signal-exit@^4.0.1:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-4.1.0.tgz#952188c1cbd546070e2dd20d0f41c0ae0530cb04"
   integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
 
-skeletest@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/skeletest/-/skeletest-0.5.3.tgz#a8fc020c78dc27376794ca7a9956c3895a7f066a"
-  integrity sha512-1bGWlv27U6p0Jyqqb1ngjPmX73z0xlRtqXpmnOpyWyeyEgdcg082z9j8K0wUI9jyS31SIFQL5UmpYeErR4dt6Q==
+skeletest@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/skeletest/-/skeletest-0.5.6.tgz#f8a3b961a1b71f83db4cb933574f17caa216e8ea"
+  integrity sha512-SOzqGCV8B7VSCUzrqHyIqu6k2zjr0bgbTTOObQ3f4YDkZB+X9zfMKJ6zRZ/Ip9WGpNJWogWFIEY+AtTH2v6+Og==
   dependencies:
     "@types/cli-color" "^2.0.6"
     "@types/cli-table" "^0.3.4"
     cli-color "^2.0.4"
     cli-table "^0.3.11"
-    commander "^12.1.0"
+    commander "^13.1.0"
     lodash "^4.17.21"
 
 sonarjs@^1.0.0:
@@ -3114,16 +3104,16 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
-strictr@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/strictr/-/strictr-0.2.7.tgz#7959ee13c014d39a2dc8d6d76e0b0225a48986b7"
-  integrity sha512-czNiQgGzefEsajwfxfpMxGvPFA/39USlkbP6ts+BKMf4thtte3ObzGpyjjzzA4Jxl7qoSe27mkHTp/M6sLaTtA==
+strictr@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/strictr/-/strictr-0.2.8.tgz#6f15dd0862f925134aa9cd2372be2201d76246ce"
+  integrity sha512-/JVTDv84alTplrzCOjDxaiR+pf9Ky/xoEpWQY7Bxw97dU/yq6P/yljD9VD6xPO/DYoEojMrY8koqWaupw3WknA==
   dependencies:
     "@types/cli-color" "^2.0.6"
     "@types/cli-table" "^0.3.4"
     cli-color "^2.0.3"
     cli-table "^0.3.11"
-    commander "^12.0.0"
+    commander "^13.1.0"
     lodash "^4.17.21"
 
 "string-width-cjs@npm:string-width@^4.2.0":
