@@ -404,24 +404,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^1.3.94":
-  version "1.3.94"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.3.94.tgz#2f82e8150c4ae32351e9753691a9f8869ab87216"
-  integrity sha512-GwOGjhj2GOutdzJ1KUOpJdHW12M8DGD7otL36qzwjE+G48AAXckJJ7H/fWtk+YGzndXrb222KGV543IKuWjWKA==
+"@owservable/actions@^1.3.95":
+  version "1.3.95"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.3.95.tgz#d4670a013ee0499e0e64ce254e156dd1a42a8c8a"
+  integrity sha512-8nUGQ9o1LMHK1ABrcQHa5m8dBDA4OGSfPt+eGVa+E9jUCWTiRBZmfuIVd636JdfMjKRKTZ4HqBktwd4CTAV1PA==
   dependencies:
-    "@owservable/folders" "^1.3.94"
+    "@owservable/folders" "^1.3.95"
     "@types/lodash" "^4.17.16"
-    "@types/node" "^22.14.1"
+    "@types/node" "^22.15.3"
     commander "^13.1.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^1.3.94":
-  version "1.3.94"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.3.94.tgz#d5982756612ebfcdcbea005fd53d58d2d796c913"
-  integrity sha512-TzXUHLkYJRD+xSDga0cUMNBmb9cqwtSK2xY3SDEemgPlNOOQ8IktTBr/wHvquPIeI2H41AL9XxGzq4+Ci0nVtA==
+"@owservable/folders@^1.3.95":
+  version "1.3.95"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.3.95.tgz#c72af7c234d4f39e2251b628b5fd81464090654b"
+  integrity sha512-mPuzAFxxQIcAekvGstcZCKHQH23QAPcxbSkgHbKXsPbuFtyjY7fTDi7inte5K6aaio2hiqgu2OApkCWuRapp1g==
   dependencies:
     "@types/lodash" "^4.17.16"
-    "@types/node" "^22.14.1"
+    "@types/node" "^22.15.3"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -528,10 +528,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^22.14.1":
-  version "22.14.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.1.tgz#53b54585cec81c21eee3697521e31312d6ca1e6f"
-  integrity sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==
+"@types/node@^22.15.3":
+  version "22.15.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.15.3.tgz#b7fb9396a8ec5b5dfb1345d8ac2502060e9af68b"
+  integrity sha512-lX7HFZeHf4QG/J7tBZqrCAXwz9J5RD56Y6MpP0eJkka8p+K0RY/yBTW7CYFJ4VGCclxqOLKmiGP5juQc6MKgcw==
   dependencies:
     undici-types "~6.21.0"
 
@@ -2420,23 +2420,23 @@ mongodb-connection-string-url@^3.0.0:
     "@types/whatwg-url" "^11.0.2"
     whatwg-url "^13.0.0"
 
-mongodb@~6.15.0:
-  version "6.15.0"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.15.0.tgz#4303ce0f7d5e5750749b1cb318dc7a115778f92e"
-  integrity sha512-ifBhQ0rRzHDzqp9jAQP6OwHSH7dbYIQjD3SbJs9YYk9AikKEettW/9s/tbSFDTpXcRbF+u1aLrhHxDFaYtZpFQ==
+mongodb@~6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.16.0.tgz#2a7a1986ec151d9c738fc8ce4cf4324c3f728a2f"
+  integrity sha512-D1PNcdT0y4Grhou5Zi/qgipZOYeWrhLEpk33n3nm6LGtz61jvO88WlrWCK/bigMjpnOdAUKKQwsGIl0NtWMyYw==
   dependencies:
     "@mongodb-js/saslprep" "^1.1.9"
     bson "^6.10.3"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.13.2:
-  version "8.13.2"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.13.2.tgz#c59458a9167a32f7f6cced2c572d320dafa703c9"
-  integrity sha512-riCBqZmNkYBWjXpM3qWLDQw7QmTKsVZDPhLXFJqC87+OjocEVpvS3dA2BPPUiLAu+m0/QmEj5pSXKhH+/DgerQ==
+mongoose@^8.14.0:
+  version "8.14.0"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.14.0.tgz#62c56f6046bbf23b6447fc383bb62ab773c34580"
+  integrity sha512-IxDxIUu42apE7oEknJK535xkQ6Gd7GKx/gNrNHY+vP4+ucVU2TOCWjVVW14Vc79y9DEEElzHDlTOuVNM8glUFA==
   dependencies:
     bson "^6.10.3"
     kareem "2.6.3"
-    mongodb "~6.15.0"
+    mongodb "~6.16.0"
     mpath "0.9.0"
     mquery "5.0.0"
     ms "2.1.3"
@@ -3468,10 +3468,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typedoc@^0.28.2:
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.28.2.tgz#342c42f2e4c0306c47a0a5e92592af9aa60e1a85"
-  integrity sha512-9Giuv+eppFKnJ0oi+vxqLM817b/IrIsEMYgy3jj6zdvppAfDqV3d6DXL2vXUg2TnlL62V48th25Zf/tcQKAJdg==
+typedoc@^0.28.3:
+  version "0.28.3"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.28.3.tgz#2332a61848d6f64e5cecf86500d8510d0bb6401c"
+  integrity sha512-5svOCTfXvVSh6zbZKSQluZhR8yN2tKpTeHZxlmWpE6N5vc3R8k/jhg9nnD6n5tN9/ObuQTojkONrOxFdUFUG9w==
   dependencies:
     "@gerrit0/mini-shiki" "^3.2.2"
     lunr "^2.3.9"
