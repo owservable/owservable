@@ -404,21 +404,21 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.4.2.tgz#d305f366628c89a080c5cc0eb5aa6bbb17c86cd7"
-  integrity sha512-vWWISN/u0ZvzIkt0MhXXWKs+k8r2XPTmWOOeV2qAzNyCfqdzFB0LvAQNdvxBdTxruP7zpMP3qIuzJ5PN8oeHuA==
+"@owservable/actions@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.5.2.tgz#b1c0ba7859ecdf5d62042687216d25c6d5107d2a"
+  integrity sha512-X0QVvHZz1B41171qCWkn3MWmqCHLmRjeCkd5QJ84e4TAD/xj2WM0ZhOAo0KcsCA1Nm801z4fvNRUvfaQAS4LRQ==
   dependencies:
-    "@owservable/folders" "^1.4.2"
+    "@owservable/folders" "^1.5.2"
     "@types/lodash" "^4.17.17"
     "@types/node" "^22.15.21"
     commander "^14.0.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.4.2.tgz#5b113f302625e4ec0313840d3578fdf340a942e1"
-  integrity sha512-wSW8cNBsHakN9pcjjwVoW8ch6g9WpfZdHCjf0MYyO3c6XvveNP0VQCaIxiRSCgXZAlVbNBBjBG7NgqQxZRAx1A==
+"@owservable/folders@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.5.2.tgz#f5ffef16c37cdd66e5c5a43809c2f24f24ff9336"
+  integrity sha512-HOZ2C3/2AfRSe099vsPNR+p6U+y4ElavhjaoNkDIYE+Bb6qzaF1O8itHMVVimE+gznLCjGHGj4+u3M/etsXJug==
   dependencies:
     "@types/lodash" "^4.17.17"
     "@types/node" "^22.15.21"
