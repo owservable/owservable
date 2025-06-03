@@ -82,7 +82,7 @@
     </file>
     <file path="test\mongodb\collections.models.map.spec.ts">
         <testCase name="collections.models.map.ts tests CollectionsModelsMap exists" duration="0"/>
-        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="1"/>
+        <testCase name="collections.models.map.ts tests CollectionsModelsMap empty functionality" duration="0"/>
     </file>
     <file path="test\mongodb\functions\index\add.down.indices.to.attributes.spec.ts">
         <testCase name="add.down.indices.to.attributes tests should be implemented" duration="0">
@@ -137,7 +137,7 @@
         </testCase>
     </file>
     <file path="test\owservable.spec.ts">
-        <testCase name="owservable.ts tests Owservable exists" duration="0"/>
+        <testCase name="owservable.ts tests Owservable exists" duration="1"/>
         <testCase name="owservable.ts tests should be implemented" duration="0">
             <skipped message="skipped">skipped</skipped>
         </testCase>
