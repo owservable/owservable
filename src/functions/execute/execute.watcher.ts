@@ -8,7 +8,7 @@ const executeWatcher = (obj: WatcherType): void => {
 	const {init, watch, waitForInit = false} = obj;
 
 	if (true !== waitForInit) {
-		init?.().then((): null => null);
+		if (isFunction(init)) init?.().then((): null => null);
 		watch?.();
 		return;
 	}
