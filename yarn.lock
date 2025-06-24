@@ -404,24 +404,24 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@owservable/actions@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.6.0.tgz#91392165a6f549208eb34a302a9f7dfc2019654e"
-  integrity sha512-09V5e4s/TZwPhhCr9iSQryf4KnOPKfIPxGWgq72NwjL2xpcc0bNxR447Zor95T2EQTxD1g+qH4WuW3A15Uzjlg==
+"@owservable/actions@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.6.1.tgz#9c7f51018980e0d6fe125e24800489ba37e43884"
+  integrity sha512-B6zrdCsK/wagXjcJkco1rEdRQmoNf7esKo1ZXOFMX+ygKE/oE5QLklqi9YwiBYbgz79xGZYJCJ1mOzfw5Keb3w==
   dependencies:
-    "@owservable/folders" "^1.6.0"
-    "@types/lodash" "^4.17.17"
-    "@types/node" "^24.0.1"
+    "@owservable/folders" "^1.6.1"
+    "@types/lodash" "^4.17.18"
+    "@types/node" "^24.0.3"
     commander "^14.0.0"
     lodash "^4.17.20"
 
-"@owservable/folders@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.6.0.tgz#3cf014e74404b5e06ecc6733bea423205775245c"
-  integrity sha512-OD6ycjBozsV3X/IFq35RUIvuIQIiB8eoixUn3Uy9tsvr6sNikXQpXL20Iig1xdAzV5KicP+/6TIUd1SfmicrXw==
+"@owservable/folders@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.6.1.tgz#3ed49b1900f1d079c39ad49db06364e03fef6adb"
+  integrity sha512-YyYhaLWpk5yDn0LVUv1zw2rW5baljU/Rt51EykmZdUtsjBHb7XMjmlbyPkHI3vSKxpR9p+1VFtUAT4LSgQmojQ==
   dependencies:
-    "@types/lodash" "^4.17.17"
-    "@types/node" "^24.0.1"
+    "@types/lodash" "^4.17.18"
+    "@types/node" "^24.0.3"
     lodash "^4.17.20"
 
 "@phenomnomnominal/tsquery@^4.0.0":
@@ -513,10 +513,10 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/lodash@^4.17.17":
-  version "4.17.17"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.17.tgz#fb85a04f47e9e4da888384feead0de05f7070355"
-  integrity sha512-RRVJ+J3J+WmyOTqnz3PiBLA501eKwXl2noseKOrNo/6+XEHjTAxO4xHvxQB6QuNm+s4WRbn6rSiap8+EA+ykFQ==
+"@types/lodash@^4.17.18":
+  version "4.17.18"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.18.tgz#4710e7db5b3857103764bf7b7b666414e6141baf"
+  integrity sha512-KJ65INaxqxmU6EoCiJmRPZC9H9RVWCRd349tXM2M3O5NA7cY6YL7c0bHAHQ93NOfTObEQ004kd2QVHs/r0+m4g==
 
 "@types/mocha@^10.0.10":
   version "10.0.10"
@@ -528,10 +528,10 @@
   resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.11.tgz#70b7131f65038ae63cfe841354c8aba363632344"
   integrity sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==
 
-"@types/node@^24.0.1":
-  version "24.0.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.0.1.tgz#e9bfcb1c35547437c294403b7bec497772a88b0a"
-  integrity sha512-MX4Zioh39chHlDJbKmEgydJDS3tspMP/lnQC67G3SWsTnb9NeYVWOjkxpOSy4oMfPs4StcWHwBrvUb4ybfnuaw==
+"@types/node@^24.0.3":
+  version "24.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.0.3.tgz#f935910f3eece3a3a2f8be86b96ba833dc286cab"
+  integrity sha512-R4I/kzCYAdRLzfiCabn9hxWfbuHS573x+r0dJMkkzThEa7pbrcDWK+9zu3e7aBOouf+rQAciqPFMnxwr0aWgKg==
   dependencies:
     undici-types "~7.8.0"
 
@@ -795,10 +795,10 @@ browserslist@^4.22.2:
     node-releases "^2.0.14"
     update-browserslist-db "^1.0.16"
 
-bson@^6.10.3:
-  version "6.10.3"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-6.10.3.tgz#5f9a463af6b83e264bedd08b236d1356a30eda47"
-  integrity sha512-MTxGsqgYTwfshYWTRdmZRC+M7FnG1b4y7RO7p2k3X24Wq0yv1m77Wsj0BzlPzd/IowgESfsruQCUToa7vbOpPQ==
+bson@^6.10.4:
+  version "6.10.4"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-6.10.4.tgz#d530733bb5bb16fb25c162e01a3344fab332fd2b"
+  integrity sha512-WIsKqkSC0ABoBJuT1LEX+2HEvNmNKKgnTAyd0fL8qzK4SH2i9NXg+t08YtdZp/V9IZ33cxe3iV4yM0qg8lMQng==
 
 buffer-alloc-unsafe@^1.1.0:
   version "1.1.0"
@@ -2405,23 +2405,23 @@ mongodb-connection-string-url@^3.0.0:
     "@types/whatwg-url" "^11.0.2"
     whatwg-url "^13.0.0"
 
-mongodb@~6.16.0:
-  version "6.16.0"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.16.0.tgz#2a7a1986ec151d9c738fc8ce4cf4324c3f728a2f"
-  integrity sha512-D1PNcdT0y4Grhou5Zi/qgipZOYeWrhLEpk33n3nm6LGtz61jvO88WlrWCK/bigMjpnOdAUKKQwsGIl0NtWMyYw==
+mongodb@~6.17.0:
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.17.0.tgz#b52da4e3cdf62299e55c51584cb5657283157594"
+  integrity sha512-neerUzg/8U26cgruLysKEjJvoNSXhyID3RvzvdcpsIi2COYM3FS3o9nlH7fxFtefTb942dX3W9i37oPfCVj4wA==
   dependencies:
     "@mongodb-js/saslprep" "^1.1.9"
-    bson "^6.10.3"
+    bson "^6.10.4"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.15.2:
-  version "8.15.2"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.15.2.tgz#3b62ac15f15a3994839443080bf5bc9576689b1f"
-  integrity sha512-GLwghI2dS/n5BTBljspF4+FsCEBeHgnMQyX8GloYkLkl+MKljKkjcP9DhLr47Yod2RO1RCr4vZ3evUZAyuoILw==
+mongoose@^8.16.0:
+  version "8.16.0"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.16.0.tgz#aef2f66def90abff8f8d3a0f9f91e52c1d480d03"
+  integrity sha512-gLuAZsbwY0PHjrvfuXvUkUq9tXjyAjN3ioXph5Y6Seu7/Uo8xJaM+rrMbL/x34K4T3UTgtXRyfoq1YU16qKyIw==
   dependencies:
-    bson "^6.10.3"
+    bson "^6.10.4"
     kareem "2.6.3"
-    mongodb "~6.16.0"
+    mongodb "~6.17.0"
     mpath "0.9.0"
     mquery "5.0.0"
     ms "2.1.3"
@@ -2464,10 +2464,10 @@ next-tick@1, next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-node-cron@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/node-cron/-/node-cron-4.1.0.tgz#375e5057c59a6c65218f5eb1a3d11de02858a764"
-  integrity sha512-OS+3ORu+h03/haS6Di8Qr7CrVs4YaKZZOynZwQpyPZDnR3tqRbwJmuP2gVR16JfhLgyNlloAV1VTrrWlRogCFA==
+node-cron@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/node-cron/-/node-cron-4.1.1.tgz#1b9a27138cd08fea46f23fc024c7761c5801658c"
+  integrity sha512-oJj9CYV7teeCVs+y2Efi5IQ4FGmAYbsXQOehc1AGLlwteec8pC7DjBCUzSyRQ0LYa+CRCgmD+vtlWQcnPpXowA==
 
 node-preload@^0.2.1:
   version "0.2.1"
