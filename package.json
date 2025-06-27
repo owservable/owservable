@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=20"
@@ -36,16 +36,16 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^1.6.1",
-		"@owservable/folders": "^1.6.1",
-		"@types/lodash": "^4.17.18",
-		"@types/node": "^24.0.3",
+		"@owservable/actions": "^1.6.2",
+		"@owservable/folders": "^1.6.2",
+		"@types/lodash": "^4.17.19",
+		"@types/node": "^24.0.4",
 		"@types/node-cron": "^3.0.11",
 		"deprecated-decorator": "^0.1.6",
 		"json-circular-stringify": "^1.0.1",
 		"jsondiffpatch": "^0.5.0",
 		"lodash": "^4.17.20",
-		"mongoose": "^8.16.0",
+		"mongoose": "^8.16.1",
 		"node-cron": "^4.1.1",
 		"rxjs": "^7.8.2",
 		"sift": "^17.1.3"
@@ -58,9 +58,9 @@
 		"chai": "4.4.0",
 		"chai-rx": "^0.0.4",
 		"coveralls": "^3.0.9",
-		"mocha": "^11.6.0",
+		"mocha": "^11.7.1",
 		"nyc": "^17.1.0",
-		"prettier": "^3.5.3",
+		"prettier": "^3.6.2",
 		"rewire": "^8.0.0",
 		"skeletest": "^0.5.6",
 		"sonarjs": "^1.0.0",
@@ -71,7 +71,7 @@
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-etc": "^1.13.7",
 		"tslint-no-unused-expression-chai": "^0.1.4",
-		"typedoc": "^0.28.5",
+		"typedoc": "^0.28.6",
 		"typescript": "^5.8.3"
 	},
 	"packageManager": "yarn@1.22.22"
