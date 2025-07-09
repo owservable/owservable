@@ -1,12 +1,14 @@
 'use strict';
 
-import {expect} from 'chai';
 import Owservable from '../src/owservable';
 
 describe('owservable.ts tests', () => {
 	it('Owservable exists', () => {
-		expect(Owservable).to.be.an('object');
+		expect(Owservable).toBeDefined();
+		expect(typeof Owservable).toBe('object');
 	});
 
-	it('should be implemented');
+	it.todo('should be implemented');
 });
+
+

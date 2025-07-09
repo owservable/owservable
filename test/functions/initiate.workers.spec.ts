@@ -1,12 +1,14 @@
 'use strict';
 
-import {expect} from 'chai';
 import initiateWorkers from '../../src/functions/initiate.workers';
 
 describe('initiate.workers.ts tests', () => {
 	it('initiateWorkers exists', () => {
-		expect(initiateWorkers).to.be.a('function');
+		expect(initiateWorkers).toBeDefined();
+		expect(typeof initiateWorkers).toBe('function');
 	});
 
-	it('should be implemented');
+	it.todo('should be implemented');
 });
+
+

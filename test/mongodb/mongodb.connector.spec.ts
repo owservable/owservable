@@ -1,13 +1,16 @@
 'use strict';
 
-import {expect} from 'chai';
 import MongoDBConnector from '../../src/mongodb/mongodb.connector';
 
 describe('mongodb.connector.ts tests', () => {
 	it('MongoDBConnector exists', () => {
-		expect(MongoDBConnector).to.be.an('function');
-		expect(MongoDBConnector.init).to.be.an('function');
+		expect(MongoDBConnector).toBeDefined();
+		expect(typeof MongoDBConnector).toBe('function');
+		expect(MongoDBConnector.init).toBeDefined();
+		expect(typeof MongoDBConnector.init).toBe('function');
 	});
 
-	it('should be implemented');
+	it.todo('should be implemented');
 });
+
+

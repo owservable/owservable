@@ -1,12 +1,14 @@
 'use strict';
 
-import {expect} from 'chai';
 import initiateCronjobs from '../../src/functions/initiate.cronjobs';
 
 describe('initiate.cronjobs.ts tests', () => {
 	it('initiateCronjobs exists', () => {
-		expect(initiateCronjobs).to.be.a('function');
+		expect(initiateCronjobs).toBeDefined();
+		expect(typeof initiateCronjobs).toBe('function');
 	});
 
-	it('should be implemented');
+	it.todo('should be implemented');
 });
+
+

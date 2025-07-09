@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">27.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/36</span>
+                <span class='fraction'>10/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.71% </span>
+                <span class="strong">35.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/28</span>
+                <span class='fraction'>10/28</span>
             </div>
         
             
@@ -57,11 +57,11 @@
         <template id="filterTemplate">
             <div class="quiet">
                 Filter:
-                <input oninput="onInput()" type="search" id="fileSearch">
+                <input type="search" id="fileSearch">
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,17 +118,17 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -161,18 +161,18 @@ import {listSubfoldersByName} from '@owservable/folders';
 &nbsp;
 import CollectionsModelsMap from '../collections.models.map';
 &nbsp;
-const _processFile = (folder: string, file: string): void =&gt; {
-	const fullPath = path.join(folder, file);
-	const model = require(fullPath).default;
-	<span class="missing-if-branch" title="if path not taken" >I</span>if (!model) <span class="cstat-no" title="statement not covered" >throw new Error(`Model not found in ${folder}/${file}`);</span>
-	CollectionsModelsMap.addCollectionToModelMapping(model);
+const _processFile = <span class="fstat-no" title="function not covered" >(f</span>older: string, file: string): void =&gt; {
+	const fullPath = <span class="cstat-no" title="statement not covered" >path.join(folder, file);</span>
+	const model = <span class="cstat-no" title="statement not covered" >require(fullPath).default;</span>
+<span class="cstat-no" title="statement not covered" >	<span class="missing-if-branch" title="if path not taken" >I</span>if (!model) <span class="cstat-no" title="statement not covered" >throw new Error(`Model not found in ${folder}/${file}`);</span></span>
+<span class="cstat-no" title="statement not covered" >	CollectionsModelsMap.addCollectionToModelMapping(model);</span>
 };
 &nbsp;
-const _isExcluded = (folder: string, exclude: string | string[]): boolean =&gt; {
-	if (!exclude) return false;
-	return isString(exclude) //
+const _isExcluded = <span class="fstat-no" title="function not covered" >(f</span>older: string, exclude: string | string[]): boolean =&gt; {
+<span class="cstat-no" title="statement not covered" >	<span class="missing-if-branch" title="if path not taken" >I</span>if (!exclude) <span class="cstat-no" title="statement not covered" >return false;</span></span>
+<span class="cstat-no" title="statement not covered" >	return isString(exclude) //</span>
 		? endsWith(folder, exclude) //
-		: !!find(exclude, (e: string) =&gt; endsWith(folder, e));
+		: !!find(exclude, <span class="fstat-no" title="function not covered" >(e</span>: string) =&gt; <span class="cstat-no" title="statement not covered" >endsWith(folder, e))</span>;
 };
 &nbsp;
 const _processModels = <span class="fstat-no" title="function not covered" >(f</span>older: string, exclude?: string | string[]): void =&gt; {
@@ -202,7 +202,7 @@ export default processModels;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-09T11:38:47.257Z
+                at 2025-07-09T16:42:07.752Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

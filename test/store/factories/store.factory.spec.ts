@@ -1,3 +1,4 @@
 'use strict';
 
-describe('store.factory.ts tests', () => it('should be implemented'));
+describe('store.factory.ts tests', () => it.todo('should be implemented'));
+

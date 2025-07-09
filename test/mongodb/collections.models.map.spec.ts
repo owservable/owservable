@@ -1,27 +1,27 @@
 'use strict';
 
-import {expect} from 'chai';
-
 import Dummy from './functions/_dummy';
 import CollectionsModelsMap from '../../src/mongodb/collections.models.map';
 
 describe('collections.models.map.ts tests', () => {
 	it('CollectionsModelsMap exists', () => {
-		expect(CollectionsModelsMap).to.be.an('function');
+		expect(CollectionsModelsMap).toBeDefined();
+		expect(typeof CollectionsModelsMap).toBe('function');
 	});
 
 	it('CollectionsModelsMap empty functionality', () => {
 		let keys = CollectionsModelsMap.keys();
-		expect(keys).to.be.empty;
+		expect(keys).toHaveLength(0);
 		let values = CollectionsModelsMap.values();
-		expect(values).to.be.empty;
-		expect(CollectionsModelsMap.getModelByCollection(null)).to.be.null;
+		expect(values).toHaveLength(0);
+		expect(CollectionsModelsMap.getModelByCollection(null)).toBeNull();
 
 		CollectionsModelsMap.addCollectionToModelMapping(Dummy);
 		keys = CollectionsModelsMap.keys();
 		values = CollectionsModelsMap.values();
-		expect(keys).to.have.length(1);
-		expect(values).to.have.length(1);
-		expect(CollectionsModelsMap.getModelByCollection('dummy')).to.be.equal(Dummy);
+		expect(keys).toHaveLength(1);
+		expect(values).toHaveLength(1);
+		expect(CollectionsModelsMap.getModelByCollection('dummy')).toBe(Dummy);
 	});
 });
+
