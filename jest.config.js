@@ -24,7 +24,7 @@ module.exports = {
 	coverageDirectory: 'coverage',
 
 	// Coverage reporters
-	coverageReporters: ['lcov', 'html', 'text-summary'],
+	coverageReporters: ['lcov', 'html', 'text', 'text-summary'],
 
 	// Coverage thresholds (optional)
 	coverageThreshold: {
@@ -40,7 +40,7 @@ module.exports = {
 	clearMocks: true,
 
 	// Verbose output
-	verbose: true,
+	// verbose: true,
 
 	// Exit on test failure
 	// forceExit: true,
