@@ -15,7 +15,7 @@ import observableModel from '../mongodb/functions/observable.model';
 import getMillisecondsFrom from '../functions/performance/get.milliseconds.from';
 import StoreSubscriptionConfigType from '../_types/store.subscription.config.type';
 
-require('json-circular-stringify');
+import 'json-circular-stringify';
 
 const DEFAULT_DELAY: number = 100;
 

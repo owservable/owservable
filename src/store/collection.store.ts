@@ -7,8 +7,6 @@ import AStore from './a.store';
 import EStoreType from '../_enums/store.type.enum';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
-require('json-circular-stringify');
-
 export default class CollectionStore extends AStore {
 	private _totalCount: number;
 
@@ -114,7 +112,6 @@ export default class CollectionStore extends AStore {
 
 		if (_.isEmpty(this._config)) return this.emitMany(startTime, currentLoadSubscriptionId);
 		if (!this.shouldReload(change)) return;
-		// console.log('[@owservable] -> CollectionStore::load', JSON.stringify(change));
 
 		try {
 			const {fullDocument} = change;
