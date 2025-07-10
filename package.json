@@ -17,7 +17,7 @@
 		"url": "git+https://github.com/owservable/owservable.git"
 	},
 	"scripts": {
-		"all": "yarn & tsc & yarn clean & yarn format & yarn build & yarn test & yarn test_qube & yarn docs & skeletest & strictr",
+		"all": "yarn & yarn clean & yarn format & yarn build & yarn test & yarn test_qube & yarn docs & skeletest & strictr",
 		"build": "del /S /Q lib\\* && tsc",
 		"build:watch": "tsc --watch",
 		"lint": "tslint -p tsconfig.json",
