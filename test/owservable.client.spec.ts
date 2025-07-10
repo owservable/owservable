@@ -10,5 +10,3 @@ describe('owservable.client.ts tests', () => {
 
 	it.todo('should be implemented');
 });
-
-

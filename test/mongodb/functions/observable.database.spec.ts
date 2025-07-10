@@ -12,5 +12,3 @@ describe('owservable.database.ts tests', () => {
 
 	it.todo('should be implemented');
 });
-
-

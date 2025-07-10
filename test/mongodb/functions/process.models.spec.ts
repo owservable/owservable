@@ -9,7 +9,7 @@ describe('process.models.ts tests', () => {
 		expect(processModels).toBeDefined();
 		expect(typeof processModels).toBe('function');
 	});
-	
+
 	it('basic functionality test', () => {
 		// Test basic functionality without accessing private functions
 		expect(CollectionsModelsMap).toBeDefined();
@@ -20,5 +20,3 @@ describe('process.models.ts tests', () => {
 
 	it.todo('should be implemented');
 });
-
-

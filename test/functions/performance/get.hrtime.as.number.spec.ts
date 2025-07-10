@@ -6,4 +6,3 @@ describe('get.hrtime.as.number tests', () => {
 	});
 	it.todo('should be implemented');
 });
-

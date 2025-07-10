@@ -6,4 +6,3 @@ describe('get.seconds.from tests', () => {
 	});
 	it.todo('should be implemented');
 });
-

@@ -23,4 +23,3 @@ describe('data.middleware.map.ts tests', () => {
 		expect(DataMiddlewareMap.getMiddleware('users')).toBe(processor);
 	});
 });
-

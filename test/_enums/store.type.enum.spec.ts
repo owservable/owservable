@@ -11,4 +11,3 @@ describe('store.type.enum.ts tests', () => {
 		expect(EStoreType.COUNT).toBe(2);
 	});
 });
-

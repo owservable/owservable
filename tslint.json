@@ -1,8 +1,7 @@
 {
 	"extends": [
 		"tslint:recommended",
-		"tslint-config-prettier",
-		"tslint-no-unused-expression-chai"
+		"tslint-config-prettier"
 	],
 	"rules": {
 		"no-console": [

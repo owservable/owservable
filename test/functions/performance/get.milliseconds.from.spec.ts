@@ -6,4 +6,3 @@ describe('get.milliseconds.from tests', () => {
 	});
 	it.todo('should be implemented');
 });
-

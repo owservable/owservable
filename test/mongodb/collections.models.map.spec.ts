@@ -24,4 +24,3 @@ describe('collections.models.map.ts tests', () => {
 		expect(CollectionsModelsMap.getModelByCollection('dummy')).toBe(Dummy);
 	});
 });
-

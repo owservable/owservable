@@ -10,5 +10,3 @@ describe('initiate.cronjobs.ts tests', () => {
 
 	it.todo('should be implemented');
 });
-
-

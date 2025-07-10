@@ -17,12 +17,12 @@
 		"url": "git+https://github.com/owservable/owservable.git"
 	},
 	"scripts": {
-		"all": "yarn & tsc & yarn clean & yarn build & yarn test & yarn test_qube & yarn docs & skeletest & strictr",
+		"all": "yarn & tsc & yarn clean & yarn format & yarn build & yarn test & yarn test_qube & yarn docs & skeletest & strictr",
 		"build": "del /S /Q lib\\* && tsc",
 		"build:watch": "tsc --watch",
 		"lint": "tslint -p tsconfig.json",
 		"clean": "tslint --config tslint-imports.json --fix --project .",
-		"format": "prettier --write \"src/**/*.ts\"",
+		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
 		"docs": "typedoc --readme none --out docs ./src/owservable.ts",
 		"sync": "git pull & git fetch origin & git merge origin/main & yarn & git branch",
 		"test": "jest --coverage --config jest.config.js",
