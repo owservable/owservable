@@ -1,169 +1,450 @@
 ![owservable](https://avatars0.githubusercontent.com/u/87773159?s=75)
 
-# Owservable backend
+# Owservable
 
-[Reactive Stack JS](https://github.com/reactive-stack-js) replacement.
+A reactive backend library for Node.js applications that provides real-time MongoDB change streams, reactive data stores, and automated task scheduling. Built with RxJS and TypeScript.
 
-See <a href="https://owservable.github.io/" target="_blank">owservable.github.io</a> for more info.
+**Owservable is a replacement for [Reactive Stack JS](https://github.com/reactive-stack-js).**
 
-Checkout my <a href="https://www.udemy.com/course/reactive-stack/" target="_blank">Reactive Stack Udemy course</a>.
+## 🚀 Features
 
-## :books: Documentation
+- **Real-time MongoDB Integration**: MongoDB change streams with reactive observables
+- **Reactive Data Stores**: Count, Document, and Collection stores with automatic updates
+- **WebSocket Client Management**: Built-in client connection and subscription handling
+- **Task Scheduling**: Automated cronjobs, watchers, and workers
+- **Action Pattern**: Structured business logic with multiple execution contexts
+- **Data Middleware**: Transform and filter data based on user permissions
+- **Type Safety**: Full TypeScript support with comprehensive type definitions
 
-See the <a href="https://owservable.github.io/owservable/docs/" target="_blank">TypeDoc documentation</a>.
+## 📦 Installation
 
-### :traffic_light: Testing:
+```bash
+npm install owservable
+```
 
-See the <a href="https://owservable.github.io/owservable/coverage/" target="_blank">Test coverage</a>.
+or
 
-## :clipboard: TODOs
+```bash
+yarn add owservable
+```
 
-- Web Server abstraction
-- Database abstraction
-- Client-side datastore abstraction
-- Larga Data handling
-- Server-Side Events
+or
 
-## :scroll: Uses
+```bash
+pnpm add owservable
+```
 
-- [Mongoose](https://mongoosejs.com)
-- [RxJS](https://rxjs.dev)
-- [Typescript](https://www.typescriptlang.org/)
-- [Chai](https://www.chaijs.com/)
-- [Mocha](https://mochajs.org/)
-- [NYC](https://istanbul.js.org/)
+## 🏗️ Requirements
 
-## :floppy_disk: MongoDB Replica Set
+- **Node.js**: >= 20
+- **MongoDB**: >= 3.6 (Replica Set required for change streams)
+- **TypeScript**: Recommended for full type safety
 
-Make sure your MongoDB database is running as a Replica Set: http://stojadinovic.net/2020/07/05/mongodb-change-streams-on-localhost-with-nodejs/
+## 🔧 MongoDB Setup
+
+Owservable requires MongoDB to be running as a Replica Set to enable change streams:
+
+```bash
+# Start MongoDB as a single-node replica set
+mongod --replSet rs0
+
+# Initialize the replica set
+mongo --eval "rs.initiate()"
+```
+
+For more details, see: [MongoDB Change Streams on localhost with Node.js](http://stojadinovic.net/2020/07/05/mongodb-change-streams-on-localhost-with-nodejs/)
+
+## 🚀 Quick Start
+
+### 1. Basic Server Setup
+
+```typescript
+import { 
+  OwservableClient, 
+  MongoDBConnector, 
+  processModels,
+  IConnectionManager 
+} from 'owservable';
+
+// Initialize MongoDB connection
+const mongoConnector = new MongoDBConnector();
+await mongoConnector.connect('mongodb://localhost:27017/myapp');
+
+// Process your Mongoose models
+await processModels('./models');
+
+// Implement connection manager
+class MyConnectionManager implements IConnectionManager {
+  async connected(jwt: string): Promise<void> {
+    // Handle client connection
+  }
+  
+  async disconnected(): Promise<void> {
+    // Handle client disconnection
+  }
+  
+  async checkSession(): Promise<any> {
+    // Handle session validation
+    return { refresh_in: 300000 };
+  }
+  
+  ping(ms: number): void {
+    // Handle ping updates
+  }
+  
+  location(path: string): void {
+    // Handle location updates
+  }
+  
+  get user(): any {
+    // Return current user
+    return this.currentUser;
+  }
+}
+
+// Create owservable client
+const connectionManager = new MyConnectionManager();
+const client = new OwservableClient(connectionManager);
+
+// Handle client messages
+client.subscribe({
+  next: (message) => {
+    // Forward to WebSocket clients
+    websocket.send(JSON.stringify(message));
+  },
+  error: (error) => console.error('Client error:', error)
+});
+```
+
+### 2. WebSocket Integration
+
+```typescript
+import { WebSocketServer } from 'ws';
+
+const wss = new WebSocketServer({ port: 8080 });
+
+wss.on('connection', (ws) => {
+  const client = new OwservableClient(connectionManager);
+  
+  // Subscribe to client updates
+  client.subscribe({
+    next: (message) => ws.send(JSON.stringify(message)),
+    error: (error) => console.error('Error:', error)
+  });
+  
+  // Handle incoming messages
+  ws.on('message', async (data) => {
+    const message = JSON.parse(data.toString());
+    await client.consume(message);
+  });
+  
+  // Handle disconnect
+  ws.on('close', () => {
+    client.disconnected();
+  });
+  
+  // Start ping
+  client.ping();
+});
+```
+
+### 3. Reactive Data Stores
+
+```typescript
+import { storeFactory, EStoreType } from 'owservable';
+
+// Count store - returns only document count
+const countStore = storeFactory(EStoreType.COUNT, 'users', 'user-count');
+countStore.config = {
+  query: { active: true },
+  fields: {}
+};
+
+// Collection store - returns array of documents
+const collectionStore = storeFactory(EStoreType.COLLECTION, 'users', 'user-list');
+collectionStore.config = {
+  query: { active: true },
+  fields: { name: 1, email: 1 },
+  sort: { name: 1 },
+  page: 1,
+  pageSize: 10
+};
+
+// Document store - returns single document
+const documentStore = storeFactory(EStoreType.DOCUMENT, 'users', 'user-profile');
+documentStore.config = {
+  query: { _id: 'user123' },
+  fields: { name: 1, email: 1, profile: 1 }
+};
+```
+
+### 4. Task Scheduling
+
+```typescript
+import { 
+  initiateCronjobs, 
+  initiateWatchers, 
+  initiateWorkers 
+} from 'owservable';
+
+// Initialize cronjobs
+await initiateCronjobs('./cronjobs');
+
+// Initialize file watchers
+await initiateWatchers('./watchers');
+
+// Initialize background workers
+await initiateWorkers('./workers');
+```
+
+### 5. Data Middleware
+
+```typescript
+import { DataMiddlewareMap } from 'owservable';
+
+// Register middleware for collection
+DataMiddlewareMap.set('users', async (payload, user) => {
+  // Filter sensitive data based on user permissions
+  if (!user.isAdmin) {
+    payload.data = payload.data.map(doc => ({
+      ...doc,
+      email: '***@***.***' // Hide emails for non-admins
+    }));
+  }
+  return payload;
+});
+```
+
+## 📚 Core Components
 
 ### OwservableClient
 
-This is the main class.
+The main client class that manages WebSocket connections and subscriptions:
 
-It processes client subscription requests, creates appropriate stores and subscribes to them to observe changes.
+```typescript
+const client = new OwservableClient(connectionManager);
 
-It extends RxJS:Subject, so that any websocket instance can subscribe to it, in order to forward updates back to the client.
+// Handle different message types
+await client.consume({
+  type: 'subscribe',
+  target: 'user-list',
+  scope: 'collection',
+  observe: 'users',
+  config: {
+    query: { active: true },
+    fields: { name: 1, email: 1 }
+  }
+});
+```
 
-### IConnectionManager
+### Store Types
 
-Defines a Connection`Manager interface to be implemented by the application using this library.
+#### CollectionStore
+Returns arrays of documents with real-time updates:
 
-This implementation is required for the above ```OwservableClient```. An instance of ```OwservableClient``` is calling ```IConnectionManager``` methods accordingly.
+```typescript
+const store = storeFactory(EStoreType.COLLECTION, 'posts', 'post-list');
+store.config = {
+  query: { published: true },
+  fields: { title: 1, content: 1, author: 1 },
+  sort: { createdAt: -1 },
+  populate: ['author'],
+  page: 1,
+  pageSize: 20,
+  incremental: true // Enable incremental updates
+};
+```
 
-### DataMiddlewareMap
+#### CountStore
+Returns document counts with real-time updates:
 
-This is a map of all defined Data Middleware methods.
+```typescript
+const store = storeFactory(EStoreType.COUNT, 'users', 'user-count');
+store.config = {
+  query: { active: true }
+};
+```
 
-A Data Middleware is tied to a collection name and is used to modify an observed payload if necessary. For example, if based on users
-access permissions a portion of the payload needs to be removed or replaced, etc.
+#### DocumentStore
+Returns single documents with real-time updates:
 
-### initiateWatchers
+```typescript
+const store = storeFactory(EStoreType.DOCUMENT, 'users', 'current-user');
+store.config = {
+  query: { _id: userId },
+  fields: { name: 1, email: 1, preferences: 1 }
+};
+```
 
-Method that initiates all watchers. Takes the project root folder path and a global folder name for the watchers.
+### MongoDB Integration
 
-Watchers can either perform simple tasks or add jobs to a queue, to be processed by the workers.
+#### Observable Models
+Monitor MongoDB collections for changes:
 
-### initiateCronjobs
+```typescript
+import { observableModel } from 'owservable';
+import UserModel from './models/User';
 
-Method that initiates all cronjobs. Takes the project root folder path and a global folder name for the cronjobs.
+const userObservable = observableModel(UserModel);
+userObservable.subscribe({
+  next: (change) => {
+    console.log('User collection changed:', change);
+  }
+});
+```
 
-Cronjobs can either perform simple tasks or add jobs to a queue, to be processed by the workers.
+#### Observable Database
+Monitor entire database for changes:
 
-### initiateWorkers
+```typescript
+import { observableDatabase } from 'owservable';
 
-Method that initiates all workers. Takes the project root folder path and a global folder name for the workers.
+const dbObservable = observableDatabase();
+dbObservable.subscribe({
+  next: (change) => {
+    console.log('Database changed:', change);
+  }
+});
+```
 
-Workers can either perform simple tasks or take jobs from a queue.
+### Action Pattern
 
-## MongoDB
+Create structured business logic with the action pattern:
 
-### MongoDBConnector
+```typescript
+import { Action, ActionInterface } from 'owservable';
 
-A MongoDB database connector class, used to initialize the database collection which Mongoose will then use.
+class SendEmailAction extends Action implements ActionInterface {
+  protected _description = 'Send email notification';
+  
+  async handle(to: string, subject: string, body: string): Promise<void> {
+    // Email sending logic
+    console.log(`Sending email to ${to}: ${subject}`);
+  }
+  
+  description(): string {
+    return this._description;
+  }
+}
 
-### processModels
+// Use in cronjobs, workers, or watchers
+const emailAction = new SendEmailAction();
+await emailAction.handle('user@example.com', 'Welcome!', 'Hello World');
+```
 
-This method parses all models and adds them to the ```CollectionsModelsMap``` if they pass validation. The method takes the project root folder path and a global folder name for
-the models and an optional folder name(
-s) to exclude, for example ```mixins``` and similar.
+## 🔧 Configuration
 
-### CollectionsModelsMap
+### Environment Variables
 
-This is a map of all Mongoose models and related MongoDB collections. It is populated automatically during the execution of ```processModels```.
+```bash
+# MongoDB connection
+MONGODB_URI=mongodb://localhost:27017/myapp
 
-### observableModel
+# WebSocket server
+WS_PORT=8080
 
-Requires MongoDB 3.6+: This method returns an RxJS Subject that can be subscribed to and thus observe a particular MongoDB collection. This method takes a Mongoose model instance.
+# JWT settings
+JWT_SECRET=your-secret-key
+JWT_EXPIRATION=24h
+```
 
-### observableDatabase
+### TypeScript Configuration
 
-Requires MongoDB 4.0+: This method returns an RxJS Subject that can be subscribed to and thus observe the entire MongoDB database.
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
 
-## Routes
+## 📖 Advanced Usage
 
-### processFastifyBlipp
+### Custom Store Implementation
 
-This method stores all fastify routes into the ```RoutesMap``` in order to display them on request as a form of quick routes documentation.
+```typescript
+import { AStore, EStoreType } from 'owservable';
 
-This method is set as ```blippLog``` options attribute during fastify registration of the ```fastify-blipp``` plugin.
-Eg. ```server.register(fastifyBlipp, {blippLog: processFastifyBlipp});```.
+class CustomStore extends AStore {
+  constructor(model: Model<any>, target: string) {
+    super(model, target);
+    this._type = EStoreType.COLLECTION;
+  }
+  
+  protected async load(change: any): Promise<void> {
+    // Custom loading logic
+    const data = await this.customQuery();
+    this.emitMany(Date.now(), this._subscriptionId, { data });
+  }
+}
+```
 
-### RoutesMap
+### Performance Optimization
 
-This is a map of all available routes. It is populated automatically during the execution of ```processFastifyBlipp```.
+```typescript
+// Use incremental updates for large collections
+store.config = {
+  incremental: true,
+  page: 1,
+  pageSize: 50
+};
 
-### addFastifyRoutes
+// Optimize queries with indexes
+await addIndexToAttributes(model, ['field1', 'field2']);
 
-This method adds all routes to fastify automatically. It requires as parameters a fastify instance, the project root folder path and a global folder name for the routes.
+// Use field projection
+store.config = {
+  fields: { 
+    name: 1, 
+    email: 1,
+    _id: 0 // Exclude _id
+  }
+};
+```
 
-### cleanRelativePath
+## 🧪 Testing
 
-Helper metohd used in ```addFastifyRoutes``` to generate the route path from filename and file location relative to routes root folder.
+```bash
+npm test
+```
 
-## Store
+## 📖 Documentation
 
-### AStore
+- **Main Website**: [owservable.github.io](https://owservable.github.io/)
+- **TypeDoc Documentation**: [owservable.github.io/owservable/docs/](https://owservable.github.io/owservable/docs/)
+- **Test Coverage**: [owservable.github.io/owservable/coverage/](https://owservable.github.io/owservable/coverage/)
+- **Udemy Course**: [Reactive Stack Course](https://www.udemy.com/course/reactive-stack/)
 
-Abstract class for ```CountStore```, ```DocumentStore``` and ```CollectionStore``` implementations.
+## 🔗 Related Projects
 
-### EStoreType
+- [@owservable/actions](https://github.com/owservable/actions) - Action pattern implementation
+- [@owservable/folders](https://github.com/owservable/folders) - File system utilities
+- [@owservable/fastify-auto-routes](https://github.com/owservable/fastify-auto-routes) - Fastify auto routing
 
-Enum for existing store types: ```COUNT | DOCUMENT | COLLECTION```.
+## 🛣️ Roadmap
 
-### CountStore
+- [ ] Web Server abstraction
+- [ ] Database abstraction
+- [ ] Client-side datastore abstraction
+- [ ] Large Data handling
+- [ ] Server-Side Events
+- [ ] Redis integration
+- [ ] GraphQL subscriptions
+- [ ] Microservices support
 
-Count store, observes a particular query and returns only an integer representing the count of response rows.
-
-### DocumentStore
-
-Document store, observes a particular query and returns all response rows.
-
-### CollectionStore
-
-Collection store, observes a particular query and returns all response rows.
-
-### storeFactory
-
-Store factory method, creates an appropriate AStore instance based on passed subscription parameters.
-
-## Types
-
-These types are self explanatory.
-
-- CronJobType
-- WatcherType
-- WorkerType
-- StoreScopeType
-- StoreSubscriptionConfigType
-- StoreSubscriptionUpdateType
-- ConnectionManagerRefreshType
-
-## :scroll: License
+## 📄 License
 
 Licensed under [The Unlicense](./LICENSE).
 
-## :sparkles: Contributors
+## 🤝 Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -196,6 +477,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 Contributions of any kind welcome!
 
-## :chart_with_upwards_trend: UML
+## 📊 UML Diagram
 
-Checkout the [UML diagram](https://raw.githubusercontent.com/owservable/owservable/main/uml.png).
+Checkout the [UML diagram](https://raw.githubusercontent.com/owservable/owservable/main/uml.png) for a visual overview of the architecture.
