@@ -10,10 +10,10 @@ import {Model} from 'mongoose';
 import {throttleTime} from 'rxjs/operators';
 import {asyncScheduler, Subject, Subscription} from 'rxjs';
 
-import EStoreType from '../_enums/store.type.enum';
+import EStoreType from '../enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
 import getMillisecondsFrom from '../functions/performance/get.milliseconds.from';
-import StoreSubscriptionConfigType from '../_types/store.subscription.config.type';
+import StoreSubscriptionConfigType from '../types/store.subscription.config.type';
 
 import 'json-circular-stringify';
 

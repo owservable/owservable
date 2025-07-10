@@ -6,14 +6,7 @@
 	"considerVueFiles": true,
 	"ignoreSrcFiles": [
 		"src/auth/i.connection.manager.ts",
-		"src/_types/connection.manager.refresh.type.ts",
-		"src/_types/cronjob.type.ts",
-		"src/_types/store.scope.type.ts",
-		"src/_types/store.subscription.config.type.ts",
-		"src/_types/store.subscription.update.type.ts",
-		"src/_types/subscription.methods.type.ts",
-		"src/_types/watcher.type.ts",
-		"src/_types/worker.type.ts"
+		"src/types/"
 	],
 	"ignoreTestFiles": [
 		"test/mongodb/functions/_dummy.ts"

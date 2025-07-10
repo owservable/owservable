@@ -1,7 +1,7 @@
 'use strict';
 
 import executeCronjob from '../../../src/functions/execute/execute.cronjob';
-import CronJobType from '../../../src/_types/cronjob.type';
+import CronJobType from '../../../src/types/cronjob.type';
 import * as cron from 'node-cron';
 
 // Mock node-cron
@@ -26,13 +26,13 @@ describe('execute.cronjob tests', () => {
 			schedule: '0 0 * * *',
 			job: mockJob,
 			init: 'not a function' as any,
-			options: { timezone: 'UTC' }
+			options: {timezone: 'UTC'}
 		};
 
 		executeCronjob(cronjob);
 
 		expect(mockCron.schedule).toHaveBeenCalledTimes(1);
-		expect(mockCron.schedule).toHaveBeenCalledWith('0 0 * * *', mockJob, { timezone: 'UTC' });
+		expect(mockCron.schedule).toHaveBeenCalledWith('0 0 * * *', mockJob, {timezone: 'UTC'});
 	});
 
 	it('should schedule cron job immediately when init is undefined', () => {
@@ -40,13 +40,13 @@ describe('execute.cronjob tests', () => {
 		const cronjob: CronJobType = {
 			schedule: '*/5 * * * *',
 			job: mockJob,
-			options: { scheduled: false }
+			options: {scheduled: false}
 		};
 
 		executeCronjob(cronjob);
 
 		expect(mockCron.schedule).toHaveBeenCalledTimes(1);
-		expect(mockCron.schedule).toHaveBeenCalledWith('*/5 * * * *', mockJob, { scheduled: false });
+		expect(mockCron.schedule).toHaveBeenCalledWith('*/5 * * * *', mockJob, {scheduled: false});
 	});
 
 	it('should schedule cron job after init resolves when init is a function', async () => {
@@ -56,20 +56,18 @@ describe('execute.cronjob tests', () => {
 			schedule: '0 */2 * * *',
 			job: mockJob,
 			init: mockInit,
-			options: { name: 'test-job' }
+			options: {name: 'test-job'}
 		};
 
 		executeCronjob(cronjob);
 
 		// Wait for the promise to resolve
-		await new Promise(resolve => setTimeout(resolve, 10));
+		await new Promise((resolve) => setTimeout(resolve, 10));
 
 		expect(mockInit).toHaveBeenCalledTimes(1);
 		expect(mockCron.schedule).toHaveBeenCalledTimes(1);
-		expect(mockCron.schedule).toHaveBeenCalledWith('0 */2 * * *', mockJob, { name: 'test-job' });
+		expect(mockCron.schedule).toHaveBeenCalledWith('0 */2 * * *', mockJob, {name: 'test-job'});
 	});
-
-
 
 	it('should handle cronjob without options', () => {
 		const mockJob = jest.fn();
@@ -115,7 +113,7 @@ describe('execute.cronjob tests', () => {
 		executeCronjob(cronjob);
 
 		// Wait for the promise to resolve
-		await new Promise(resolve => setTimeout(resolve, 10));
+		await new Promise((resolve) => setTimeout(resolve, 10));
 
 		expect(executionOrder).toEqual(['init']);
 		expect(mockCron.schedule).toHaveBeenCalledTimes(1);
@@ -124,15 +122,9 @@ describe('execute.cronjob tests', () => {
 
 	it('should handle different schedule formats', () => {
 		const mockJob = jest.fn();
-		const testSchedules = [
-			'0 0 * * *',
-			'*/15 * * * *',
-			'0 9-17 * * 1-5',
-			'@hourly',
-			'@daily'
-		];
+		const testSchedules = ['0 0 * * *', '*/15 * * * *', '0 9-17 * * 1-5', '@hourly', '@daily'];
 
-		testSchedules.forEach(schedule => {
+		testSchedules.forEach((schedule) => {
 			const cronjob: CronJobType = {
 				schedule,
 				job: mockJob

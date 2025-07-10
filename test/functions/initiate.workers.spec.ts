@@ -41,15 +41,9 @@ describe('initiate.workers tests', () => {
 	});
 
 	it('should handle different root paths', () => {
-		const testRoots = [
-			'/home/user/project',
-			'./src',
-			'../parent/dir',
-			'C:\\Windows\\System32',
-			'/var/www/html'
-		];
+		const testRoots = ['/home/user/project', './src', '../parent/dir', 'C:\\Windows\\System32', '/var/www/html'];
 
-		testRoots.forEach(root => {
+		testRoots.forEach((root) => {
 			initiateWorkers(root);
 		});
 

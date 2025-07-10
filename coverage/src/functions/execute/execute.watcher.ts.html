@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>20/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -84,40 +84,40 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 import {isFunction} from 'lodash';
 &nbsp;
-import WatcherType from '../../_types/watcher.type';
+import WatcherType from '../../types/watcher.type';
 &nbsp;
-const executeWatcher = <span class="fstat-no" title="function not covered" >(o</span>bj: WatcherType): void =&gt; {
-	const {init, watch, waitForInit = <span class="branch-0 cbranch-no" title="branch not covered" >false}</span> = <span class="cstat-no" title="statement not covered" >obj;</span>
+const executeWatcher = (obj: WatcherType): void =&gt; {
+	const {init, watch, waitForInit = false} = obj;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	<span class="missing-if-branch" title="if path not taken" >I</span>if (true !== waitForInit) {</span>
-<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (isFunction(init)) <span class="cstat-no" title="statement not covered" >init?.().then(<span class="fstat-no" title="function not covered" >(): null =</span>&gt; <span class="cstat-no" title="statement not covered" >null)</span>;</span></span>
-<span class="cstat-no" title="statement not covered" >		watch?.();</span>
-<span class="cstat-no" title="statement not covered" >		return;</span>
+	if (true !== waitForInit) {
+		if (isFunction(init)) init<span class="branch-0 cbranch-no" title="branch not covered" >?.().t</span>hen((): null =&gt; null);
+		watch?.();
+		return;
 	}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	if (isFunction(init)) <span class="cstat-no" title="statement not covered" >init().then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >watch?.())</span>;</span></span>
-	else <span class="cstat-no" title="statement not covered" >watch?.();</span>
+	if (isFunction(init)) init().then(() =&gt; watch<span class="branch-0 cbranch-no" title="branch not covered" >?.())</span>;
+	else watch<span class="branch-0 cbranch-no" title="branch not covered" >?.();</span>
 };
 export default executeWatcher;
 &nbsp;</pre></td></tr></table></pre>
@@ -127,7 +127,7 @@ export default executeWatcher;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-10T15:09:58.345Z
+                at 2025-07-10T19:13:53.423Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

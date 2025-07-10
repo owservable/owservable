@@ -2,9 +2,9 @@
 
 import addActionWorkers from '../../../src/functions/action/add.action.workers';
 
-// Mock dependencies
+// Mock the external dependencies
 jest.mock('@owservable/folders', () => ({
-	listSubfoldersFilesByFolderName: jest.fn(),
+	listSubfoldersFilesByFolderName: jest.fn().mockResolvedValue([])
 }));
 
 const mockListSubfoldersFilesByFolderName = require('@owservable/folders').listSubfoldersFilesByFolderName;
@@ -21,30 +21,28 @@ describe('addActionWorkers tests', () => {
 		consoleLogSpy.mockRestore();
 	});
 
-	it('should call listSubfoldersFilesByFolderName with correct parameters', () => {
-		mockListSubfoldersFilesByFolderName.mockReturnValue([]);
+	it('should call listSubfoldersFilesByFolderName with correct parameters', async () => {
+		mockListSubfoldersFilesByFolderName.mockResolvedValue([]);
 
-		addActionWorkers('/test/root', 'workers');
+		await addActionWorkers('/test/root', 'workers');
 
 		expect(mockListSubfoldersFilesByFolderName).toHaveBeenCalledWith('/test/root', 'workers');
 	});
 
-	it('should handle empty folder results', () => {
-		mockListSubfoldersFilesByFolderName.mockReturnValue([]);
+	it('should handle empty folder results', async () => {
+		mockListSubfoldersFilesByFolderName.mockResolvedValue([]);
 
-		addActionWorkers('/test/root', 'workers');
+		await addActionWorkers('/test/root', 'workers');
 
 		expect(mockListSubfoldersFilesByFolderName).toHaveBeenCalledWith('/test/root', 'workers');
 		// Should not log any initialization messages when no files are found
-		expect(consoleLogSpy).not.toHaveBeenCalledWith(
-			expect.stringContaining('[@owservable] -> Initializing worker action')
-		);
+		expect(consoleLogSpy).not.toHaveBeenCalledWith(expect.stringContaining('[@owservable] -> Initializing worker action'));
 	});
 
-	it('should handle different folder names', () => {
-		mockListSubfoldersFilesByFolderName.mockReturnValue([]);
+	it('should handle different folder names', async () => {
+		mockListSubfoldersFilesByFolderName.mockResolvedValue([]);
 
-		addActionWorkers('/different/root', 'custom-workers');
+		await addActionWorkers('/different/root', 'custom-workers');
 
 		expect(mockListSubfoldersFilesByFolderName).toHaveBeenCalledWith('/different/root', 'custom-workers');
 	});
@@ -52,4 +50,4 @@ describe('addActionWorkers tests', () => {
 	it('should be a function', () => {
 		expect(typeof addActionWorkers).toBe('function');
 	});
-}); 
+});

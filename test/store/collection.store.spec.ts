@@ -1,10 +1,8 @@
 'use strict';
-
-import * as _ from 'lodash';
 import {Model} from 'mongoose';
 
 import CollectionStore from '../../src/store/collection.store';
-import EStoreType from '../../src/_enums/store.type.enum';
+import EStoreType from '../../src/enums/store.type.enum';
 import getHrtimeAsNumber from '../../src/functions/performance/get.hrtime.as.number';
 import observableModel from '../../src/mongodb/functions/observable.model';
 import getMillisecondsFrom from '../../src/functions/performance/get.milliseconds.from';
@@ -31,7 +29,7 @@ describe('CollectionStore tests', () => {
 			findOne: jest.fn(),
 			findById: jest.fn(),
 			countDocuments: jest.fn(),
-			populate: jest.fn(),
+			populate: jest.fn()
 		} as any;
 
 		mockObservableModel = observableModel as jest.MockedFunction<typeof observableModel>;
@@ -46,8 +44,8 @@ describe('CollectionStore tests', () => {
 		const mockObservable = {
 			pipe: jest.fn().mockReturnThis(),
 			subscribe: jest.fn().mockReturnValue({
-				unsubscribe: jest.fn(),
-			}),
+				unsubscribe: jest.fn()
+			})
 		};
 		mockObservableModel.mockReturnValue(mockObservable as any);
 
@@ -67,11 +65,11 @@ describe('CollectionStore tests', () => {
 		beforeEach(() => {
 			// Mock restartSubscription to prevent automatic restart during config assignment
 			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
-			
+
 			mockStore.config = {
 				query: {status: 'active'},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 		});
 
@@ -83,7 +81,7 @@ describe('CollectionStore tests', () => {
 		it('should return true for delete operation', () => {
 			const change = {
 				operationType: 'delete',
-				updateDescription: {updatedFields: {}, removedFields: [] as string[]},
+				updateDescription: {updatedFields: {}, removedFields: [] as string[]}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -91,14 +89,14 @@ describe('CollectionStore tests', () => {
 		it('should return true for insert operation', () => {
 			const change = {
 				operationType: 'insert',
-				updateDescription: {updatedFields: {}, removedFields: [] as string[]},
+				updateDescription: {updatedFields: {}, removedFields: [] as string[]}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
 
 		it('should return true if no updateDescription', () => {
 			const change = {
-				operationType: 'update',
+				operationType: 'update'
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -108,8 +106,8 @@ describe('CollectionStore tests', () => {
 				operationType: 'update',
 				updateDescription: {
 					updatedFields: {status: 'inactive'},
-					removedFields: [] as string[],
-				},
+					removedFields: [] as string[]
+				}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -119,9 +117,9 @@ describe('CollectionStore tests', () => {
 				operationType: 'update',
 				updateDescription: {
 					updatedFields: {name: 'test'},
-					removedFields: [] as string[],
+					removedFields: [] as string[]
 				},
-				fullDocument: {status: 'active'},
+				fullDocument: {status: 'active'}
 			};
 			jest.spyOn(mockStore as any, 'testDocument').mockReturnValue(true);
 			expect((mockStore as any).shouldReload(change)).toBe(true);
@@ -132,7 +130,7 @@ describe('CollectionStore tests', () => {
 		it('should emit total count', async () => {
 			const mockEmitTotal = jest.spyOn(mockStore as any, 'emitTotal').mockImplementation();
 			mockModel.countDocuments.mockResolvedValue(10);
-			
+
 			// Mock restartSubscription to prevent automatic restart during config assignment
 			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {query: {status: 'active'}, strict: false, incremental: false} as any;
@@ -149,7 +147,7 @@ describe('CollectionStore tests', () => {
 		beforeEach(() => {
 			jest.spyOn(mockStore as any, 'emitDelete').mockImplementation();
 			jest.spyOn(mockStore as any, 'emitMany').mockImplementation();
-			
+
 			// Mock restartSubscription to prevent automatic restart during config assignment
 			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
@@ -157,14 +155,14 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: true,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 		});
 
 		it('should emit delete for delete operation', async () => {
 			const change = {
 				operationType: 'delete',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 
 			await (mockStore as any).loadIncremental(1000, 'test-sub', change);
@@ -176,13 +174,13 @@ describe('CollectionStore tests', () => {
 			const fullDocument = {
 				_id: 'test-id',
 				name: 'test',
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
 			};
 
 			const change = {
 				operationType: 'insert',
 				documentKey: {_id: 'test-id'},
-				fullDocument,
+				fullDocument
 			};
 
 			await (mockStore as any).loadIncremental(1000, 'test-sub', change);
@@ -194,13 +192,13 @@ describe('CollectionStore tests', () => {
 			const fullDocument = {
 				_id: 'test-id',
 				name: 'test',
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
 			};
 
 			const change = {
 				operationType: 'insert',
 				documentKey: {_id: 'test-id'},
-				fullDocument,
+				fullDocument
 			};
 
 			// Mock restartSubscription to prevent automatic restart during config assignment
@@ -210,7 +208,7 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: true,
 				populates: ['user', 'category'],
-				virtuals: [],
+				virtuals: []
 			} as any;
 
 			await (mockStore as any).loadIncremental(1000, 'test-sub', change);
@@ -224,13 +222,13 @@ describe('CollectionStore tests', () => {
 				_id: 'test-id',
 				name: 'test',
 				fullName: Promise.resolve('Test Full Name'),
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test', fullName: 'Test Full Name'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test', fullName: 'Test Full Name'})
 			};
 
 			const change = {
 				operationType: 'insert',
 				documentKey: {_id: 'test-id'},
-				fullDocument,
+				fullDocument
 			};
 
 			// Mock restartSubscription to prevent automatic restart during config assignment
@@ -240,13 +238,13 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: true,
 				populates: [],
-				virtuals: ['fullName'],
+				virtuals: ['fullName']
 			} as any;
 
 			await (mockStore as any).loadIncremental(1000, 'test-sub', change);
 
 			expect((mockStore as any).emitMany).toHaveBeenCalledWith(1000, 'test-sub', {
-				data: {_id: 'test-id', name: 'test', fullName: 'Test Full Name'},
+				data: {_id: 'test-id', name: 'test', fullName: 'Test Full Name'}
 			});
 		});
 	});
@@ -257,7 +255,7 @@ describe('CollectionStore tests', () => {
 			jest.spyOn(mockStore as any, 'sendCount').mockImplementation();
 			jest.spyOn(mockStore as any, 'isQueryChange').mockReturnValue(false);
 			jest.spyOn(mockStore as any, 'removeSubscriptionDiff').mockImplementation();
-			
+
 			// Mock restartSubscription to prevent automatic restart during config assignment
 			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
@@ -268,19 +266,19 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 		});
 
 		it('should load and emit all documents', async () => {
 			const documents = [
 				{_id: '1', name: 'doc1'},
-				{_id: '2', name: 'doc2'},
+				{_id: '2', name: 'doc2'}
 			];
 
 			const mockQuery = {
 				sort: jest.fn().mockReturnThis(),
-				setOptions: jest.fn().mockResolvedValue(documents),
+				setOptions: jest.fn().mockResolvedValue(documents)
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
@@ -293,7 +291,7 @@ describe('CollectionStore tests', () => {
 			expect(mockQuery.setOptions).toHaveBeenCalledWith({allowDiskUse: true});
 			expect((mockStore as any).emitMany).toHaveBeenCalledWith(1000, 'test-sub', {
 				total: 2,
-				data: documents,
+				data: documents
 			});
 		});
 
@@ -301,7 +299,7 @@ describe('CollectionStore tests', () => {
 			const documents = [{_id: '1', name: 'doc1'}];
 			const mockQuery = {
 				sort: jest.fn().mockReturnThis(),
-				setOptions: jest.fn().mockResolvedValue(documents),
+				setOptions: jest.fn().mockResolvedValue(documents)
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
@@ -313,7 +311,7 @@ describe('CollectionStore tests', () => {
 			expect((mockStore as any).emitMany).toHaveBeenCalledWith(1000, 'test-sub', {
 				total: 1,
 				data: documents,
-				recounting: true,
+				recounting: true
 			});
 			expect((mockStore as any).sendCount).toHaveBeenCalledWith('test-sub');
 			expect((mockStore as any).removeSubscriptionDiff).toHaveBeenCalledWith('test-sub');
@@ -323,7 +321,7 @@ describe('CollectionStore tests', () => {
 			const documents = [{_id: '1', name: 'doc1'}];
 			const mockQuery = {
 				sort: jest.fn().mockReturnThis(),
-				setOptions: jest.fn().mockResolvedValue(documents),
+				setOptions: jest.fn().mockResolvedValue(documents)
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
@@ -334,7 +332,7 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: ['user'],
-				virtuals: [],
+				virtuals: []
 			} as any;
 
 			await (mockStore as any).loadAll(1000, 'test-sub');
@@ -343,16 +341,18 @@ describe('CollectionStore tests', () => {
 		});
 
 		it('should handle virtuals', async () => {
-			const documents = [{
-				_id: '1',
-				name: 'doc1',
-				fullName: Promise.resolve('Full Name 1'),
-				toJSON: jest.fn().mockReturnValue({_id: '1', name: 'doc1', fullName: 'Full Name 1'}),
-			}];
+			const documents = [
+				{
+					_id: '1',
+					name: 'doc1',
+					fullName: Promise.resolve('Full Name 1'),
+					toJSON: jest.fn().mockReturnValue({_id: '1', name: 'doc1', fullName: 'Full Name 1'})
+				}
+			];
 
 			const mockQuery = {
 				sort: jest.fn().mockReturnThis(),
-				setOptions: jest.fn().mockResolvedValue(documents),
+				setOptions: jest.fn().mockResolvedValue(documents)
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
@@ -363,14 +363,14 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: ['fullName'],
+				virtuals: ['fullName']
 			} as any;
 
 			await (mockStore as any).loadAll(1000, 'test-sub');
 
 			expect((mockStore as any).emitMany).toHaveBeenCalledWith(1000, 'test-sub', {
 				total: -1,
-				data: [{_id: '1', name: 'doc1', fullName: 'Full Name 1'}],
+				data: [{_id: '1', name: 'doc1', fullName: 'Full Name 1'}]
 			});
 		});
 	});
@@ -382,13 +382,13 @@ describe('CollectionStore tests', () => {
 			jest.spyOn(mockStore as any, 'shouldReload').mockReturnValue(true);
 			jest.spyOn(mockStore as any, 'loadIncremental').mockImplementation();
 			jest.spyOn(mockStore as any, 'loadAll').mockImplementation();
-			
+
 			// Mock restartSubscription to prevent automatic restart during config assignment
 			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 		});
 
@@ -447,7 +447,7 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: true,
 				page: 2,
-				pageSize: 20,
+				pageSize: 20
 			};
 
 			// Mock restartSubscription to prevent automatic restart during config assignment
@@ -457,7 +457,7 @@ describe('CollectionStore tests', () => {
 			expect((mockStore as any)._incremental).toBe(true);
 			expect((mockStore as any)._paging).toEqual({
 				skip: 20,
-				limit: 20,
+				limit: 20
 			});
 		});
 
@@ -465,7 +465,7 @@ describe('CollectionStore tests', () => {
 			const config = {
 				query: {},
 				strict: false,
-				incremental: false,
+				incremental: false
 			};
 
 			// Mock restartSubscription to prevent automatic restart during config assignment
@@ -481,7 +481,7 @@ describe('CollectionStore tests', () => {
 				strict: false,
 				incremental: false,
 				page: 1,
-				pageSize: 10,
+				pageSize: 10
 			};
 
 			// Mock restartSubscription to prevent automatic restart during config assignment
@@ -490,7 +490,7 @@ describe('CollectionStore tests', () => {
 
 			expect((mockStore as any)._paging).toEqual({
 				skip: 0,
-				limit: 10,
+				limit: 10
 			});
 		});
 	});

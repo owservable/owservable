@@ -2,12 +2,11 @@
 
 import * as _ from 'lodash';
 import {Model} from 'mongoose';
-import {Subject, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {randomUUID} from 'crypto';
 
 import AStore from '../../src/store/a.store';
-import EStoreType from '../../src/_enums/store.type.enum';
-import StoreSubscriptionConfigType from '../../src/_types/store.subscription.config.type';
+import EStoreType from '../../src/enums/store.type.enum';
 import observableModel from '../../src/mongodb/functions/observable.model';
 import getMillisecondsFrom from '../../src/functions/performance/get.milliseconds.from';
 
@@ -135,7 +134,7 @@ describe('AStore tests', () => {
 			findOne: jest.fn(),
 			findById: jest.fn(),
 			countDocuments: jest.fn(),
-			populate: jest.fn(),
+			populate: jest.fn()
 		} as any;
 
 		mockObservableModel = observableModel as jest.MockedFunction<typeof observableModel>;
@@ -146,7 +145,7 @@ describe('AStore tests', () => {
 			unsubscribe: jest.fn(),
 			closed: false,
 			add: jest.fn(),
-			remove: jest.fn(),
+			remove: jest.fn()
 		} as any;
 
 		// Mock return values
@@ -156,7 +155,7 @@ describe('AStore tests', () => {
 		// Mock observable model
 		const mockObservable = {
 			pipe: jest.fn().mockReturnThis(),
-			subscribe: jest.fn().mockReturnValue(mockSubscription),
+			subscribe: jest.fn().mockReturnValue(mockSubscription)
 		};
 		mockObservableModel.mockReturnValue(mockObservable as any);
 
@@ -221,7 +220,7 @@ describe('AStore tests', () => {
 				virtuals: ['fullName'],
 				delay: 200,
 				strict: false as const,
-				incremental: false as const,
+				incremental: false as const
 			};
 
 			mockStore.config = config;
@@ -238,7 +237,7 @@ describe('AStore tests', () => {
 				query: {},
 				fields: ['name', 'email', 'createdAt'],
 				strict: false as const,
-				incremental: false as const,
+				incremental: false as const
 			};
 
 			mockStore.config = config;
@@ -251,7 +250,7 @@ describe('AStore tests', () => {
 			const config = {
 				query: {},
 				strict: false as const,
-				incremental: false as const,
+				incremental: false as const
 			};
 
 			mockStore.config = config;
@@ -294,26 +293,30 @@ describe('AStore tests', () => {
 				const update = {name: 'test'};
 				mockStore.testEmitOne(1000, 'test-sub', update);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					subscriptionId: 'test-sub',
-					type: 'update',
-					target: 'testTarget',
-					payload: {testTarget: update},
-					execution_time: '123.45ms',
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						subscriptionId: 'test-sub',
+						type: 'update',
+						target: 'testTarget',
+						payload: {testTarget: update},
+						execution_time: '123.45ms'
+					})
+				);
 			});
 
 			it('should emit with incremental type', () => {
 				mockStore.config = {subscriptionId: 'test-sub', query: {}, strict: false, incremental: true} as any;
-				
+
 				// Verify that incremental flag is properly set
 				expect(mockStore.getIncremental()).toBe(true);
-				
+
 				mockStore.testEmitOne(1000, 'test-sub', {});
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					type: 'increment',
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						type: 'increment'
+					})
+				);
 			});
 		});
 
@@ -322,27 +325,31 @@ describe('AStore tests', () => {
 				const update = {total: 5, data: [{name: 'test1'}, {name: 'test2'}] as any[], recounting: false};
 				mockStore.testEmitMany(1000, 'test-sub', update);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					subscriptionId: 'test-sub',
-					type: 'update',
-					target: 'testTarget',
-					payload: {
-						testTarget: update.data,
-						_testTargetCount: 5,
-					},
-					execution_time: '123.45ms',
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						subscriptionId: 'test-sub',
+						type: 'update',
+						target: 'testTarget',
+						payload: {
+							testTarget: update.data,
+							_testTargetCount: 5
+						},
+						execution_time: '123.45ms'
+					})
+				);
 			});
 
 			it('should include recounting flag', () => {
 				const update = {total: 5, data: [] as any[], recounting: true};
 				mockStore.testEmitMany(1000, 'test-sub', update);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					payload: expect.objectContaining({
-						_testTargetRecounting: true,
-					}),
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						payload: expect.objectContaining({
+							_testTargetRecounting: true
+						})
+					})
+				);
 			});
 
 			it('should not include count for incremental updates', () => {
@@ -350,11 +357,13 @@ describe('AStore tests', () => {
 				const update = {total: 5, data: [] as any[], recounting: false};
 				mockStore.testEmitMany(1000, 'test-sub', update);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					payload: expect.not.objectContaining({
-						_testTargetCount: expect.anything(),
-					}),
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						payload: expect.not.objectContaining({
+							_testTargetCount: expect.anything()
+						})
+					})
+				);
 			});
 		});
 
@@ -362,13 +371,15 @@ describe('AStore tests', () => {
 			it('should emit total count', () => {
 				mockStore.testEmitTotal(1000, 'test-sub', 10);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					subscriptionId: 'test-sub',
-					type: 'total',
-					target: 'testTarget',
-					total: 10,
-					execution_time: '123.45ms',
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						subscriptionId: 'test-sub',
+						type: 'total',
+						target: 'testTarget',
+						total: 10,
+						execution_time: '123.45ms'
+					})
+				);
 			});
 		});
 
@@ -377,13 +388,15 @@ describe('AStore tests', () => {
 				const deleted = 'deleted-id';
 				mockStore.testEmitDelete(1000, 'test-sub', deleted);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					subscriptionId: 'test-sub',
-					type: 'delete',
-					target: 'testTarget',
-					payload: deleted,
-					execution_time: '123.45ms',
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						subscriptionId: 'test-sub',
+						type: 'delete',
+						target: 'testTarget',
+						payload: deleted,
+						execution_time: '123.45ms'
+					})
+				);
 			});
 		});
 
@@ -392,13 +405,15 @@ describe('AStore tests', () => {
 				const error = new Error('Test error');
 				mockStore.testEmitError(1000, 'test-sub', error);
 
-				expect(mockStore.next).toHaveBeenCalledWith(expect.objectContaining({
-					subscriptionId: 'test-sub',
-					type: 'error',
-					error,
-					target: 'testTarget',
-					execution_time: '123.45ms',
-				}));
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						subscriptionId: 'test-sub',
+						type: 'error',
+						error,
+						target: 'testTarget',
+						execution_time: '123.45ms'
+					})
+				);
 			});
 		});
 	});
@@ -425,7 +440,7 @@ describe('AStore tests', () => {
 			const config = {
 				subscriptionId: 'test-sub',
 				query: {status: 'active'},
-				sort: {createdAt: -1},
+				sort: {createdAt: -1}
 			} as any;
 
 			mockStore.config = config;
@@ -456,7 +471,7 @@ describe('AStore tests', () => {
 		it('should add subscription diff', () => {
 			const config = {
 				subscriptionId: 'test-sub',
-				query: {status: 'active'},
+				query: {status: 'active'}
 			} as any;
 
 			mockStore.config = config;
@@ -466,7 +481,7 @@ describe('AStore tests', () => {
 		it('should remove subscription diff', () => {
 			const config = {
 				subscriptionId: 'test-sub',
-				query: {status: 'active'},
+				query: {status: 'active'}
 			} as any;
 
 			mockStore.config = config;

@@ -2,7 +2,7 @@
 
 import {isFunction} from 'lodash';
 
-import WorkerType from '../../_types/worker.type';
+import WorkerType from '../../types/worker.type';
 
 const executeWorker = (obj: WorkerType) => {
 	const {init, work} = obj;

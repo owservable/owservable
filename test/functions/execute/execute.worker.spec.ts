@@ -1,7 +1,7 @@
 'use strict';
 
 import executeWorker from '../../../src/functions/execute/execute.worker';
-import WorkerType from '../../../src/_types/worker.type';
+import WorkerType from '../../../src/types/worker.type';
 
 describe('execute.worker tests', () => {
 	it('should be defined', () => {
@@ -43,13 +43,11 @@ describe('execute.worker tests', () => {
 		executeWorker(worker);
 
 		// Wait for the promise to resolve
-		await new Promise(resolve => setTimeout(resolve, 10));
+		await new Promise((resolve) => setTimeout(resolve, 10));
 
 		expect(mockInit).toHaveBeenCalledTimes(1);
 		expect(mockWork).toHaveBeenCalledTimes(1);
 	});
-
-
 
 	it('should handle missing work function', async () => {
 		const mockInit = jest.fn().mockResolvedValue(undefined);
@@ -61,7 +59,7 @@ describe('execute.worker tests', () => {
 		executeWorker(worker);
 
 		// Wait for the promise to resolve
-		await new Promise(resolve => setTimeout(resolve, 10));
+		await new Promise((resolve) => setTimeout(resolve, 10));
 
 		expect(mockInit).toHaveBeenCalledTimes(1);
 		// Should not throw even if work is undefined
@@ -106,7 +104,7 @@ describe('execute.worker tests', () => {
 		executeWorker(worker);
 
 		// Wait for the promise to resolve
-		await new Promise(resolve => setTimeout(resolve, 10));
+		await new Promise((resolve) => setTimeout(resolve, 10));
 
 		expect(executionOrder).toEqual(['init', 'work']);
 	});

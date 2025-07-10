@@ -11,7 +11,7 @@ describe('add.index.to.attributes tests', () => {
 
 	beforeEach(() => {
 		mockSchema = {
-			index: jest.fn(),
+			index: jest.fn()
 		} as any;
 	});
 
@@ -31,7 +31,7 @@ describe('add.index.to.attributes tests', () => {
 		addIndexToAttributes(mockSchema, attributes, index);
 
 		expect(mockSchema.index).toHaveBeenCalledTimes(1);
-		expect(mockSchema.index).toHaveBeenCalledWith({ name: 1 });
+		expect(mockSchema.index).toHaveBeenCalledWith({name: 1});
 	});
 
 	it('should create descending index for single attribute', () => {
@@ -41,7 +41,7 @@ describe('add.index.to.attributes tests', () => {
 		addIndexToAttributes(mockSchema, attributes, index);
 
 		expect(mockSchema.index).toHaveBeenCalledTimes(1);
-		expect(mockSchema.index).toHaveBeenCalledWith({ createdAt: -1 });
+		expect(mockSchema.index).toHaveBeenCalledWith({createdAt: -1});
 	});
 
 	it('should create indices for multiple attributes', () => {
@@ -51,9 +51,9 @@ describe('add.index.to.attributes tests', () => {
 		addIndexToAttributes(mockSchema, attributes, index);
 
 		expect(mockSchema.index).toHaveBeenCalledTimes(3);
-		expect(mockSchema.index).toHaveBeenNthCalledWith(1, { name: 1 });
-		expect(mockSchema.index).toHaveBeenNthCalledWith(2, { email: 1 });
-		expect(mockSchema.index).toHaveBeenNthCalledWith(3, { status: 1 });
+		expect(mockSchema.index).toHaveBeenNthCalledWith(1, {name: 1});
+		expect(mockSchema.index).toHaveBeenNthCalledWith(2, {email: 1});
+		expect(mockSchema.index).toHaveBeenNthCalledWith(3, {status: 1});
 	});
 
 	it('should handle nested attributes', () => {
@@ -63,17 +63,17 @@ describe('add.index.to.attributes tests', () => {
 		addIndexToAttributes(mockSchema, attributes, index);
 
 		expect(mockSchema.index).toHaveBeenCalledTimes(2);
-		expect(mockSchema.index).toHaveBeenNthCalledWith(1, { 
-			user: { 
-				profile: { 
-					name: 1 
-				} 
-			} 
+		expect(mockSchema.index).toHaveBeenNthCalledWith(1, {
+			user: {
+				profile: {
+					name: 1
+				}
+			}
 		});
-		expect(mockSchema.index).toHaveBeenNthCalledWith(2, { 
-			settings: { 
-				theme: 1 
-			} 
+		expect(mockSchema.index).toHaveBeenNthCalledWith(2, {
+			settings: {
+				theme: 1
+			}
 		});
 	});
 
@@ -94,7 +94,7 @@ describe('add.index.to.attributes tests', () => {
 		addIndexToAttributes(mockSchema, attributes2, -1);
 
 		expect(mockSchema.index).toHaveBeenCalledTimes(2);
-		expect(mockSchema.index).toHaveBeenNthCalledWith(1, { name: 1 });
-		expect(mockSchema.index).toHaveBeenNthCalledWith(2, { createdAt: -1 });
+		expect(mockSchema.index).toHaveBeenNthCalledWith(1, {name: 1});
+		expect(mockSchema.index).toHaveBeenNthCalledWith(2, {createdAt: -1});
 	});
 });

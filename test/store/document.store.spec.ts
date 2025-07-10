@@ -1,10 +1,8 @@
 'use strict';
-
-import * as _ from 'lodash';
 import {Model} from 'mongoose';
 
 import DocumentStore from '../../src/store/document.store';
-import EStoreType from '../../src/_enums/store.type.enum';
+import EStoreType from '../../src/enums/store.type.enum';
 import getHrtimeAsNumber from '../../src/functions/performance/get.hrtime.as.number';
 import observableModel from '../../src/mongodb/functions/observable.model';
 import getMillisecondsFrom from '../../src/functions/performance/get.milliseconds.from';
@@ -30,7 +28,7 @@ describe('DocumentStore tests', () => {
 			findOne: jest.fn(),
 			findById: jest.fn(),
 			find: jest.fn(),
-			populate: jest.fn(),
+			populate: jest.fn()
 		} as any;
 
 		mockObservableModel = observableModel as jest.MockedFunction<typeof observableModel>;
@@ -45,8 +43,8 @@ describe('DocumentStore tests', () => {
 		const mockObservable = {
 			pipe: jest.fn().mockReturnThis(),
 			subscribe: jest.fn().mockReturnValue({
-				unsubscribe: jest.fn(),
-			}),
+				unsubscribe: jest.fn()
+			})
 		};
 		mockObservableModel.mockReturnValue(mockObservable as any);
 
@@ -66,7 +64,7 @@ describe('DocumentStore tests', () => {
 			mockStore.config = {
 				query: {_id: 'test-id'},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 		});
 
@@ -78,7 +76,7 @@ describe('DocumentStore tests', () => {
 		it('should return true for delete operation', () => {
 			const change = {
 				operationType: 'delete',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -86,7 +84,7 @@ describe('DocumentStore tests', () => {
 		it('should return false for insert operation with ID query', () => {
 			const change = {
 				operationType: 'insert',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(false);
 		});
@@ -95,11 +93,11 @@ describe('DocumentStore tests', () => {
 			mockStore.config = {
 				query: {name: 'test'},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 			const change = {
 				operationType: 'insert',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -107,7 +105,7 @@ describe('DocumentStore tests', () => {
 		it('should return true if no updateDescription', () => {
 			const change = {
 				operationType: 'update',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -118,8 +116,8 @@ describe('DocumentStore tests', () => {
 				documentKey: {_id: 'test-id'},
 				updateDescription: {
 					updatedFields: {name: 'updated'},
-					removedFields: [] as string[],
-				},
+					removedFields: [] as string[]
+				}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -131,8 +129,8 @@ describe('DocumentStore tests', () => {
 				documentKey: {_id: 'different-id'},
 				updateDescription: {
 					updatedFields: {name: 'updated'},
-					removedFields: [] as string[],
-				},
+					removedFields: [] as string[]
+				}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -143,15 +141,15 @@ describe('DocumentStore tests', () => {
 				query: {_id: 'test-id'},
 				fields: {name: 1, email: 1},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 			const change = {
 				operationType: 'update',
 				documentKey: {_id: 'different-id'},
 				updateDescription: {
 					updatedFields: {name: 'updated'},
-					removedFields: [] as string[],
-				},
+					removedFields: [] as string[]
+				}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
@@ -162,15 +160,15 @@ describe('DocumentStore tests', () => {
 				query: {_id: 'test-id'},
 				fields: {name: 1, email: 1},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 			const change = {
 				operationType: 'update',
 				documentKey: {_id: 'different-id'},
 				updateDescription: {
 					updatedFields: {description: 'updated'},
-					removedFields: [] as string[],
-				},
+					removedFields: [] as string[]
+				}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(false);
 		});
@@ -184,7 +182,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 		});
 
@@ -212,7 +210,7 @@ describe('DocumentStore tests', () => {
 			const documents = [{_id: 'test-id', name: 'test'}];
 			const mockQuery = {
 				sort: jest.fn().mockReturnThis(),
-				setOptions: jest.fn().mockResolvedValue(documents),
+				setOptions: jest.fn().mockResolvedValue(documents)
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
@@ -224,7 +222,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 
 			const result = await (mockStore as any)._loadSortedFirstDocument();
@@ -244,7 +242,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 		});
 
@@ -253,7 +251,7 @@ describe('DocumentStore tests', () => {
 				query: {status: 'active'},
 				sort: {createdAt: -1},
 				strict: false,
-				incremental: false,
+				incremental: false
 			} as any;
 
 			const change = {operationType: 'update'};
@@ -272,7 +270,7 @@ describe('DocumentStore tests', () => {
 		it('should return true if document key matches query ID', () => {
 			const change = {
 				operationType: 'update',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 			const result = (mockStore as any)._pipeFilter(change);
 
@@ -283,7 +281,7 @@ describe('DocumentStore tests', () => {
 			const change = {
 				operationType: 'update',
 				documentKey: {_id: 'other-id'},
-				fullDocument: {_id: 'other-id', name: 'test'},
+				fullDocument: {_id: 'other-id', name: 'test'}
 			};
 			jest.spyOn(mockStore as any, 'testDocument').mockReturnValue(true);
 
@@ -303,14 +301,14 @@ describe('DocumentStore tests', () => {
 			jest.spyOn(mockStore as any, '_loadDocumentById').mockImplementation();
 			jest.spyOn(mockStore as any, '_loadDocument').mockImplementation();
 			jest.spyOn(mockStore as any, '_loadSortedFirstDocument').mockImplementation();
-			
+
 			mockStore.config = {
 				query: {_id: 'test-id'},
 				fields: {name: 1},
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 		});
 
@@ -334,7 +332,7 @@ describe('DocumentStore tests', () => {
 		it('should emit delete for delete operation with matching ID', async () => {
 			const change = {
 				operationType: 'delete',
-				documentKey: {_id: 'test-id'},
+				documentKey: {_id: 'test-id'}
 			};
 
 			await (mockStore as any).load(change);
@@ -346,7 +344,7 @@ describe('DocumentStore tests', () => {
 			const document = {
 				_id: 'test-id',
 				name: 'test',
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
 			};
 
 			jest.spyOn(mockStore as any, '_loadSortedFirstDocument').mockResolvedValue(document);
@@ -357,7 +355,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 
 			await (mockStore as any).load({});
@@ -370,7 +368,7 @@ describe('DocumentStore tests', () => {
 			const document = {
 				_id: 'test-id',
 				name: 'test',
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
 			};
 
 			jest.spyOn(mockStore as any, '_loadDocumentById').mockResolvedValue(document);
@@ -385,7 +383,7 @@ describe('DocumentStore tests', () => {
 			const document = {
 				_id: 'test-id',
 				name: 'test',
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
 			};
 
 			jest.spyOn(mockStore as any, '_loadDocument').mockResolvedValue(document);
@@ -395,7 +393,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: [],
+				virtuals: []
 			} as any;
 
 			await (mockStore as any).load({});
@@ -409,7 +407,7 @@ describe('DocumentStore tests', () => {
 				_id: 'test-id',
 				name: 'test',
 				populate: jest.fn().mockResolvedValue(undefined),
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
 			};
 
 			jest.spyOn(mockStore as any, '_loadDocumentById').mockResolvedValue(document);
@@ -419,7 +417,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: ['user', 'category'],
-				virtuals: [],
+				virtuals: []
 			} as any;
 
 			await (mockStore as any).load({});
@@ -433,7 +431,7 @@ describe('DocumentStore tests', () => {
 				_id: 'test-id',
 				name: 'test',
 				fullName: Promise.resolve('Test Full Name'),
-				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test', fullName: 'Test Full Name'}),
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test', fullName: 'Test Full Name'})
 			};
 
 			jest.spyOn(mockStore as any, '_loadDocumentById').mockResolvedValue(document);
@@ -443,7 +441,7 @@ describe('DocumentStore tests', () => {
 				strict: false,
 				incremental: false,
 				populates: [],
-				virtuals: ['fullName'],
+				virtuals: ['fullName']
 			} as any;
 
 			await (mockStore as any).load({});
@@ -451,7 +449,7 @@ describe('DocumentStore tests', () => {
 			expect((mockStore as any).emitOne).toHaveBeenCalledWith(1000, expect.any(String), {
 				_id: 'test-id',
 				name: 'test',
-				fullName: 'Test Full Name',
+				fullName: 'Test Full Name'
 			});
 		});
 
@@ -479,7 +477,7 @@ describe('DocumentStore tests', () => {
 				query: {_id: 'test-id'},
 				skip: 10,
 				strict: false,
-				incremental: false,
+				incremental: false
 			};
 
 			mockStore.config = config as any;
@@ -491,7 +489,7 @@ describe('DocumentStore tests', () => {
 			const config = {
 				query: {_id: 'test-id'},
 				strict: false,
-				incremental: false,
+				incremental: false
 			};
 
 			mockStore.config = config as any;
@@ -504,7 +502,7 @@ describe('DocumentStore tests', () => {
 				query: {_id: 'test-id'},
 				skip: 0,
 				strict: false,
-				incremental: false,
+				incremental: false
 			};
 
 			mockStore.config = config as any;

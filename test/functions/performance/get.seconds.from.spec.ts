@@ -1,6 +1,6 @@
 'use strict';
 
-import getSecondsFrom, { NS_PER_SEC } from '../../../src/functions/performance/get.seconds.from';
+import getSecondsFrom, {NS_PER_SEC} from '../../../src/functions/performance/get.seconds.from';
 import getHrtimeAsNumber from '../../../src/functions/performance/get.hrtime.as.number';
 
 describe('get.seconds.from tests', () => {
@@ -34,7 +34,7 @@ describe('get.seconds.from tests', () => {
 		// Small delay to ensure time passes
 		const after1 = getSecondsFrom(start);
 		const after2 = getSecondsFrom(start);
-		
+
 		expect(after2).toBeGreaterThanOrEqual(after1);
 	});
 
@@ -45,17 +45,17 @@ describe('get.seconds.from tests', () => {
 			// Simple loop to create measurable time difference
 		}
 		const start2 = getHrtimeAsNumber();
-		
+
 		const elapsed1 = getSecondsFrom(start1);
 		const elapsed2 = getSecondsFrom(start2);
-		
+
 		expect(elapsed1).toBeGreaterThan(elapsed2);
 	});
 
 	it('should return valid decimal seconds', () => {
 		const start = getHrtimeAsNumber() - 1500000000; // 1.5 seconds ago in nanoseconds
 		const result = getSecondsFrom(start);
-		
+
 		expect(result).toBeGreaterThan(0);
 		expect(Number.isFinite(result)).toBe(true);
 	});

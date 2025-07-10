@@ -6,7 +6,7 @@ import {asyncScheduler} from 'rxjs';
 import {filter, throttleTime} from 'rxjs/operators';
 
 import AStore from './a.store';
-import EStoreType from '../_enums/store.type.enum';
+import EStoreType from '../enums/store.type.enum';
 import observableModel from '../mongodb/functions/observable.model';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 

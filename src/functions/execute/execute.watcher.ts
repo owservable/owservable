@@ -2,7 +2,7 @@
 
 import {isFunction} from 'lodash';
 
-import WatcherType from '../../_types/watcher.type';
+import WatcherType from '../../types/watcher.type';
 
 const executeWatcher = (obj: WatcherType): void => {
 	const {init, watch, waitForInit = false} = obj;

@@ -8,8 +8,8 @@ import AStore from './store/a.store';
 import storeFactory from './store/factories/store.factory';
 import IConnectionManager from './auth/i.connection.manager';
 import DataMiddlewareMap from './middleware/data.middleware.map';
-import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
-import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
+import StoreSubscriptionUpdateType from './types/store.subscription.update.type';
+import ConnectionManagerRefreshType from './types/connection.manager.refresh.type';
 
 export default class OwservableClient extends Subject<any> {
 	private readonly _connectionManager: IConnectionManager;

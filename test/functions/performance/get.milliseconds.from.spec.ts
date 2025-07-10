@@ -27,14 +27,14 @@ describe('get.milliseconds.from tests', () => {
 		const start = getHrtimeAsNumber();
 		const after1 = getMillisecondsFrom(start);
 		const after2 = getMillisecondsFrom(start);
-		
+
 		expect(after2).toBeGreaterThanOrEqual(after1);
 	});
 
 	it('should return milliseconds (1000x seconds)', () => {
 		const start = getHrtimeAsNumber() - 1000000000; // 1 second ago in nanoseconds
 		const result = getMillisecondsFrom(start);
-		
+
 		// Should be approximately 1000ms (1 second)
 		expect(result).toBeGreaterThan(999);
 		expect(result).toBeLessThan(1001);
@@ -43,17 +43,17 @@ describe('get.milliseconds.from tests', () => {
 	it('should handle different start times correctly', () => {
 		const start1 = getHrtimeAsNumber();
 		const start2 = getHrtimeAsNumber();
-		
+
 		const elapsed1 = getMillisecondsFrom(start1);
 		const elapsed2 = getMillisecondsFrom(start2);
-		
+
 		expect(elapsed1).toBeGreaterThanOrEqual(elapsed2);
 	});
 
 	it('should return valid decimal milliseconds', () => {
 		const start = getHrtimeAsNumber() - 1500000000; // 1.5 seconds ago in nanoseconds
 		const result = getMillisecondsFrom(start);
-		
+
 		expect(result).toBeGreaterThan(0);
 		expect(Number.isFinite(result)).toBe(true);
 		// Should be approximately 1500ms (1.5 seconds)
@@ -64,7 +64,7 @@ describe('get.milliseconds.from tests', () => {
 	it('should maintain precision for small time differences', () => {
 		const start = getHrtimeAsNumber() - 500000; // 0.5ms ago in nanoseconds
 		const result = getMillisecondsFrom(start);
-		
+
 		expect(result).toBeGreaterThan(0);
 		expect(result).toBeLessThan(1);
 	});

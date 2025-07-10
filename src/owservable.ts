@@ -2,18 +2,18 @@
 
 import OwservableClient from './owservable.client';
 
-// _enums
-import EStoreType from './_enums/store.type.enum';
+// enums
+import EStoreType from './enums/store.type.enum';
 
-// _types
-import ConnectionManagerRefreshType from './_types/connection.manager.refresh.type';
-import CronJobType from './_types/cronjob.type';
-import StoreScopeType from './_types/store.scope.type';
-import StoreSubscriptionConfigType from './_types/store.subscription.config.type';
-import StoreSubscriptionUpdateType from './_types/store.subscription.update.type';
-import SubscriptionMethodsType from './_types/subscription.methods.type';
-import WatcherType from './_types/watcher.type';
-import WorkerType from './_types/worker.type';
+// types
+import ConnectionManagerRefreshType from './types/connection.manager.refresh.type';
+import CronJobType from './types/cronjob.type';
+import StoreScopeType from './types/store.scope.type';
+import StoreSubscriptionConfigType from './types/store.subscription.config.type';
+import StoreSubscriptionUpdateType from './types/store.subscription.update.type';
+import SubscriptionMethodsType from './types/subscription.methods.type';
+import WatcherType from './types/watcher.type';
+import WorkerType from './types/worker.type';
 
 // auth
 import IConnectionManager from './auth/i.connection.manager';
@@ -63,10 +63,10 @@ import storeFactory from './store/factories/store.factory';
 export {
 	OwservableClient,
 
-	// _enums
+	// enums
 	EStoreType,
 
-	// _types
+	// types
 	ConnectionManagerRefreshType,
 	CronJobType,
 	StoreScopeType,

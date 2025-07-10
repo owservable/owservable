@@ -18,7 +18,7 @@ describe('get.hrtime.as.number tests', () => {
 		const first = getHrtimeAsNumber();
 		const second = getHrtimeAsNumber();
 		const third = getHrtimeAsNumber();
-		
+
 		expect(second).toBeGreaterThanOrEqual(first);
 		expect(third).toBeGreaterThanOrEqual(second);
 	});
@@ -28,7 +28,7 @@ describe('get.hrtime.as.number tests', () => {
 		// Small delay to ensure time passes
 		const end = getHrtimeAsNumber();
 		const elapsed = end - start;
-		
+
 		expect(elapsed).toBeGreaterThanOrEqual(0);
 		expect(typeof elapsed).toBe('number');
 	});

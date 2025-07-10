@@ -5,11 +5,11 @@ import {isFunction, set} from 'lodash';
 import {ActionAsWorkerInterface} from '@owservable/actions';
 import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 
-import WorkerType from '../../_types/worker.type';
+import WorkerType from '../../types/worker.type';
 import executeWorker from '../execute/execute.worker';
 
-export default function addActionWorkers(root: string, folderName: string) {
-	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
+export default async function addActionWorkers(root: string, folderName: string) {
+	const actionPaths: string[] = await listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing worker action', actionPath);
@@ -19,6 +19,7 @@ export default function addActionWorkers(root: string, folderName: string) {
 
 		if (isFunction(action.asWorker)) {
 			const job: WorkerType = {
+				...(action.asWorkerInit && {init: action.asWorkerInit}),
 				work: action.asWorker
 			};
 			if (isFunction(action.asWorkerInit)) set(job, 'init', action.asWorkerInit());

@@ -2,9 +2,9 @@
 
 import addActionCronjobs from '../../../src/functions/action/add.action.cronjobs';
 
-// Mock dependencies
+// Mock the external dependencies
 jest.mock('@owservable/folders', () => ({
-	listSubfoldersFilesByFolderName: jest.fn(),
+	listSubfoldersFilesByFolderName: jest.fn().mockResolvedValue([])
 }));
 
 const mockListSubfoldersFilesByFolderName = require('@owservable/folders').listSubfoldersFilesByFolderName;
@@ -21,30 +21,28 @@ describe('addActionCronjobs tests', () => {
 		consoleLogSpy.mockRestore();
 	});
 
-	it('should call listSubfoldersFilesByFolderName with correct parameters', () => {
-		mockListSubfoldersFilesByFolderName.mockReturnValue([]);
+	it('should call listSubfoldersFilesByFolderName with correct parameters', async () => {
+		mockListSubfoldersFilesByFolderName.mockResolvedValue([]);
 
-		addActionCronjobs('/test/root', 'cronjobs');
+		await addActionCronjobs('/test/root', 'cronjobs');
 
 		expect(mockListSubfoldersFilesByFolderName).toHaveBeenCalledWith('/test/root', 'cronjobs');
 	});
 
-	it('should handle empty folder results', () => {
-		mockListSubfoldersFilesByFolderName.mockReturnValue([]);
+	it('should handle empty folder results', async () => {
+		mockListSubfoldersFilesByFolderName.mockResolvedValue([]);
 
-		addActionCronjobs('/test/root', 'cronjobs');
+		await addActionCronjobs('/test/root', 'cronjobs');
 
 		expect(mockListSubfoldersFilesByFolderName).toHaveBeenCalledWith('/test/root', 'cronjobs');
 		// Should not log any initialization messages when no files are found
-		expect(consoleLogSpy).not.toHaveBeenCalledWith(
-			expect.stringContaining('[@owservable] -> Initializing cronjob action')
-		);
+		expect(consoleLogSpy).not.toHaveBeenCalledWith(expect.stringContaining('[@owservable] -> Initializing cronjob action'));
 	});
 
-	it('should handle different folder names', () => {
-		mockListSubfoldersFilesByFolderName.mockReturnValue([]);
+	it('should handle different folder names', async () => {
+		mockListSubfoldersFilesByFolderName.mockResolvedValue([]);
 
-		addActionCronjobs('/different/root', 'custom-cronjobs');
+		await addActionCronjobs('/different/root', 'custom-cronjobs');
 
 		expect(mockListSubfoldersFilesByFolderName).toHaveBeenCalledWith('/different/root', 'custom-cronjobs');
 	});
@@ -52,4 +50,4 @@ describe('addActionCronjobs tests', () => {
 	it('should be a function', () => {
 		expect(typeof addActionCronjobs).toBe('function');
 	});
-}); 
+});

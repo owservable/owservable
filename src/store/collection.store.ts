@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import {Model} from 'mongoose';
 
 import AStore from './a.store';
-import EStoreType from '../_enums/store.type.enum';
+import EStoreType from '../enums/store.type.enum';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
 export default class CollectionStore extends AStore {

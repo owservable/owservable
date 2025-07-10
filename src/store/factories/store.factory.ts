@@ -6,7 +6,7 @@ import AStore from '../a.store';
 import CountStore from '../count.store';
 import DocumentStore from '../document.store';
 import CollectionStore from '../collection.store';
-import StoreScopeType from '../../_types/store.scope.type';
+import StoreScopeType from '../../types/store.scope.type';
 import CollectionsModelsMap from '../../mongodb/collections.models.map';
 
 const storeFactory = (scope: StoreScopeType, observe: string, target: string): AStore => {

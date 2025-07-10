@@ -2,7 +2,6 @@
 
 import storeFactory from '../../../src/store/factories/store.factory';
 import CollectionsModelsMap from '../../../src/mongodb/collections.models.map';
-import AStore from '../../../src/store/a.store';
 import CountStore from '../../../src/store/count.store';
 import DocumentStore from '../../../src/store/document.store';
 import CollectionStore from '../../../src/store/collection.store';

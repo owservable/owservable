@@ -10,6 +10,7 @@
 		"preserveConstEnums": true,
 		"sourceMap": true,
 		"declaration": true,
+		"rootDir": "./src",
 		"outDir": "./lib",
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
@@ -19,8 +20,7 @@
 		"types": ["jest", "node"]
 	},
 	"include": [
-		"./src/**/*",
-		"./test/**/*"
+		"./src/**/*"
 	],
 	"exclude": [
 		".idea",
