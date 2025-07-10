@@ -65,6 +65,9 @@ describe('CollectionStore tests', () => {
 
 	describe('shouldReload', () => {
 		beforeEach(() => {
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
+			
 			mockStore.config = {
 				query: {status: 'active'},
 				strict: false,
@@ -129,6 +132,9 @@ describe('CollectionStore tests', () => {
 		it('should emit total count', async () => {
 			const mockEmitTotal = jest.spyOn(mockStore as any, 'emitTotal').mockImplementation();
 			mockModel.countDocuments.mockResolvedValue(10);
+			
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {query: {status: 'active'}, strict: false, incremental: false} as any;
 
 			await (mockStore as any).sendCount('test-sub');
@@ -143,6 +149,9 @@ describe('CollectionStore tests', () => {
 		beforeEach(() => {
 			jest.spyOn(mockStore as any, 'emitDelete').mockImplementation();
 			jest.spyOn(mockStore as any, 'emitMany').mockImplementation();
+			
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
@@ -194,6 +203,8 @@ describe('CollectionStore tests', () => {
 				fullDocument,
 			};
 
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
@@ -222,6 +233,8 @@ describe('CollectionStore tests', () => {
 				fullDocument,
 			};
 
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
@@ -245,6 +258,8 @@ describe('CollectionStore tests', () => {
 			jest.spyOn(mockStore as any, 'isQueryChange').mockReturnValue(false);
 			jest.spyOn(mockStore as any, 'removeSubscriptionDiff').mockImplementation();
 			
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {status: 'active'},
 				fields: {name: 1},
@@ -312,6 +327,8 @@ describe('CollectionStore tests', () => {
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
@@ -339,6 +356,8 @@ describe('CollectionStore tests', () => {
 			};
 
 			mockModel.find.mockReturnValue(mockQuery as any);
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
@@ -364,6 +383,8 @@ describe('CollectionStore tests', () => {
 			jest.spyOn(mockStore as any, 'loadIncremental').mockImplementation();
 			jest.spyOn(mockStore as any, 'loadAll').mockImplementation();
 			
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = {
 				query: {},
 				strict: false,
@@ -429,6 +450,8 @@ describe('CollectionStore tests', () => {
 				pageSize: 20,
 			};
 
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = config as any;
 
 			expect((mockStore as any)._incremental).toBe(true);
@@ -445,6 +468,8 @@ describe('CollectionStore tests', () => {
 				incremental: false,
 			};
 
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = config as any;
 
 			expect((mockStore as any)._paging).toEqual({});
@@ -459,6 +484,8 @@ describe('CollectionStore tests', () => {
 				pageSize: 10,
 			};
 
+			// Mock restartSubscription to prevent automatic restart during config assignment
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
 			mockStore.config = config as any;
 
 			expect((mockStore as any)._paging).toEqual({
