@@ -108,4 +108,15 @@ describe('execute.worker tests', () => {
 
 		expect(executionOrder).toEqual(['init', 'work']);
 	});
+
+	it('should handle undefined work with non-function init', () => {
+		// This tests the missing branch: else work?.();
+		const worker: WorkerType = {
+			init: 'not a function' as any, // Forces else branch
+			work: undefined as any         // Tests ?.() optional chaining
+		};
+
+		// Should not throw even with undefined work in else branch
+		expect(() => executeWorker(worker)).not.toThrow();
+	});
 });

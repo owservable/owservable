@@ -12,4 +12,10 @@ describe('owservable.ts tests', () => {
 		expect(Owservable).toEqual({});
 		expect(Object.keys(Owservable)).toHaveLength(0);
 	});
+
+	it('should be an object', () => {
+		expect(typeof Owservable).toBe('object');
+		expect(Owservable).not.toBeNull();
+		expect(Owservable).not.toBeUndefined();
+	});
 });

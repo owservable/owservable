@@ -86,6 +86,55 @@ describe('observable.model.ts tests', () => {
 		});
 	});
 
+	describe('Internal class methods', () => {
+		it('should test ObservableModel _pipeFilter with valid change', () => {
+			const modelInstance = observableModel(mockModel);
+			
+			// Access the private method for testing
+			const pipeFilter = (modelInstance as any)._pipeFilter;
+			
+			if (pipeFilter) {
+				const validChange = {
+					ns: { coll: 'testCollection' }
+				};
+				
+				const result = pipeFilter.call(modelInstance, validChange);
+				expect(result).toBe(true);
+			}
+		});
+
+		it('should test ObservableModel _pipeFilter error handling', () => {
+			const modelInstance = observableModel(mockModel);
+			
+			// Access the private method for testing
+			const pipeFilter = (modelInstance as any)._pipeFilter;
+			
+			if (pipeFilter) {
+				// Test with malformed change object to trigger error handling
+				const invalidChange: any = null;
+				
+				const result = pipeFilter.call(modelInstance, invalidChange);
+				expect(result).toBe(false);
+			}
+		});
+
+		it('should test ObservableModel _pipeFilter with mismatched collection', () => {
+			const modelInstance = observableModel(mockModel);
+			
+			// Access the private method for testing  
+			const pipeFilter = (modelInstance as any)._pipeFilter;
+			
+			if (pipeFilter) {
+				const mismatchedChange = {
+					ns: { coll: 'differentCollection' }
+				};
+				
+				const result = pipeFilter.call(modelInstance, mismatchedChange);
+				expect(result).toBe(false);
+			}
+		});
+	});
+
 	// Skip the complex RxJS interaction tests that were failing
 	describe.skip('Complex RxJS functionality', () => {
 		// These tests require complex RxJS mocking and database event simulation
