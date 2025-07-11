@@ -8,5 +8,8 @@ describe('owservable.ts tests', () => {
 		expect(typeof Owservable).toBe('object');
 	});
 
-	it.todo('should be implemented');
+	it('should have the correct structure', () => {
+		expect(Owservable).toEqual({});
+		expect(Object.keys(Owservable)).toHaveLength(0);
+	});
 });

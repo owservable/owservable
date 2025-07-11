@@ -119,4 +119,53 @@ describe('MongoDBConnector tests', () => {
 			expect(result).toBeNull();
 		});
 	});
+
+	describe('event handlers', () => {
+		it('should register and trigger connection event handlers', async () => {
+			const mongoDbUri = 'mongodb://localhost:27017/test';
+			mockConnect.mockResolvedValue(undefined);
+
+			// Initialize connection to register event handlers
+			await MongoDBConnector.init(mongoDbUri);
+
+			// Verify event handlers were registered
+			expect(mockConnection.on).toHaveBeenCalledWith('connecting', expect.any(Function));
+			expect(mockConnection.on).toHaveBeenCalledWith('connected', expect.any(Function));
+			expect(mockConnection.on).toHaveBeenCalledWith('open', expect.any(Function));
+			expect(mockConnection.on).toHaveBeenCalledWith('error', expect.any(Function));
+			expect(mockConnection.on).toHaveBeenCalledWith('disconnecting', expect.any(Function));
+			expect(mockConnection.on).toHaveBeenCalledWith('disconnected', expect.any(Function));
+			expect(mockConnection.on).toHaveBeenCalledWith('close', expect.any(Function));
+
+			// Trigger each event handler to increase function coverage
+			const onCalls = mockConnection.on.mock.calls;
+			
+			// Find and trigger each event handler
+			const connectingHandler = onCalls.find((call: any) => call[0] === 'connecting')[1];
+			const connectedHandler = onCalls.find((call: any) => call[0] === 'connected')[1];
+			const openHandler = onCalls.find((call: any) => call[0] === 'open')[1];
+			const errorHandler = onCalls.find((call: any) => call[0] === 'error')[1];
+			const disconnectingHandler = onCalls.find((call: any) => call[0] === 'disconnecting')[1];
+			const disconnectedHandler = onCalls.find((call: any) => call[0] === 'disconnected')[1];
+			const closeHandler = onCalls.find((call: any) => call[0] === 'close')[1];
+
+			// Execute event handlers to cover the arrow functions
+			connectingHandler();
+			connectedHandler();
+			openHandler();
+			errorHandler(new Error('Test error'));
+			disconnectingHandler();
+			disconnectedHandler();
+			closeHandler();
+
+			// Verify console methods were called
+			expect(consoleLogSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB connecting to', mongoDbUri, '...');
+			expect(consoleLogSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB connected to', mongoDbUri);
+			expect(consoleLogSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB opened connection to', mongoDbUri);
+			expect(consoleErrorSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB connection error:', new Error('Test error'));
+			expect(consoleErrorSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB disconnecting from', mongoDbUri, '...');
+			expect(consoleErrorSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB disconnected from', mongoDbUri);
+			expect(consoleErrorSpy).toHaveBeenCalledWith('[@owservable] -> MongoDB closed connection to', mongoDbUri);
+		});
+	});
 });
