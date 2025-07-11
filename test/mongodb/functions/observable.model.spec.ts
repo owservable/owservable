@@ -89,15 +89,15 @@ describe('observable.model.ts tests', () => {
 	describe('Internal class methods', () => {
 		it('should test ObservableModel _pipeFilter with valid change', () => {
 			const modelInstance = observableModel(mockModel);
-			
+
 			// Access the private method for testing
 			const pipeFilter = (modelInstance as any)._pipeFilter;
-			
+
 			if (pipeFilter) {
 				const validChange = {
-					ns: { coll: 'testCollection' }
+					ns: {coll: 'testCollection'}
 				};
-				
+
 				const result = pipeFilter.call(modelInstance, validChange);
 				expect(result).toBe(true);
 			}
@@ -105,14 +105,14 @@ describe('observable.model.ts tests', () => {
 
 		it('should test ObservableModel _pipeFilter error handling', () => {
 			const modelInstance = observableModel(mockModel);
-			
+
 			// Access the private method for testing
 			const pipeFilter = (modelInstance as any)._pipeFilter;
-			
+
 			if (pipeFilter) {
 				// Test with malformed change object to trigger error handling
 				const invalidChange: any = null;
-				
+
 				const result = pipeFilter.call(modelInstance, invalidChange);
 				expect(result).toBe(false);
 			}
@@ -120,15 +120,15 @@ describe('observable.model.ts tests', () => {
 
 		it('should test ObservableModel _pipeFilter with mismatched collection', () => {
 			const modelInstance = observableModel(mockModel);
-			
-			// Access the private method for testing  
+
+			// Access the private method for testing
 			const pipeFilter = (modelInstance as any)._pipeFilter;
-			
+
 			if (pipeFilter) {
 				const mismatchedChange = {
-					ns: { coll: 'differentCollection' }
+					ns: {coll: 'differentCollection'}
 				};
-				
+
 				const result = pipeFilter.call(modelInstance, mismatchedChange);
 				expect(result).toBe(false);
 			}

@@ -42,12 +42,12 @@ describe('get.milliseconds.from tests', () => {
 
 	it('should handle different start times correctly', () => {
 		const start1 = getHrtimeAsNumber();
-		
+
 		// Add a small delay to ensure measureable time difference
 		for (let i = 0; i < 10000; i++) {
 			Math.random();
 		}
-		
+
 		const start2 = getHrtimeAsNumber();
 
 		const elapsed1 = getMillisecondsFrom(start1);

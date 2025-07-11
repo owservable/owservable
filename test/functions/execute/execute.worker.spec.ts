@@ -113,7 +113,7 @@ describe('execute.worker tests', () => {
 		// This tests the missing branch: else work?.();
 		const worker: WorkerType = {
 			init: 'not a function' as any, // Forces else branch
-			work: undefined as any         // Tests ?.() optional chaining
+			work: undefined as any // Tests ?.() optional chaining
 		};
 
 		// Should not throw even with undefined work in else branch

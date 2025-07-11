@@ -8,8 +8,8 @@ import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 import CronJobType from '../../types/cronjob.type';
 import executeCronJob from '../execute/execute.cronjob';
 
-export default async function addActionCronjobs(root: string, folderName: string) {
-	const actionPaths: string[] = await listSubfoldersFilesByFolderName(root, folderName);
+export default function addActionCronjobs(root: string, folderName: string) {
+	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing cronjob action', actionPath);

@@ -8,8 +8,8 @@ import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 import WatcherType from '../../types/watcher.type';
 import executeWatcher from '../execute/execute.watcher';
 
-export default async function addActionWatchers(root: string, folderName: string) {
-	const actionPaths: string[] = await listSubfoldersFilesByFolderName(root, folderName);
+export default function addActionWatchers(root: string, folderName: string) {
+	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing watcher action', actionPath);

@@ -28,7 +28,7 @@ describe('collections.models.map.ts tests', () => {
 		it('should add a model to the mapping', () => {
 			// Since the static Map persists between tests, just verify the model is added
 			CollectionsModelsMap.addCollectionToModelMapping(Dummy);
-			
+
 			expect(CollectionsModelsMap.keys()).toContain('dummy');
 			expect(CollectionsModelsMap.values()).toContain('Dummy');
 		});
@@ -61,17 +61,17 @@ describe('collections.models.map.ts tests', () => {
 		it('should return empty array when no models are mapped', () => {
 			// Clear any existing mappings for this test
 			const currentKeys = CollectionsModelsMap.keys();
-			currentKeys.forEach(key => {
+			currentKeys.forEach((key) => {
 				// We can't directly clear the map, but we can verify behavior
 			});
-			
+
 			const keys = CollectionsModelsMap.keys();
 			expect(Array.isArray(keys)).toBe(true);
 		});
 
 		it('should return array of collection names after adding models', () => {
 			CollectionsModelsMap.addCollectionToModelMapping(Dummy);
-			
+
 			const keys = CollectionsModelsMap.keys();
 			expect(Array.isArray(keys)).toBe(true);
 			expect(keys).toContain('dummy');
@@ -86,7 +86,7 @@ describe('collections.models.map.ts tests', () => {
 
 		it('should return array of model names after adding models', () => {
 			CollectionsModelsMap.addCollectionToModelMapping(Dummy);
-			
+
 			const values = CollectionsModelsMap.values();
 			expect(Array.isArray(values)).toBe(true);
 			expect(values).toContain('Dummy');

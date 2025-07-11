@@ -8,8 +8,8 @@ import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 import WorkerType from '../../types/worker.type';
 import executeWorker from '../execute/execute.worker';
 
-export default async function addActionWorkers(root: string, folderName: string) {
-	const actionPaths: string[] = await listSubfoldersFilesByFolderName(root, folderName);
+export default function addActionWorkers(root: string, folderName: string) {
+	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing worker action', actionPath);

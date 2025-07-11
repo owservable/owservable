@@ -3,7 +3,6 @@
 import observableDatabase from '../../../src/mongodb/functions/observable.database';
 
 describe('observable.database.ts tests', () => {
-
 	describe('observableDatabase function', () => {
 		it('should exist and be a function', () => {
 			expect(observableDatabase).toBeDefined();

@@ -139,7 +139,7 @@ describe('MongoDBConnector tests', () => {
 
 			// Trigger each event handler to increase function coverage
 			const onCalls = mockConnection.on.mock.calls;
-			
+
 			// Find and trigger each event handler
 			const connectingHandler = onCalls.find((call: any) => call[0] === 'connecting')[1];
 			const connectedHandler = onCalls.find((call: any) => call[0] === 'connected')[1];
