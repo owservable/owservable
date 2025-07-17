@@ -1,9 +1,11 @@
 {
 	"srcFolderName": "src",
-	"filesExtension": "ts",
+	"filesExtensions": [
+		"ts"
+	],
 	"testFolderName": "test",
 	"testFileExtensionPrefix": "spec",
-	"considerVueFiles": true,
+	"testExtension": "ts",
 	"ignoreSrcFiles": [
 		"src/auth/i.connection.manager.ts",
 		"src/types/"
