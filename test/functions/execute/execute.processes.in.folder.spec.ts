@@ -7,41 +7,21 @@ import {listSubfoldersByName} from '@owservable/folders';
 // Mock external dependencies
 jest.mock('@owservable/folders');
 jest.mock('../../../src/functions/execute/execute.on.files.recursively');
-jest.mock('lodash', () => ({
-	each: jest.fn((collection, callback) => {
-		if (Array.isArray(collection)) {
-			collection.forEach(callback);
-		}
-		return collection;
-	})
-}));
-
-// Import after mocking
-import {each} from 'lodash';
+// Lodash no longer used - replaced with native forEach
 
 describe('execute.processes.in.folder tests', () => {
 	let mockListSubfoldersByName: jest.MockedFunction<(...args: any[]) => any>;
 	let mockExecuteOnFilesRecursively: jest.MockedFunction<typeof executeOnFilesRecursively>;
-	let mockEach: jest.MockedFunction<typeof each>;
 	let mockExecute: jest.MockedFunction<any>;
 
 	beforeEach(() => {
 		// Get mocked functions
 		mockListSubfoldersByName = listSubfoldersByName as jest.MockedFunction<(...args: any[]) => any>;
 		mockExecuteOnFilesRecursively = executeOnFilesRecursively as jest.MockedFunction<typeof executeOnFilesRecursively>;
-		mockEach = each as jest.MockedFunction<typeof each>;
 		mockExecute = jest.fn();
 
 		// Reset all mocks
 		jest.clearAllMocks();
-
-		// Setup default each behavior to actually call the callback
-		mockEach.mockImplementation((collection: any, callback: any) => {
-			if (Array.isArray(collection)) {
-				collection.forEach(callback);
-			}
-			return collection;
-		});
 	});
 
 	describe('executeProcessesInFolder function', () => {
@@ -55,7 +35,7 @@ describe('execute.processes.in.folder tests', () => {
 			executeProcessesInFolder(root, folderName, mockExecute);
 
 			expect(mockListSubfoldersByName).toHaveBeenCalledWith(root, folderName);
-			expect(mockEach).toHaveBeenCalledWith(mockFolders, expect.any(Function));
+
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledTimes(1);
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledWith('/test/root/app1/workers', mockExecute);
 		});
@@ -70,7 +50,7 @@ describe('execute.processes.in.folder tests', () => {
 			executeProcessesInFolder(root, folderName, mockExecute);
 
 			expect(mockListSubfoldersByName).toHaveBeenCalledWith(root, folderName);
-			expect(mockEach).toHaveBeenCalledWith(mockFolders, expect.any(Function));
+
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledTimes(3);
 			expect(mockExecuteOnFilesRecursively).toHaveBeenNthCalledWith(1, '/test/root/app1/workers', mockExecute);
 			expect(mockExecuteOnFilesRecursively).toHaveBeenNthCalledWith(2, '/test/root/app2/workers', mockExecute);
@@ -87,7 +67,7 @@ describe('execute.processes.in.folder tests', () => {
 			executeProcessesInFolder(root, folderName, mockExecute);
 
 			expect(mockListSubfoldersByName).toHaveBeenCalledWith(root, folderName);
-			expect(mockEach).toHaveBeenCalledWith(mockFolders, expect.any(Function));
+
 			expect(mockExecuteOnFilesRecursively).not.toHaveBeenCalled();
 		});
 
@@ -176,7 +156,7 @@ describe('execute.processes.in.folder tests', () => {
 			executeProcessesInFolder(root, folderName, mockExecute);
 
 			expect(mockListSubfoldersByName).toHaveBeenCalledWith(root, folderName);
-			expect(mockEach).toHaveBeenCalledWith(mockFolders, expect.any(Function));
+
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledTimes(1);
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledWith('/single/root/only-app/workers', mockExecute);
 		});
@@ -191,7 +171,7 @@ describe('execute.processes.in.folder tests', () => {
 			executeProcessesInFolder(root, folderName, mockExecute);
 
 			expect(mockListSubfoldersByName).toHaveBeenCalledWith(root, folderName);
-			expect(mockEach).toHaveBeenCalledWith(mockFolders, expect.any(Function));
+
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledTimes(100);
 
 			// Verify first and last calls as spot checks
@@ -212,7 +192,7 @@ describe('execute.processes.in.folder tests', () => {
 
 			// Verify correct dependency calls
 			expect(mockListSubfoldersByName).toHaveBeenCalledTimes(1);
-			expect(mockEach).toHaveBeenCalledTimes(1);
+
 			expect(mockExecuteOnFilesRecursively).toHaveBeenCalledTimes(1);
 
 			// Verify correct parameters passed through

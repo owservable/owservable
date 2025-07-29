@@ -64,16 +64,10 @@ describe('add.index.to.attributes tests', () => {
 
 		expect(mockSchema.index).toHaveBeenCalledTimes(2);
 		expect(mockSchema.index).toHaveBeenNthCalledWith(1, {
-			user: {
-				profile: {
-					name: 1
-				}
-			}
+			'user.profile.name': 1
 		});
 		expect(mockSchema.index).toHaveBeenNthCalledWith(2, {
-			settings: {
-				theme: 1
-			}
+			'settings.theme': 1
 		});
 	});
 

@@ -1,6 +1,5 @@
 'use strict';
 
-import {pick} from 'lodash';
 import {Subject} from 'rxjs';
 import mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
@@ -21,7 +20,8 @@ class ObservableDatabase extends Subject<any> {
 
 		this._stream = db.watch([], {fullDocument: 'updateLookup'});
 		this._stream.on('change', (change: any): void => {
-			this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument']));
+			const {ns, documentKey, operationType, updateDescription, fullDocument} = change;
+			this.next({ns, documentKey, operationType, updateDescription, fullDocument});
 		});
 	}
 }

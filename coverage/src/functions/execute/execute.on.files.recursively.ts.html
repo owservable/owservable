@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">22.22% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>4/18</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.46% </span>
+                <span class="strong">26.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/13</span>
+                <span class='fraction'>4/15</span>
             </div>
         
             
@@ -83,24 +83,56 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
@@ -108,20 +140,36 @@
 import * as fs from 'fs';
 import * as path from 'path';
 &nbsp;
-import {each, filter} from 'lodash';
+import {ItemStat} from '@owservable/folders';
 &nbsp;
 const executeOnFilesRecursively = <span class="fstat-no" title="function not covered" >(f</span>older: string, execute: Function): void =&gt; {
-	const children = <span class="cstat-no" title="statement not covered" >fs.readdirSync(folder);</span>
-	const files = <span class="cstat-no" title="statement not covered" >filter(children, <span class="fstat-no" title="function not covered" >(n</span>ame) =&gt; <span class="cstat-no" title="statement not covered" >!fs.lstatSync(path.join(folder, name)).isDirectory())</span>;</span>
-<span class="cstat-no" title="statement not covered" >	each(files, <span class="fstat-no" title="function not covered" >(f</span>ile: string) =&gt; {</span>
-		const absoluteFilePath = <span class="cstat-no" title="statement not covered" >path.join(folder, file);</span>
-		const obj: any = <span class="cstat-no" title="statement not covered" >require(absoluteFilePath).default;</span>
+	const children: string[] = <span class="cstat-no" title="statement not covered" >fs.readdirSync(folder);</span>
+&nbsp;
+	// PERFORMANCE: Single lstat call per item instead of two
+	const itemStats: ItemStat[] = <span class="cstat-no" title="statement not covered" >children.map(<span class="fstat-no" title="function not covered" >(n</span>ame: string): ItemStat =&gt; {</span>
+		const fullPath: string = <span class="cstat-no" title="statement not covered" >path.join(folder, name);</span>
+		const stat: fs.Stats = <span class="cstat-no" title="statement not covered" >fs.lstatSync(fullPath);</span>
+<span class="cstat-no" title="statement not covered" >		return {</span>
+			name,
+			fullPath,
+			isDirectory: stat.isDirectory()
+		};
+	});
+&nbsp;
+	// Separate files and folders using cached stat results
+	const files: ItemStat[] = <span class="cstat-no" title="statement not covered" >itemStats.filter(<span class="fstat-no" title="function not covered" >(i</span>tem: ItemStat): boolean =&gt; <span class="cstat-no" title="statement not covered" >!item.isDirectory)</span>;</span>
+	const folders: ItemStat[] = <span class="cstat-no" title="statement not covered" >itemStats.filter(<span class="fstat-no" title="function not covered" >(i</span>tem: ItemStat): boolean =&gt; <span class="cstat-no" title="statement not covered" >item.isDirectory)</span>;</span>
+&nbsp;
+	// Process files using native forEach
+<span class="cstat-no" title="statement not covered" >	files.forEach(<span class="fstat-no" title="function not covered" >(f</span>ile: ItemStat): void =&gt; {</span>
+		const obj: any = <span class="cstat-no" title="statement not covered" >require(file.fullPath).default;</span>
 <span class="cstat-no" title="statement not covered" >		execute(obj);</span>
 	});
 &nbsp;
-	const folders = <span class="cstat-no" title="statement not covered" >filter(children, <span class="fstat-no" title="function not covered" >(n</span>ame: string) =&gt; <span class="cstat-no" title="statement not covered" >fs.lstatSync(path.join(folder, name)).isDirectory())</span>;</span>
-<span class="cstat-no" title="statement not covered" >	each(folders, <span class="fstat-no" title="function not covered" >(s</span>ub: string) =&gt; <span class="cstat-no" title="statement not covered" >executeOnFilesRecursively(path.join(folder, sub), execute))</span>;</span>
+	// Process subfolders recursively using native forEach
+<span class="cstat-no" title="statement not covered" >	folders.forEach(<span class="fstat-no" title="function not covered" >(s</span>ubFolder: ItemStat): void =&gt; <span class="cstat-no" title="statement not covered" >executeOnFilesRecursively(subFolder.fullPath, execute))</span>;</span>
 };
+&nbsp;
 export default executeOnFilesRecursively;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -130,7 +178,7 @@ export default executeOnFilesRecursively;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-17T15:56:27.901Z
+                at 2025-07-29T09:15:48.215Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

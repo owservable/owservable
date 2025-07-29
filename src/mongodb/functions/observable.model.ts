@@ -1,6 +1,5 @@
 'use strict';
 
-import {pick} from 'lodash';
 import {Model} from 'mongoose';
 
 import {Subject, Subscription} from 'rxjs';
@@ -19,7 +18,10 @@ class ObservableModel extends Subject<any> {
 		this._subscription = observableDatabase()
 			.pipe(filter((change) => this._pipeFilter(change)))
 			.subscribe({
-				next: (change: any): void => this.next(pick(change, ['ns', 'documentKey', 'operationType', 'updateDescription', 'fullDocument'])),
+				next: (change: any): void => {
+					const {ns, documentKey, operationType, updateDescription, fullDocument} = change;
+					this.next({ns, documentKey, operationType, updateDescription, fullDocument});
+				},
 				error: (e: any): void => this.error(e),
 				complete: (): void => this.complete()
 			});

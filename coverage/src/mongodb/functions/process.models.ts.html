@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.77% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/36</span>
+                <span class='fraction'>10/40</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.71% </span>
+                <span class="strong">31.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/28</span>
+                <span class='fraction'>10/32</span>
             </div>
         
             
@@ -107,7 +107,24 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -135,20 +152,37 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
@@ -156,14 +190,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
 &nbsp;
-import {each, endsWith, filter, find, isString} from 'lodash';
-import {listSubfoldersByName} from '@owservable/folders';
+import {endsWith, find, isString} from 'lodash';
+import {listSubfoldersByName, ItemStat} from '@owservable/folders';
 &nbsp;
 import CollectionsModelsMap from '../collections.models.map';
 &nbsp;
 const _processFile = <span class="fstat-no" title="function not covered" >(f</span>older: string, file: string): void =&gt; {
-	const fullPath = <span class="cstat-no" title="statement not covered" >path.join(folder, file);</span>
-	const model = <span class="cstat-no" title="statement not covered" >require(fullPath).default;</span>
+	const fullPath: string = <span class="cstat-no" title="statement not covered" >path.join(folder, file);</span>
+	const model: any = <span class="cstat-no" title="statement not covered" >require(fullPath).default;</span>
 <span class="cstat-no" title="statement not covered" >	if (!model) <span class="cstat-no" title="statement not covered" >throw new Error(`Model not found in ${folder}/${file}`);</span></span>
 <span class="cstat-no" title="statement not covered" >	CollectionsModelsMap.addCollectionToModelMapping(model);</span>
 };
@@ -178,22 +212,39 @@ const _isExcluded = <span class="fstat-no" title="function not covered" >(f</spa
 const _processModels = <span class="fstat-no" title="function not covered" >(f</span>older: string, exclude?: string | string[]): void =&gt; {
 <span class="cstat-no" title="statement not covered" >	if (_isExcluded(folder, exclude)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
-	const subfolderNames = <span class="cstat-no" title="statement not covered" >fs.readdirSync(folder);</span>
-	const files = <span class="cstat-no" title="statement not covered" >filter(subfolderNames, <span class="fstat-no" title="function not covered" >(f</span>ileName: string) =&gt; <span class="cstat-no" title="statement not covered" >!fs.lstatSync(path.join(folder, fileName)).isDirectory())</span>;</span>
-<span class="cstat-no" title="statement not covered" >	each(files, <span class="fstat-no" title="function not covered" >(f</span>ile: string) =&gt; {</span>
-		const ext = <span class="cstat-no" title="statement not covered" >path.extname(file);</span>
-<span class="cstat-no" title="statement not covered" >		if (ext !== '.ts' &amp;&amp; ext !== '.js') <span class="cstat-no" title="statement not covered" >return;</span></span>
-<span class="cstat-no" title="statement not covered" >		_processFile(folder, file);</span>
+	const subfolderNames: string[] = <span class="cstat-no" title="statement not covered" >fs.readdirSync(folder);</span>
+&nbsp;
+	// PERFORMANCE: Single lstat call per item instead of two
+	const itemStats: ItemStat[] = <span class="cstat-no" title="statement not covered" >subfolderNames.map(<span class="fstat-no" title="function not covered" >(f</span>ileName: string): ItemStat =&gt; {</span>
+		const fullPath: string = <span class="cstat-no" title="statement not covered" >path.join(folder, fileName);</span>
+		const stat: fs.Stats = <span class="cstat-no" title="statement not covered" >fs.lstatSync(fullPath);</span>
+<span class="cstat-no" title="statement not covered" >		return {</span>
+			name: fileName,
+			fullPath,
+			isDirectory: stat.isDirectory()
+		};
 	});
 &nbsp;
-	const folders = <span class="cstat-no" title="statement not covered" >filter(subfolderNames, <span class="fstat-no" title="function not covered" >(f</span>ileName: string) =&gt; <span class="cstat-no" title="statement not covered" >fs.lstatSync(path.join(folder, fileName)).isDirectory())</span>;</span>
-<span class="cstat-no" title="statement not covered" >	each(folders, <span class="fstat-no" title="function not covered" >(s</span>ub: string) =&gt; <span class="cstat-no" title="statement not covered" >_processModels(path.join(folder, sub), exclude))</span>;</span>
+	// Separate files and folders using cached stat results
+	const files: ItemStat[] = <span class="cstat-no" title="statement not covered" >itemStats.filter(<span class="fstat-no" title="function not covered" >(i</span>tem: ItemStat): boolean =&gt; <span class="cstat-no" title="statement not covered" >!item.isDirectory)</span>;</span>
+	const folders: ItemStat[] = <span class="cstat-no" title="statement not covered" >itemStats.filter(<span class="fstat-no" title="function not covered" >(i</span>tem: ItemStat): boolean =&gt; <span class="cstat-no" title="statement not covered" >item.isDirectory)</span>;</span>
+&nbsp;
+	// Process files using native forEach
+<span class="cstat-no" title="statement not covered" >	files.forEach(<span class="fstat-no" title="function not covered" >(f</span>ile: ItemStat): void =&gt; {</span>
+		const ext: string = <span class="cstat-no" title="statement not covered" >path.extname(file.name);</span>
+<span class="cstat-no" title="statement not covered" >		if (ext !== '.ts' &amp;&amp; ext !== '.js') <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		_processFile(folder, file.name);</span>
+	});
+&nbsp;
+	// Process subfolders recursively using native forEach
+<span class="cstat-no" title="statement not covered" >	folders.forEach(<span class="fstat-no" title="function not covered" >(s</span>ubFolder: ItemStat): void =&gt; <span class="cstat-no" title="statement not covered" >_processModels(subFolder.fullPath, exclude))</span>;</span>
 };
 &nbsp;
 const processModels = <span class="fstat-no" title="function not covered" >(r</span>oot: string, name: string = <span class="branch-0 cbranch-no" title="branch not covered" >'models',</span> exclude?: string | string[]): void =&gt; {
 	const folders: string[] = <span class="cstat-no" title="statement not covered" >listSubfoldersByName(root, name);</span>
-<span class="cstat-no" title="statement not covered" >	each(folders, <span class="fstat-no" title="function not covered" >(f</span>older: string) =&gt; <span class="cstat-no" title="statement not covered" >_processModels(folder, exclude))</span>;</span>
+<span class="cstat-no" title="statement not covered" >	folders.forEach(<span class="fstat-no" title="function not covered" >(f</span>older: string): void =&gt; <span class="cstat-no" title="statement not covered" >_processModels(folder, exclude))</span>;</span>
 };
+&nbsp;
 export default processModels;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -202,7 +253,7 @@ export default processModels;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-17T15:56:27.901Z
+                at 2025-07-29T09:15:48.215Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

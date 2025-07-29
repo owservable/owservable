@@ -1,5 +1,5 @@
 'use strict';
-import {isEmpty} from 'lodash';
+
 import {Model} from 'mongoose';
 
 import AStore from './a.store';
@@ -32,7 +32,7 @@ export default class CountStore extends AStore {
 	protected async load(change: any): Promise<void> {
 		const startTime: number = getHrtimeAsNumber();
 
-		if (isEmpty(this._config)) return this.emitOne(startTime, this._subscriptionId);
+		if (Object.keys(this._config).length === 0) return this.emitOne(startTime, this._subscriptionId);
 		if (!this.shouldReload(change)) return;
 
 		const count = await this._model.countDocuments(this._query);

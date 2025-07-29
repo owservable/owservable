@@ -1,12 +1,12 @@
 'use strict';
 
-import {each} from 'lodash';
 import {listSubfoldersByName} from '@owservable/folders';
 
 import executeOnFilesRecursively from './execute.on.files.recursively';
 
-const executeProcessesInFolder = (root: string, folderName: string, execute: Function): void => {
+const executeProcessesInFolder = (root: string, folderName: string, execute: (obj: any) => void): void => {
 	const folders: string[] = listSubfoldersByName(root, folderName);
-	each(folders, (folder: string) => executeOnFilesRecursively(folder, execute));
+	folders.forEach((folder: string): void => executeOnFilesRecursively(folder, execute));
 };
+
 export default executeProcessesInFolder;

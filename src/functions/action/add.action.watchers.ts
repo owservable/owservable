@@ -1,14 +1,12 @@
 'use strict';
 
-import {isFunction, set} from 'lodash';
-
 import {ActionAsWatcherInterface} from '@owservable/actions';
 import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 
 import WatcherType from '../../types/watcher.type';
 import executeWatcher from '../execute/execute.watcher';
 
-export default function addActionWatchers(root: string, folderName: string) {
+export default function addActionWatchers(root: string, folderName: string): void {
 	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 
 	for (const actionPath of actionPaths) {
@@ -17,12 +15,12 @@ export default function addActionWatchers(root: string, folderName: string) {
 		const ActionClass: new () => ActionAsWatcherInterface = require(actionPath).default;
 		const action: ActionAsWatcherInterface = new ActionClass();
 
-		if (isFunction(action.asWatcher)) {
+		if (typeof action.asWatcher === 'function') {
 			const job: WatcherType = {
 				...(action.asWatcherInit && {init: action.asWatcherInit}),
 				watch: action.asWatcher
 			};
-			if (isFunction(action.asWatcherInit)) set(job, 'init', action.asWatcherInit());
+			if (typeof action.asWatcherInit === 'function') job.init = action.asWatcherInit;
 
 			executeWatcher(job);
 		}

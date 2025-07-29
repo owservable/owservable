@@ -1,20 +1,14 @@
 'use strict';
 
-import {isFunction} from 'lodash';
 import executeWatcher from '../../../src/functions/execute/execute.watcher';
 import WatcherType from '../../../src/types/watcher.type';
 
-// Mock lodash
-jest.mock('lodash');
-
 describe('execute.watcher tests', () => {
-	let mockIsFunction: jest.MockedFunction<typeof isFunction>;
 	let mockInit: jest.MockedFunction<any>;
 	let mockWatch: jest.MockedFunction<any>;
 
 	beforeEach(() => {
 		// Get mocked functions
-		mockIsFunction = isFunction as jest.MockedFunction<typeof isFunction>;
 		mockInit = jest.fn();
 		mockWatch = jest.fn();
 
@@ -34,11 +28,8 @@ describe('execute.watcher tests', () => {
 					waitForInit: false
 				};
 
-				mockIsFunction.mockReturnValue(true);
-
 				executeWatcher(watcherObj);
 
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -50,11 +41,7 @@ describe('execute.watcher tests', () => {
 					// waitForInit is undefined (default false)
 				};
 
-				mockIsFunction.mockReturnValue(true);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -66,11 +53,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: false
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith('not-a-function');
 				expect(mockInit).not.toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -81,11 +64,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: false
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(undefined);
 				expect(mockInit).not.toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -96,11 +75,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: false
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(undefined);
 				expect(mockInit).not.toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -112,11 +87,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: false
 				};
 
-				mockIsFunction.mockReturnValue(true);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				// watch() should be called even if undefined (no error)
 			});
@@ -136,11 +107,7 @@ describe('execute.watcher tests', () => {
 					return Promise.resolve();
 				});
 				mockInit.mockReturnValue({then: mockThen});
-				mockIsFunction.mockReturnValue(true);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockThen).toHaveBeenCalledWith(expect.any(Function));
 				expect(mockWatch).toHaveBeenCalled();
@@ -153,11 +120,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: true
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith('not-a-function');
 				expect(mockInit).not.toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -168,11 +131,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: true
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(undefined);
 				expect(mockInit).not.toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -183,11 +142,7 @@ describe('execute.watcher tests', () => {
 					waitForInit: true
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(undefined);
 				expect(mockInit).not.toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -204,11 +159,7 @@ describe('execute.watcher tests', () => {
 					return Promise.resolve();
 				});
 				mockInit.mockReturnValue({then: mockThen});
-				mockIsFunction.mockReturnValue(true);
-
 				executeWatcher(watcherObj);
-
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockThen).toHaveBeenCalledWith(expect.any(Function));
 			});
@@ -227,11 +178,7 @@ describe('execute.watcher tests', () => {
 					return Promise.resolve();
 				});
 				mockInit.mockReturnValue({then: mockThen});
-				mockIsFunction.mockReturnValue(true);
-
 				expect(() => executeWatcher(watcherObj)).not.toThrow();
-
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockWatch).toHaveBeenCalled();
 			});
@@ -248,11 +195,7 @@ describe('execute.watcher tests', () => {
 					return Promise.resolve();
 				});
 				mockInit.mockReturnValue({then: mockThen});
-				mockIsFunction.mockReturnValue(true);
-
 				expect(() => executeWatcher(watcherObj)).not.toThrow();
-
-				expect(mockIsFunction).toHaveBeenCalledWith(mockInit);
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockThen).toHaveBeenCalledWith(expect.any(Function));
 				expect(mockWatch).toHaveBeenCalled();
@@ -271,7 +214,6 @@ describe('execute.watcher tests', () => {
 
 				testCases.forEach(({waitForInit, expected}) => {
 					jest.clearAllMocks();
-					mockIsFunction.mockReturnValue(true);
 
 					const mockThen = jest.fn().mockImplementation((callback) => {
 						callback();
@@ -320,7 +262,6 @@ describe('execute.watcher tests', () => {
 
 				testCases.forEach(({init, watch}) => {
 					jest.clearAllMocks();
-					mockIsFunction.mockImplementation((fn) => typeof fn === 'function');
 
 					const watcherObj: WatcherType = {
 						init,
@@ -348,22 +289,14 @@ describe('execute.watcher tests', () => {
 					waitForInit: false
 				};
 
-				mockIsFunction.mockReturnValue(false);
-
 				// Should not throw when init and watch are undefined due to optional chaining
 				expect(() => executeWatcher(watcherObj)).not.toThrow();
-
-				expect(mockIsFunction).toHaveBeenCalledWith(undefined);
 			});
 
 			it('should handle partial watcher objects', () => {
 				const partialWatcher = {} as WatcherType;
 
-				mockIsFunction.mockReturnValue(false);
-
 				expect(() => executeWatcher(partialWatcher)).not.toThrow();
-
-				expect(mockIsFunction).toHaveBeenCalledWith(undefined);
 			});
 		});
 	});
