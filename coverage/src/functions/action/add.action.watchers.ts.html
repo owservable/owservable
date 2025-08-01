@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.07% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,22 +100,22 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,23 +127,23 @@ import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 import WatcherType from '../../types/watcher.type';
 import executeWatcher from '../execute/execute.watcher';
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >addActionWatchers(</span>root: string, folderName: string): void {
-	const actionPaths: string[] = <span class="cstat-no" title="statement not covered" >listSubfoldersFilesByFolderName(root, folderName);</span>
+export default function addActionWatchers(root: string, folderName: string): void {
+	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	for (const actionPath of actionPaths) {</span>
-<span class="cstat-no" title="statement not covered" >		console.log('[@owservable] -&gt; Initializing watcher action', actionPath);</span>
+	for (const actionPath of actionPaths) {
+		console.log('[@owservable] -&gt; Initializing watcher action', actionPath);
 		// tslint:disable-next-line:callable-types
-		const ActionClass: new () =&gt; ActionAsWatcherInterface = <span class="cstat-no" title="statement not covered" >require(actionPath).default;</span>
-		const action: ActionAsWatcherInterface = <span class="cstat-no" title="statement not covered" >new ActionClass();</span>
+		const ActionClass: new () =&gt; ActionAsWatcherInterface = require(actionPath).default;
+		const action: ActionAsWatcherInterface = new ActionClass();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		if (typeof action.asWatcher === 'function') {</span>
-			const job<span class="cstat-no" title="statement not covered" >: WatcherType = {</span>
+		if (typeof action.asWatcher === 'function') {
+			const job: WatcherType = {
 				...(action.asWatcherInit &amp;&amp; {init: action.asWatcherInit}),
 				watch: action.asWatcher
 			};
-<span class="cstat-no" title="statement not covered" >			if (typeof action.asWatcherInit === 'function') <span class="cstat-no" title="statement not covered" >job.init = action.asWatcherInit;</span></span>
+			if (typeof action.asWatcherInit === 'function') job.init = action.asWatcherInit;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >			executeWatcher(job);</span>
+			executeWatcher(job);
 		}
 	}
 }
@@ -154,7 +154,7 @@ export default function <span class="fstat-no" title="function not covered" >add
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-01T10:26:39.213Z
+                at 2025-08-01T10:39:55.468Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

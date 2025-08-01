@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.07% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,23 +101,23 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,24 +129,24 @@ import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 import CronJobType from '../../types/cronjob.type';
 import executeCronJob from '../execute/execute.cronjob';
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >addActionCronjobs(</span>root: string, folderName: string): void {
-	const actionPaths: string[] = <span class="cstat-no" title="statement not covered" >listSubfoldersFilesByFolderName(root, folderName);</span>
+export default function addActionCronjobs(root: string, folderName: string): void {
+	const actionPaths: string[] = listSubfoldersFilesByFolderName(root, folderName);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	for (const actionPath of actionPaths) {</span>
-<span class="cstat-no" title="statement not covered" >		console.log('[@owservable] -&gt; Initializing cronjob action', actionPath);</span>
+	for (const actionPath of actionPaths) {
+		console.log('[@owservable] -&gt; Initializing cronjob action', actionPath);
 		// tslint:disable-next-line:callable-types
-		const ActionClass: new () =&gt; ActionAsCronjobInterface = <span class="cstat-no" title="statement not covered" >require(actionPath).default;</span>
-		const action: ActionAsCronjobInterface = <span class="cstat-no" title="statement not covered" >new ActionClass();</span>
+		const ActionClass: new () =&gt; ActionAsCronjobInterface = require(actionPath).default;
+		const action: ActionAsCronjobInterface = new ActionClass();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		if (typeof action.asCronjob === 'function') {</span>
-			const job<span class="cstat-no" title="statement not covered" >: CronJobType = {</span>
+		if (typeof action.asCronjob === 'function') {
+			const job: CronJobType = {
 				schedule: action.schedule(),
 				...(action.asCronjobInit &amp;&amp; {init: action.asCronjobInit}),
 				job: action.asCronjob
 			};
-<span class="cstat-no" title="statement not covered" >			if (typeof action.asCronjobInit === 'function') <span class="cstat-no" title="statement not covered" >job.init = action.asCronjobInit;</span></span>
+			if (typeof action.asCronjobInit === 'function') job.init = action.asCronjobInit;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >			executeCronJob(job);</span>
+			executeCronJob(job);
 		}
 	}
 }
@@ -157,7 +157,7 @@ export default function <span class="fstat-no" title="function not covered" >add
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-01T10:26:39.213Z
+                at 2025-08-01T10:39:55.468Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

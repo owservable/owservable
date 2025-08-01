@@ -299,5 +299,56 @@ describe('execute.watcher tests', () => {
 				expect(() => executeWatcher(partialWatcher)).not.toThrow();
 			});
 		});
+
+		describe('specific branch coverage for lines 9, 14-15', () => {
+			it('should cover line 9: init is not a function in waitForInit=false branch', () => {
+				const watcherObj: WatcherType = {
+					init: 'not-a-function' as any,
+					watch: mockWatch,
+					waitForInit: false
+				};
+
+				executeWatcher(watcherObj);
+
+				// init should not be called since it's not a function
+				expect(mockInit).not.toHaveBeenCalled();
+				expect(mockWatch).toHaveBeenCalled();
+			});
+
+			it('should cover lines 14-15: init is not a function in waitForInit=true branch', () => {
+				const watcherObj: WatcherType = {
+					init: 'not-a-function' as any,
+					watch: mockWatch,
+					waitForInit: true
+				};
+
+				executeWatcher(watcherObj);
+
+				// Should go to else branch (line 15) and call watch directly
+				expect(mockInit).not.toHaveBeenCalled();
+				expect(mockWatch).toHaveBeenCalled();
+			});
+
+			it('should cover line 14: init is a function in waitForInit=true branch', () => {
+				const mockThen = jest.fn().mockImplementation((callback) => {
+					callback();
+					return Promise.resolve();
+				});
+				mockInit.mockReturnValue({then: mockThen});
+
+				const watcherObj: WatcherType = {
+					init: mockInit,
+					watch: mockWatch,
+					waitForInit: true
+				};
+
+				executeWatcher(watcherObj);
+
+				// Should call init().then() on line 14
+				expect(mockInit).toHaveBeenCalled();
+				expect(mockThen).toHaveBeenCalledWith(expect.any(Function));
+				expect(mockWatch).toHaveBeenCalled();
+			});
+		});
 	});
 });
