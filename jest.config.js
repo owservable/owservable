@@ -8,11 +8,17 @@ module.exports = {
 
 	// TypeScript configuration
 	transform: {
-		'^.+\\.ts$': 'ts-jest'
+		'^.+\\.ts$': 'ts-jest',
+		'^.+\\.js$': 'ts-jest'
 	},
 
 	// Module file extensions
 	moduleFileExtensions: ['ts', 'js', 'json'],
+
+	// Transform ignore patterns - allow jsondiffpatch to be transformed
+	transformIgnorePatterns: [
+		'node_modules/(?!(jsondiffpatch)/)'
+	],
 
 	// Setup Jest types globally
 	setupFilesAfterEnv: [],
