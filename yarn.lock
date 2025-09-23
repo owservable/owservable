@@ -995,19 +995,19 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@owservable/actions@^1.8.7":
-  version "1.8.7"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.8.7.tgz#3ba3c395378ad23b58cf24ca2a852ce35d553c20"
-  integrity sha512-7LQd7DNX9tZkLovpNEIUMYa7hys+wgQxa4vducr0Ks155LZJYfKGenwVo+gVJcSXP3asMNezUgZwKobfbTta3g==
+"@owservable/actions@^1.8.8":
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.8.8.tgz#4d82ac5a000bd2543e57e94db37139b87a3c3deb"
+  integrity sha512-piSy+JKyjM6m+25P7DWGr2VtqC6xYQFk8x7VgC0SnVNzYOMxFmK6XDee+cG0K3wFKoJD7Mgl51+J11Vd/hBQeQ==
   dependencies:
-    "@owservable/folders" "^1.8.7"
+    "@owservable/folders" "^1.8.8"
     "@types/node" "^24.5.2"
     commander "^14.0.1"
 
-"@owservable/folders@^1.8.7":
-  version "1.8.7"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.8.7.tgz#2a57420b4526979f418d34723a971babd356b8e8"
-  integrity sha512-TEXRCJJN4+LEGN562A2zoBFtEciTqsscKvoNQ4KGur3tscw3CgyL+LfwUeAqwgAxpmss3zCIDwtPit7LLvXIMQ==
+"@owservable/folders@^1.8.8":
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.8.8.tgz#90b792d38a4a5731a4c25c6c3c81db4074917adc"
+  integrity sha512-fv+YlEkcGZfhhZPIhBGENhMrZ+Z4zhURh4xMv+z1hOJ0HQesYrUSCMT4RF4IupHecky7cpEFcsIV+JBJkqpNjQ==
   dependencies:
     "@types/node" "^24.5.2"
 
@@ -3571,10 +3571,10 @@ mongodb@~6.18.0:
     bson "^6.10.4"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.18.1:
-  version "8.18.1"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.18.1.tgz#46118754e6dba688352fdefaaaac90308788920e"
-  integrity sha512-K0RfrUXXufqNRZZjvAGdyjydB91SnbWxlwFYi5t7zN2DxVWFD3c6puia0/7xfBwZm6RCpYOVdYFlRFpoDWiC+w==
+mongoose@^8.18.2:
+  version "8.18.2"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.18.2.tgz#40e928030f10a506645ee770d878a2a3994a0f79"
+  integrity sha512-gA6GFlshOHUdNyw9OQTmMLSGzVOPbcbjaSZ1dvR5iMp668N2UUznTuzgTY6V6Q41VtBc4kmL/qqML1RNgXB5Fg==
   dependencies:
     bson "^6.10.4"
     kareem "2.6.3"
@@ -4450,10 +4450,10 @@ tr46@^4.1.1:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
   integrity sha512-iawgk0hLP3SxGKDfnDJf8wTz4p2qImnyihM5Hh/sGvQ3K37dPi/w8sRhdNIxYA1TwFwc5mDhIJq+O0RsvXBKdQ==
 
-ts-jest@^29.4.3:
-  version "29.4.3"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-29.4.3.tgz#23264489bebb5b3e2c7966dbf6788e960f244f7c"
-  integrity sha512-KTWbK2Wot8VXargsLoxhSoEQ9OyMdzQXQoUDeIulWu2Tf7gghuBHeg+agZqVLdTOHhQHVKAaeuctBDRkhWE7hg==
+ts-jest@^29.4.4:
+  version "29.4.4"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-29.4.4.tgz#fc6fefe28652ed81b8e1381ef8391901d9f81417"
+  integrity sha512-ccVcRABct5ZELCT5U0+DZwkXMCcOCLi2doHRrKy1nK/s7J7bch6TzJMsrY09WxgUUIP/ITfmcDS8D2yl63rnXw==
   dependencies:
     bs-logger "^0.2.6"
     fast-json-stable-stringify "^2.1.0"
