@@ -995,19 +995,19 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@owservable/actions@^1.9.01":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.9.1.tgz#afe051bdb5277a0aa0b8c41b760d5c906cafbb9e"
-  integrity sha512-dBKP+xl1+O7BPSU04vlT4Nfx8CPCy3cMateiqjDsTNjQ0vLZkPJf3+lB222XjOmThIbu4WxWtzgkcOfApAdEjQ==
+"@owservable/actions@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.9.2.tgz#f48050870e4c1f8948b9e4818c84317500acc719"
+  integrity sha512-NExVBicg0tINB1vinous5xr235GNtjAzrjtnxmuFVQ5rxIiZOYfn2EWi1jR2QqlUu1n/W11+wDFSb41XC6TKeQ==
   dependencies:
-    "@owservable/folders" "^1.9.1"
+    "@owservable/folders" "^1.9.2"
     "@types/node" "^24.7.2"
     commander "^14.0.1"
 
-"@owservable/folders@^1.9.01", "@owservable/folders@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.9.1.tgz#5aa0fd2b38177581b794d0c795b3e7c10a1297e6"
-  integrity sha512-Igi4fy4UL5oIbFvWiOrtnY12vXj09oz7EJJnSxvERvru02JFokNCMdTHT4BOcxzdURJD67dhObPOe9ipwWOUTw==
+"@owservable/folders@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.9.2.tgz#c07d70c269d066fba7f13e3ddd5fdd8629f2b544"
+  integrity sha512-nYfQAze8S3GmRjfg2VFe4taNT9neYIYq1JF5GM4GNEDHnzOPxruYO+L7ljllJ/NI7ZjVOLbKpry4TvauDQta+g==
   dependencies:
     "@types/node" "^24.7.2"
 
