@@ -94,6 +94,4 @@ class ObservableDatabase extends Subject<any> {
 		this._initializeStream();
 	}
 }
-
-const observableDatabase = (): Subject<any> => ObservableDatabase.init();
-export default observableDatabase;
+export default ObservableDatabase;

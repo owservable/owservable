@@ -1,8 +1,8 @@
 'use strict';
 
 import {Model} from 'mongoose';
-import {Subject} from 'rxjs';
 import observableModel from '../../../src/mongodb/functions/observable.model.factory';
+import ObservableModel from '../../../src/mongodb/functions/observable.model';
 import ObservableModelsMap from '../../../src/mongodb/functions/observable.models.map';
 
 jest.mock('../../../src/mongodb/functions/observable.models.map');
@@ -29,8 +29,8 @@ describe('observable.model.factory tests', () => {
 			}
 		} as any;
 
-		mockObservableModel1 = new Subject();
-		mockObservableModel2 = new Subject();
+		mockObservableModel1 = {subscribe: jest.fn(), lifecycle: {subscribe: jest.fn()}} as any;
+		mockObservableModel2 = {subscribe: jest.fn(), lifecycle: {subscribe: jest.fn()}} as any;
 
 		mockGetSpy = jest.spyOn(ObservableModelsMap, 'get');
 		mockGetSpy.mockImplementation((model: Model<any>) => {
@@ -49,9 +49,11 @@ describe('observable.model.factory tests', () => {
 		expect(typeof observableModel).toBe('function');
 	});
 
-	it('should return a Subject', () => {
-		const result: Subject<any> = observableModel(mockModel1);
-		expect(result).toBeInstanceOf(Subject);
+	it('should return an ObservableModel', () => {
+		const result: ObservableModel = observableModel(mockModel1);
+		expect(result).toBeDefined();
+		expect(result.subscribe).toBeDefined();
+		expect(result.lifecycle).toBeDefined();
 	});
 
 	it('should delegate to ObservableModelsMap.get with the correct model', () => {
@@ -61,13 +63,13 @@ describe('observable.model.factory tests', () => {
 	});
 
 	it('should return the result from ObservableModelsMap.get', () => {
-		const result: Subject<any> = observableModel(mockModel1);
+		const result: ObservableModel = observableModel(mockModel1);
 		expect(result).toBe(mockObservableModel1);
 	});
 
 	it('should return different results for different models', () => {
-		const result1: Subject<any> = observableModel(mockModel1);
-		const result2: Subject<any> = observableModel(mockModel2);
+		const result1: ObservableModel = observableModel(mockModel1);
+		const result2: ObservableModel = observableModel(mockModel2);
 
 		expect(result1).toBe(mockObservableModel1);
 		expect(result2).toBe(mockObservableModel2);

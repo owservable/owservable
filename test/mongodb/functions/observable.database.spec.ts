@@ -20,7 +20,7 @@ jest.mock('mongoose', () => ({
 	}
 }));
 
-import observableDatabase from '../../../src/mongodb/functions/observable.database';
+import observableDatabase from '../../../src/mongodb/functions/observable.database.factory';
 
 describe('observable.database.ts tests', () => {
 	describe('observableDatabase function', () => {
