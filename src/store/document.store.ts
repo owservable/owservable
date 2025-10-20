@@ -7,7 +7,7 @@ import {filter, throttleTime} from 'rxjs/operators';
 
 import AStore from './a.store';
 import EStoreType from '../enums/store.type.enum';
-import observableModel from '../mongodb/functions/observable.model';
+import observableModel from '../mongodb/functions/observable.model.factory';
 import getHrtimeAsNumber from '../functions/performance/get.hrtime.as.number';
 
 // tslint:disable-next-line:variable-name

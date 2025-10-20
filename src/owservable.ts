@@ -8,6 +8,7 @@ import EStoreType from './enums/store.type.enum';
 // types
 import ConnectionManagerRefreshType from './types/connection.manager.refresh.type';
 import CronJobType from './types/cronjob.type';
+import LifecycleEvent from './types/lifecycle.event.type';
 import StoreScopeType from './types/store.scope.type';
 import StoreSubscriptionConfigType from './types/store.subscription.config.type';
 import StoreSubscriptionUpdateType from './types/store.subscription.update.type';
@@ -44,7 +45,7 @@ import CollectionsModelsMap from './mongodb/collections.models.map';
 
 // mongodb functions
 import processModels from './mongodb/functions/process.models';
-import observableModel from './mongodb/functions/observable.model';
+import observableModel from './mongodb/functions/observable.model.factory';
 import observableDatabase from './mongodb/functions/observable.database';
 import addIndexToAttributes from './mongodb/functions/index/add.index.to.attributes';
 import addUpIndicesToAttributes from './mongodb/functions/index/add.up.indices.to.attributes';
@@ -69,6 +70,7 @@ export {
 	// types
 	ConnectionManagerRefreshType,
 	CronJobType,
+	LifecycleEvent,
 	StoreScopeType,
 	StoreSubscriptionConfigType,
 	StoreSubscriptionUpdateType,

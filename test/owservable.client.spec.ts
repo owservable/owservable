@@ -223,6 +223,26 @@ describe('OwservableClient tests', () => {
 
 			expect((global as any).setTimeout).toHaveBeenCalledWith(expect.any(Function), 285000); // 95% of default 300000
 		});
+
+		it('should handle null checkSession result without calling next', async () => {
+			mockConnectionManager.checkSession.mockResolvedValue(null);
+
+			await (client as any)._checkSession();
+
+			expect(mockConnectionManager.checkSession).toHaveBeenCalled();
+			expect(client.next).not.toHaveBeenCalled();
+			expect((global as any).setTimeout).toHaveBeenCalledWith(expect.any(Function), 285000);
+		});
+
+		it('should handle undefined checkSession result without calling next', async () => {
+			mockConnectionManager.checkSession.mockResolvedValue(undefined);
+
+			await (client as any)._checkSession();
+
+			expect(mockConnectionManager.checkSession).toHaveBeenCalled();
+			expect(client.next).not.toHaveBeenCalled();
+			expect((global as any).setTimeout).toHaveBeenCalledWith(expect.any(Function), 285000);
+		});
 	});
 
 	describe('removeSubscription', () => {

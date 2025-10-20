@@ -11,7 +11,7 @@ import {throttleTime} from 'rxjs/operators';
 import {asyncScheduler, Subject, Subscription} from 'rxjs';
 
 import EStoreType from '../enums/store.type.enum';
-import observableModel from '../mongodb/functions/observable.model';
+import observableModel from '../mongodb/functions/observable.model.factory';
 import getMillisecondsFrom from '../functions/performance/get.milliseconds.from';
 import StoreSubscriptionConfigType from '../types/store.subscription.config.type';
 

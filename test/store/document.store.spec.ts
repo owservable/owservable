@@ -4,11 +4,11 @@ import {Model} from 'mongoose';
 import DocumentStore from '../../src/store/document.store';
 import EStoreType from '../../src/enums/store.type.enum';
 import getHrtimeAsNumber from '../../src/functions/performance/get.hrtime.as.number';
-import observableModel from '../../src/mongodb/functions/observable.model';
+import observableModel from '../../src/mongodb/functions/observable.model.factory';
 import getMillisecondsFrom from '../../src/functions/performance/get.milliseconds.from';
 
 // Mock external dependencies
-jest.mock('../../src/mongodb/functions/observable.model');
+jest.mock('../../src/mongodb/functions/observable.model.factory');
 jest.mock('../../src/functions/performance/get.hrtime.as.number');
 jest.mock('../../src/functions/performance/get.milliseconds.from');
 

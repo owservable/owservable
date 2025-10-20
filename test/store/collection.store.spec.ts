@@ -4,11 +4,11 @@ import {Model} from 'mongoose';
 import CollectionStore from '../../src/store/collection.store';
 import EStoreType from '../../src/enums/store.type.enum';
 import getHrtimeAsNumber from '../../src/functions/performance/get.hrtime.as.number';
-import observableModel from '../../src/mongodb/functions/observable.model';
+import observableModel from '../../src/mongodb/functions/observable.model.factory';
 import getMillisecondsFrom from '../../src/functions/performance/get.milliseconds.from';
 
 // Mock external dependencies
-jest.mock('../../src/mongodb/functions/observable.model');
+jest.mock('../../src/mongodb/functions/observable.model.factory');
 jest.mock('../../src/functions/performance/get.hrtime.as.number');
 jest.mock('../../src/functions/performance/get.milliseconds.from');
 
@@ -123,6 +123,28 @@ describe('CollectionStore tests', () => {
 			};
 			jest.spyOn(mockStore as any, 'testDocument').mockReturnValue(true);
 			expect((mockStore as any).shouldReload(change)).toBe(true);
+		});
+
+		it('should return false for unknown operation types', () => {
+			const change = {
+				operationType: 'drop',
+				updateDescription: {
+					updatedFields: {},
+					removedFields: [] as string[]
+				}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(false);
+		});
+
+		it('should return false for invalidate operation type', () => {
+			const change = {
+				operationType: 'invalidate',
+				updateDescription: {
+					updatedFields: {},
+					removedFields: [] as string[]
+				}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(false);
 		});
 	});
 

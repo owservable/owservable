@@ -7,11 +7,11 @@ import {randomUUID} from 'crypto';
 
 import AStore from '../../src/store/a.store';
 import EStoreType from '../../src/enums/store.type.enum';
-import observableModel from '../../src/mongodb/functions/observable.model';
+import observableModel from '../../src/mongodb/functions/observable.model.factory';
 import getMillisecondsFrom from '../../src/functions/performance/get.milliseconds.from';
 
 // Mock external dependencies
-jest.mock('../../src/mongodb/functions/observable.model');
+jest.mock('../../src/mongodb/functions/observable.model.factory');
 jest.mock('../../src/functions/performance/get.milliseconds.from');
 jest.mock('crypto');
 
