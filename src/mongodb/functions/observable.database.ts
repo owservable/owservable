@@ -1,6 +1,6 @@
 'use strict';
 
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
 
@@ -9,7 +9,7 @@ import LifecycleEvent from '../../types/lifecycle.event.type';
 class ObservableDatabase extends Subject<any> {
 	private _stream: ChangeStream;
 	private static _instance: ObservableDatabase;
-	public readonly lifecycle: Subject<LifecycleEvent>;
+	public readonly lifecycle: ReplaySubject<LifecycleEvent>;
 
 	public static init(): ObservableDatabase {
 		if (!ObservableDatabase._instance) ObservableDatabase._instance = new ObservableDatabase();
@@ -18,7 +18,7 @@ class ObservableDatabase extends Subject<any> {
 
 	constructor() {
 		super();
-		this.lifecycle = new Subject<LifecycleEvent>();
+		this.lifecycle = new ReplaySubject<LifecycleEvent>(1);
 
 		this._initializeStream();
 	}

@@ -3,19 +3,19 @@
 import mongoose from 'mongoose';
 import {ChangeStream} from 'mongodb';
 
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 
 import LifecycleEvent from '../../types/lifecycle.event.type';
 
 class ObservableModel extends Subject<any> {
 	private readonly _collection: string;
 	private _stream: ChangeStream;
-	public readonly lifecycle: Subject<LifecycleEvent>;
+	public readonly lifecycle: ReplaySubject<LifecycleEvent>;
 
 	constructor(collection: string) {
 		super();
 		this._collection = collection;
-		this.lifecycle = new Subject<LifecycleEvent>();
+		this.lifecycle = new ReplaySubject<LifecycleEvent>(1);
 
 		this._initializeStream();
 	}
