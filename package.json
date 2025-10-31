@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "1.9.6",
+	"version": "1.9.7",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=20"
@@ -39,10 +39,10 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^1.9.6",
-		"@owservable/folders": "^1.9.6",
+		"@owservable/actions": "^1.9.7",
+		"@owservable/folders": "^1.9.7",
 		"@types/lodash": "^4.17.20",
-		"@types/node": "^24.9.1",
+		"@types/node": "^24.9.2",
 		"@types/node-cron": "^3.0.11",
 		"deprecated-decorator": "^0.1.6",
 		"json-circular-stringify": "^1.0.1",
