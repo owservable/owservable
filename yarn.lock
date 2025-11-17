@@ -995,21 +995,21 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@owservable/actions@^1.9.8":
-  version "1.9.8"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.9.8.tgz#9018f4a2f4659315ea7585012cbe887e43eeb01c"
-  integrity sha512-kAlvsl68CBxzb2D8AieU8URFFG4fW4dXJJ2TajvJWkudv7J9PqPvvac6BLqRI3WUCpnGEXTaPM/jYD3fLa5N0w==
+"@owservable/actions@^1.9.9":
+  version "1.9.9"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-1.9.9.tgz#c7d109a72929ee98fbd5479aeca131cc5b56ffc8"
+  integrity sha512-WNQgfwTMU/qt6HrZ5KtqdT0h6thXXSV88Yh6pQfRZZfLyj5jFY5qHGByqOYrcH/ktMxmYsJtBXfaMkOkFPj6fQ==
   dependencies:
-    "@owservable/folders" "^1.9.8"
-    "@types/node" "^24.10.0"
+    "@owservable/folders" "^1.9.9"
+    "@types/node" "^24.10.1"
     commander "^14.0.2"
 
-"@owservable/folders@^1.9.8":
-  version "1.9.8"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.9.8.tgz#9a67966523b2f16388173c47e8d579cd46e1b843"
-  integrity sha512-GwPrxOQPYpTKLRWhBZFEEtve/Og1pPmuPsSzqUjjaSGq4d5XphHQE29myS/mgR+IEGhS/hYS9kfra363LiFOYQ==
+"@owservable/folders@^1.9.9":
+  version "1.9.9"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-1.9.9.tgz#19cfbe96b584160f031a2183e764582b3726e946"
+  integrity sha512-n2JJZegP3gDVgNzEPn5zawM+y6wDeXecfz8o7P9bkmw8hOZWpWyNL5KMznic7I0mE4nCwRCwcEzB9u3XylKLRQ==
   dependencies:
-    "@types/node" "^24.10.0"
+    "@types/node" "^24.10.1"
 
 "@phenomnomnominal/tsquery@^4.0.0":
   version "4.2.0"
@@ -1213,10 +1213,10 @@
   dependencies:
     undici-types "~7.8.0"
 
-"@types/node@^24.10.0":
-  version "24.10.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.10.0.tgz#6b79086b0dfc54e775a34ba8114dcc4e0221f31f"
-  integrity sha512-qzQZRBqkFsYyaSWXuEHc2WR9c0a0CXwiE5FWUvn7ZM+vdy1uZLfCunD38UzhuB7YN/J11ndbDBcTmOdxJo9Q7A==
+"@types/node@^24.10.1":
+  version "24.10.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.10.1.tgz#91e92182c93db8bd6224fca031e2370cef9a8f01"
+  integrity sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==
   dependencies:
     undici-types "~7.16.0"
 
@@ -3569,10 +3569,10 @@ mongodb@~6.20.0:
     bson "^6.10.4"
     mongodb-connection-string-url "^3.0.2"
 
-mongoose@^8.19.3:
-  version "8.19.3"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.19.3.tgz#1c322eafd43d824bd4a87aa997012cb46e771441"
-  integrity sha512-fTAGaIohkk8wCggMuBuqTVD4YrM1/J8cBr1ekqzFqtz65qkLjtX2dcy3NH1e+2rk2365dyrrsPAnt4YTxBhEiQ==
+mongoose@^8.19.4:
+  version "8.19.4"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.19.4.tgz#cc7bca2380c78c9d8b1c912ff7a9430135fa9036"
+  integrity sha512-yiY/Wv6FUYDQ4kBN1RQHiYuayQS4k+yzytj4nctMmQiBIXLfJqvw6fRgmvw1rIOmShp7iAbpNt7s2s6TyVOSyA==
   dependencies:
     bson "^6.10.4"
     kareem "2.6.3"
