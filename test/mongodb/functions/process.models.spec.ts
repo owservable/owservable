@@ -302,6 +302,29 @@ describe('process.models.ts tests', () => {
 			expect(() => processModels('/test/root', 'models')).not.toThrow();
 		});
 
+		it('should throw error when model default export is missing', () => {
+			mockListSubfoldersByName.mockReturnValue(['/test/models']);
+			mockFs.readdirSync.mockReturnValue(['invalid.ts'] as any);
+			mockFs.lstatSync.mockReturnValue({isDirectory: () => false} as any);
+
+			jest.doMock('/test/models/invalid.ts', () => ({}), {virtual: true});
+
+			expect(() => processModels('/test/root', 'models')).toThrow('Model not found in /test/models/invalid.ts');
+		});
+
+		it('should call addCollectionToModelMapping when model default export exists', () => {
+			mockListSubfoldersByName.mockReturnValue(['/test/models']);
+			mockFs.readdirSync.mockReturnValue(['valid.ts'] as any);
+			mockFs.lstatSync.mockReturnValue({isDirectory: () => false} as any);
+
+			const mockModel: any = {modelName: 'TestModel'};
+			jest.doMock('/test/models/valid.ts', () => ({default: mockModel}), {virtual: true});
+
+			processModels('/test/root', 'models');
+
+			expect(mockAddCollectionToModelMapping).toHaveBeenCalledWith(mockModel);
+		});
+
 		it('should handle ItemStat mapping with mixed content', () => {
 			mockListSubfoldersByName.mockReturnValue(['/test/models']);
 

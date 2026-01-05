@@ -38,12 +38,9 @@ describe('get.seconds.from tests', () => {
 		expect(after2).toBeGreaterThanOrEqual(after1);
 	});
 
-	it('should handle different start times correctly', () => {
+	it('should handle different start times correctly', async () => {
 		const start1 = getHrtimeAsNumber();
-		// Small delay to ensure difference
-		for (let i = 0; i < 1000; i++) {
-			// Simple loop to create measurable time difference
-		}
+		await new Promise((resolve) => setTimeout(resolve, 1));
 		const start2 = getHrtimeAsNumber();
 
 		const elapsed1 = getSecondsFrom(start1);

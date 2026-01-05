@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=20"
@@ -17,7 +17,7 @@
 		"url": "git+https://github.com/owservable/owservable.git"
 	},
 	"scripts": {
-		"all": "yarn & yarn clean & yarn format & yarn build & yarn test & yarn docs & skeletest & strictr",
+		"all": "yarn & yarn clean & yarn format & yarn build & skeletest -f & strictr -f & yarn test & yarn docs",
 		"clear:lib": "del /S /Q lib\\*",
 		"build": "yarn clear:lib & tsc",
 		"build:watch": "tsc --watch",
@@ -39,8 +39,8 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^2.0.1",
-		"@owservable/folders": "^2.0.1",
+		"@owservable/actions": "^2.0.2",
+		"@owservable/folders": "^2.0.2",
 		"@types/lodash": "^4.17.20",
 		"@types/node": "^25.0.3",
 		"@types/node-cron": "^3.0.11",
@@ -48,7 +48,7 @@
 		"json-circular-stringify": "^1.0.1",
 		"jsondiffpatch": "^0.5.0",
 		"lodash": "^4.17.20",
-		"mongoose": "^8.19.4",
+		"mongoose": "^9.1.1",
 		"node-cron": "^4.2.1",
 		"rxjs": "^7.8.2",
 		"sift": "^17.1.3"
