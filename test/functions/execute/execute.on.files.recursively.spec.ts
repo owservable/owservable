@@ -1,8 +1,8 @@
 'use strict';
 
-import * as fs from 'fs';
-import * as path from 'path';
-import * as os from 'os';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as os from 'node:os';
 import executeOnFilesRecursively from '../../../src/functions/execute/execute.on.files.recursively';
 
 describe('execute.on.files.recursively tests', () => {

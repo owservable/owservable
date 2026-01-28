@@ -707,21 +707,21 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@owservable/actions@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-2.0.2.tgz#119fd544060097c3c42ee416f4468645d1ecee36"
-  integrity sha512-0vWLEnKBEZQ01ZaPU7W803S1zeDd+nCiHEn+kqnTrrq/xKrocKdxPBESvnKOCwcQwC8xAFA4N6LK5IYEykgnEA==
+"@owservable/actions@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-2.0.3.tgz#d7635894b3d37dc2ec603cda357aea6f5efeed7a"
+  integrity sha512-k38hH33WJTO31VDKtu9KuUU9q2iG3Dc0R07f6d6kEV+QgnaNka4W4bSCAVSgDqNiKIi7LRBA6xw+5EtXkjgWsA==
   dependencies:
-    "@owservable/folders" "^2.0.2"
-    "@types/node" "^25.0.3"
+    "@owservable/folders" "^2.0.3"
+    "@types/node" "^25.0.10"
     commander "^14.0.2"
 
-"@owservable/folders@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-2.0.2.tgz#a4f0da1b15a98a1b12a3b762ee8494ba730f5f5a"
-  integrity sha512-3AjrP2wlqMmKfaUjm5r4TlTQqvbp18jw0GO6nPxbQmazqjS3qOco1ouCyhtBvEn3KBJr+jqKfWQT0nmjg7tHgQ==
+"@owservable/folders@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-2.0.3.tgz#59ee27caddafd2f5376c71812fbab65e46b4b7ad"
+  integrity sha512-9+u3jF5aU/3H6e5CdpZ8baCOgzdKNISsPTvIRCBcGHVTKL3LHT+oITbAQQA9L3VoU/bXpCnYUnaxuVTfMDkT9g==
   dependencies:
-    "@types/node" "^25.0.3"
+    "@types/node" "^25.0.10"
 
 "@phenomnomnominal/tsquery@^4.0.0":
   version "4.2.0"
@@ -908,10 +908,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
-"@types/lodash@^4.17.20":
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.21.tgz#b806831543d696b14f8112db600ea9d3a1df6ea4"
-  integrity sha512-FOvQ0YPD5NOfPgMzJihoT+Za5pdkDJWcbpuj1DjaKZIr/gxodQjY/uWEFlTNqW2ugXHUiL8lRQgw63dzKHZdeQ==
+"@types/lodash@^4.17.23":
+  version "4.17.23"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.23.tgz#c1bb06db218acc8fc232da0447473fc2fb9d9841"
+  integrity sha512-RDvF6wTulMPjrNdCoYRC8gNR880JNGT8uB+REUpC2Ns4pRqQJhGz90wh7rgdXDPpCczF3VGktDuFGVnz8zP7HA==
 
 "@types/node-cron@^3.0.11":
   version "3.0.11"
@@ -925,10 +925,10 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/node@^25.0.3":
-  version "25.0.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.3.tgz#79b9ac8318f373fbfaaf6e2784893efa9701f269"
-  integrity sha512-W609buLVRVmeW693xKfzHeIV6nJGGz98uCPfeXI1ELMLXVeKYZ9m15fAMSaUPBHYLGFsVRcMmSCksQOrZV9BYA==
+"@types/node@^25.0.10":
+  version "25.0.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.10.tgz#4864459c3c9459376b8b75fd051315071c8213e7"
+  integrity sha512-zWW5KPngR/yvakJgGOmZ5vTBemDoSqF3AcV/LrO5u5wTWyEAVVh+IT39G4gtyAkh3CtTZs8aX/yRM82OfzHJRg==
   dependencies:
     undici-types "~7.16.0"
 
@@ -3084,10 +3084,15 @@ lodash.merge@^4.6.2:
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-lodash@^4.17.20, lodash@^4.17.21:
+lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+lodash@^4.17.23:
+  version "4.17.23"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.23.tgz#f113b0378386103be4f6893388c73d0bde7f2c5a"
+  integrity sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==
 
 log-driver@^1.2.7:
   version "1.2.7"
@@ -3276,10 +3281,10 @@ mongodb@~7.0:
     bson "^7.0.0"
     mongodb-connection-string-url "^7.0.0"
 
-mongoose@^9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-9.1.1.tgz#2992a473d8e1bb9f69ff367a0ee15d0908462194"
-  integrity sha512-/CgKSAmjzgIj4o1FyWZIpQ2rmUQlhalwWd4l/Ht3XUVWscHRHev1TIwKz1ADNC5tHHyOQEaUDkEh0jI91c4Ydw==
+mongoose@^9.1.5:
+  version "9.1.5"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-9.1.5.tgz#55c63831649e5f98a07722fe6a04082e9118f89e"
+  integrity sha512-N6gypEO+wLmZp8kCYNQmrEWxVMT0KhyHvVttBZoKA/1ngY7aUsBjqHzCPtDgz+i8JAnqMOiEKmuJIDEQu1b9Dw==
   dependencies:
     kareem "3.0.0"
     mongodb "~7.0"
@@ -3561,10 +3566,10 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@^3.7.4:
-  version "3.7.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.4.tgz#d2f8335d4b1cec47e1c8098645411b0c9dff9c0f"
-  integrity sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==
+prettier@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.8.1.tgz#edf48977cf991558f4fcbd8a3ba6015ba2a3a173"
+  integrity sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==
 
 pretty-format@30.2.0, pretty-format@^30.0.0:
   version "30.2.0"
@@ -4279,10 +4284,10 @@ typed-array-buffer@^1.0.3:
     es-errors "^1.3.0"
     is-typed-array "^1.1.14"
 
-typedoc@^0.28.15:
-  version "0.28.15"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.28.15.tgz#667faf77eb934deb935fbfd5108a6de5f953948f"
-  integrity sha512-mw2/2vTL7MlT+BVo43lOsufkkd2CJO4zeOSuWQQsiXoV2VuEn7f6IZp2jsUDPmBMABpgR0R5jlcJ2OGEFYmkyg==
+typedoc@^0.28.16:
+  version "0.28.16"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.28.16.tgz#3901672c48746587fa24390077d07317a1fd180f"
+  integrity sha512-x4xW77QC3i5DUFMBp0qjukOTnr/sSg+oEs86nB3LjDslvAmwe/PUGDWbe3GrIqt59oTqoXK5GRK9tAa0sYMiog==
   dependencies:
     "@gerrit0/mini-shiki" "^3.17.0"
     lunr "^2.3.9"

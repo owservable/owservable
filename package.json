@@ -1,9 +1,9 @@
 {
 	"name": "owservable",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "owservable backend",
 	"engines": {
-		"node": ">=20"
+		"node": ">=22.11.0"
 	},
 	"main": "./lib/owservable.js",
 	"types": "./lib/owservable.d.ts",
@@ -39,16 +39,16 @@
 		"srctree": "dir src /s /b > srctree.txt"
 	},
 	"dependencies": {
-		"@owservable/actions": "^2.0.2",
-		"@owservable/folders": "^2.0.2",
-		"@types/lodash": "^4.17.20",
-		"@types/node": "^25.0.3",
+		"@owservable/actions": "^2.0.3",
+		"@owservable/folders": "^2.0.3",
+		"@types/lodash": "^4.17.23",
+		"@types/node": "^25.0.10",
 		"@types/node-cron": "^3.0.11",
 		"deprecated-decorator": "^0.1.6",
 		"json-circular-stringify": "^1.0.1",
 		"jsondiffpatch": "^0.5.0",
-		"lodash": "^4.17.20",
-		"mongoose": "^9.1.1",
+		"lodash": "^4.17.23",
+		"mongoose": "^9.1.5",
 		"node-cron": "^4.2.1",
 		"rxjs": "^7.8.2",
 		"sift": "^17.1.3"
@@ -59,7 +59,7 @@
 		"coveralls": "^3.0.9",
 		"jest": "^30.2.0",
 		"jest-sonar-reporter": "^2.0.0",
-		"prettier": "^3.7.4",
+		"prettier": "^3.8.1",
 		"rewire": "^9.0.1",
 		"skeletest": "^0.7.3",
 		"sonarjs": "^1.0.0",
@@ -70,7 +70,7 @@
 		"tslint": "^6.1.3",
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-etc": "^1.13.7",
-		"typedoc": "^0.28.15",
+		"typedoc": "^0.28.16",
 		"typescript": "^5.9.3"
 	},
 	"packageManager": "yarn@1.22.22"
