@@ -707,21 +707,21 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@owservable/actions@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-2.0.3.tgz#d7635894b3d37dc2ec603cda357aea6f5efeed7a"
-  integrity sha512-k38hH33WJTO31VDKtu9KuUU9q2iG3Dc0R07f6d6kEV+QgnaNka4W4bSCAVSgDqNiKIi7LRBA6xw+5EtXkjgWsA==
+"@owservable/actions@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-2.0.4.tgz#5020069ae1e1876aceadafb19471819a4295b65a"
+  integrity sha512-lt878pyFtnH6Q26zm1GFoMEkO6RXtD82aUvMq6pL5vaseiN3LHqMNhGypJquDaeOe0QRcMpaYmHvQBPwIqyN1A==
   dependencies:
-    "@owservable/folders" "^2.0.3"
-    "@types/node" "^25.0.10"
-    commander "^14.0.2"
+    "@owservable/folders" "^2.0.4"
+    "@types/node" "^25.2.2"
+    commander "^14.0.3"
 
-"@owservable/folders@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-2.0.3.tgz#59ee27caddafd2f5376c71812fbab65e46b4b7ad"
-  integrity sha512-9+u3jF5aU/3H6e5CdpZ8baCOgzdKNISsPTvIRCBcGHVTKL3LHT+oITbAQQA9L3VoU/bXpCnYUnaxuVTfMDkT9g==
+"@owservable/folders@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-2.0.4.tgz#cf47b9c0706ca3947758b244d678fe0c8a122335"
+  integrity sha512-E7tHzrZ/5tkuPqHGYYajcjLOl12sMyAO25SFFXu19BDBmyN6RsV6P38UNAB4y2QnZxeDt/o+hIj+KkUva3HeiA==
   dependencies:
-    "@types/node" "^25.0.10"
+    "@types/node" "^25.2.2"
 
 "@phenomnomnominal/tsquery@^4.0.0":
   version "4.2.0"
@@ -925,10 +925,10 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/node@^25.0.10":
-  version "25.0.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.10.tgz#4864459c3c9459376b8b75fd051315071c8213e7"
-  integrity sha512-zWW5KPngR/yvakJgGOmZ5vTBemDoSqF3AcV/LrO5u5wTWyEAVVh+IT39G4gtyAkh3CtTZs8aX/yRM82OfzHJRg==
+"@types/node@^25.2.2":
+  version "25.2.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.2.2.tgz#0ddfe326c326afcb3422d32bfe5eb2938e1cb5db"
+  integrity sha512-BkmoP5/FhRYek5izySdkOneRyXYN35I860MFAGupTdebyE66uZaR+bXLHq8k4DirE5DwQi3NuhvRU1jqTVwUrQ==
   dependencies:
     undici-types "~7.16.0"
 
@@ -1588,10 +1588,15 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^14.0.0, commander@^14.0.2:
+commander@^14.0.0:
   version "14.0.2"
   resolved "https://registry.yarnpkg.com/commander/-/commander-14.0.2.tgz#b71fd37fe4069e4c3c7c13925252ada4eba14e8e"
   integrity sha512-TywoWNNRbhoD0BXs1P3ZEScW8W5iKrnbithIl0YH+uCmBd0QpPOA8yc82DS3BIE5Ma6FnBVUsJ7wVUDz4dvOWQ==
+
+commander@^14.0.3:
+  version "14.0.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-14.0.3.tgz#425d79b48f9af82fcd9e4fc1ea8af6c5ec07bbc2"
+  integrity sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==
 
 commander@^2.12.1:
   version "2.20.3"
@@ -3281,10 +3286,10 @@ mongodb@~7.0:
     bson "^7.0.0"
     mongodb-connection-string-url "^7.0.0"
 
-mongoose@^9.1.5:
-  version "9.1.5"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-9.1.5.tgz#55c63831649e5f98a07722fe6a04082e9118f89e"
-  integrity sha512-N6gypEO+wLmZp8kCYNQmrEWxVMT0KhyHvVttBZoKA/1ngY7aUsBjqHzCPtDgz+i8JAnqMOiEKmuJIDEQu1b9Dw==
+mongoose@^9.1.6:
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-9.1.6.tgz#98dca5aca71a6145015b6eed5f386b14094f57f6"
+  integrity sha512-ZrtgRsJKtW3od36TVXtAnrNHOO3rqhsqfVut6IzyWyJeLLeLTqW66qej/0qB37GZd5jL06nHfAceTikkfnSqbA==
   dependencies:
     kareem "3.0.0"
     mongodb "~7.0"
