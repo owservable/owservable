@@ -707,21 +707,21 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@owservable/actions@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-2.0.4.tgz#5020069ae1e1876aceadafb19471819a4295b65a"
-  integrity sha512-lt878pyFtnH6Q26zm1GFoMEkO6RXtD82aUvMq6pL5vaseiN3LHqMNhGypJquDaeOe0QRcMpaYmHvQBPwIqyN1A==
+"@owservable/actions@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@owservable/actions/-/actions-2.0.5.tgz#fc4f87a26b3a6bb374c13c0d135834e8be238879"
+  integrity sha512-Oy5Rx/HSws92dY4iYYqau+CommfevGymHczU7Z7CrbKHejx64P5GJSDDDv2Jqf09QxgazdiaI80R8zWg6ktQrQ==
   dependencies:
-    "@owservable/folders" "^2.0.4"
-    "@types/node" "^25.2.2"
+    "@owservable/folders" "^2.0.5"
+    "@types/node" "^25.3.5"
     commander "^14.0.3"
 
-"@owservable/folders@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-2.0.4.tgz#cf47b9c0706ca3947758b244d678fe0c8a122335"
-  integrity sha512-E7tHzrZ/5tkuPqHGYYajcjLOl12sMyAO25SFFXu19BDBmyN6RsV6P38UNAB4y2QnZxeDt/o+hIj+KkUva3HeiA==
+"@owservable/folders@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@owservable/folders/-/folders-2.0.5.tgz#03d76bc01f63f594f9e8ba63bbc57c27911a1cbc"
+  integrity sha512-s/xWLojOb4sstITxUYF5ZIZNxC2BkGEfmkoyxfjwEku49ZS5qspIb4PtcQZBtkIh9BEoLUpbE/X7nEvuHKuwjg==
   dependencies:
-    "@types/node" "^25.2.2"
+    "@types/node" "^25.3.5"
 
 "@phenomnomnominal/tsquery@^4.0.0":
   version "4.2.0"
@@ -908,10 +908,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
-"@types/lodash@^4.17.23":
-  version "4.17.23"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.23.tgz#c1bb06db218acc8fc232da0447473fc2fb9d9841"
-  integrity sha512-RDvF6wTulMPjrNdCoYRC8gNR880JNGT8uB+REUpC2Ns4pRqQJhGz90wh7rgdXDPpCczF3VGktDuFGVnz8zP7HA==
+"@types/lodash@^4.17.24":
+  version "4.17.24"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.24.tgz#4ae334fc62c0e915ca8ed8e35dcc6d4eeb29215f"
+  integrity sha512-gIW7lQLZbue7lRSWEFql49QJJWThrTFFeIMJdp3eH4tKoxm1OvEPg02rm4wCCSHS0cL3/Fizimb35b7k8atwsQ==
 
 "@types/node-cron@^3.0.11":
   version "3.0.11"
@@ -925,12 +925,12 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/node@^25.2.2":
-  version "25.2.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.2.2.tgz#0ddfe326c326afcb3422d32bfe5eb2938e1cb5db"
-  integrity sha512-BkmoP5/FhRYek5izySdkOneRyXYN35I860MFAGupTdebyE66uZaR+bXLHq8k4DirE5DwQi3NuhvRU1jqTVwUrQ==
+"@types/node@^25.3.5":
+  version "25.3.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.3.5.tgz#beccb5915561f7a9970ace547ad44d6cdbf39b46"
+  integrity sha512-oX8xrhvpiyRCQkG1MFchB09f+cXftgIXb3a7UUa4Y3wpmZPw5tyZGTLWhlESOLq1Rq6oDlc8npVU2/9xiCuXMA==
   dependencies:
-    undici-types "~7.16.0"
+    undici-types "~7.18.0"
 
 "@types/rewire@^2.5.30":
   version "2.5.30"
@@ -3008,10 +3008,10 @@ jsprim@^1.2.2:
     json-schema "0.4.0"
     verror "1.10.0"
 
-kareem@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/kareem/-/kareem-3.0.0.tgz#b1abcd504a01d45d712d311bf2178ce2bc0081bb"
-  integrity sha512-RKhaOBSPN8L7y4yAgNhDT2602G5FD6QbOIISbjN9D6mjHPeqeg7K+EB5IGSU5o81/X2Gzm3ICnAvQW3x3OP8HA==
+kareem@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/kareem/-/kareem-3.2.0.tgz#8f69b25f9ceac80e9bc46b391008da7fc93d4ab0"
+  integrity sha512-VS8MWZz/cT+SqBCpVfNN4zoVz5VskR3N4+sTmUXme55e9avQHntpwpNq0yjnosISXqwJ3AQVjlbI4Dyzv//JtA==
 
 keyv@^4.5.4:
   version "4.5.4"
@@ -3286,12 +3286,12 @@ mongodb@~7.0:
     bson "^7.0.0"
     mongodb-connection-string-url "^7.0.0"
 
-mongoose@^9.1.6:
-  version "9.1.6"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-9.1.6.tgz#98dca5aca71a6145015b6eed5f386b14094f57f6"
-  integrity sha512-ZrtgRsJKtW3od36TVXtAnrNHOO3rqhsqfVut6IzyWyJeLLeLTqW66qej/0qB37GZd5jL06nHfAceTikkfnSqbA==
+mongoose@^9.2.4:
+  version "9.2.4"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-9.2.4.tgz#1bed2b788ff4de6791ec2d71e313a2fc262a48f6"
+  integrity sha512-XNh+jiztVMddDFDCv8TWxVxi/rGx+0FfsK3Ftj6hcYzEmhTcos2uC144OJRmUFPHSu3hJr6Pgip++Ab2+Da35Q==
   dependencies:
-    kareem "3.0.0"
+    kareem "3.2.0"
     mongodb "~7.0"
     mpath "0.9.0"
     mquery "6.0.0"
@@ -4289,10 +4289,10 @@ typed-array-buffer@^1.0.3:
     es-errors "^1.3.0"
     is-typed-array "^1.1.14"
 
-typedoc@^0.28.16:
-  version "0.28.16"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.28.16.tgz#3901672c48746587fa24390077d07317a1fd180f"
-  integrity sha512-x4xW77QC3i5DUFMBp0qjukOTnr/sSg+oEs86nB3LjDslvAmwe/PUGDWbe3GrIqt59oTqoXK5GRK9tAa0sYMiog==
+typedoc@^0.28.17:
+  version "0.28.17"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.28.17.tgz#eab7c6649494d0a796e0b2fd2c9a5aea41b0a781"
+  integrity sha512-ZkJ2G7mZrbxrKxinTQMjFqsCoYY6a5Luwv2GKbTnBCEgV2ihYm5CflA9JnJAwH0pZWavqfYxmDkFHPt4yx2oDQ==
   dependencies:
     "@gerrit0/mini-shiki" "^3.17.0"
     lunr "^2.3.9"
@@ -4319,6 +4319,11 @@ undici-types@~7.16.0:
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.16.0.tgz#ffccdff36aea4884cbfce9a750a0580224f58a46"
   integrity sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==
+
+undici-types@~7.18.0:
+  version "7.18.2"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.18.2.tgz#29357a89e7b7ca4aef3bf0fd3fd0cd73884229e9"
+  integrity sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==
 
 unrs-resolver@^1.7.11:
   version "1.11.1"
