@@ -1,5 +1,6 @@
 'use strict';
 import {Model} from 'mongoose';
+import {Subscription} from 'rxjs';
 
 import DocumentStore from '../../src/store/document.store';
 import EStoreType from '../../src/enums/store.type.enum';
@@ -171,6 +172,72 @@ describe('DocumentStore tests', () => {
 				}
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(false);
+		});
+
+		it('should return false for unknown operation types', () => {
+			const change = {
+				operationType: 'rename',
+				documentKey: {_id: 'test-id'}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(false);
+		});
+
+		it('should handle replace like update when id matches', () => {
+			const change = {
+				operationType: 'replace',
+				documentKey: {_id: 'test-id'},
+				updateDescription: {
+					updatedFields: {name: 'n'},
+					removedFields: [] as string[]
+				}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(true);
+		});
+	});
+
+	describe('restartSubscription', () => {
+		const bindHandlers = (): any => {
+			let handlers: any;
+			const sub: Subscription = {unsubscribe: jest.fn()} as any;
+			const mockObservable: any = {
+				pipe: jest.fn().mockReturnThis(),
+				subscribe: jest.fn((h: any) => {
+					handlers = h;
+					return sub;
+				})
+			};
+			mockObservableModel.mockReturnValue(mockObservable);
+			mockStore.config = {
+				query: {_id: 'id1'},
+				fields: {n: 1},
+				strict: false,
+				incremental: false,
+				populates: [],
+				virtuals: []
+			} as any;
+			return handlers;
+		};
+
+		it('forwards stream error to error()', () => {
+			const errSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'error').mockImplementation();
+			try {
+				const handlers: any = bindHandlers();
+				handlers.error(new Error('pipe-err'));
+				expect(errSpy).toHaveBeenCalledWith(new Error('pipe-err'));
+			} finally {
+				errSpy.mockRestore();
+			}
+		});
+
+		it('forwards stream completion to complete()', () => {
+			const completeSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'complete').mockImplementation();
+			try {
+				const handlers: any = bindHandlers();
+				handlers.complete();
+				expect(completeSpy).toHaveBeenCalled();
+			} finally {
+				completeSpy.mockRestore();
+			}
 		});
 	});
 

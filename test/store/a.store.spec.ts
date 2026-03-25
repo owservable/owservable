@@ -197,6 +197,30 @@ describe('AStore tests', () => {
 			mockStore.restartSubscription();
 			expect(mockSubscription.unsubscribe).toHaveBeenCalledTimes(1);
 		});
+
+		it('should forward stream error and completion', () => {
+			let handlers: any;
+			const mockObservable: any = {
+				pipe: jest.fn().mockReturnThis(),
+				subscribe: jest.fn((h: any) => {
+					handlers = h;
+					return mockSubscription;
+				})
+			};
+			mockObservableModel.mockReturnValue(mockObservable);
+			const errSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'error').mockImplementation();
+			const completeSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'complete').mockImplementation();
+			try {
+				mockStore.restartSubscription();
+				handlers.error(new Error('stream-fail'));
+				handlers.complete();
+				expect(errSpy).toHaveBeenCalledWith(new Error('stream-fail'));
+				expect(completeSpy).toHaveBeenCalled();
+			} finally {
+				errSpy.mockRestore();
+				completeSpy.mockRestore();
+			}
+		});
 	});
 
 	describe('isInitialSubscription', () => {
@@ -279,6 +303,28 @@ describe('AStore tests', () => {
 			mockStore.config = {query: {$invalid: 'invalid-query'}, strict: false as const, incremental: false as const};
 			const document = {name: 'test'};
 			expect(mockStore.testTestDocument(document)).toBe(true);
+		});
+	});
+
+	describe('_responseStatistics', () => {
+		it('returns empty object and logs when JSON.stringify fails', () => {
+			const nextSpy: jest.SpyInstance = jest.spyOn(mockStore, 'next').mockImplementation();
+			const consoleSpy: jest.SpyInstance = jest.spyOn(console, 'error').mockImplementation();
+			mockStore.config = {subscriptionId: 'test-sub', query: {}, strict: false as const, incremental: false as const};
+			(mockStore as any)._query = {x: BigInt(1)};
+			try {
+				mockStore.testEmitOne(999, 'test-sub', {x: 1});
+				expect(nextSpy).toHaveBeenCalled();
+				const payload: any = nextSpy.mock.calls[0][0];
+				expect(payload.payload.testTarget).toEqual({x: 1});
+				expect(consoleSpy).toHaveBeenCalled();
+				const firstArg: string = consoleSpy.mock.calls[0][0] as string;
+				expect(firstArg).toContain('AStore::responseStatistics');
+			} finally {
+				nextSpy.mockRestore();
+				consoleSpy.mockRestore();
+				(mockStore as any)._query = {};
+			}
 		});
 	});
 

@@ -56,6 +56,12 @@ describe('MongoDBConnector tests', () => {
 			expect(MongoDBConnector.init).toBeDefined();
 			expect(MongoDBConnector.connection).toBeDefined();
 		});
+
+		it('allows runtime instantiation of the private constructor', () => {
+			const ConnectorCtor: any = MongoDBConnector;
+			const inst: MongoDBConnector = new ConnectorCtor();
+			expect(inst).toBeInstanceOf(MongoDBConnector);
+		});
 	});
 
 	describe('init', () => {

@@ -146,6 +146,48 @@ describe('CollectionStore tests', () => {
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(false);
 		});
+
+		it('should return true for replace when field projection intersects updated fields', () => {
+			jest.spyOn(mockStore as any, 'shouldConsiderFields').mockReturnValue(true);
+			const change = {
+				operationType: 'replace',
+				updateDescription: {
+					updatedFields: {title: 't'},
+					removedFields: [] as string[]
+				},
+				fullDocument: {}
+			};
+			(mockStore as any)._fields = {title: 1};
+			expect((mockStore as any).shouldReload(change)).toBe(true);
+		});
+
+		it('should return false for replace when field projection does not intersect', () => {
+			jest.spyOn(mockStore as any, 'shouldConsiderFields').mockReturnValue(true);
+			const change = {
+				operationType: 'replace',
+				updateDescription: {
+					updatedFields: {other: 'x'},
+					removedFields: [] as string[]
+				},
+				fullDocument: {}
+			};
+			(mockStore as any)._fields = {title: 1};
+			expect((mockStore as any).shouldReload(change)).toBe(false);
+		});
+
+		it('should use testDocument for replace when not considering fields', () => {
+			jest.spyOn(mockStore as any, 'shouldConsiderFields').mockReturnValue(false);
+			jest.spyOn(mockStore as any, 'testDocument').mockReturnValue(true);
+			const change = {
+				operationType: 'replace',
+				updateDescription: {
+					updatedFields: {name: 'n'},
+					removedFields: [] as string[]
+				},
+				fullDocument: {status: 'active'}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(true);
+		});
 	});
 
 	describe('sendCount', () => {
