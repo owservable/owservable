@@ -524,6 +524,23 @@ describe('OwservableClient tests', () => {
 			expect(() => (client as any).clearSubscriptions()).not.toThrow();
 			expect(mockSendDebugTargets).toHaveBeenCalledWith('clearSubscriptions', '*');
 		});
+
+		it('should skip unsubscribe and destroy when map entries are nullish', () => {
+			const mockSendDebugTargets: jest.SpyInstance = jest.spyOn(client as any, 'sendDebugTargets').mockImplementation();
+			try {
+				const sub1: any = {unsubscribe: jest.fn()};
+				(client as any)._subscriptions.set('a', sub1);
+				(client as any)._subscriptions.set('b', null as any);
+				(client as any)._stores.set('c', mockStore);
+				(client as any)._stores.set('d', null as any);
+				(client as any).clearSubscriptions();
+				expect(sub1.unsubscribe).toHaveBeenCalled();
+				expect(mockStore.destroy).toHaveBeenCalled();
+				expect(mockSendDebugTargets).toHaveBeenCalledWith('clearSubscriptions', '*');
+			} finally {
+				mockSendDebugTargets.mockRestore();
+			}
+		});
 	});
 
 	describe('location setter', () => {
