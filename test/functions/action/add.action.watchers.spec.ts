@@ -8,6 +8,7 @@ jest.mock('@owservable/folders', () => ({
 }));
 
 jest.mock('../../../src/functions/execute/execute.watcher', () => ({
+	__esModule: true,
 	default: jest.fn()
 }));
 
@@ -19,13 +20,11 @@ describe('addActionWatchers tests', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
-		jest.resetModules();
 		consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
 	});
 
 	afterEach(() => {
 		consoleLogSpy.mockRestore();
-		jest.resetModules();
 	});
 
 	it('should be a function', () => {

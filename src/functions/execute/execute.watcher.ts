@@ -1,6 +1,6 @@
 'use strict';
 
-import WatcherType from '../../types/watcher.type';
+import type WatcherType from '../../types/watcher.type';
 
 const executeWatcher = (obj: WatcherType): void => {
 	const {init, watch, waitForInit = false} = obj;

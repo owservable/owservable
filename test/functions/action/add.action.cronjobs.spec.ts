@@ -8,6 +8,7 @@ jest.mock('@owservable/folders', () => ({
 }));
 
 jest.mock('../../../src/functions/execute/execute.cronjob', () => ({
+	__esModule: true,
 	default: jest.fn()
 }));
 
@@ -19,13 +20,11 @@ describe('addActionCronjobs tests', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
-		jest.resetModules();
 		consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
 	});
 
 	afterEach(() => {
 		consoleLogSpy.mockRestore();
-		jest.resetModules();
 	});
 
 	it('should be a function', () => {
@@ -43,8 +42,6 @@ describe('addActionCronjobs tests', () => {
 
 		mockListSubfoldersFilesByFolderName.mockReturnValue([mockActionPath]);
 
-		// Mock require to return our mock action class
-		const originalRequire = require;
 		jest.doMock(mockActionPath, () => ({default: MockActionClass}), {virtual: true});
 
 		addActionCronjobs('/test/root', 'actions');

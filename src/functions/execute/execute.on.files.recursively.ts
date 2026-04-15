@@ -3,9 +3,9 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import {ItemStat} from '@owservable/folders';
+import type {ItemStat} from '@owservable/folders';
 
-const executeOnFilesRecursively = (folder: string, execute: Function): void => {
+const executeOnFilesRecursively = (folder: string, execute: (obj: unknown) => void): void => {
 	const children: string[] = fs.readdirSync(folder);
 
 	// PERFORMANCE: Single lstat call per item instead of two

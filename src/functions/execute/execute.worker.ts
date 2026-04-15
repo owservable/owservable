@@ -1,6 +1,6 @@
 'use strict';
 
-import WorkerType from '../../types/worker.type';
+import type WorkerType from '../../types/worker.type';
 
 const executeWorker = (obj: WorkerType) => {
 	const {init, work} = obj;

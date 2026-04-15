@@ -1,9 +1,9 @@
 'use strict';
 
-import {ActionAsWorkerInterface} from '@owservable/actions';
+import type {ActionAsWorkerInterface} from '@owservable/actions';
 import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 
-import WorkerType from '../../types/worker.type';
+import type WorkerType from '../../types/worker.type';
 import executeWorker from '../execute/execute.worker';
 
 export default function addActionWorkers(root: string, folderName: string): void {
@@ -11,7 +11,6 @@ export default function addActionWorkers(root: string, folderName: string): void
 
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing worker action', actionPath);
-		// tslint:disable-next-line:callable-types
 		const ActionClass: new () => ActionAsWorkerInterface = require(actionPath).default;
 		const action: ActionAsWorkerInterface = new ActionClass();
 

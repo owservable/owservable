@@ -7,7 +7,7 @@ import {Subject, Subscription} from 'rxjs';
 import AStore from './store/a.store';
 import storeFactory from './store/factories/store.factory';
 import IConnectionManager from './auth/i.connection.manager';
-import DataMiddlewareMap from './middleware/data.middleware.map';
+import DataMiddlewareMap, {type DataMiddlewareProcessor} from './middleware/data.middleware.map';
 import StoreSubscriptionUpdateType from './types/store.subscription.update.type';
 import ConnectionManagerRefreshType from './types/connection.manager.refresh.type';
 
@@ -125,7 +125,7 @@ export default class OwservableClient extends Subject<any> {
 				next: async (m: any): Promise<void> => {
 					if (!this.isValidTarget(target)) return;
 
-					const process: Function = DataMiddlewareMap.getMiddleware(observe);
+					const process: DataMiddlewareProcessor | undefined = DataMiddlewareMap.getMiddleware(observe);
 					if (!process) return this.next(m);
 
 					const r: any = await process(m, this._connectionManager.user);

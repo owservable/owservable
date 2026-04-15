@@ -26,7 +26,7 @@ class MockAStore extends AStore {
 		return !_.isEmpty(change);
 	}
 
-	protected async load(change: any): Promise<void> {
+	protected async load(_change: any): Promise<void> {
 		// Mock implementation for testing
 		return Promise.resolve();
 	}

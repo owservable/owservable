@@ -2,7 +2,7 @@
 
 import * as cron from 'node-cron';
 
-import CronJobType from '../../types/cronjob.type';
+import type CronJobType from '../../types/cronjob.type';
 
 const executeCronjob = (obj: CronJobType) => {
 	const {schedule, job, options, init} = obj;

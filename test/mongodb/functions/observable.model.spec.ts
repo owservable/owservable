@@ -244,10 +244,7 @@ describe('observable.model.ts tests', () => {
 			mockWatch.mockReturnValueOnce(failingStream).mockImplementation(() => buildStream());
 			const m: ObservableModel = new ObservableModel('directColl6');
 			failingStream.emit('error', new Error('e'));
-			expect(consoleErrorSpy).toHaveBeenCalledWith(
-				expect.stringContaining('cleaning up old stream'),
-				expect.any(Error)
-			);
+			expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('cleaning up old stream'), expect.any(Error));
 			expect(mockWatch.mock.calls.length).toBeGreaterThanOrEqual(2);
 			expect(m).toBeDefined();
 		});

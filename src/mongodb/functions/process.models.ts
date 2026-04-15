@@ -4,7 +4,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import {endsWith, find, isString} from 'lodash';
-import {listSubfoldersByName, ItemStat} from '@owservable/folders';
+import {listSubfoldersByName, type ItemStat} from '@owservable/folders';
 
 import CollectionsModelsMap from '../collections.models.map';
 

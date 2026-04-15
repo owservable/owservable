@@ -1,7 +1,5 @@
 'use strict';
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 import processModels from '../../../src/mongodb/functions/process.models';
 import CollectionsModelsMap from '../../../src/mongodb/collections.models.map';
 
@@ -15,8 +13,6 @@ describe('process.models.ts tests', () => {
 	let mockPath: jest.Mocked<typeof import('path')>;
 	let mockListSubfoldersByName: jest.MockedFunction<any>;
 	let mockAddCollectionToModelMapping: jest.MockedFunction<any>;
-	let originalRequire: NodeRequire;
-
 	beforeAll(() => {
 		mockFs = require('fs');
 		mockPath = require('path');

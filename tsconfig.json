@@ -1,10 +1,11 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"allowJs": true,
 		"target": "es6",
-		"module": "commonjs",
-		"moduleResolution": "node",
+		"module": "Node16",
+		"moduleResolution": "Node16",
+		"types": ["node"],
+		"isolatedModules": true,
 		"resolveJsonModule": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
@@ -17,7 +18,8 @@
 		"noImplicitAny": true,
 		"strict": true,
 		"strictNullChecks": false,
-		"types": ["jest", "node"]
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"include": [
 		"./src/**/*"
@@ -27,6 +29,7 @@
 		".sonarlint",
 		"coverage",
 		"docs",
-		"node_modules"
+		"node_modules",
+		"test"
 	]
 }

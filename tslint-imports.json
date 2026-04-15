@@ -1,9 +1,0 @@
-{
-	"extends": [
-		"tslint-etc"
-	],
-	"rules": {
-		"no-unused-declaration": true,
-		"no-unused-variable": false
-	}
-}

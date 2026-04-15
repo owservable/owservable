@@ -73,7 +73,7 @@ export default class CollectionStore extends AStore {
 	protected async loadAll(startTime: number, currentLoadSubscriptionId: string): Promise<void> {
 		let documents: any[] = await this._model //
 			.find(this._query, this._fields, this._paging)
-			.sort(this._sort) // @ts-ignore
+			.sort(this._sort)
 			.setOptions({allowDiskUse: true});
 
 		for (const populate of this._populates) {

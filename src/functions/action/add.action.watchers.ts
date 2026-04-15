@@ -1,9 +1,9 @@
 'use strict';
 
-import {ActionAsWatcherInterface} from '@owservable/actions';
+import type {ActionAsWatcherInterface} from '@owservable/actions';
 import {listSubfoldersFilesByFolderName} from '@owservable/folders';
 
-import WatcherType from '../../types/watcher.type';
+import type WatcherType from '../../types/watcher.type';
 import executeWatcher from '../execute/execute.watcher';
 
 export default function addActionWatchers(root: string, folderName: string): void {
@@ -11,7 +11,6 @@ export default function addActionWatchers(root: string, folderName: string): voi
 
 	for (const actionPath of actionPaths) {
 		console.log('[@owservable] -> Initializing watcher action', actionPath);
-		// tslint:disable-next-line:callable-types
 		const ActionClass: new () => ActionAsWatcherInterface = require(actionPath).default;
 		const action: ActionAsWatcherInterface = new ActionClass();
 

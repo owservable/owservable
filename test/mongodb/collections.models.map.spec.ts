@@ -61,7 +61,7 @@ describe('collections.models.map.ts tests', () => {
 		it('should return empty array when no models are mapped', () => {
 			// Clear any existing mappings for this test
 			const currentKeys = CollectionsModelsMap.keys();
-			currentKeys.forEach((key) => {
+			currentKeys.forEach((_key) => {
 				// We can't directly clear the map, but we can verify behavior
 			});
 

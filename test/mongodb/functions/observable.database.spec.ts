@@ -168,10 +168,7 @@ describe('observable.database.ts tests', () => {
 			mockWatch.mockReturnValueOnce(failingStream).mockImplementation(() => buildStream());
 			const db = observableDatabase();
 			failingStream.emit('error', new Error('e'));
-			expect(consoleErrorSpy).toHaveBeenCalledWith(
-				expect.stringContaining('cleaning up old stream'),
-				expect.any(Error)
-			);
+			expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('cleaning up old stream'), expect.any(Error));
 			expect(mockWatch.mock.calls.length).toBeGreaterThanOrEqual(2);
 			expect(db).toBeDefined();
 		});
