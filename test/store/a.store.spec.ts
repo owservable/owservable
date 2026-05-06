@@ -221,6 +221,57 @@ describe('AStore tests', () => {
 				completeSpy.mockRestore();
 			}
 		});
+
+		it('should process stream next event', async () => {
+			let handlers: any;
+			const mockObservable: any = {
+				pipe: jest.fn().mockReturnThis(),
+				subscribe: jest.fn((h: any) => {
+					handlers = h;
+					return mockSubscription;
+				})
+			};
+			mockObservableModel.mockReturnValue(mockObservable);
+			const loadSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'load').mockResolvedValue(undefined);
+			try {
+				mockStore.restartSubscription();
+				const change: any = {operationType: 'update', documentKey: {_id: 'abc'}};
+				handlers.next(change);
+				await Promise.resolve();
+				expect(loadSpy).toHaveBeenCalledWith(change);
+			} finally {
+				loadSpy.mockRestore();
+			}
+		});
+
+		it('should forward rejected load from stream next to error()', async () => {
+			let handlers: any;
+			const mockObservable: any = {
+				pipe: jest.fn().mockReturnThis(),
+				subscribe: jest.fn((h: any) => {
+					handlers = h;
+					return mockSubscription;
+				})
+			};
+			mockObservableModel.mockReturnValue(mockObservable);
+			const failure: Error = new Error('load-reject');
+			const loadSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'load').mockImplementation((change: any): Promise<void> => {
+				if (_.isEmpty(change)) return Promise.resolve();
+				return Promise.reject(failure);
+			});
+			const errorSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'error').mockImplementation();
+			try {
+				mockStore.restartSubscription();
+				handlers.next({operationType: 'update'});
+				await Promise.resolve();
+				await Promise.resolve();
+				expect(loadSpy).toHaveBeenCalled();
+				expect(errorSpy).toHaveBeenCalledWith(failure);
+			} finally {
+				loadSpy.mockRestore();
+				errorSpy.mockRestore();
+			}
+		});
 	});
 
 	describe('isInitialSubscription', () => {

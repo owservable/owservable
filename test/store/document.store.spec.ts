@@ -1,4 +1,5 @@
 'use strict';
+import * as _ from 'lodash';
 import {Model} from 'mongoose';
 import {Subscription} from 'rxjs';
 
@@ -237,6 +238,39 @@ describe('DocumentStore tests', () => {
 				expect(completeSpy).toHaveBeenCalled();
 			} finally {
 				completeSpy.mockRestore();
+			}
+		});
+
+		it('handles stream next event', async () => {
+			const loadSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'load').mockResolvedValue(undefined);
+			try {
+				const handlers: any = bindHandlers();
+				const change: any = {operationType: 'update', documentKey: {_id: 'id1'}};
+				handlers.next(change);
+				await Promise.resolve();
+				expect(loadSpy).toHaveBeenCalledWith(change);
+			} finally {
+				loadSpy.mockRestore();
+			}
+		});
+
+		it('forwards rejected load from next() to error()', async () => {
+			const failure: Error = new Error('next-load-fail');
+			const loadSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'load').mockImplementation((change: any): Promise<void> => {
+				if (_.isEmpty(change)) return Promise.resolve();
+				return Promise.reject(failure);
+			});
+			const errorSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'error').mockImplementation();
+			try {
+				const handlers: any = bindHandlers();
+				handlers.next({operationType: 'update'});
+				await Promise.resolve();
+				await Promise.resolve();
+				expect(loadSpy).toHaveBeenCalled();
+				expect(errorSpy).toHaveBeenCalledWith(failure);
+			} finally {
+				loadSpy.mockRestore();
+				errorSpy.mockRestore();
 			}
 		});
 	});

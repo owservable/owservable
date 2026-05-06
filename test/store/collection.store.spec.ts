@@ -557,5 +557,20 @@ describe('CollectionStore tests', () => {
 				limit: 10
 			});
 		});
+
+		it('should default page to 1 when pageSize is provided', () => {
+			const config = {
+				query: {},
+				strict: false,
+				incremental: false,
+				pageSize: 15
+			};
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
+			mockStore.config = config as any;
+			expect((mockStore as any)._paging).toEqual({
+				skip: 0,
+				limit: 15
+			});
+		});
 	});
 });
