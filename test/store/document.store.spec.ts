@@ -194,6 +194,27 @@ describe('DocumentStore tests', () => {
 			};
 			expect((mockStore as any).shouldReload(change)).toBe(true);
 		});
+
+		it('should reach missing updateDescription branch when id does not match', () => {
+			const change: {operationType: string; documentKey: {_id: string}} = {
+				operationType: 'update',
+				documentKey: {_id: 'different-id'}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(true);
+		});
+
+		it('should handle string query ids via _getIdFromQuery', () => {
+			mockStore.config = {
+				query: 'string-id',
+				strict: false,
+				incremental: false
+			} as any;
+			const change: {operationType: string; documentKey: {_id: string}} = {
+				operationType: 'insert',
+				documentKey: {_id: 'x'}
+			};
+			expect((mockStore as any).shouldReload(change)).toBe(false);
+		});
 	});
 
 	describe('restartSubscription', () => {
@@ -562,6 +583,28 @@ describe('DocumentStore tests', () => {
 
 			expect(document.populate).toHaveBeenCalledWith('user');
 			expect(document.populate).toHaveBeenCalledWith('category');
+		});
+
+		it('should skip populate call when data has no populate method', async () => {
+			const document: {_id: string; name: string; toJSON: jest.MockedFunction<() => {_id: string; name: string}>} = {
+				_id: 'test-id',
+				name: 'test',
+				toJSON: jest.fn().mockReturnValue({_id: 'test-id', name: 'test'})
+			};
+
+			jest.spyOn(mockStore as any, '_loadDocumentById').mockResolvedValue(document);
+			mockStore.config = {
+				query: {_id: 'test-id'},
+				fields: {name: 1},
+				strict: false,
+				incremental: false,
+				populates: ['user'],
+				virtuals: []
+			} as any;
+
+			await (mockStore as any).load({});
+
+			expect((mockStore as any).emitOne).toHaveBeenCalledWith(1000, expect.any(String), {_id: 'test-id', name: 'test'});
 		});
 
 		it('should handle virtuals', async () => {

@@ -200,9 +200,7 @@ describe('execute.watcher tests', () => {
 				});
 
 				await Promise.resolve();
-				await new Promise<void>((resolve: (value: void | PromiseLike<void>) => void) =>
-					setImmediate(() => resolve())
-				);
+				await new Promise<void>((resolve: (value: void | PromiseLike<void>) => void) => setImmediate(() => resolve()));
 				expect(order).toEqual(['init', 'watch']);
 			});
 
@@ -388,6 +386,29 @@ describe('execute.watcher tests', () => {
 				expect(mockInit).toHaveBeenCalled();
 				expect(mockThen).toHaveBeenCalledWith(expect.any(Function));
 				expect(mockWatch).toHaveBeenCalled();
+			});
+
+			it('should cover waitForInit=true with function init and undefined watch', async () => {
+				const watcherObj: WatcherType = {
+					init: mockInit,
+					waitForInit: true
+				};
+
+				executeWatcher(watcherObj);
+
+				await Promise.resolve();
+				await Promise.resolve();
+				expect(mockInit).toHaveBeenCalled();
+			});
+
+			it('should cover waitForInit=true with non-function init and undefined watch', () => {
+				const watcherObj: WatcherType = {
+					init: null as any,
+					waitForInit: true
+				};
+
+				expect(() => executeWatcher(watcherObj)).not.toThrow();
+				expect(mockInit).not.toHaveBeenCalled();
 			});
 		});
 	});

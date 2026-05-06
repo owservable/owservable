@@ -344,6 +344,14 @@ describe('AStore tests', () => {
 			expect(mockStore.getQuery()).toEqual({b: 2});
 			expect(mockStore.getFields()).toEqual({});
 		});
+
+		it('should use default query and sort when omitted in config', () => {
+			mockStore.config = {query: {a: 1}, sort: {createdAt: -1}, strict: false as const, incremental: false as const};
+			mockStore.config = {strict: false as const, incremental: false as const} as any;
+
+			expect((mockStore as any)._query).toEqual({});
+			expect((mockStore as any)._sort).toEqual({});
+		});
 	});
 
 	describe('testDocument', () => {
@@ -493,6 +501,20 @@ describe('AStore tests', () => {
 					expect.objectContaining({
 						payload: expect.not.objectContaining({
 							_testTargetCount: expect.anything()
+						})
+					})
+				);
+			});
+
+			it('should use default update when undefined is passed', () => {
+				mockStore.testEmitMany(1000, 'test-sub', undefined);
+
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						type: 'update',
+						payload: expect.objectContaining({
+							testTarget: [],
+							_testTargetCount: 0
 						})
 					})
 				);
