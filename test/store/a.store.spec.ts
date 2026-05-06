@@ -335,6 +335,15 @@ describe('AStore tests', () => {
 			expect(mockStore.getFields()).toEqual({});
 			expect(mockStore.getDelay()).toBe(100);
 		});
+
+		it('should apply defaults when optional config keys are omitted after a diff', () => {
+			mockStore.config = {query: {a: 1}, strict: false as const, incremental: false as const};
+			mockStore.config = {query: {b: 2}, strict: false as const, incremental: false as const};
+
+			expect(mockStore.getDelay()).toBe(100);
+			expect(mockStore.getQuery()).toEqual({b: 2});
+			expect(mockStore.getFields()).toEqual({});
+		});
 	});
 
 	describe('testDocument', () => {
@@ -452,6 +461,32 @@ describe('AStore tests', () => {
 			it('should not include count for incremental updates', () => {
 				mockStore.config = {subscriptionId: 'test-sub', query: {}, strict: false, incremental: true} as any;
 				const update = {total: 5, data: [] as any[], recounting: false};
+				mockStore.testEmitMany(1000, 'test-sub', update);
+
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						payload: expect.not.objectContaining({
+							_testTargetCount: expect.anything()
+						})
+					})
+				);
+			});
+
+			it('should use emitMany default update object when omitted', () => {
+				mockStore.testEmitMany(1000, 'test-sub');
+
+				expect(mockStore.next).toHaveBeenCalledWith(
+					expect.objectContaining({
+						payload: expect.objectContaining({
+							testTarget: [],
+							_testTargetCount: 0
+						})
+					})
+				);
+			});
+
+			it('should omit count when total is negative', () => {
+				const update: {total: number; data: any[]; recounting: boolean} = {total: -1, data: [] as any[], recounting: false};
 				mockStore.testEmitMany(1000, 'test-sub', update);
 
 				expect(mockStore.next).toHaveBeenCalledWith(

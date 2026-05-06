@@ -1,7 +1,7 @@
 'use strict';
 import * as _ from 'lodash';
 import {Model} from 'mongoose';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 
 import DocumentStore from '../../src/store/document.store';
 import EStoreType from '../../src/enums/store.type.enum';
@@ -271,6 +271,43 @@ describe('DocumentStore tests', () => {
 			} finally {
 				loadSpy.mockRestore();
 				errorSpy.mockRestore();
+			}
+		});
+
+		it('invokes filter pipeline when source emits', async () => {
+			const subject: Subject<any> = new Subject<any>();
+			mockObservableModel.mockReturnValue(subject);
+			const pipeFilterSpy: jest.SpyInstance = jest.spyOn(mockStore as any, '_pipeFilter');
+			const loadSpy: jest.SpyInstance = jest.spyOn(mockStore as any, 'load').mockImplementation((): Promise<void> => Promise.resolve());
+			try {
+				mockStore.config = {
+					query: {_id: 'id1'},
+					fields: {n: 1},
+					strict: false,
+					incremental: false,
+					populates: [],
+					virtuals: [],
+					delay: 0
+				} as any;
+
+				const change: any = {
+					operationType: 'update',
+					documentKey: {_id: 'id1'},
+					updateDescription: {updatedFields: {}, removedFields: [] as string[]}
+				};
+
+				subject.next(change);
+
+				await Promise.resolve();
+				await Promise.resolve();
+				await new Promise<void>((resolve: (value: void | PromiseLike<void>) => void) => setImmediate(() => resolve()));
+
+				expect(pipeFilterSpy).toHaveBeenCalledWith(change);
+				expect(loadSpy).toHaveBeenCalledWith(change);
+			} finally {
+				pipeFilterSpy.mockRestore();
+				loadSpy.mockRestore();
+				subject.complete();
 			}
 		});
 	});

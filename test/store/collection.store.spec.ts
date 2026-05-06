@@ -572,5 +572,25 @@ describe('CollectionStore tests', () => {
 				limit: 15
 			});
 		});
+
+		it('should default incremental when key is omitted', () => {
+			jest.spyOn(mockStore as any, 'restartSubscription').mockImplementation();
+			mockStore.config = {
+				query: {p: 1},
+				strict: false,
+				incremental: false,
+				pageSize: 11
+			} as any;
+			mockStore.config = {
+				query: {p: 2},
+				strict: false,
+				pageSize: 11
+			} as any;
+			expect((mockStore as any)._incremental).toBe(false);
+			expect((mockStore as any)._paging).toEqual({
+				skip: 0,
+				limit: 11
+			});
+		});
 	});
 });

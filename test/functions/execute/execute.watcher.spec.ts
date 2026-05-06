@@ -166,6 +166,46 @@ describe('execute.watcher tests', () => {
 		});
 
 		describe('promise handling and edge cases', () => {
+			it('should run chained then after init resolves when waitForInit is false', async () => {
+				const marker: jest.Mock = jest.fn();
+				mockInit.mockImplementation(() =>
+					Promise.resolve().then(() => {
+						marker();
+					})
+				);
+
+				executeWatcher({
+					init: mockInit,
+					watch: mockWatch,
+					waitForInit: false
+				});
+
+				await Promise.resolve();
+				await Promise.resolve();
+				await Promise.resolve();
+				expect(marker).toHaveBeenCalledTimes(1);
+			});
+
+			it('should resolve watch after init promise fulfills when waitForInit is true', async () => {
+				const order: string[] = [];
+				mockInit.mockImplementation(async () => {
+					order.push('init');
+				});
+				const watchFn: jest.MockedFunction<() => void> = jest.fn(() => order.push('watch'));
+
+				executeWatcher({
+					init: mockInit,
+					watch: watchFn,
+					waitForInit: true
+				});
+
+				await Promise.resolve();
+				await new Promise<void>((resolve: (value: void | PromiseLike<void>) => void) =>
+					setImmediate(() => resolve())
+				);
+				expect(order).toEqual(['init', 'watch']);
+			});
+
 			it('should handle init promise rejection gracefully when waitForInit is false', () => {
 				const watcherObj: WatcherType = {
 					init: mockInit,
