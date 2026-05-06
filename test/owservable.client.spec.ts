@@ -119,6 +119,20 @@ describe('OwservableClient tests', () => {
 
 			global.Date = originalDate;
 		});
+
+		it('should run setTimeout callback registered by ping', () => {
+			const setTimeoutMock: jest.Mock = (global as any).setTimeout as jest.Mock;
+			client.ping();
+			const firstCall: unknown[] = setTimeoutMock.mock.calls[0];
+			const scheduledPing: () => void = firstCall[0] as () => void;
+			const pingSpy: jest.SpyInstance = jest.spyOn(client, 'ping').mockImplementation((): void => undefined);
+			try {
+				scheduledPing();
+				expect(pingSpy).toHaveBeenCalledTimes(1);
+			} finally {
+				pingSpy.mockRestore();
+			}
+		});
 	});
 
 	describe('consume', () => {

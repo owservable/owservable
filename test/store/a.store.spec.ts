@@ -55,7 +55,7 @@ class MockAStore extends AStore {
 		return this.emitOne(startTime, subscriptionId, update);
 	}
 
-	public testEmitMany(startTime: number, subscriptionId: string, update: any = {total: 0, data: [], recounting: false}): void {
+	public testEmitMany(startTime: number, subscriptionId: string, update?: any): void {
 		return this.emitMany(startTime, subscriptionId, update);
 	}
 
@@ -343,6 +343,17 @@ describe('AStore tests', () => {
 			expect(mockStore.getDelay()).toBe(100);
 			expect(mockStore.getQuery()).toEqual({b: 2});
 			expect(mockStore.getFields()).toEqual({});
+		});
+
+		it('should assign subscriptionId from randomUUID when missing on config', () => {
+			(mockStore as any)._config = {
+				query: {},
+				strict: false as const,
+				incremental: false as const
+			};
+			mockStore.testExtractFromConfig();
+			expect(mockRandomUUID).toHaveBeenCalled();
+			expect(mockStore.getSubscriptionId()).toBe('12345678-1234-1234-1234-123456789012');
 		});
 
 		it('should use default query and sort when omitted in config', () => {

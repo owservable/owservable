@@ -24,7 +24,7 @@ const diffPatcher: jsondiffpatch.DiffPatcher = jsondiffpatch.create({
 });
 
 // tslint:disable-next-line:variable-name
-const _baseMessage = (target: string, incremental = false): any => ({
+const _baseMessage = (target: string, incremental: boolean): any => ({
 	type: incremental ? 'increment' : 'update',
 	target,
 	payload: {}
@@ -102,23 +102,34 @@ export default abstract class AStore extends Subject<any> {
 	protected abstract load(change: any): Promise<void>;
 
 	protected extractFromConfig(): void {
-		const {subscriptionId = randomUUID(), query = {}, sort = {}, fields = {}, populates = [], virtuals = [], delay = DEFAULT_DELAY} = this._config;
+		const cfg: StoreSubscriptionConfigType = this._config;
 
-		this._subscriptionId = subscriptionId;
+		let subscriptionIdResolved: string;
+		if (cfg.subscriptionId === undefined) subscriptionIdResolved = randomUUID();
+		else subscriptionIdResolved = cfg.subscriptionId;
 
-		this._query = query;
-		this._sort = sort;
+		const queryResolved: any = cfg.query === undefined ? {} : cfg.query;
+		const sortResolved: any = cfg.sort === undefined ? {} : cfg.sort;
+		const fieldsResolved: any = cfg.fields === undefined ? {} : cfg.fields;
+		const populatesResolved: any[] = cfg.populates === undefined ? [] : cfg.populates;
+		const virtualsResolved: any[] = cfg.virtuals === undefined ? [] : cfg.virtuals;
+		const delayResolved: number = cfg.delay ?? DEFAULT_DELAY;
 
-		this._populates = populates;
-		this._virtuals = virtuals;
+		this._subscriptionId = subscriptionIdResolved;
 
-		this._delay = delay;
+		this._query = queryResolved;
+		this._sort = sortResolved;
 
-		if (isArray(fields)) {
+		this._populates = populatesResolved;
+		this._virtuals = virtualsResolved;
+
+		this._delay = delayResolved;
+
+		if (isArray(fieldsResolved)) {
 			this._fields = {};
-			each(fields, (field: string) => set(this._fields, field, 1));
+			each(fieldsResolved, (field: string) => set(this._fields, field, 1));
 		} else {
-			this._fields = fields;
+			this._fields = fieldsResolved;
 		}
 	}
 
@@ -153,8 +164,17 @@ export default abstract class AStore extends Subject<any> {
 		});
 	}
 
-	protected emitMany(startTime: number, subscriptionId: string, update: any = {total: 0, data: [], recounting: false}): void {
-		const {total, data, recounting} = update;
+	protected emitMany(startTime: number, subscriptionId: string, update?: any): void {
+		let resolved: any;
+		if (update === undefined) {
+			resolved = {} as any;
+			resolved.total = 0;
+			resolved.data = [];
+			resolved.recounting = false;
+		} else {
+			resolved = update;
+		}
+		const {total, data, recounting} = resolved;
 
 		const message = _baseMessage(this._target, this._incremental);
 		set(message.payload, this._target, data);
