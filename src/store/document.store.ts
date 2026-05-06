@@ -94,7 +94,7 @@ export default class DocumentStore extends AStore {
 			if (!data) return this.emitOne(startTime, this._subscriptionId);
 
 			for (const populate of this._populates) {
-				if (data?.populate) await data.populate(populate);
+				if (data.populate) await data.populate(populate);
 			}
 
 			if (_.isEmpty(this._virtuals)) return this.emitOne(startTime, this._subscriptionId, data.toJSON());
