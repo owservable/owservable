@@ -2,8 +2,8 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"target": "es6",
-		"module": "Node16",
-		"moduleResolution": "Node16",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"types": ["node"],
 		"isolatedModules": true,
 		"resolveJsonModule": true,

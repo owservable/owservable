@@ -2,7 +2,8 @@
 
 import sift from 'sift';
 import {randomUUID} from 'node:crypto';
-import * as jsondiffpatch from 'jsondiffpatch';
+import {createRequire} from 'node:module';
+import type {DiffPatcher} from 'jsondiffpatch';
 import {cloneDeep, each, get, includes, isArray, isEmpty, isNil, omit, omitBy, set, values} from 'lodash';
 
 import {Model} from 'mongoose';
@@ -17,9 +18,12 @@ import StoreSubscriptionConfigType from '../types/store.subscription.config.type
 
 import 'json-circular-stringify';
 
+const nodeRequire: ReturnType<typeof createRequire> = createRequire(__filename);
+const jsondiffpatch: typeof import('jsondiffpatch') = nodeRequire('jsondiffpatch');
+
 const DEFAULT_DELAY: number = 100;
 
-const diffPatcher: jsondiffpatch.DiffPatcher = jsondiffpatch.create({
+const diffPatcher: DiffPatcher = jsondiffpatch.create({
 	propertyFilter: (name: string): boolean => name !== 'subscriptionId'
 });
 

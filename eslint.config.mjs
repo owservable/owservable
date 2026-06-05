@@ -5,16 +5,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
 	{
-		ignores: [
-			'**/node_modules/**',
-			'**/coverage/**',
-			'**/lib/**',
-			'**/docs/**',
-			'**/.nyc_output/**',
-			'**/.sonarlint/**',
-			'test/**/*.js',
-			'**/*.min.js'
-		]
+		ignores: ['**/node_modules/**', '**/coverage/**', '**/lib/**', '**/docs/**', '**/.nyc_output/**', '**/.sonarlint/**', 'test/**/*.js', '**/*.min.js']
 	},
 	{
 		files: ['jest.config.js'],
@@ -35,7 +26,7 @@ export default tseslint.config(
 	{
 		files: ['**/*.ts'],
 		rules: {
-			'no-console': ['error', { allow: ['warn', 'log', 'error', 'info'] }],
+			'no-console': ['error', {allow: ['warn', 'log', 'error', 'info']}],
 			'sonarjs/no-commented-code': 'off',
 			curly: ['error', 'multi-line'],
 			'max-classes-per-file': ['error', 5],
@@ -51,29 +42,17 @@ export default tseslint.config(
 				'error',
 				{
 					types: {
-						Object: { message: 'Use {} instead.' }
+						Object: {message: 'Use {} instead.'}
 					}
 				}
 			],
-			'@typescript-eslint/no-explicit-any': 'off'
-		}
-	},
-	{
-		files: [
-			'src/mongodb/functions/process.models.ts',
-			'src/functions/execute/execute.on.files.recursively.ts',
-			'src/functions/action/add.action.cronjobs.ts',
-			'src/functions/action/add.action.watchers.ts',
-			'src/functions/action/add.action.workers.ts'
-		],
-		rules: {
-			'@typescript-eslint/no-require-imports': 'off'
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-require-imports': 'warn'
 		}
 	},
 	{
 		files: ['test/**/*.ts'],
 		rules: {
-			'@typescript-eslint/no-require-imports': 'off',
 			'sonarjs/no-ignored-exceptions': 'off',
 			'no-empty': 'off',
 			'sonarjs/pseudo-random': 'off'
