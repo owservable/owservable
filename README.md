@@ -2,6 +2,8 @@
 
 # Owservable
 
+[📖 API Docs](https://owservable.github.io/owservable/docs/) · [✅ Coverage](https://owservable.github.io/owservable/coverage/)
+
 A reactive backend library for Node.js applications that provides real-time MongoDB change streams, reactive data stores, and automated task scheduling. Built with RxJS and TypeScript.
 
 > ## ⚠️ owservable v3 has moved
