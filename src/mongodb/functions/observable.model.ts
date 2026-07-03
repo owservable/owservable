@@ -1,7 +1,6 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import {ChangeStream} from 'mongodb';
 
 import {ReplaySubject, Subject} from 'rxjs';
 
@@ -9,7 +8,7 @@ import LifecycleEvent from '../../types/lifecycle.event.type';
 
 class ObservableModel extends Subject<any> {
 	private readonly _collection: string;
-	private _stream: ChangeStream;
+	private _stream: mongoose.mongo.ChangeStream;
 	public readonly lifecycle: ReplaySubject<LifecycleEvent>;
 
 	constructor(collection: string) {

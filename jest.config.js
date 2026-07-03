@@ -17,7 +17,12 @@ module.exports = {
 		'^.+\\.js$': [
 			'ts-jest',
 			{
-				tsconfig: 'tsconfig.test.json'
+				tsconfig: {
+					allowJs: true,
+					module: 'commonjs',
+					moduleResolution: 'node10',
+					esModuleInterop: true
+				}
 			}
 		]
 	},
@@ -25,9 +30,10 @@ module.exports = {
 	// Module file extensions
 	moduleFileExtensions: ['ts', 'js', 'json'],
 
-	// Transform ignore patterns - allow jsondiffpatch to be transformed
+	// Transform ignore patterns - allow jsondiffpatch to be transformed (pnpm layout)
 	transformIgnorePatterns: [
-		'node_modules/(?!(jsondiffpatch)/)'
+		'node_modules[/\\\\](?!\\.pnpm|jsondiffpatch)',
+		'node_modules[/\\\\]\\.pnpm[/\\\\](?!jsondiffpatch@)'
 	],
 
 	// Setup Jest types globally

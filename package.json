@@ -1,6 +1,6 @@
 {
 	"name": "owservable",
-	"version": "2.2.2",
+	"version": "2.3.0",
 	"description": "owservable backend",
 	"engines": {
 		"node": ">=24.12.0"
@@ -17,25 +17,25 @@
 		"url": "git+https://github.com/owservable/owservable.git"
 	},
 	"scripts": {
-		"all": "yarn & yarn clean & yarn format & yarn build & skeletest -f & strictr -f & yarn test & yarn docs",
+		"all": "pnpm i & pnpm clean & pnpm format & pnpm build & skeletest -f & strictr -f & pnpm test & pnpm run docs",
 		"clear:lib": "del /S /Q lib\\*",
-		"build": "yarn clear:lib & tsc",
+		"build": "pnpm clear:lib & tsc",
 		"build:watch": "tsc --watch",
 		"lint": "eslint .",
 		"clean": "eslint --fix .",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
 		"docs": "typedoc --readme none --out docs ./src/owservable.ts",
-		"sync": "git pull & git fetch origin & git merge origin/main & yarn & git branch",
+		"sync": "git pull & git fetch origin & git merge origin/main & pnpm i & git branch",
 		"test": "jest --coverage --config jest.config.js",
 		"quick": "jest --config jest.config.js",
 		"test:watch": "jest --watch --config jest.config.js",
 		"coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
 		"test_qube": "jest --coverage --testResultsProcessor=jest-sonar-reporter --config jest.config.js",
-		"up": "yarn upgrade-interactive",
-		"latest": "yarn upgrade-interactive --latest",
-		"l": "yarn & yarn latest",
-		"audit-fix": "npx --yes yarn-audit-fix",
-		"srctree": "dir src /s /b > srctree.txt"
+		"up": "pnpm up -i",
+		"latest": "pnpm up -i -L",
+		"l": "pnpm i & pnpm latest",
+		"srctree": "dir src /s /b > srctree.txt",
+		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {
 		"@owservable/actions": "^2.2.2",
@@ -73,5 +73,5 @@
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.62.1"
 	},
-	"packageManager": "yarn@1.22.22"
+	"packageManager": "pnpm@11.9.0"
 }

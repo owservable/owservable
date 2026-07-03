@@ -4,6 +4,17 @@
 
 A reactive backend library for Node.js applications that provides real-time MongoDB change streams, reactive data stores, and automated task scheduling. Built with RxJS and TypeScript.
 
+> ## ⚠️ owservable v3 has moved
+>
+> Active development continues in the scoped **v3 package trio**, which splits this library into a database-agnostic core plus per-database adapters — including **PostgreSQL live updates**:
+>
+> - [@owservable/core](https://github.com/owservable/core) — subscription protocol, reactive stores, backend interface
+> - [@owservable/mongodb](https://github.com/owservable/mongodb) — MongoDB change streams adapter (this package's successor)
+> - [@owservable/postgres](https://github.com/owservable/postgres) — PostgreSQL LISTEN/NOTIFY adapter
+>
+> **New projects should start with the trio.** This package (2.x) is **frozen**: it keeps working and receives critical fixes only, no new features. Migration is mostly import swaps — `owservable` becomes `@owservable/core` + `@owservable/mongodb`; the websocket wire protocol is unchanged, so client applications need no changes at all.
+
+
 **Owservable is a replacement for [Reactive Stack JS](https://github.com/reactive-stack-js).**
 
 ## 🚀 Features

@@ -2,12 +2,11 @@
 
 import {ReplaySubject, Subject} from 'rxjs';
 import mongoose from 'mongoose';
-import {ChangeStream} from 'mongodb';
 
 import LifecycleEvent from '../../types/lifecycle.event.type';
 
 class ObservableDatabase extends Subject<any> {
-	private _stream: ChangeStream;
+	private _stream: mongoose.mongo.ChangeStream;
 	private static _instance: ObservableDatabase;
 	public readonly lifecycle: ReplaySubject<LifecycleEvent>;
 

@@ -1,0 +1,8 @@
+allowBuilds:
+  '@owservable/actions': true
+  '@owservable/folders': true
+  es5-ext: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@owservable/actions@2.2.2'
+  - '@owservable/folders@2.2.2'
