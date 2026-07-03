@@ -13,6 +13,26 @@ A reactive backend library for Node.js applications that provides real-time Mong
 > - [@owservable/postgres](https://github.com/owservable/postgres) — PostgreSQL LISTEN/NOTIFY adapter
 >
 > **New projects should start with the trio.** This package (2.x) is **frozen**: it keeps working and receives critical fixes only, no new features. Migration is mostly import swaps — `owservable` becomes `@owservable/core` + `@owservable/mongodb`; the websocket wire protocol is unchanged, so client applications need no changes at all.
+>
+> ### Migrating from 2.x
+>
+> Protocol pieces move to `@owservable/core` **unchanged**: `OwservableClient`, `AStore`/`CollectionStore`/`DocumentStore`/`CountStore`, `storeFactory`, `DataMiddlewareMap`, `EStoreType`, `IConnectionManager`, all types, and the cronjobs/workers/watchers functions (`initiateCronjobs`, `addActionWorkers`, `executeWatcher`, ...).
+>
+> MongoDB pieces move to `@owservable/mongodb` with **database-prefixed names**:
+>
+> | owservable 2.x | @owservable/mongodb 3.x |
+> |---|---|
+> | `MongoDBConnector` | `MongoDBConnector` (unchanged) |
+> | `CollectionsModelsMap` | `MongoCollectionsModelsMap` |
+> | `processModels` | `processMongoModels` |
+> | `observableModel` | `observableMongoModel` |
+> | `observableDatabase` | `observableMongoDatabase` |
+> | `addIndexToAttributes` | `addMongoIndexToAttributes` |
+> | `addUpIndicesToAttributes` | `addMongoUpIndicesToAttributes` |
+> | `addDownIndicesToAttributes` | `addMongoDownIndicesToAttributes` |
+> | `addUpAndDownIndicesToAttributes` | `addMongoUpAndDownIndicesToAttributes` |
+>
+> Note for v3: stores are constructed with an `IObservableBackend` instead of a mongoose `Model` — apps that only use `OwservableClient` + `processMongoModels` (the normal setup) are unaffected, since `storeFactory` resolves backends through the new `BackendRegistry` automatically.
 
 
 **Owservable is a replacement for [Reactive Stack JS](https://github.com/reactive-stack-js).**

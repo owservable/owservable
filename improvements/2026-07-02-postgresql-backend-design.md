@@ -50,7 +50,7 @@ One generic trigger function, installed idempotently (`CREATE OR REPLACE FUNCTIO
 
 ### PK-refetch enrichment
 
-The PG adapter's `ObservableTable` enriches keys-only notifications by fetching the row by PK before emitting the normalized change (one indexed lookup per change). Deletes skip the fetch — `documentKey` alone suffices, matching `CollectionStore.loadIncremental`'s delete path. This keeps incremental mode fully working without hitting the NOTIFY size cap. Where Mongo needs N change streams, PG needs exactly **one** LISTEN connection (dedicated non-pooled client, auto-reconnect + re-LISTEN, forced store reload after reconnect to cover the missed-notification window).
+The PG adapter's `PostgresObservableTable` enriches keys-only notifications by fetching the row by PK before emitting the normalized change (one indexed lookup per change). Deletes skip the fetch — `documentKey` alone suffices, matching `CollectionStore.loadIncremental`'s delete path. This keeps incremental mode fully working without hitting the NOTIFY size cap. Where Mongo needs N change streams, PG needs exactly **one** LISTEN connection (dedicated non-pooled client, auto-reconnect + re-LISTEN, forced store reload after reconnect to cover the missed-notification window).
 
 ### Query execution
 
@@ -60,27 +60,27 @@ MikroORM's `FilterQuery` is deliberately Mongo-flavored — `$and`, `$or`, `$in`
 
 1. **Extract `IObservableBackend`** — `changes$` (normalized change Subject), `find(query, fields, paging, sort)`, `findOne`, `count`, `populate`. `AStore` and the three stores depend on it instead of `Model<any>`.
 2. **Mongoose adapter** — thin wrapper around today's code; zero behavior change.
-3. **PG adapter** (`src/postgres/`, parallel to `src/mongodb/`) — `PostgresConnector` (MikroORM init + LISTEN client), `ObservableTable` + `ObservableTablesMap`, `processEntities` registering tables into the shared registry so `storeFactory` resolves either backend by `observe` name.
+3. **PG adapter** (`src/postgres/`, parallel to `src/mongodb/`) — `PostgresConnector` (MikroORM init + LISTEN client), `PostgresObservableTable` + `PostgresObservableTablesMap`, `processPostgresEntities` registering tables into the shared registry so `storeFactory` resolves either backend by `observe` name.
 4. **Trigger bootstrap helper** — exports the `CREATE OR REPLACE` DDL install, iterating registered entities.
 
-### Entity discovery — `processEntities`
+### Entity discovery — `processPostgresEntities`
 
-Mirrors `processModels` (same recursive walk via `listSubfoldersByName`, one default export per file), with one structural difference: mongoose models self-register into mongoose's global registry at import time, so `processModels` is pure side effect — but MikroORM needs the complete class list up front at `MikroORM.init({entities})`, so `processEntities` **returns the collected classes** and must run *before* the PG connector init:
+Mirrors `processModels` (same recursive walk via `listSubfoldersByName`, one default export per file), with one structural difference: mongoose models self-register into mongoose's global registry at import time, so `processModels` is pure side effect — but MikroORM needs the complete class list up front at `MikroORM.init({entities})`, so `processPostgresEntities` **returns the collected classes** and must run *before* the PG connector init:
 
 ```ts
-processModels(rootFolder, 'models', ['mixins', 'schemas']);
+processMongoModels(rootFolder, 'models', ['mixins', 'schemas']);
 await MongoDBConnector.init(uri);
 
-const entities: EntityClass<any>[] = processEntities(rootFolder, 'pgmodels');
+const entities: EntityClass<any>[] = processPostgresEntities(rootFolder, 'pgmodels');
 await PostgresConnector.init(entities);
 ```
 
-- Signature mirrors `processModels`: `processEntities(root: string, name: string = 'entities', exclude?: string | string[]): EntityClass<any>[]`.
-- Per file: `require(fullPath).default` → push into the result array + `TablesEntitiesMap.addTableToEntityMapping(entity)` (table name from `@Entity({tableName})` metadata) so `storeFactory` resolves `observe: '<table>'` to the PG backend the same way `CollectionsModelsMap` resolves Mongo collections.
-- **The folder name is a parameter**, exactly like `processModels`. The library default is `entities` (MikroORM idiom); consuming apps pick their own convention — e.g. systools uses `pgmodels/` for symmetry with its `models/` folders. The folder must be a *sibling* of `models/`, never nested inside it: `processModels` walks `models/` recursively and would try to register entity classes as mongoose models.
+- Signature mirrors `processModels`: `processPostgresEntities(root: string, name: string = 'entities', exclude?: string | string[]): EntityClass<any>[]`.
+- Per file: `require(fullPath).default` → push into the result array + `PostgresTablesEntitiesMap.addTableToEntityMapping(entity)` (table name from `@Entity({tableName})` metadata) so `storeFactory` resolves `observe: '<table>'` to the PG backend the same way `MongoCollectionsModelsMap` resolves Mongo collections.
+- **The folder name is a parameter**, exactly like `processModels`. The library default is `entities` (MikroORM idiom); consuming apps pick their own convention — e.g. systools uses `pgmodels/` for symmetry with its `models/` folders. The folder must be a *sibling* of `models/`, never nested inside it: `processMongoModels` walks `models/` recursively and would try to register entity classes as mongoose models.
 - Both decorator entity classes and `EntitySchema` instances are valid default exports — `MikroORM.init` accepts either, so apps choose per taste (decorators need `experimentalDecorators` + `emitDecoratorMetadata`).
 - Shared base entities (timestamps, audit fields — the mixin analog, as `@Entity({abstract: true})` base classes) live in a subfolder passed via `exclude`, matching the mongoose `['mixins', 'schemas']` exclusion.
-- Live-update opt-in: a `@LiveUpdates()` decorator (or `EntitySchema` flag) adds the entity to the registry that the trigger bootstrap iterates — one line to make a table live.
+- Live-update opt-in: a `@PostgresLiveUpdates()` decorator (or `EntitySchema` flag) adds the entity to the registry that the trigger bootstrap iterates — one line to make a table live.
 
 ## Packaging — decided: greenfield package trio
 
@@ -93,7 +93,7 @@ What goes where (per the mongoose-coupling audit: only `src/mongodb/**`, the sto
 | `@owservable/core` | `owservable.client.ts`, `middleware/`, `enums/`, `types/`, `auth/`, `functions/` (cronjobs, workers, watchers, actions, performance) | verbatim copy |
 | `@owservable/core` | `store/` (`AStore` + 3 stores + `store.factory`) | the refactor: `Model<any>` → `IObservableBackend` + a backend registry that adapters populate (replaces the factory's direct `CollectionsModelsMap` import) |
 | `@owservable/mongodb` | `src/mongodb/**` (connector, `ObservableModel`, maps, `processModels`, index helpers) | copy, reshaped as an adapter implementing `IObservableBackend` |
-| `@owservable/postgres` | LISTEN client, `ObservableTable`, `processEntities`, MikroORM query execution, trigger bootstrap, `@LiveUpdates()` | new code |
+| `@owservable/postgres` | LISTEN client, `PostgresObservableTable`, `processPostgresEntities`, MikroORM query execution, trigger bootstrap, `@PostgresLiveUpdates()` | new code |
 
 Dependency distribution: `rxjs`/`sift`/`jsondiffpatch`/`lodash`/`node-cron` + `@owservable/actions` + `@owservable/folders` in core; `mongoose` only in `@owservable/mongodb`; `pg` + `@mikro-orm/postgresql` only in `@owservable/postgres`. No optional-peer-dependency tricks needed — each app installs core plus exactly the adapters it uses.
 
@@ -106,6 +106,7 @@ Notes:
 - **Repo mechanics** — repo-per-package, following org convention (repo name = package name sans scope): `github.com/owservable/core`, `github.com/owservable/mongodb`, `github.com/owservable/postgres`, cloned as siblings into the local `owservable/` folder and added to `owservable.code-workspace`. Scaffolding template: `fastify-auto-routes` (already pnpm-based — tsconfig, eslint.config.mjs, jest + sonar config, LICENSE, scoped-package publishConfig). During development, link sibling repos with `pnpm link ../core`; publish order is core → adapters.
 - **`@owservable/core` must be a peerDependency of both adapters** — the backend registry in core is a singleton; if an adapter bundled its own copy of core, the registry would split and `storeFactory` would never see that adapter's registrations.
 - **Versioning** — start the trio at 3.0.0 to signal lineage (the 2.x family stays as-is).
+- **API naming — decided (2026-07-03): DB-prefixed public API in the adapters.** Every adapter export carries its database. Classes/types are noun phrases and lead with the DB name (`PostgresTablesEntitiesMap`, `PostgresObservableTable`, `MongoCollectionsModelsMap`, `MongoObservableModel`); functions stay verb-first with the DB name qualifying the object of the verb (`installPostgresTriggers`, `processPostgresEntities`, `processMongoModels`, `observableMongoModel`, `addMongoIndexToAttributes`). Rationale: apps import both adapters side by side, so unprefixed names hide the database from readers, break grep, and will collide across future adapters (mysql/mssql `installTriggers`). Done before the adapters' first publish — zero breaking-change cost. `@owservable/core` keeps generic names by design (`BackendRegistry`, `storeFactory` are intentionally database-neutral); the 2.x → 3.x rename mapping lives in the `@owservable/mongodb` README.
 
 Rejected alternative: extending `owservable` in place with `pg`/MikroORM as optional peer dependencies (lazy-required). Workable, but it burdens the shipped package with dual-backend complexity, requires peer-dependency gymnastics, and the refactor would carry in-place compat risk — the clean split was preferred.
 
@@ -114,7 +115,7 @@ Rejected alternative: extending `owservable` in place with `pg`/MikroORM as opti
 | Work | Estimate |
 |---|---|
 | Interface extraction (AStore + 3 stores + factory + maps) | 2–4 days |
-| PG adapter (listener, ObservableTable, MikroORM execution, registry) | 2–3 days |
+| PG adapter (listener, PostgresObservableTable, MikroORM execution, registry) | 2–3 days |
 | Trigger bootstrap helper | trivial |
 | Tests (mirror existing store/model suites for the PG adapter) | 1–2 days |
 
