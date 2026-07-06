@@ -156,6 +156,40 @@ export default class Comment {
 
 **Effort.** Decorator options type + registry (~0.5d), `owservable_touch_notify` + generator incl. reparenting/NULL branches (~0.5d), stores/core untouched, tests incl. reparenting and NULL-FK paths (~1d).
 
+## Adapter candidate — @owservable/sqlite (cross-process change capture)
+
+**Status:** speced 2026-07-06, not scheduled.
+**Motivating use case:** a companion UI for [mastra.ai](https://mastra.ai/) — mastra's default local storage is SQLite/libsql (memory threads, traces, workflow snapshots), and a Vue console subscribing through owservable would show agent activity live. The defining constraint: **the writers are other backend processes** (mastra agents/workflows), not the owservable server. Same design also serves desktop/electron tools and local-first apps.
+
+### Why the postgres pattern doesn't transplant directly
+
+SQLite has no LISTEN/NOTIFY and no server, and its native update hooks fire only for changes on the *same connection* — invisible to other processes. ORM flush events have the same blind spot. Change capture must be **database-level**:
+
+1. **Journal-table triggers** — `installSqliteTriggers` creates a small `_owservable_changes` journal (`id INTEGER PRIMARY KEY AUTOINCREMENT, table_name, op, pk, changed, created_at`) plus `AFTER INSERT/UPDATE/DELETE` triggers on each watched table. SQLite triggers fire **regardless of which connection or process writes** — this is what makes external writers visible. The `changed` column list is generated per table from entity metadata as `CASE WHEN OLD.col IS NOT NEW.col …` comparisons — same information the postgres trigger derives from `to_jsonb` diffing. Idempotency via `DROP TRIGGER IF EXISTS` + `CREATE TRIGGER` (SQLite lacks `CREATE OR REPLACE TRIGGER`); the bootstrap re-runs at every connector init, which also self-heals if an external schema owner recreates its tables.
+2. **`SqliteJournalPoller`** (the `PostgresListener` seat) — every ~250 ms reads `WHERE id > lastSeen ORDER BY id` from the journal (indexed range scan on a usually-empty table ≈ free) and emits the same normalized notifications; prunes consumed rows periodically. `PRAGMA data_version` (a near-free per-connection counter that moves when any *other* connection commits) can gate the poll as an optimization — but not replace it, since it does not move for same-connection writes.
+3. **Everything downstream is byte-identical**: `SqliteObservableTable` with PK-refetch enrichment, `SqliteBackend` ≈ `PostgresBackend` verbatim (driver import + the same query/sort/fields/populate translations), `BackendRegistry`, stores, websocket, clients.
+
+### Connector specifics
+
+- MikroORM driver: `@mikro-orm/sqlite` (better-sqlite3) or `@mikro-orm/libsql`; same `defineEntity` + `updateSchema({safe})` flow.
+- **`updateSchema: false` mode matters here**: for externally-owned schemas (mastra's tables), entities are read-mappings over existing tables — the connector must not touch the schema, only attach journal triggers and register backends.
+- **WAL mode is mandatory** (`PRAGMA journal_mode=WAL` + `busy_timeout`) for the multi-process case — external writer + owservable reader on the same file. Local file only; remote libsql (Turso/sqld) has no shared file and is out of scope.
+- Exports follow the DB-prefixed API convention: `SqliteConnector`, `SqliteBackend`, `SqliteJournalPoller`, `SqliteObservableTable`, `SqliteTablesEntitiesMap`, `SqliteLiveUpdatesRegistry`, `installSqliteTriggers`, `processSqliteEntities`.
+
+### Trade-offs
+
+- Update latency = poll interval (~250 ms) instead of push — fine for UI observability.
+- One journal insert per write (trigger overhead) + periodic pruning.
+- Triggers on tables owned by another tool (mastra) are additive and safe, but its migrations dropping/recreating tables silently remove them — mitigated by the idempotent bootstrap on every boot, and worth a startup verification log.
+
+### Testing
+
+Trivially self-contained — no embedded server, no binaries: a **temp-file** database (`:memory:` is per-connection and cannot exercise the cross-process path) plus a second raw connection acting as the "external writer" proves the journal pipeline end to end. The integration harness is the cheapest of all three adapters.
+
+### Effort
+
+~2–3 days using the postgres repo as template (scaffolding, suite conventions, and the query-translation layer all reuse).
+
 ## Relation to consuming apps
 
 - **systools-server (SYSEDA-19106):** this design supersedes that plan's custom `pg-subscribe` websocket message type — with the library route, clients send the ordinary `subscribe` message and the app just registers PG entities alongside mongoose models. The app-side plan's Phases 1–2 (MikroORM config, trigger bootstrap) carry over as-is; its `PgCollectionStore`/listener work moves into this package.
