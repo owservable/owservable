@@ -119,6 +119,43 @@ Rejected alternative: extending `owservable` in place with `pg`/MikroORM as opti
 | Trigger bootstrap helper | trivial |
 | Tests (mirror existing store/model suites for the PG adapter) | 1–2 days |
 
+## v3.1 candidate — cross-table invalidation (`touches`)
+
+**Status:** speced 2026-07-03, not scheduled.
+
+**Problem.** Subscription *data* can include joined relations (`populates` → MikroORM joins), but *invalidation* is root-table-only: each store listens to exactly one `PostgresObservableTable`, and triggers fire per table. A change that touches only a joined table (author renamed, child row inserted) never notifies the parent's subscriptions — populated data goes stale until the root row changes. (Same limitation as the Mongo adapter and owservable 2.x `populates`; clients have historically composed per-collection subscriptions instead.)
+
+**Feature.** Let a child entity declare that its changes semantically *touch* its parent:
+
+```ts
+@PostgresLiveUpdates({touches: ['post']})
+@Entity({tableName: 'comments'})
+export default class Comment {
+	@ManyToOne(() => Post)
+	post!: Post;
+	...
+}
+```
+
+`touches` entries name **relation properties** (not table names) — the trigger generator resolves everything from MikroORM metadata: target entity → parent `tableName`, relation prop → FK column. No manual SQL, no duplicated knowledge.
+
+**Generated trigger.** For each `touches` entry, `installPostgresTriggers` emits an additional trigger on the child table using a second generic function `owservable_touch_notify(parent_table, fk_column)`:
+
+- INSERT/UPDATE: notify `{table: <parent_table>, op: 'update', id: NEW-><fk_column>}`; DELETE uses `OLD`.
+- **Reparenting**: on UPDATE where `OLD.fk IS DISTINCT FROM NEW.fk`, notify **both** parent ids (old parent lost a child, new parent gained one).
+- `NULL` FK → no notify.
+- Trigger name: `<child>_touches_<parent>_owservable_notify` (idempotent `CREATE OR REPLACE`, PG 14+ as before).
+
+**Why the payload shape works with zero store/core changes.** The parent's `PostgresObservableTable` receives an ordinary-looking `update` notification and PK-refetches the parent row; the synthesized event carries **no `updateDescription`**, which every store already treats as "reload" (`CollectionStore.shouldReload`: `if (!updateDescription) return true`) — deliberately bypassing field-intersection filtering, since the change was in another table. `CountStore` correctly ignores it (child changes don't alter parent counts). Bursts of child writes collapse into the stores' existing throttle. The feature is confined to the decorator options, the registry, and the trigger generator.
+
+**Scope limits (v3.1).**
+
+- One hop, direct FK only. Deep chains = chain `touches` hop by hop; many-to-many = flag the pivot entity with `touches` to both sides.
+- The child entity does not itself need to be live — `touches` works with or without the child's own subscriptions.
+- Not chosen: wal2json logical decoding for full dependency tracking — real cross-table completeness, but heavy ops (replication slots, `wal_level=logical`) against this package's zero-config trigger story.
+
+**Effort.** Decorator options type + registry (~0.5d), `owservable_touch_notify` + generator incl. reparenting/NULL branches (~0.5d), stores/core untouched, tests incl. reparenting and NULL-FK paths (~1d).
+
 ## Relation to consuming apps
 
 - **systools-server (SYSEDA-19106):** this design supersedes that plan's custom `pg-subscribe` websocket message type — with the library route, clients send the ordinary `subscribe` message and the app just registers PG entities alongside mongoose models. The app-side plan's Phases 1–2 (MikroORM config, trigger bootstrap) carry over as-is; its `PgCollectionStore`/listener work moves into this package.
