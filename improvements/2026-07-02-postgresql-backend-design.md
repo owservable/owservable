@@ -158,7 +158,7 @@ export default class Comment {
 
 ## Adapter candidate — @owservable/sqlite (cross-process change capture)
 
-**Status:** speced 2026-07-06, not scheduled.
+**Status:** BUILT 2026-07-07 (repo `owservable/sqlite`, v3.0.0, all gates green incl. external-writer integration test) — pending publish.
 **Motivating use case:** a companion UI for [mastra.ai](https://mastra.ai/) — mastra's default local storage is SQLite/libsql (memory threads, traces, workflow snapshots), and a Vue console subscribing through owservable would show agent activity live. The defining constraint: **the writers are other backend processes** (mastra agents/workflows), not the owservable server. Same design also serves desktop/electron tools and local-first apps.
 
 ### Why the postgres pattern doesn't transplant directly
